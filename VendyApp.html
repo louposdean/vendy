@@ -76,12 +76,13 @@
       color:var(--text);
       font-family:'Nunito',sans-serif;
       overflow-x:hidden;
+      min-height:100vh;
       min-height:100svh;
       overscroll-behavior:none;
       -webkit-font-smoothing:antialiased;
     }
 
-    .app { width:100%; max-width:430px; margin:0 auto; padding:env(safe-area-inset-top,2px) 10px env(safe-area-inset-bottom,4px); min-height:100svh; display:flex; flex-direction:column; box-sizing:border-box; align-items:stretch; }
+    .app { width:100%; max-width:430px; margin:0 auto; padding:env(safe-area-inset-top,2px) 10px env(safe-area-inset-bottom,4px); min-height:100vh; min-height:100svh; display:flex; flex-direction:column; box-sizing:border-box; align-items:stretch; }
     .card { background:var(--card); border-radius:24px; box-shadow:0 8px 40px rgba(79,120,255,.10), 0 2px 8px rgba(0,0,0,.06); padding:0 clamp(6px,2vw,10px) 8px; flex:1; display:flex; flex-direction:column; overflow:hidden; }
     .screen { display:none; flex:1; flex-direction:column; }
     .screen.active { display:flex; }
@@ -206,7 +207,7 @@
     body.dark .key.key-submit { background:var(--blue); }
 
     /* ── POST SOLVE ── */
-    .post-solve { display:none; flex-direction:column; gap:7px; animation:fadeUp .4s ease; margin-top:-14px; }
+    .post-solve { display:none; }
     .post-solve.active { display:flex; }
     @keyframes fadeUp { 0%{opacity:0;transform:translateY(14px);}100%{opacity:1;transform:translateY(0);} }
     .solve-speed { font-size:19px; font-weight:900; color:var(--navy); line-height:1.1; font-family:'Nunito',sans-serif; }
@@ -473,14 +474,17 @@
   <!-- GAME SHELL -->
   <div id="game-shell" class="screen">
     <div class="game-header">
-      <div style="display:flex;align-items:center;gap:4px;"><div class="header-streak"><span class="flame">🔥</span><span id="header-streak-count">0</span></div><button id="stats-icon-btn" style="background:none;border:none;font-size:16px;cursor:pointer;padding:0 0 0 2px;opacity:.55;color:var(--text);" title="Stats">📊</button></div>
+      <div style="display:flex;align-items:center;gap:4px;"><div class="header-streak"><span class="flame">🔥</span><span id="header-streak-count">0</span></div><button id="stats-icon-btn" style="background:none;border:none;font-size:18px;cursor:pointer;padding:0 0 0 2px;opacity:.55;color:var(--text);" title="Stats">🏆</button></div>
       <div class="header-title">Vendy <span id="intro-puzzle-number" style="font-size:22px;font-weight:900;opacity:0.45;font-family:'Nunito',sans-serif;color:inherit;"></span></div>
-      <button class="gear-btn" id="gear-btn" aria-label="Menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-        </svg>
-      </button>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <button onclick="window.open('https://www.youtube.com/shorts/rN6OKi_vBBw','_blank')" style="background:none;border:none;font-size:18px;cursor:pointer;opacity:.55;color:var(--text);padding:0;font-weight:900;font-family:'Nunito',sans-serif;" title="How to Play">?</button>
+        <button class="gear-btn" id="gear-btn" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+      </div>
     </div>
     <div class="header-divider"></div>
 
@@ -537,25 +541,45 @@
           <button class="key key-submit" id="kb-enter" style="flex:1;max-width:none;font-size:18px;font-weight:900;background:#16a34a;color:#fff;border-radius:12px;letter-spacing:.5px;">SUBMIT</button>
         </div>
       </div>
-      <div class="post-solve" id="post-solve">
-        <div style="text-align:center;padding:8px 0 4px;">
-          <div style="font-size:28px;font-weight:900;color:var(--text);margin-bottom:4px;" id="solve-speed">🎉 You solved it!</div>
-          <div style="font-size:18px;font-weight:700;color:var(--muted);margin-bottom:4px;" id="solve-time">⏱ 0:42</div>
-          <div style="font-size:18px;font-weight:800;margin-bottom:2px;" id="ps-streak">🔥 3-day streak</div>
-          <div style="font-size:13px;color:var(--muted);font-weight:700;margin-bottom:14px;">Don't break it tomorrow</div>
-          <div style="font-size:13px;font-weight:800;color:var(--muted);margin-bottom:14px;margin-top:-10px;">Next puzzle in: <span id="next-puzzle-timer" style="color:var(--text);">--:--:--</span></div>
+      <div class="post-solve" id="post-solve" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,.65);z-index:9995;align-items:center;justify-content:center;padding:16px;">
+        <div style="background:var(--card);border-radius:24px;width:100%;max-width:360px;max-height:90vh;overflow-y:auto;padding:20px 18px 18px;box-shadow:0 20px 60px rgba(15,23,42,.3);position:relative;">
+          <!-- X button -->
+          <button onclick="closePostSolve()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);font-family:'Nunito',sans-serif;font-weight:900;line-height:1;">✕</button>
+          <!-- Vendy symbol -->
+          <div style="text-align:center;margin-bottom:6px;">
+            <svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" style="width:64px;height:auto;">
+              <circle cx="42" cy="40" r="34" fill="#4f78ff" opacity="0.9"/>
+              <circle cx="78" cy="40" r="34" fill="#f550a0" opacity="0.9"/>
+              <clipPath id="ps-clip"><circle cx="42" cy="40" r="34"/></clipPath>
+              <circle cx="78" cy="40" r="34" fill="#c040b0" clip-path="url(#ps-clip)" opacity="0.95"/>
+            </svg>
+          </div>
+          <!-- Well Done + stars + time -->
+          <div style="text-align:center;margin-bottom:6px;">
+            <div style="font-size:30px;font-weight:900;color:var(--text);" id="solve-speed">Well Done!</div>
+            <div style="font-size:28px;margin:6px 0;" id="ps-stars">⭐⭐⭐</div>
+            <div style="font-size:20px;font-weight:700;color:var(--pink);" id="solve-time">⏱ 8.4s</div>
+          </div>
+          <!-- Streak -->
+          <div style="text-align:center;margin:8px 0 4px;">
+            <div style="font-size:22px;font-weight:900;" id="ps-streak">🔥 3-day streak</div>
+            <div style="font-size:14px;color:var(--muted);font-weight:700;margin-bottom:4px;">Don't break it tomorrow</div>
+          </div>
+          <!-- Next puzzle countdown -->
+          <div style="text-align:center;font-size:15px;font-weight:800;color:var(--muted);margin-bottom:14px;">Next new puzzle in: <span id="next-puzzle-timer" style="color:var(--text);">--:--:--</span></div>
+          <!-- Share -->
+          <div style="text-align:center;font-size:15px;font-weight:700;color:var(--muted);margin-bottom:8px;">How'd you do compared to your friends?</div>
+          <button class="psb psb-share" id="ps-share" style="width:100%;padding:16px;border-radius:12px;background:#86efac;color:#14532d;font-size:18px;font-weight:700;border:none;cursor:pointer;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:10px;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;flex-shrink:0;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Share your results
+          </button>
+          <!-- Create your own -->
+          <div style="text-align:center;font-size:15px;font-weight:700;color:var(--muted);margin-bottom:10px;">Want to create your own? <span onclick="closePostSolve();openCreateOverlay();" style="cursor:pointer;color:var(--pink);text-decoration:underline;font-weight:800;">Make a Vendy ✏️</span></div>
+          <!-- Missed any this week -->
+          <div onclick="closePostSolve();openWeekOverlay();" style="width:100%;padding:14px;border-radius:12px;background:transparent;border:2px solid var(--divider);cursor:pointer;text-align:center;font-size:17px;font-weight:800;color:var(--text);box-sizing:border-box;">Missed any this week? <span style="color:var(--pink);">Catch up ▶</span></div>
+          <div class="share-preview" id="share-preview"></div>
+          <div class="solve-lock" id="solve-lock"></div>
         </div>
-        <button class="psb psb-share" id="ps-share" style="width:100%;padding:14px;border-radius:12px;background:#86efac;color:#14532d;font-size:16px;font-weight:700;border:none;cursor:pointer;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:10px;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;flex-shrink:0;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          Share your results with friends
-        </button>
-        <div onclick="closePostSolve();openWeekOverlay();" style="width:100%;padding:14px;border-radius:12px;background:transparent;border:2px solid var(--divider);cursor:pointer;text-align:center;font-size:16px;font-weight:800;color:var(--text);margin-bottom:8px;box-sizing:border-box;">Missed any this week? <span style="color:var(--pink);">This Week's Vendys ▶</span></div>
-        <a href="https://buymeacoffee.com/playvendy" target="_blank" style="display:block;text-align:center;font-size:13px;font-weight:700;color:var(--muted);text-decoration:none;margin-bottom:10px;">Enjoying Vendy? <span style="color:#f59e0b;font-weight:800;">☕ Support Vendy</span></a>
-        <div style="display:flex;gap:8px;margin-bottom:8px;">
-          <button id="ps-a2hs" onclick="showA2HS()" style="flex:1;padding:14px;border-radius:12px;background:var(--stats-bg);color:var(--text);font-size:15px;font-weight:700;border:1.5px solid var(--divider);cursor:pointer;">📲 Add to Home</button>
-        </div>
-        <div class="share-preview" id="share-preview"></div>
-        <div class="solve-lock" id="solve-lock"></div>
       </div>
       <div class="puzzle-meta" style="display:flex;justify-content:center;gap:8px;">
         <div id="puzzle-id"></div><div>·</div><div id="puzzle-date"></div>
@@ -642,7 +666,6 @@
 <div class="gear-sheet" id="gear-sheet">
   <div class="gear-handle"></div>
   <div class="gear-label">Menu</div>
-  <button class="gear-item" id="gi-how"><span class="gear-item-icon">❓</span><div><div>How to Play</div><div class="gear-item-sub">Learn the rules</div></div></button>
   <button class="gear-item" id="gi-week"><span class="gear-item-icon">📅</span><div><div>This Week's Vendys</div><div class="gear-item-sub">Catch up on this week's puzzles</div></div></button>
   <button class="gear-item" id="gi-create"><span class="gear-item-icon">✏️</span><div><div>Create a Vendy</div><div class="gear-item-sub">Make one for a friend</div></div></button>
   <button class="gear-item" style="opacity:.45;pointer-events:none;"><span class="gear-item-icon">🔵</span><div><div>Three Word Vendy</div><div class="gear-item-sub">Coming soon</div></div><span style="font-size:10px;background:#eef3ff;color:#4f78ff;border-radius:999px;padding:2px 9px;font-weight:800;margin-left:auto;letter-spacing:.3px;">Soon</span></button>
@@ -852,7 +875,6 @@ function openGear(){gearBackdrop.classList.add("active");gearSheet.classList.add
 function closeGear(){gearBackdrop.classList.remove("active");gearSheet.classList.remove("active");}
 gearBtn.addEventListener("click",openGear);
 gearBackdrop.addEventListener("click",closeGear);
-$("gi-how").addEventListener("click",()=>{closeGear();showTutorial();});
 $("gi-week").addEventListener("click",()=>{closeGear();openWeekOverlay();});
 $("gi-create").addEventListener("click",()=>{closeGear();openCreateOverlay();});
 
@@ -1342,25 +1364,23 @@ function resetPuzzleState(){
   stopTimer();updateTimerDisplay();
 }
 function buildWord(slots,revealed){return slots.map((l,i)=>revealed[i]||l||"").join("")}
-function closePostSolve(){postSolveEl.classList.remove("active");}
+function closePostSolve(){postSolveEl.style.display="none";}
 function showPostSolve(){
   keyboardEl.classList.add("fading-out");
   document.querySelector(".timer-bar").style.visibility="hidden";
   setTimeout(()=>{
     keyboardEl.style.display="none";
-    postSolveEl.classList.add("active");
-    // Populate end screen
     const mins=Math.floor(timerElapsed/60);
     const secs=(timerElapsed%60).toFixed(0).padStart(2,"0");
     const timeStr=mins>0?`${mins}:${secs}`:`${timerElapsed.toFixed(1)}s`;
     const speedEl=document.getElementById("solve-speed");
     const timeEl=document.getElementById("solve-time");
     const streakEl=document.getElementById("ps-streak");
-    const a2hsEl=document.getElementById("ps-a2hs");
-    if(speedEl) speedEl.textContent="🎉 You solved it!";
+    if(speedEl) speedEl.textContent="Well Done!";
     if(timeEl) timeEl.textContent=`⏱ ${timeStr}`;
     if(streakEl) streakEl.textContent=stats.streak>0?`🔥 ${stats.streak}-day streak`:"";
-    if(a2hsEl) a2hsEl.style.display=stats.streak>=2?"block":"none";
+    // Show modal after confetti — 2 second delay
+    setTimeout(()=>{postSolveEl.style.display="flex";},2000);
   },380);
 }
 function saveDailySolve(stars,hintsUsed,time){const p=loadArchiveProgress();p[currentPuzzleKey]={solved:true,hintsUsed,stars,time,datePlayed:new Date().toISOString()};saveArchiveProgress(p);}
@@ -1419,7 +1439,11 @@ function enterAnswer(){
     const hintsUsed=3-hintsRemaining,stars=starsFromHints(hintsUsed);
     currentStars=stars;stopTimer();const ft=timerElapsed,sl=speedLabel(ft);
     resultEl.textContent="";resultEl.className="result";
-    const goldStars="⭐".repeat(stars);solveSpeedEl.innerHTML=(goldStars?'<span style="font-size:18px;letter-spacing:1px;margin-right:6px;">'+goldStars+"</span>":"")+sl;solveTimeEl.textContent=`⏱ ${ft.toFixed(1)}s`;
+    const goldStars="⭐".repeat(stars);
+    solveSpeedEl.textContent=sl;
+    const psStarsEl=document.getElementById("ps-stars");
+    if(psStarsEl)psStarsEl.textContent=goldStars||"";
+    solveTimeEl.textContent=`⏱ ${ft.toFixed(1)}s`;
     triggerWinEffects(sl,ft);
     [...leftTilesEl.children,...rightTilesEl.children].forEach((tile,i)=>{tile.classList.add("correct-pop");tile.style.animationDelay=`${i*60}ms`;});
     if(!puzzleCompleted){
@@ -1433,15 +1457,15 @@ function enterAnswer(){
           stats.dailySolvedKeys.push(currentPuzzleKey);stats.currentDailySolvedKey=currentPuzzleKey;
           saveStats();saveDailySolve(stars,hintsUsed,ft);
         }
-        activateSolveLock("Come back tomorrow for a new Vendy — or make one for a friend! <span onclick='openCreateOverlay()' style='cursor:pointer;text-decoration:underline;'>✏️</span>");
+        activateSolveLock("");
       }
       else if(currentMode==="week"){
         saveDailySolve(stars,hintsUsed,ft);
-        activateSolveLock("Nice! Play today's Vendy to keep your streak alive 🔥");
+        activateSolveLock("Nice solve! Play today's Vendy to keep your streak going 🔥");
       }
       else if(currentMode==="free"){
         const p2=loadArchiveProgress();p2[currentPuzzleKey]={solved:true,stars,hintsUsed,time:ft,datePlayed:new Date().toISOString()};saveArchiveProgress(p2);
-        activateSolveLock("Nice! Play today's Vendy to keep your streak alive 🔥");
+        activateSolveLock("Nice solve! Play today's Vendy to keep your streak going 🔥");
       }
       else{activateSolveLock("You solved it! 🎉");}
       renderStats();lockInputs(true);kbHint.disabled=true;showPostSolve();
@@ -1505,7 +1529,7 @@ function loadGame(mode,vendyNumber){
     updateTimerDisplay();
     renderInputs();
     lockInputs(true);kbHint.disabled=true;
-    activateSolveLock("Come back tomorrow for a new Vendy — or make one for a friend! <span onclick='openCreateOverlay()' style='cursor:pointer;text-decoration:underline;'>✏️</span>");
+    activateSolveLock("");
     resultEl.textContent="";resultEl.className="result";
     const rS=replay?.stars||0;const rG="⭐".repeat(rS);const rLabel=replay?.time?speedLabel(replay.time):"Solved!";solveSpeedEl.innerHTML=(rG?'<span style="font-size:18px;letter-spacing:1px;margin-right:6px;">'+rG+"</span>":"")+rLabel;
     solveTimeEl.textContent=replay?.time?`⏱ ${replay.time.toFixed(1)}s`:"";
