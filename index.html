@@ -422,6 +422,8 @@
       .category-box { font-size:12px; padding:3px 8px; }
     }
   </style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SB5QRPS4EV"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SB5QRPS4EV');</script>
 </head>
 <body>
 <div class="app">
@@ -772,6 +774,23 @@
 <script>
 const VERSION = "1.1.0";
 let deferredInstallPrompt=null;
+
+// Service worker for cache busting — bump VERSION to force update
+if('serviceWorker' in navigator){
+  const swCode=`
+    const CACHE='vendy-v${VERSION}';
+    self.addEventListener('install',e=>{self.skipWaiting();});
+    self.addEventListener('activate',e=>{
+      e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));
+    });
+    self.addEventListener('fetch',e=>{
+      e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)));
+    });
+  `;
+  const blob=new Blob([swCode],{type:'application/javascript'});
+  const swUrl=URL.createObjectURL(blob);
+  navigator.serviceWorker.register(swUrl).catch(()=>{});
+}
 let currentFreePuzzle=null;
 window.addEventListener("beforeinstallprompt",(e)=>{e.preventDefault();deferredInstallPrompt=e;});
 const launchDate = new Date(2026, 4, 4);
