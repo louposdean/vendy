@@ -816,7 +816,7 @@ const dailySets=[
 const specialPuzzles={
   'md_e':{id:'md_e',topic:"Mother's Day 🌸",stars:2,leftLetters:['S','W'],overlapLetters:['E','T'],rightLetters:['A','H','R'],leftAnswer:"SWEET",rightAnswer:"HEART",fact:"Sweet heart is a classic Mother's Day term of endearment."},
   'md_m':{id:'md_m',topic:"Mother's Day 🌸",stars:2,leftLetters:['F','L'],overlapLetters:['E','O','R','W'],rightLetters:['P'],leftAnswer:"FLOWER",rightAnswer:"POWER",fact:"Flowers are the most popular Mother's Day gift worldwide."},
-  'md_h':{id:'md_h',topic:"Mother's Day 🌸",stars:2,leftLetters:['G'],overlapLetters:['E'],rightLetters:['A','B','F','K','R','S','T'],leftAnswer:"EGG",rightAnswer:"BREAKFAST",fact:"Breakfast in bed is a classic Mother's Day tradition."},
+  'md_h':{id:'md_h',topic:"Mother's Day 🌸",stars:2,leftLetters:['A','B','C','D','L','M','R'],overlapLetters:['E','S'],rightLetters:['G'],leftAnswer:"SCRAMBLED",rightAnswer:"EGGS",fact:"Scrambled eggs for breakfast in bed is a classic Mother's Day treat."},
 };
 function getDiffColor(key){return key==='e'?'#22c55e':key==='m'?'#f59e0b':'#ef4444';}
 function getDiffBg(key){return key==='e'?'rgba(34,197,94,.12)':key==='m'?'rgba(245,158,11,.12)':'rgba(239,68,68,.12)';}
@@ -1448,7 +1448,7 @@ function renderVennLetters(puzzle){
     });
   });
 }
-function renderInputs(){const p=isTrial?trialPuzzle:(currentMode==="free"&&currentFreePuzzle?currentFreePuzzle:(currentPuzzleIdx===-1||currentPuzzleIdx===-99?trialPuzzle:puzzles[currentPuzzleIdx]));renderTiles(leftTilesEl,leftGuessSlots,p.leftAnswer.length,revealedLeft,"left");renderTiles(rightTilesEl,rightGuessSlots,p.rightAnswer.length,revealedRight,"right");lastHintLeftIdx=-1;lastHintRightIdx=-1;}
+function renderInputs(){const p=isTrial?trialPuzzle:((currentMode==="free"||currentMode==="daily")&&currentFreePuzzle?currentFreePuzzle:(currentPuzzleIdx===-1||currentPuzzleIdx===-99?trialPuzzle:puzzles[currentPuzzleIdx]));renderTiles(leftTilesEl,leftGuessSlots,p.leftAnswer.length,revealedLeft,"left");renderTiles(rightTilesEl,rightGuessSlots,p.rightAnswer.length,revealedRight,"right");lastHintLeftIdx=-1;lastHintRightIdx=-1;}
 function updateHintBtn(){
     const hint=document.getElementById("kb-hint");
     if(hintsRemaining>0){
@@ -1484,7 +1484,7 @@ function removeLetter(){
 /* ── RESET ── */
 function resetPuzzleState(){
   document.querySelector(".timer-bar").style.visibility="visible";
-  const p=(currentMode==="free"&&currentFreePuzzle?currentFreePuzzle:(currentPuzzleIdx===-1||currentPuzzleIdx===-99?trialPuzzle:puzzles[currentPuzzleIdx]));
+  const p=((currentMode==="free"||currentMode==="daily")&&currentFreePuzzle?currentFreePuzzle:(currentPuzzleIdx===-1||currentPuzzleIdx===-99?trialPuzzle:puzzles[currentPuzzleIdx]));
   leftGuessSlots=new Array(p.leftAnswer.length).fill("");rightGuessSlots=new Array(p.rightAnswer.length).fill("");
   leftTapHistory=[];rightTapHistory=[];hintsRemaining=3;
   revealedLeft=new Array(p.leftAnswer.length).fill("");revealedRight=new Array(p.rightAnswer.length).fill("");
@@ -1508,7 +1508,7 @@ function giveUp(){
   const giveUpBtn=document.getElementById("kb-giveup");
   if(giveUpBtn)giveUpBtn.style.display="none";
   // Reveal the answers
-  const p=isTrial?trialPuzzle:(currentMode==="free"&&currentFreePuzzle?currentFreePuzzle:(currentPuzzleIdx===-1||currentPuzzleIdx===-99?trialPuzzle:puzzles[currentPuzzleIdx]));
+  const p=isTrial?trialPuzzle:((currentMode==="free"||currentMode==="daily")&&currentFreePuzzle?currentFreePuzzle:(currentPuzzleIdx===-1||currentPuzzleIdx===-99?trialPuzzle:puzzles[currentPuzzleIdx]));
   puzzleCompleted=true;
   // Show gave up post-solve
   setTimeout(()=>{
@@ -1614,7 +1614,7 @@ async function shareVendy(){
 
 /* ── ANSWER ── */
 function enterAnswer(){
-  const p=isTrial?trialPuzzle:(currentMode==="free"&&currentFreePuzzle?currentFreePuzzle:puzzles[currentPuzzleIdx]);
+  const p=isTrial?trialPuzzle:((currentMode==="free"||currentMode==="daily")&&currentFreePuzzle?currentFreePuzzle:puzzles[currentPuzzleIdx]);
   const fl=buildWord(leftGuessSlots,revealedLeft),fr=buildWord(rightGuessSlots,revealedRight);
   if(fl===p.leftAnswer&&fr===p.rightAnswer){
     const hintsUsed=3-hintsRemaining,stars=starsFromHints(hintsUsed);
@@ -1676,7 +1676,7 @@ function enterAnswer(){
 function unrevealed(answer,revealed,slots){const out=[];for(let i=0;i<answer.length;i++)if(slots[i]!==answer[i]&&!revealed[i])out.push(i);return out;}
 function useHint(){
   if(hintsRemaining<=0||puzzleCompleted)return;
-  const p=(currentMode==="free"&&currentFreePuzzle?currentFreePuzzle:(currentPuzzleIdx===-1||currentPuzzleIdx===-99?trialPuzzle:puzzles[currentPuzzleIdx]));
+  const p=((currentMode==="free"||currentMode==="daily")&&currentFreePuzzle?currentFreePuzzle:(currentPuzzleIdx===-1||currentPuzzleIdx===-99?trialPuzzle:puzzles[currentPuzzleIdx]));
   const choices=[...unrevealed(p.leftAnswer,revealedLeft,leftGuessSlots).map(i=>({side:"left",index:i})),...unrevealed(p.rightAnswer,revealedRight,rightGuessSlots).map(i=>({side:"right",index:i}))];
   if(!choices.length){resultEl.textContent="Nothing left to reveal.";resultEl.className="result";return;}
   const c=choices[Math.floor(Math.random()*choices.length)];
@@ -1980,7 +1980,7 @@ document.getElementById("stuck-skip").addEventListener("click",()=>{
   hideStuck();
   document.getElementById("stuck-overlay").classList.remove("active");
   // Show the correct answer
-  const p=(currentMode==="free"&&currentFreePuzzle?currentFreePuzzle:(currentPuzzleIdx===-1||currentPuzzleIdx===-99?trialPuzzle:puzzles[currentPuzzleIdx]));
+  const p=((currentMode==="free"||currentMode==="daily")&&currentFreePuzzle?currentFreePuzzle:(currentPuzzleIdx===-1||currentPuzzleIdx===-99?trialPuzzle:puzzles[currentPuzzleIdx]));
   if(p){
     puzzleCompleted=true;
     lockInputs(true);
