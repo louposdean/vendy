@@ -431,18 +431,15 @@
 
   <!-- INTRO -->
   <div id="intro-screen" class="screen active intro-screen">
-    <svg viewBox="0 0 320 215" xmlns="http://www.w3.org/2000/svg" style="width:min(364px,100%);height:auto;margin:0 auto 4px;display:block;">
+    <svg viewBox="0 0 320 215" xmlns="http://www.w3.org/2000/svg" style="width:min(300px,100%);height:auto;margin:0 auto 2px;display:block;">
       <defs>
         <clipPath id="lc"><circle cx="140" cy="52" r="38"/></clipPath>
         <path id="vendy-arc" d="M 38,152 Q 160,128 282,152" fill="none"/>
         <path id="tagline-arc" d="M 38,192 Q 160,148 282,192" fill="none"/>
       </defs>
-      <!-- fills only, no stroke -->
       <circle cx="140" cy="52" r="38" fill="rgba(79,120,255,.72)" stroke="none"/>
       <circle cx="180" cy="52" r="38" fill="rgba(245,80,160,.72)" stroke="none"/>
-      <!-- overlap fill -->
       <circle cx="180" cy="52" r="38" fill="#d466bb" clip-path="url(#lc)" stroke="none"/>
-      <!-- outlines drawn last on top, fill=none so intersection stays clean -->
       <circle cx="140" cy="52" r="38" fill="none" stroke="#000" stroke-width="5"/>
       <circle cx="180" cy="52" r="38" fill="none" stroke="#000" stroke-width="5"/>
       <text x="160" y="52" text-anchor="middle" dominant-baseline="central" font-size="24" font-weight="900" fill="white" font-family="'Nunito', sans-serif">★</text>
@@ -455,30 +452,37 @@
         </textPath>
       </text>
     </svg>
-    <button id="start-btn" class="intro-button">Today's Puzzle</button>
-    <div id="return-btn-wrap" class="intro-return-wrap" style="display:none;width:100%;max-width:260px;">
+
+    <!-- Today's Challenges -->
+    <div style="font-size:13px;font-weight:800;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Today's Challenges</div>
+    <div id="challenge-cards" style="width:100%;max-width:320px;display:flex;flex-direction:column;gap:8px;margin-bottom:12px;"></div>
+
+    <!-- Archive + other buttons -->
+    <button onclick="openWeekOverlay()" style="width:100%;max-width:320px;padding:11px;border-radius:12px;background:transparent;border:2px solid var(--divider);font-size:14px;font-weight:800;color:var(--muted);cursor:pointer;font-family:'Nunito',sans-serif;margin-bottom:6px;">Missed a Day? <span style="color:var(--pink);">Browse Archive ▶</span></button>
+
+    <div style="display:flex;gap:10px;width:100%;max-width:320px;margin-bottom:10px;">
+      <button id="tutorial-btn" style="flex:1;padding:10px;border-radius:12px;background:var(--key-bg);border:none;font-size:13px;font-weight:800;color:var(--text);cursor:pointer;font-family:'Nunito',sans-serif;">How to Play</button>
+      <button onclick="shareVendy()" style="flex:1;padding:10px;border-radius:12px;background:#f0fdf4;border:2px solid #22c55e;font-size:13px;font-weight:800;color:#166534;cursor:pointer;font-family:'Nunito',sans-serif;">Share Vendy</button>
+    </div>
+
+    <a href="https://buymeacoffee.com/playvendy" target="_blank" style="font-size:12px;font-weight:700;color:var(--muted);text-decoration:none;opacity:.7;">☕ Support Vendy</a>
+    <div id="return-btn-wrap" class="intro-return-wrap" style="display:none;">
       <button id="return-btn" class="intro-button" style="background:rgba(212,102,187,.15);color:#9333ea;border:2px solid rgba(212,102,187,.4);box-shadow:none;margin-bottom:8px;">Admire your puzzle ✨</button>
-    </div>
-    <button id="tutorial-btn" class="intro-button secondary" style="margin-top:-4px;">How to Play</button>
-    <button onclick="openWeekOverlay()" class="intro-button secondary" style="margin-top:-4px;">📅 This Week's Vendys</button>
-    <div class="intro-footer-meta">
-      <div id="intro-date"></div>
-    </div>
-    <div style="margin-top:16px;display:flex;flex-direction:column;align-items:center;gap:10px;">
-      <button id="share-vendy-btn" onclick="shareVendy()" style="display:flex;align-items:center;gap:8px;background:#f0fdf4;border:2px solid #22c55e;border-radius:14px;padding:10px 22px;font-size:15px;font-weight:800;color:#166534;cursor:pointer;font-family:'Nunito',sans-serif;">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" style="width:18px;height:18px;flex-shrink:0;"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        Share Vendy
-      </button>
-      <a href="https://buymeacoffee.com/playvendy" target="_blank" style="font-size:12px;font-weight:700;color:var(--muted);text-decoration:none;opacity:.7;">☕ Support Vendy</a>
     </div>
   </div>
 
   <!-- GAME SHELL -->
   <div id="game-shell" class="screen">
     <div class="game-header">
-      <div style="display:flex;align-items:center;gap:4px;"><div class="header-streak"><span class="flame">🔥</span><span id="header-streak-count">0</span></div><button id="stats-icon-btn" style="background:none;border:none;font-size:18px;cursor:pointer;padding:0 0 0 2px;opacity:.55;color:var(--text);" title="Stats">🏆</button></div>
+      <!-- E M H progress -->
+      <div style="display:flex;align-items:center;gap:6px;">
+        <span id="emh-e" onclick="showIntro()" style="font-size:14px;font-weight:900;color:var(--muted);opacity:0.35;font-family:'Nunito',sans-serif;transition:all .2s;cursor:pointer;">E</span>
+        <span id="emh-m" onclick="showIntro()" style="font-size:14px;font-weight:900;color:var(--muted);opacity:0.35;font-family:'Nunito',sans-serif;transition:all .2s;cursor:pointer;">M</span>
+        <span id="emh-h" onclick="showIntro()" style="font-size:14px;font-weight:900;color:var(--muted);opacity:0.35;font-family:'Nunito',sans-serif;transition:all .2s;cursor:pointer;">H</span>
+      </div>
       <div class="header-title">Vendy <span id="intro-puzzle-number" style="font-size:22px;font-weight:900;opacity:0.45;font-family:'Nunito',sans-serif;color:inherit;"></span></div>
       <div style="display:flex;align-items:center;gap:6px;">
+        <div id="header-flame" style="font-size:18px;font-weight:900;display:flex;align-items:center;gap:2px;opacity:0.4;">🔥<span id="header-streak-count" style="font-size:14px;font-family:'Nunito',sans-serif;font-weight:900;color:var(--text);">0</span></div>
         <button onclick="window.open('https://www.youtube.com/shorts/rN6OKi_vBBw','_blank')" style="background:none;border:none;font-size:18px;cursor:pointer;opacity:.55;color:var(--text);padding:0;font-weight:900;font-family:'Nunito',sans-serif;" title="How to Play">?</button>
         <button class="gear-btn" id="gear-btn" aria-label="Menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -541,6 +545,7 @@
             <span style="font-size:10px;font-weight:700;opacity:.8;">+10s (3)</span>
           </button>
           <button class="key key-submit" id="kb-enter" style="flex:1;max-width:none;font-size:18px;font-weight:900;background:#16a34a;color:#fff;border-radius:12px;letter-spacing:.5px;">SUBMIT</button>
+          <button id="kb-giveup" onclick="giveUp()" style="flex:0 0 auto;width:60px;height:46px;border:none;border-radius:12px;background:rgba(239,68,68,.12);color:#ef4444;font-size:11px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif;letter-spacing:.3px;">Give<br>Up</button>
         </div>
       </div>
       <div class="post-solve" id="post-solve" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,.65);z-index:9995;align-items:center;justify-content:center;padding:16px;">
@@ -562,6 +567,8 @@
             <div style="font-size:28px;margin:6px 0;" id="ps-stars">⭐⭐⭐</div>
             <div style="font-size:20px;font-weight:700;color:var(--pink);" id="solve-time">⏱ 8.4s</div>
           </div>
+          <!-- Remaining challenges -->
+          <div id="ps-remaining" style="margin:8px 0;"></div>
           <!-- Streak -->
           <div style="text-align:center;margin:8px 0 4px;">
             <div style="font-size:22px;font-weight:900;" id="ps-streak">🔥 3-day streak</div>
@@ -772,7 +779,7 @@
 <canvas id="confetti-canvas"></canvas>
 
 <script>
-const VERSION = "1.1.0";
+const VERSION = "1.2.0";
 let deferredInstallPrompt=null;
 
 // Service worker for cache busting — bump VERSION to force update
@@ -791,7 +798,99 @@ if('serviceWorker' in navigator){
   const swUrl=URL.createObjectURL(blob);
   navigator.serviceWorker.register(swUrl).catch(()=>{});
 }
+
 let currentFreePuzzle=null;
+let currentDiffKey='e';
+
+// Daily puzzle sets — E/M/H per day (puzzle IDs, 1-indexed)
+const dailySets=[
+  {e:12,m:1,h:3},
+  {e:13,m:2,h:4},
+  {e:15,m:7,h:5},
+  {e:16,m:8,h:6},
+  {e:17,m:9,h:26},
+  {e:18,m:10,h:27},
+  {e:'md_e',m:'md_m',h:'md_h'},  // Mother's Day special
+];
+
+const specialPuzzles={
+  'md_e':{id:'md_e',topic:"Mother's Day 🌸",stars:2,leftLetters:['S','W'],overlapLetters:['E','T'],rightLetters:['A','H','R'],leftAnswer:"SWEET",rightAnswer:"HEART",fact:"Sweet heart is a classic Mother's Day term of endearment."},
+  'md_m':{id:'md_m',topic:"Mother's Day 🌸",stars:2,leftLetters:['F','L'],overlapLetters:['E','O','R','W'],rightLetters:['P'],leftAnswer:"FLOWER",rightAnswer:"POWER",fact:"Flowers are the most popular Mother's Day gift worldwide."},
+  'md_h':{id:'md_h',topic:"Mother's Day 🌸",stars:2,leftLetters:['G'],overlapLetters:['E'],rightLetters:['A','B','F','K','R','S','T'],leftAnswer:"EGG",rightAnswer:"BREAKFAST",fact:"Breakfast in bed is a classic Mother's Day tradition."},
+};
+function getDiffColor(key){return key==='e'?'#22c55e':key==='m'?'#f59e0b':'#ef4444';}
+function getDiffBg(key){return key==='e'?'rgba(34,197,94,.12)':key==='m'?'rgba(245,158,11,.12)':'rgba(239,68,68,.12)';}
+function getDiffLabel(key){return key==='e'?'Easy':key==='m'?'Medium':'Hard';}
+function getPuzzleById(id){return typeof id==='string'?specialPuzzles[id]:puzzles[id-1];}
+function getTodaySet(){const todayN=getDailyNum();return dailySets[(todayN-1)%dailySets.length];}
+
+function renderChallengeCards(){
+  const set=getTodaySet();
+  const container=document.getElementById('challenge-cards');
+  if(!container)return;
+  container.innerHTML='';
+  const progress=loadArchiveProgress();
+  const dayN=getDailyNum();
+  ['e','m','h'].forEach(key=>{
+    const puzId=set[key];
+    const puz=getPuzzleById(puzId);
+    const solved=progress[`daily_${dayN}_${key}`]?.solved;
+    const btn=document.createElement('button');
+    btn.style.cssText=`width:100%;padding:14px 16px;border-radius:14px;background:${solved?'rgba(34,197,94,.1)':getDiffBg(key)};border:2px solid ${solved?'#22c55e':getDiffColor(key)};cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;justify-content:space-between;`;
+    btn.innerHTML=`
+      <div style="text-align:left;">
+        <div style="font-size:16px;font-weight:900;color:${solved?'#22c55e':getDiffColor(key)};">${solved?'✅ ':''}${getDiffLabel(key)}</div>
+        <div style="font-size:13px;font-weight:700;color:var(--muted);margin-top:2px;">${puz.topic}</div>
+      </div>
+      <div style="font-size:22px;font-weight:900;color:${solved?'#22c55e':getDiffColor(key)};opacity:${solved?'1':'0.5'};">${key.toUpperCase()}</div>
+    `;
+    btn.addEventListener('click',()=>{currentDiffKey=key;loadDailyChallenge(key);});
+    container.appendChild(btn);
+  });
+}
+
+function loadDailyChallenge(key){
+  const set=getTodaySet();
+  const puzId=set[key];
+  currentDiffKey=key;
+  introScreen.classList.remove('active');gameShell.classList.add('active');showDailyScreen();
+  if(typeof puzId==='string'){
+    // Special puzzle (e.g. Mother's Day)
+    const p=specialPuzzles[puzId];
+    currentMode="daily";currentPuzzleKey=`daily_${getDailyNum()}_${key}`;currentFreePuzzle=p;currentPuzzleIdx=-99;
+    if(topicEl)topicEl.textContent=p.topic;
+    if(puzzleIdEl)puzzleIdEl.textContent=getDiffLabel(key);
+    const label=document.getElementById('intro-puzzle-number');
+    if(label)label.textContent=getDiffLabel(key);
+    renderVennLetters(p);resetPuzzleState();
+    leftGuessSlots=new Array(p.leftAnswer.length).fill("");
+    rightGuessSlots=new Array(p.rightAnswer.length).fill("");
+    revealedLeft=new Array(p.leftAnswer.length).fill("");
+    revealedRight=new Array(p.rightAnswer.length).fill("");
+    renderTiles(leftTilesEl,leftGuessSlots,p.leftAnswer.length,revealedLeft,"left");
+    renderTiles(rightTilesEl,rightGuessSlots,p.rightAnswer.length,revealedRight,"right");
+    setTimeout(()=>setActiveField("left"),150);renderStats();startStuckTimer();startTimer();
+  } else {
+    loadGame('daily',puzId);
+    const label=document.getElementById('intro-puzzle-number');
+    if(label)label.textContent=getDiffLabel(key);
+  }
+}
+
+function updateEMHHeader(){
+  const progress=loadArchiveProgress();
+  const dayN=getDailyNum();
+  ['e','m','h'].forEach(key=>{
+    const el=document.getElementById(`emh-${key}`);
+    if(!el)return;
+    const solved=progress[`daily_${dayN}_${key}`]?.solved;
+    el.style.opacity=solved?'1':'0.35';
+    el.style.color=solved?getDiffColor(key):'var(--muted)';
+  });
+  const allDone=['e','m','h'].every(k=>progress[`daily_${dayN}_${k}`]?.solved);
+  const flame=document.getElementById('header-flame');
+  if(flame)flame.style.opacity=allDone?'1':'0.4';
+}
 window.addEventListener("beforeinstallprompt",(e)=>{e.preventDefault();deferredInstallPrompt=e;});
 const launchDate = new Date(2026, 4, 4);
 
@@ -857,7 +956,7 @@ let timerStart=null,timerElapsed=0,timerInterval=null;
 let currentLeftIdx=0,currentRightIdx=0,confettiRaf=null;
 
 const $=id=>document.getElementById(id);
-const introScreen=$("intro-screen"),gameShell=$("game-shell"),startBtn=$("start-btn");
+const introScreen=$("intro-screen"),gameShell=$("game-shell");
 const introDate=$("intro-date"),introPuzzleNum=$("intro-puzzle-number");
 const returnBtnWrap=$("return-btn-wrap"),returnBtn=$("return-btn");
 const puzzleIdEl=$("puzzle-id"),puzzleDateEl=$("puzzle-date"),topicEl=$("topic-text");
@@ -867,6 +966,7 @@ const leftTilesEl=$("left-tiles"),rightTilesEl=$("right-tiles"),leftBox=$("left-
 const lettersLayer=$("letters-layer"),keyboardEl=$("keyboard");
 const kbEnter=$("kb-enter"),kbDelete=$("kb-delete"),kbHint=$("kb-hint"),kbSwitch=$("kb-switch");
 const psShare=$("ps-share");
+const winPopup=$("win-popup"),winLabel=$("win-label"),winTime=$("win-time");
 const statPlayedEl=$("stat-played")||{textContent:""},statSolvedEl=$("stat-solved")||{textContent:""},statStreakEl=$("stat-streak")||{textContent:""};
 const statBestEl=$("stat-best")||{textContent:""},statPerfectEl=$("stat-perfect")||{textContent:""},fastestTimeEl=$("fastest-time")||{textContent:""};
 const resetStatsBtn=$("reset-stats-btn"),headerStreakEl=$("header-streak-count");
@@ -885,7 +985,6 @@ if(_rtb) _rtb.addEventListener("click",()=>{
 });
 const dailyScreen=$("daily-screen");
 const timerValueEl=$("timer-value"),tutorialOverlay=$("tutorial-overlay"),tutorialCloseBtn=$("tutorial-close-btn");
-const winPopup=$("win-popup"),winLabel=$("win-label"),winTime=$("win-time");
 const confettiCanvas=$("confetti-canvas"),ctx=confettiCanvas.getContext("2d");
 
 /* ── GEAR ── */
@@ -899,7 +998,7 @@ $("gi-create").addEventListener("click",()=>{closeGear();openCreateOverlay();});
 
 function openWeekOverlay(){
   const todayN=getDailyNum();
-  const startN=Math.max(1,todayN-6);
+  const startN=Math.max(1,todayN-2); // last 3 days
   const list=$("week-list");
   const progress=loadArchiveProgress();
   list.innerHTML="";
@@ -927,8 +1026,8 @@ function openWeekOverlay(){
         closeWeekOverlay();
         currentMode="free";currentPuzzleKey=key;
         introScreen.classList.remove("active");gameShell.classList.add("active");showDailyScreen();
-        topicEl.textContent=p.topic;
-        puzzleIdEl.textContent=`Free #${i+1}`;puzzleDateEl.textContent="First Week Bonus";
+        if(topicEl)topicEl.textContent=p.topic;
+        if(puzzleIdEl)puzzleIdEl.textContent=`Free #${i+1}`;if(puzzleDateEl)puzzleDateEl.textContent="First Week Bonus";
         if(introPuzzleNum)introPuzzleNum.textContent=`Free`;
         currentFreePuzzle=p;
         currentPuzzleIdx=-99;
@@ -953,26 +1052,42 @@ function openWeekOverlay(){
   }
 
   for(let n=startN;n<=todayN;n++){
-    const p=puzzles[(n-1)%puzzles.length];
-    const key=pKey("daily",n);
-    const record=progress[key];
     const isToday=n===todayN;
-    const btn=document.createElement("button");
-    btn.style.cssText="display:flex;align-items:center;justify-content:space-between;width:100%;padding:12px 14px;border-radius:12px;background:var(--stats-bg);border:1.5px solid var(--divider);cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:14px;color:var(--text);margin-bottom:6px;";
-    const left=document.createElement("div");left.style.textAlign="left";
-    const title=document.createElement("div");title.textContent=`Vendy #${n}${isToday?" — Today":""}`;title.style.fontWeight="900";
-    const sub=document.createElement("div");sub.textContent=p.topic;sub.style.cssText="font-size:11px;color:var(--muted);font-weight:600;margin-top:2px;";
-    left.appendChild(title);left.appendChild(sub);
-    const status=document.createElement("div");
-    status.textContent=record?.solved?`✅ ${"⭐".repeat(record.stars||1)}`:(isToday?"▶ Play":"▶ Catch up");
-    status.style.cssText="font-size:12px;font-weight:800;color:var(--muted);";
-    btn.appendChild(left);btn.appendChild(status);
-    btn.addEventListener("click",()=>{
-      closeWeekOverlay();
-      if(isToday){showGame();}
-      else{currentMode="week";introScreen.classList.remove("active");gameShell.classList.add("active");showDailyScreen();loadGame("week",n);}
+    const set=dailySets[(n-1)%dailySets.length];
+    const dayLabel=isToday?"Today":`Day ${n}`;
+
+    // Day header
+    const dayHead=document.createElement("div");
+    dayHead.style.cssText="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:10px 0 6px;";
+    dayHead.textContent=`📅 ${isToday?"Today":"Day "+n}`;
+    list.appendChild(dayHead);
+
+    // E M H buttons for this day
+    const row=document.createElement("div");
+    row.style.cssText="display:flex;gap:8px;margin-bottom:4px;";
+    ['e','m','h'].forEach(key=>{
+      const puzId=set[key];
+      const puz=getPuzzleById(puzId);
+      const solved=progress[`daily_${n}_${key}`]?.solved;
+      const btn=document.createElement("button");
+      btn.style.cssText=`flex:1;padding:10px 6px;border-radius:12px;background:${solved?'rgba(34,197,94,.1)':getDiffBg(key)};border:2px solid ${solved?'#22c55e':getDiffColor(key)};cursor:pointer;font-family:'Nunito',sans-serif;text-align:center;`;
+      btn.innerHTML=`<div style="font-size:14px;font-weight:900;color:${solved?'#22c55e':getDiffColor(key)};">${solved?'✅':''} ${getDiffLabel(key)}</div><div style="font-size:10px;font-weight:700;color:var(--muted);margin-top:2px;">${puz.topic.split(' ')[0]}</div>`;
+      btn.addEventListener("click",()=>{
+        closeWeekOverlay();
+        currentDiffKey=key;
+        if(isToday){
+          loadDailyChallenge(key);
+        } else {
+          currentMode="week";
+          introScreen.classList.remove("active");gameShell.classList.add("active");showDailyScreen();
+          loadGame("week",puzId);
+          const label=document.getElementById("intro-puzzle-number");
+          if(label)label.textContent=getDiffLabel(key);
+        }
+      });
+      row.appendChild(btn);
     });
-    list.appendChild(btn);
+    list.appendChild(row);
   }
   $("week-overlay").style.display="flex";
 }
@@ -1210,7 +1325,7 @@ function setActiveField(side,index=null){
   renderInputs();
 }
 function maybeAdvance(){if(activeField!=="left")return;if(nextOpen(leftGuessSlots,revealedLeft)===-1)setActiveField("right")}
-function lockInputs(locked){kbEnter.disabled=locked;kbDelete.disabled=locked;leftBox.classList.toggle("locked",locked);rightBox.classList.toggle("locked",locked)}
+function lockInputs(locked){kbEnter.disabled=locked;kbDelete.disabled=locked;leftBox.classList.toggle("locked",locked);rightBox.classList.toggle("locked",locked);const gb=document.getElementById("kb-giveup");if(gb)gb.style.display=locked?"none":"";}  
 
 /* ── TILES ── */
 function tileSize(len){
@@ -1376,14 +1491,40 @@ function resetPuzzleState(){
   lastHintLeftIdx=-1;lastHintRightIdx=-1;currentStars=0;currentLeftIdx=0;currentRightIdx=0;
   puzzleCompleted=false;lockInputs(false);updateHintBtn();
   resultEl.textContent="";resultEl.className="result";
-  postSolveEl.classList.remove("active");solveSpeedEl.textContent="";solveTimeEl.textContent="";
-  sharePreviewEl.classList.remove("active");sharePreviewEl.textContent="";
-  solveLockEl.classList.remove("active");solveLockEl.textContent="";
+  postSolveEl.style.display="none";
+  if(solveSpeedEl)solveSpeedEl.textContent="";
+  if(solveTimeEl)solveTimeEl.textContent="";
+  if(sharePreviewEl){sharePreviewEl.classList.remove("active");sharePreviewEl.textContent="";}
+  if(solveLockEl){solveLockEl.classList.remove("active");if(solveLockEl)solveLockEl.textContent="";}
   keyboardEl.classList.remove("fading-out");keyboardEl.style.display="";document.querySelector(".timer-bar").style.visibility="visible";
   stopTimer();updateTimerDisplay();
 }
 function buildWord(slots,revealed){return slots.map((l,i)=>revealed[i]||l||"").join("")}
 function closePostSolve(){postSolveEl.style.display="none";}
+function giveUp(){
+  if(puzzleCompleted)return;
+  stopTimer();
+  lockInputs(true);kbHint.disabled=true;
+  const giveUpBtn=document.getElementById("kb-giveup");
+  if(giveUpBtn)giveUpBtn.style.display="none";
+  // Reveal the answers
+  const p=isTrial?trialPuzzle:(currentMode==="free"&&currentFreePuzzle?currentFreePuzzle:(currentPuzzleIdx===-1||currentPuzzleIdx===-99?trialPuzzle:puzzles[currentPuzzleIdx]));
+  puzzleCompleted=true;
+  // Show gave up post-solve
+  setTimeout(()=>{
+    const speedEl=document.getElementById("solve-speed");
+    const starsEl=document.getElementById("ps-stars");
+    const timeEl=document.getElementById("solve-time");
+    const streakEl=document.getElementById("ps-streak");
+    const remEl=document.getElementById("ps-remaining");
+    if(speedEl)speedEl.textContent="That was a tough one!";
+    if(starsEl)starsEl.textContent="The answer was:";
+    if(timeEl)timeEl.innerHTML=`<span style="font-size:20px;font-weight:900;color:var(--navy);">${p.leftAnswer} / ${p.rightAnswer}</span>`;
+    if(streakEl)streakEl.textContent="";
+    if(remEl)remEl.innerHTML="";
+    postSolveEl.style.display="flex";
+  },400);
+}
 function showPostSolve(){
   keyboardEl.classList.add("fading-out");
   document.querySelector(".timer-bar").style.visibility="hidden";
@@ -1398,6 +1539,27 @@ function showPostSolve(){
     if(speedEl) speedEl.textContent="Well Done!";
     if(timeEl) timeEl.textContent=`⏱ ${timeStr}`;
     if(streakEl) streakEl.textContent=stats.streak>0?`🔥 ${stats.streak}-day streak`:"";
+
+    // Show remaining challenges
+    if(currentMode==="daily"){
+      const progress=loadArchiveProgress();
+      const dayN=getDailyNum();
+      const remaining=['e','m','h'].filter(k=>!progress[`daily_${dayN}_${k}`]?.solved&&k!==currentDiffKey);
+      const allDone=remaining.length===0;
+      const remEl=document.getElementById('ps-remaining');
+      if(remEl){
+        if(allDone){
+          remEl.innerHTML=`<div style="text-align:center;font-size:16px;font-weight:900;color:#22c55e;margin:6px 0;">🎉 Daily Challenges Complete!</div>`;
+        } else {
+          remEl.innerHTML=`<div style="font-size:13px;font-weight:800;color:var(--muted);text-align:center;margin-bottom:6px;">${remaining.length} Challenge${remaining.length>1?'s':''} Remaining</div>
+          <div style="display:flex;gap:8px;">${remaining.map(k=>`
+            <button onclick="closePostSolve();loadDailyChallenge('${k}')" style="flex:1;padding:12px;border-radius:12px;background:${getDiffBg(k)};border:2px solid ${getDiffColor(k)};font-size:15px;font-weight:900;color:${getDiffColor(k)};cursor:pointer;font-family:'Nunito',sans-serif;">
+              ${getDiffLabel(k)}
+            </button>`).join('')}</div>`;
+        }
+      }
+    }
+
     // Show modal after confetti — 2 second delay
     setTimeout(()=>{postSolveEl.style.display="flex";},2000);
   },380);
@@ -1432,7 +1594,7 @@ async function shareResult(){
     psShare.textContent="✅ Copied!";
     setTimeout(()=>{psShare.textContent="Share";},2500);
   }catch(e){
-    sharePreviewEl.textContent=text;sharePreviewEl.classList.add("active");
+    if(sharePreviewEl){sharePreviewEl.textContent=text;sharePreviewEl.classList.add("active");}
   }
 }
 
@@ -1459,23 +1621,35 @@ function enterAnswer(){
     currentStars=stars;stopTimer();const ft=timerElapsed,sl=speedLabel(ft);
     resultEl.textContent="";resultEl.className="result";
     const goldStars="⭐".repeat(stars);
-    solveSpeedEl.textContent=sl;
+    if(solveSpeedEl)solveSpeedEl.textContent=sl;
     const psStarsEl=document.getElementById("ps-stars");
     if(psStarsEl)psStarsEl.textContent=goldStars||"";
-    solveTimeEl.textContent=`⏱ ${ft.toFixed(1)}s`;
+    if(solveTimeEl)solveTimeEl.textContent=`⏱ ${ft.toFixed(1)}s`;
     triggerWinEffects(sl,ft);
     [...leftTilesEl.children,...rightTilesEl.children].forEach((tile,i)=>{tile.classList.add("correct-pop");tile.style.animationDelay=`${i*60}ms`;});
     if(!puzzleCompleted){
       puzzleCompleted=true;
       if(isTrial){isTrial=false;lockInputs(true);kbHint.disabled=true;showPostSolve();setTimeout(()=>{showIntro();},3500);return;}
       if(currentMode==="daily"){
-        if(!stats.dailySolvedKeys.includes(currentPuzzleKey)){
-          stats.solved+=1;stats.streak+=1;stats.bestStreak=Math.max(stats.bestStreak,stats.streak);
-          stats.hintsUsed+=hintsUsed;if(hintsUsed===0)stats.perfectSolves+=1;
+        // Save this puzzle's solve with difficulty key
+        const dayN=getDailyNum();
+        const diffKey=`daily_${dayN}_${currentDiffKey}`;
+        const prog=loadArchiveProgress();
+        if(!prog[diffKey]?.solved){
+          prog[diffKey]={solved:true,hintsUsed,stars,time:ft,datePlayed:new Date().toISOString()};
+          saveArchiveProgress(prog);
+          stats.solved+=1;stats.hintsUsed+=hintsUsed;
+          if(hintsUsed===0)stats.perfectSolves+=1;
           if(stats.fastestTimed===null||ft<stats.fastestTimed)stats.fastestTimed=ft;
-          stats.dailySolvedKeys.push(currentPuzzleKey);stats.currentDailySolvedKey=currentPuzzleKey;
-          saveStats();saveDailySolve(stars,hintsUsed,ft);
+          // Only increment streak if all 3 done today
+          const allDone=['e','m','h'].every(k=>prog[`daily_${dayN}_${k}`]?.solved);
+          if(allDone&&!stats.dailySolvedKeys.includes(`day_${dayN}`)){
+            stats.streak+=1;stats.bestStreak=Math.max(stats.bestStreak,stats.streak);
+            stats.dailySolvedKeys.push(`day_${dayN}`);
+          }
+          saveStats();
         }
+        updateEMHHeader();
         activateSolveLock("");
       }
       else if(currentMode==="week"){
@@ -1532,8 +1706,8 @@ function loadGame(mode,vendyNumber){
   currentPuzzleIdx=(vendyNumber-1)%puzzles.length;currentPuzzleKey=pKey(mode,vendyNumber);
   const p=puzzles[currentPuzzleIdx];
   if(mode==="daily"&&!stats.dailyPlayedKeys.includes(currentPuzzleKey)){stats.played+=1;stats.dailyPlayedKeys.push(currentPuzzleKey);saveStats();}
-  topicEl.textContent=p.topic;
-  puzzleIdEl.textContent=`Vendy #${vendyNumber}`;puzzleDateEl.textContent=fmt(dateForNum(vendyNumber));
+  if(topicEl)topicEl.textContent=p.topic;
+  if(puzzleIdEl)puzzleIdEl.textContent=`Vendy #${vendyNumber}`;if(puzzleDateEl)puzzleDateEl.textContent=fmt(dateForNum(vendyNumber));
   refreshIntroState();renderVennLetters(p);resetPuzzleState();renderInputs();
   if(introPuzzleNum)introPuzzleNum.textContent=`#${vendyNumber}`;
   setTimeout(()=>setActiveField("left"),150);renderStats();startStuckTimer();
@@ -1551,7 +1725,7 @@ function loadGame(mode,vendyNumber){
     activateSolveLock("");
     resultEl.textContent="";resultEl.className="result";
     const rS=replay?.stars||0;const rG="⭐".repeat(rS);const rLabel=replay?.time?speedLabel(replay.time):"Solved!";solveSpeedEl.innerHTML=(rG?'<span style="font-size:18px;letter-spacing:1px;margin-right:6px;">'+rG+"</span>":"")+rLabel;
-    solveTimeEl.textContent=replay?.time?`⏱ ${replay.time.toFixed(1)}s`:"";
+    if(solveTimeEl)solveTimeEl.textContent=replay?.time?`⏱ ${replay.time.toFixed(1)}s`:"";
     showPostSolve();
   } else {
     startTimer();
@@ -1560,8 +1734,8 @@ function loadGame(mode,vendyNumber){
 
 function loadCustomGame(puzzle){
   currentMode="custom";currentVendyNum=0;currentPuzzleKey="custom";
-  topicEl.textContent=puzzle.topic;
-  puzzleIdEl.textContent="Custom Vendy";puzzleDateEl.textContent="Made by a friend";
+  if(topicEl)topicEl.textContent=puzzle.topic;
+  if(puzzleIdEl)puzzleIdEl.textContent="Custom Vendy";if(puzzleDateEl)puzzleDateEl.textContent="Made by a friend";
   introScreen.classList.remove("active");gameShell.classList.add("active");showDailyScreen();
   puzzles.unshift(puzzle);currentPuzzleIdx=0;
   renderVennLetters(puzzle);resetPuzzleState();renderInputs();
@@ -1582,11 +1756,10 @@ function resetStats(){stats={...defaultStats};saveStats();localStorage.removeIte
 function refreshIntroState(){
   const todayN=getDailyNum(),todayKey=pKey("daily",todayN);
   const solved=stats.currentDailySolvedKey===todayKey||stats.dailySolvedKeys.includes(todayKey);
-  introPuzzleNum.textContent=`#${todayN}`;introDate.textContent=fmt(dateForNum(todayN));
-  startBtn.style.display=solved?"none":"";
+  if(introPuzzleNum)introPuzzleNum.textContent=`#${todayN}`;if(introDate)introDate.textContent=fmt(dateForNum(todayN));
   returnBtnWrap.style.display=solved?"block":"none";
 }
-function showIntro(){stopTimer();timerElapsed=0;updateTimerDisplay();introScreen.classList.add("active");gameShell.classList.remove("active");refreshIntroState();}
+function showIntro(){stopTimer();timerElapsed=0;updateTimerDisplay();introScreen.classList.add("active");gameShell.classList.remove("active");refreshIntroState();renderChallengeCards();updateEMHHeader();}
 function showGame(){introScreen.classList.remove("active");gameShell.classList.add("active");showDailyScreen();loadGame("daily",getDailyNum());}
 function runVideo2(){
   function af(fn,ms){setTimeout(fn,ms);}
@@ -1769,9 +1942,11 @@ function resetPuzzleState_trial(){
   lastHintLeftIdx=-1;lastHintRightIdx=-1;currentStars=0;currentLeftIdx=0;currentRightIdx=0;
   puzzleCompleted=false;lockInputs(false);updateHintBtn();
   resultEl.textContent="";resultEl.className="result";
-  postSolveEl.classList.remove("active");solveSpeedEl.textContent="";solveTimeEl.textContent="";
-  sharePreviewEl.classList.remove("active");sharePreviewEl.textContent="";
-  solveLockEl.classList.remove("active");solveLockEl.textContent="";
+  postSolveEl.style.display="none";
+  if(solveSpeedEl)solveSpeedEl.textContent="";
+  if(solveTimeEl)solveTimeEl.textContent="";
+  if(sharePreviewEl){sharePreviewEl.classList.remove("active");sharePreviewEl.textContent="";}
+  if(solveLockEl){solveLockEl.classList.remove("active");if(solveLockEl)solveLockEl.textContent="";}
   keyboardEl.classList.remove("fading-out");keyboardEl.style.display="";document.querySelector(".timer-bar").style.visibility="visible";
   stopTimer();updateTimerDisplay();
 }
@@ -1822,7 +1997,7 @@ document.getElementById("stuck-skip").addEventListener("click",()=>{
     keyboardEl.classList.add("fading-out");
     setTimeout(()=>{keyboardEl.style.display="none";},380);
     document.querySelector(".timer-bar").style.visibility="hidden";
-    solveLockEl.textContent="";
+    if(solveLockEl)solveLockEl.textContent="";
     solveLockEl.classList.add("active");
   }
 });
@@ -1866,7 +2041,7 @@ function playClickSound(){
 
 /* ── EVENTS ── */
 document.addEventListener("keydown",handleGlobalKey);
-startBtn.addEventListener("click",showGame);returnBtn.addEventListener("click",showGame);
+if(returnBtn)returnBtn.addEventListener("click",showGame);
 const _tb=document.getElementById("tutorial-btn");if(_tb)_tb.addEventListener("click",showTutorial);
 tutorialCloseBtn.addEventListener("click",hideTutorial);
 document.getElementById("tutorial-trial-btn").addEventListener("click",()=>{
@@ -1926,6 +2101,8 @@ psShare.addEventListener("click",shareResult);
 /* ── INIT ── */
 document.querySelector(".timer-bar").style.visibility="visible";
 renderStats();
+renderChallengeCards();
+updateEMHHeader();
 if(!checkURLForCustomPuzzle())showIntro();
 
 /* ── CONFETTI ── */
@@ -1980,7 +2157,7 @@ function playVendySound(){
     if(s){ s.currentTime=0; s.play().catch(()=>{}); }
   }catch(e){}
 }
-function triggerWinEffects(sl,ft){winLabel.textContent=sl;winTime.textContent=ft.toFixed(1)+"s";winPopup.classList.add("active");playVendySound();if(navigator.vibrate)navigator.vibrate([40,30,60]);launchConfetti();setTimeout(()=>{winPopup.classList.remove("active");},2000);setTimeout(()=>{stopConfetti();},3500);}
+function triggerWinEffects(sl,ft){if(winLabel)winLabel.textContent=sl;if(winTime)winTime.textContent=ft.toFixed(1)+"s";winPopup.classList.add("active");playVendySound();if(navigator.vibrate)navigator.vibrate([40,30,60]);launchConfetti();setTimeout(()=>{winPopup.classList.remove("active");},2000);setTimeout(()=>{stopConfetti();},3500);}
 </script>
 
 <!-- STUCK OVERLAY -->
