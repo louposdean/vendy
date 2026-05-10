@@ -1583,11 +1583,14 @@ function showPostSolve(){
   const timerBar=document.querySelector(".timer-bar");
   if(timerBar)timerBar.style.visibility="visible";
   if(timerValueEl)timerValueEl.textContent=timerElapsed.toFixed(1);
-  // Show share button on solve page immediately
+  // Clear result text
+  if(resultEl){resultEl.textContent="";resultEl.className="result";}
+  // Show share button immediately
   const solveShare=document.getElementById("solve-page-share");
   if(solveShare)solveShare.style.display="block";
   setTimeout(()=>{
     keyboardEl.style.display="none";
+    keyboardEl.classList.remove("fading-out");
     const mins=Math.floor(timerElapsed/60);
     const secs=(timerElapsed%60).toFixed(0).padStart(2,"0");
     const timeStr=mins>0?`${mins}:${secs}`:`${timerElapsed.toFixed(1)}s`;
