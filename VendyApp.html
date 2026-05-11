@@ -594,7 +594,7 @@
             <button onclick="showA2HS()" style="flex:1;padding:12px;border-radius:12px;background:var(--stats-bg);border:1.5px solid var(--divider);font-size:13px;font-weight:800;color:var(--text);cursor:pointer;font-family:'Nunito',sans-serif;">📲 Add to Home</button>
           </div>
           <!-- Missed any this week -->
-          <div onclick="closePostSolve();openWeekOverlay();" style="width:100%;padding:14px;border-radius:12px;background:transparent;border:2px solid var(--divider);cursor:pointer;text-align:center;font-size:17px;font-weight:800;color:var(--text);box-sizing:border-box;">Missed any this week? <span style="color:var(--pink);">Catch up ▶</span></div>
+          <div onclick="closePostSolve();openWeekOverlay();" style="width:100%;padding:14px;border-radius:12px;background:transparent;border:2px solid var(--divider);cursor:pointer;text-align:center;font-size:17px;font-weight:800;color:var(--text);box-sizing:border-box;">Missed any? <span style="color:var(--pink);">Catch up ▶</span></div>
           <div class="share-preview" id="share-preview"></div>
           <div class="solve-lock" id="solve-lock"></div>
         </div>
@@ -621,7 +621,7 @@
         <div style="font-size:18px;font-weight:900;color:var(--text);">📅 This Week</div>
         <button onclick="closeWeekOverlay()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);">✕</button>
       </div>
-      <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:14px;">Catch up on this week's puzzles — wins here don't affect your streak.</div>
+      <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:14px;">Play puzzles from the past 3 days — wins here don't affect your streak.</div>
       <div id="week-list" style="display:flex;flex-direction:column;gap:8px;"></div>
     </div>
   </div>
@@ -694,7 +694,7 @@
     <button onclick="closeGear()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);font-family:'Nunito',sans-serif;font-weight:900;line-height:1;padding:0;">✕</button>
   </div>
   <button class="gear-item" id="gi-how"><span class="gear-item-icon">❓</span><div><div>How to Play</div><div class="gear-item-sub">Watch a solve video</div></div></button>
-  <button class="gear-item" id="gi-week"><span class="gear-item-icon">📅</span><div><div>This Week's Vendys</div><div class="gear-item-sub">Catch up on this week's puzzles</div></div></button>
+  <button class="gear-item" id="gi-week"><span class="gear-item-icon">📅</span><div><div>The Vault 🔒</div><div class="gear-item-sub">Play puzzles from the past 3 days</div></div></button>
   <button class="gear-item" id="gi-create"><span class="gear-item-icon">✏️</span><div><div>Create a Vendy</div><div class="gear-item-sub">Make one for a friend</div></div></button>
   <button class="gear-item" style="opacity:.45;pointer-events:none;"><span class="gear-item-icon">🔵</span><div><div>Three Word Vendy</div><div class="gear-item-sub">Coming soon</div></div><span style="font-size:10px;background:#eef3ff;color:#4f78ff;border-radius:999px;padding:2px 9px;font-weight:800;margin-left:auto;letter-spacing:.3px;">Soon</span></button>
 
@@ -798,7 +798,7 @@
 <canvas id="confetti-canvas"></canvas>
 
 <script>
-const VERSION = "1.2.0";
+const VERSION = "1.3.0";
 
 // Update notification — shows when a newer version is deployed
 function checkForUpdate(){
@@ -840,13 +840,20 @@ let currentDiffKey='e';
 
 // Daily puzzle sets — E/M/H per day (puzzle IDs, 1-indexed)
 const dailySets=[
-  {e:12,m:1,h:3},
-  {e:13,m:2,h:4},
-  {e:15,m:7,h:5},
-  {e:16,m:8,h:6},
-  {e:17,m:9,h:26},
-  {e:18,m:10,h:27},
-  {e:'md_e',m:'md_m',h:'md_h'},  // Mother's Day special
+  {e:12,m:1,h:3},    // Day 1
+  {e:13,m:2,h:4},    // Day 2
+  {e:15,m:7,h:5},    // Day 3
+  {e:16,m:8,h:6},    // Day 4
+  {e:17,m:9,h:26},   // Day 5
+  {e:18,m:10,h:27},  // Day 6
+  {e:'md_e',m:'md_m',h:'md_h'}, // Day 7 Mother's Day
+  {e:39,m:40,h:41},  // Day 8  May 11
+  {e:42,m:43,h:44},  // Day 9  May 12
+  {e:45,m:46,h:47},  // Day 10 May 13
+  {e:48,m:49,h:50},  // Day 11 May 14
+  {e:51,m:52,h:53},  // Day 12 May 15
+  {e:54,m:55,h:56},  // Day 13 May 16
+  {e:57,m:58,h:59},  // Day 14 May 17
 ];
 
 const specialPuzzles={
@@ -945,12 +952,7 @@ window.addEventListener("beforeinstallprompt",(e)=>{e.preventDefault();deferredI
 const launchDate = new Date(2026, 4, 4);
 
 const trialPuzzle = {id:"trial",topic:"Snack Attack 🍔",stars:3,leftLetters:['A','N','P'],overlapLetters:['E','T','U'],rightLetters:['B','R'],leftAnswer:"PEANUT",rightAnswer:"BUTTER",fact:"Peanut butter can be turned into diamonds under extreme pressure."};
-const freePuzzles = [
-  {id:"f1",topic:"Famous People 🌟",stars:2,leftLetters:['D','L','Y'],overlapLetters:['A'],rightLetters:['G'],leftAnswer:"LADY",rightAnswer:"GAGA",fact:"Lady Gaga has won multiple Grammy, Oscar and Golden Globe awards."},
-  {id:"f2",topic:"Plants & Animals 🌿",stars:2,leftLetters:['F','L'],overlapLetters:['U','Y'],rightLetters:['P'],leftAnswer:"FLUFFY",rightAnswer:"PUPPY",fact:"Puppies are born blind and deaf, opening their eyes after about two weeks."},
-  {id:"f3",topic:"80s Slang 🎸",stars:2,leftLetters:['O','Y'],overlapLetters:['A','L','T'],rightLetters:['B','R','U'],leftAnswer:"TOTALLY",rightAnswer:"TUBULAR",fact:"Tubular was 80s slang for something awesome, popularized by surfer culture."},
-  {id:"f4",topic:"Snack Attack 🍔 — 🔥 Tough One",stars:2,leftLetters:['D','P','R'],overlapLetters:['E'],rightLetters:['B','F'],leftAnswer:"PEPPERED",rightAnswer:"BEEF",fact:"Peppered beef is a classic dish found in cuisines around the world."},
-];
+
 
 const puzzles = [
   {id:1,topic:"Rhyme Time 🎤",stars:2,leftLetters:['S','W'],overlapLetters:['E','T'],rightLetters:['A','R'],leftAnswer:"SWEET",rightAnswer:"TREAT",fact:"Honey never spoils — edible samples found in Egyptian tombs."},
@@ -991,6 +993,28 @@ const puzzles = [
   {id:36,topic:"Big Brands 🏷️",stars:2,leftLetters:['B','E','R','U'],overlapLetters:['G'],rightLetters:['I','K','N'],leftAnswer:"BURGER",rightAnswer:"KING",fact:"Burger King is called Hungry Jacks in Australia."},
   {id:37,topic:"Sports 🏀",stars:2,leftLetters:['G','I','M','W'],overlapLetters:['N','S'],rightLetters:['E','L','O'],leftAnswer:"SWIMMING",rightAnswer:"LESSONS",fact:"Swimming is one of the best full body workouts you can do."},
   {id:38,topic:"Around the House 🏠",stars:2,leftLetters:['E','L','U'],overlapLetters:['B'],rightLetters:['A','H','T'],leftAnswer:"BUBBLE",rightAnswer:"BATH",fact:"Bubble baths were popularized in the 1960s with the invention of bubble bath liquid."},
+  // Week 2 - May 11-17
+  {id:39,topic:"Food & Drink 🍔",stars:2,leftLetters:['I','N','V'],overlapLetters:['A','L'],rightLetters:['E','T'],leftAnswer:"VANILLA",rightAnswer:"LATTE",fact:"Vanilla is the second most expensive spice in the world after saffron."},
+  {id:40,topic:"Daily Life 🗓️",stars:2,leftLetters:['C','O','P','R'],overlapLetters:['A','L'],rightLetters:['E','N'],leftAnswer:"CARPOOL",rightAnswer:"LANE",fact:"Carpooling can cut commute costs by up to 50%."},
+  {id:41,topic:"Around the World 🌍",stars:2,leftLetters:['A','H'],overlapLetters:['R','S'],rightLetters:['D','E','T'],leftAnswer:"SAHARA",rightAnswer:"DESERT",fact:"The Sahara Desert is about the size of the United States."},
+  {id:42,topic:"Rhyme Time 🎤",stars:2,leftLetters:[],overlapLetters:['E','K','O','Y'],rightLetters:['D'],leftAnswer:"OKEY",rightAnswer:"DOKEY",fact:"Okey dokey is an informal way of saying okay, popular since the 1930s."},
+  {id:43,topic:"What to Wear 👕",stars:2,leftLetters:['E','I','L'],overlapLetters:['N'],rightLetters:['A','P','S','T'],leftAnswer:"LINEN",rightAnswer:"PANTS",fact:"Linen is one of the oldest textiles in the world, dating back 36,000 years."},
+  {id:44,topic:"Fun & Games 🎮",stars:2,leftLetters:['D','K','O'],overlapLetters:['S','U'],rightLetters:['E','L','P','Z'],leftAnswer:"SUDOKU",rightAnswer:"PUZZLES",fact:"Sudoku was popularized in Japan in 1986 before spreading worldwide."},
+  {id:45,topic:"Daily Life 🗓️",stars:2,leftLetters:['A','M','R'],overlapLetters:['L'],rightLetters:['C','K','O'],leftAnswer:"ALARM",rightAnswer:"CLOCK",fact:"The snooze button was invented in 1956 and set to exactly 9 minutes."},
+  {id:46,topic:"Spring Things 🌷",stars:2,leftLetters:['E','R','U'],overlapLetters:['B'],rightLetters:['O','S','T'],leftAnswer:"RUBBER",rightAnswer:"BOOTS",fact:"Wellington boots were named after the Duke of Wellington in the early 1800s."},
+  {id:47,topic:"Around the House 🏠",stars:2,leftLetters:['O','P','R','T'],overlapLetters:['A'],rightLetters:['C','E','G'],leftAnswer:"PARROT",rightAnswer:"CAGE",fact:"Parrots can live up to 80 years and mimic over 100 words."},
+  {id:48,topic:"Living Things 🌿",stars:2,leftLetters:['A','L','P'],overlapLetters:['E'],rightLetters:['R','S','T'],leftAnswer:"APPLE",rightAnswer:"TREES",fact:"Apple trees can live for more than 100 years."},
+  {id:49,topic:"Food & Drink 🍔",stars:2,leftLetters:['D'],overlapLetters:['E','R'],rightLetters:['P'],leftAnswer:"RED",rightAnswer:"PEPPER",fact:"Red peppers are simply green peppers that have been left to ripen longer."},
+  {id:50,topic:"Rhyme Time 🎤",stars:2,leftLetters:['B','T'],overlapLetters:['E','S'],rightLetters:['D','R'],leftAnswer:"BEST",rightAnswer:"DRESSED",fact:"Best dressed lists have been a staple of celebrity culture since the 1940s."},
+  {id:51,topic:"Around the House 🏠",stars:2,leftLetters:['I','N','W'],overlapLetters:['E'],rightLetters:['A','G','L','S'],leftAnswer:"WINE",rightAnswer:"GLASSES",fact:"Wine glasses with longer stems help keep white wine cool by avoiding hand warmth."},
+  {id:52,topic:"Around the World 🌍",stars:2,leftLetters:['I','M','P','R'],overlapLetters:['E'],rightLetters:['A','S','T'],leftAnswer:"EMPIRE",rightAnswer:"STATE",fact:"The Empire State Building was built in just 410 days."},
+  {id:53,topic:"What to Wear 👕",stars:2,leftLetters:['A','B','D'],overlapLetters:['O','R'],rightLetters:['H','S','T'],leftAnswer:"BOARD",rightAnswer:"SHORTS",fact:"Board shorts were designed in the 1970s for surfers in Hawaii."},
+  {id:54,topic:"Daily Life 🗓️",stars:2,leftLetters:['C','R'],overlapLetters:['A'],rightLetters:['H','S','W'],leftAnswer:"CAR",rightAnswer:"WASH",fact:"The first automatic car wash opened in Detroit in 1940."},
+  {id:55,topic:"Food & Drink 🍔",stars:2,leftLetters:['O','P','T'],overlapLetters:['A'],rightLetters:['D','L','S'],leftAnswer:"POTATO",rightAnswer:"SALAD",fact:"Potato salad has been a picnic staple since the 19th century."},
+  {id:56,topic:"Living Things 🌿",stars:2,leftLetters:['A','C','D','I'],overlapLetters:['N'],rightLetters:['L','X','Y'],leftAnswer:"CANADIAN",rightAnswer:"LYNX",fact:"The Canadian Lynx has huge padded paws that act like snowshoes."},
+  {id:57,topic:"What to Wear 👕",stars:2,leftLetters:['D','I','N','R'],overlapLetters:['E'],rightLetters:['A','C','J','K','T'],leftAnswer:"DINNER",rightAnswer:"JACKET",fact:"The dinner jacket was first worn at a gentlemen's club in 1865."},
+  {id:58,topic:"Around the House 🏠",stars:2,leftLetters:['A','R','S','T'],overlapLetters:['E','O'],rightLetters:['N','V'],leftAnswer:"TOASTER",rightAnswer:"OVEN",fact:"The first pop-up toaster was invented in 1921 by Charles Strite."},
+  {id:59,topic:"Spring Things 🌷",stars:2,leftLetters:['A','I','L','P'],overlapLetters:['R'],rightLetters:['E','H','O','S','W'],leftAnswer:"APRIL",rightAnswer:"SHOWERS",fact:"April showers bring May flowers — a proverb dating back to 1557."},
 ];
 
 
@@ -1053,54 +1077,6 @@ function openWeekOverlay(){
   const list=$("week-list");
   const progress=loadArchiveProgress();
   list.innerHTML="";
-
-  // Show free puzzles if we're in the first week
-  if(todayN<=7){
-    const freeHeader=document.createElement("div");
-    freeHeader.style.cssText="font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;";
-    freeHeader.textContent="🎁 Free Bonus Puzzles — First Week Only";
-    list.appendChild(freeHeader);
-    freePuzzles.forEach((p,i)=>{
-      const key=`free_${p.id}`;
-      const record=progress[key];
-      const btn=document.createElement("button");
-      btn.style.cssText="display:flex;align-items:center;justify-content:space-between;width:100%;padding:12px 14px;border-radius:12px;background:var(--stats-bg);border:1.5px solid var(--divider);cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:14px;color:var(--text);margin-bottom:6px;";
-      const left=document.createElement("div");left.style.textAlign="left";
-      const title=document.createElement("div");title.textContent=`Free #${i+1}`;title.style.fontWeight="900";
-      const sub=document.createElement("div");sub.textContent=p.topic;sub.style.cssText="font-size:11px;color:var(--muted);font-weight:600;margin-top:2px;";
-      left.appendChild(title);left.appendChild(sub);
-      const status=document.createElement("div");
-      status.textContent=record?.solved?`✅ ${"⭐".repeat(record.stars||1)}`:"▶ Play";
-      status.style.cssText="font-size:12px;font-weight:800;color:var(--muted);";
-      btn.appendChild(left);btn.appendChild(status);
-      btn.addEventListener("click",()=>{
-        closeWeekOverlay();
-        currentMode="free";currentPuzzleKey=key;
-        introScreen.classList.remove("active");gameShell.classList.add("active");showDailyScreen();
-        if(topicEl)topicEl.textContent=p.topic;
-        if(puzzleIdEl)puzzleIdEl.textContent=`Free #${i+1}`;if(puzzleDateEl)puzzleDateEl.textContent="First Week Bonus";
-        if(introPuzzleNum)introPuzzleNum.textContent=`Free`;
-        currentFreePuzzle=p;
-        currentPuzzleIdx=-99;
-        renderVennLetters(p);resetPuzzleState();
-        leftGuessSlots=new Array(p.leftAnswer.length).fill("");
-        rightGuessSlots=new Array(p.rightAnswer.length).fill("");
-        revealedLeft=new Array(p.leftAnswer.length).fill("");
-        revealedRight=new Array(p.rightAnswer.length).fill("");
-        renderTiles(leftTilesEl,leftGuessSlots,p.leftAnswer.length,revealedLeft,"left");
-        renderTiles(rightTilesEl,rightGuessSlots,p.rightAnswer.length,revealedRight,"right");
-        setTimeout(()=>setActiveField("left"),150);renderStats();startStuckTimer();startTimer();
-      });
-      list.appendChild(btn);
-    });
-    const divider=document.createElement("div");
-    divider.style.cssText="border-top:1.5px solid var(--divider);margin:10px 0;";
-    list.appendChild(divider);
-    const dailyHeader=document.createElement("div");
-    dailyHeader.style.cssText="font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;";
-    dailyHeader.textContent="📅 This Week's Daily Puzzles";
-    list.appendChild(dailyHeader);
-  }
 
   for(let n=startN;n<=todayN;n++){
     const isToday=n===todayN;
@@ -1830,6 +1806,8 @@ function admireCurrentPuzzle(){
     renderTiles(leftTilesEl,leftGuessSlots,lastAdmiredPuzzle.leftAnswer.length,revealedLeft,"left");
     renderTiles(rightTilesEl,rightGuessSlots,lastAdmiredPuzzle.rightAnswer.length,revealedRight,"right");
     puzzleCompleted=true;
+    // Hide keyboard
+    keyboardEl.style.display="none";
     // Restore solved time
     const progress=loadArchiveProgress();
     const dayN=getDailyNum();
