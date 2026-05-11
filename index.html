@@ -910,11 +910,12 @@ function loadDailyChallenge(key){
   const set=getTodaySet();
   const puzId=set[key];
   currentDiffKey=key;
+  currentPuzzleKey=`daily_${getDailyNum()}_${key}`;
   introScreen.classList.remove('active');gameShell.classList.add('active');showDailyScreen();
   if(typeof puzId==='string'){
     // Special puzzle (e.g. Mother's Day)
     const p=specialPuzzles[puzId];
-    currentMode="daily";currentPuzzleKey=`daily_${getDailyNum()}_${key}`;currentFreePuzzle=p;currentPuzzleIdx=-99;
+    currentMode="daily";currentFreePuzzle=p;currentPuzzleIdx=-99;
     if(topicEl)topicEl.textContent=p.topic;
     if(puzzleIdEl)puzzleIdEl.textContent=getDiffLabel(key);
     const label=document.getElementById('intro-puzzle-number');
@@ -928,9 +929,21 @@ function loadDailyChallenge(key){
     renderTiles(rightTilesEl,rightGuessSlots,p.rightAnswer.length,revealedRight,"right");
     setTimeout(()=>setActiveField("left"),150);renderStats();startStuckTimer();startTimer();
   } else {
+    currentFreePuzzle=null;
     loadGame('daily',puzId);
     const label=document.getElementById('intro-puzzle-number');
     if(label)label.textContent=getDiffLabel(key);
+    // Override puzzle key to use difficulty-based key AFTER loadGame
+    currentPuzzleKey=`daily_${getDailyNum()}_${key}`;
+    if(topicEl)topicEl.textContent=puzzles[puzId-1].topic;
+    // Restart timer with correct key — clear any stale value first if unplayed
+    const progress=loadArchiveProgress();
+    const alreadySolved=progress[currentPuzzleKey]?.solved;
+    if(!alreadySolved){
+      localStorage.removeItem(`vendy_timer_${currentPuzzleKey}`);
+      timerElapsed=0;
+      startTimer();
+    }
   }
 }
 
