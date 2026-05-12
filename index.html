@@ -848,12 +848,13 @@ const dailySets=[
   {e:18,m:10,h:27},  // Day 6
   {e:'md_e',m:'md_m',h:'md_h'}, // Day 7 Mother's Day
   {e:39,m:40,h:41},  // Day 8  May 11
-  {e:42,m:43,h:44},  // Day 9  May 12
-  {e:45,m:46,h:47},  // Day 10 May 13
-  {e:48,m:49,h:50},  // Day 11 May 14
-  {e:51,m:52,h:53},  // Day 12 May 15
-  {e:54,m:55,h:56},  // Day 13 May 16
-  {e:57,m:58,h:59},  // Day 14 May 17
+  {e:42,m:46,h:47},  // Day 9  May 12 — Animal Tuesday
+  {e:45,m:43,h:44},  // Day 10 May 13
+  {e:48,m:50,h:49},  // Day 11 May 14
+  {e:51,m:66,h:53},  // Day 12 May 15
+  {e:54,m:55,h:60},  // Day 13 May 16 — Soccer hard
+  {e:62,m:67,h:61},  // Day 14 May 17
+  {e:63,m:64,h:65},  // Day 15 May 18
 ];
 
 const specialPuzzles={
@@ -1010,24 +1011,32 @@ const puzzles = [
   {id:39,topic:"Food & Drink 🍔",stars:2,leftLetters:['I','N','V'],overlapLetters:['A','L'],rightLetters:['E','T'],leftAnswer:"VANILLA",rightAnswer:"LATTE",fact:"Vanilla is the second most expensive spice in the world after saffron."},
   {id:40,topic:"Daily Life 🗓️",stars:2,leftLetters:['C','O','P','R'],overlapLetters:['A','L'],rightLetters:['E','N'],leftAnswer:"CARPOOL",rightAnswer:"LANE",fact:"Carpooling can cut commute costs by up to 50%."},
   {id:41,topic:"Around the World 🌍",stars:2,leftLetters:['A','H'],overlapLetters:['R','S'],rightLetters:['D','E','T'],leftAnswer:"SAHARA",rightAnswer:"DESERT",fact:"The Sahara Desert is about the size of the United States."},
-  {id:42,topic:"Rhyme Time 🎤",stars:2,leftLetters:[],overlapLetters:['E','K','O','Y'],rightLetters:['D'],leftAnswer:"OKEY",rightAnswer:"DOKEY",fact:"Okey dokey is an informal way of saying okay, popular since the 1930s."},
-  {id:43,topic:"What to Wear 👕",stars:2,leftLetters:['E','I','L'],overlapLetters:['N'],rightLetters:['A','P','S','T'],leftAnswer:"LINEN",rightAnswer:"PANTS",fact:"Linen is one of the oldest textiles in the world, dating back 36,000 years."},
-  {id:44,topic:"Fun & Games 🎮",stars:2,leftLetters:['D','K','O'],overlapLetters:['S','U'],rightLetters:['E','L','P','Z'],leftAnswer:"SUDOKU",rightAnswer:"PUZZLES",fact:"Sudoku was popularized in Japan in 1986 before spreading worldwide."},
-  {id:45,topic:"Daily Life 🗓️",stars:2,leftLetters:['A','M','R'],overlapLetters:['L'],rightLetters:['C','K','O'],leftAnswer:"ALARM",rightAnswer:"CLOCK",fact:"The snooze button was invented in 1956 and set to exactly 9 minutes."},
-  {id:46,topic:"Spring Things 🌷",stars:2,leftLetters:['E','R','U'],overlapLetters:['B'],rightLetters:['O','S','T'],leftAnswer:"RUBBER",rightAnswer:"BOOTS",fact:"Wellington boots were named after the Duke of Wellington in the early 1800s."},
-  {id:47,topic:"Around the House 🏠",stars:2,leftLetters:['O','P','R','T'],overlapLetters:['A'],rightLetters:['C','E','G'],leftAnswer:"PARROT",rightAnswer:"CAGE",fact:"Parrots can live up to 80 years and mimic over 100 words."},
+  {id:42,topic:"Rhyme Time 🎤",stars:2,leftLetters:['F','U'],overlapLetters:['K','N','Y'],rightLetters:['E','M','O'],leftAnswer:"FUNKY",rightAnswer:"MONKEY",fact:"Funky Monkey is a classic rhyme pairing that's been used in music and pop culture."},
+  {id:43,topic:"What to Wear 👕",stars:2,leftLetters:['I','N','T'],overlapLetters:['E','S'],rightLetters:['H','O'],leftAnswer:"TENNIS",rightAnswer:"SHOES",fact:"Tennis shoes were originally designed for playing tennis on grass courts."},
+  {id:44,topic:"Fun & Games 🎮",stars:2,leftLetters:['N','O'],overlapLetters:['A','E','S'],rightLetters:['P'],leftAnswer:"SEASON",rightAnswer:"PASSES",fact:"Season passes were first introduced by ski resorts in the 1970s."},
+  {id:45,topic:"Fun & Games 🎮",stars:2,leftLetters:['M','X'],overlapLetters:['B'],rightLetters:['E','I','K'],leftAnswer:"BMX",rightAnswer:"BIKE",fact:"BMX racing became an Olympic sport at the 2008 Beijing Games."},
+  {id:47,topic:"Living Things 🌿",stars:2,leftLetters:['H','I'],overlapLetters:['R','S'],rightLetters:['E','T'],leftAnswer:"IRISH",rightAnswer:"SETTER",fact:"The Irish Setter is known for its distinctive mahogany red coat."},
+  {id:46,topic:"Living Things 🌿",stars:2,leftLetters:['D','E','L','O'],overlapLetters:['P'],rightLetters:['U','Y'],leftAnswer:"POODLE",rightAnswer:"PUPPY",fact:"Poodles are one of the most intelligent dog breeds in the world."},
   {id:48,topic:"Living Things 🌿",stars:2,leftLetters:['A','L','P'],overlapLetters:['E'],rightLetters:['R','S','T'],leftAnswer:"APPLE",rightAnswer:"TREES",fact:"Apple trees can live for more than 100 years."},
   {id:49,topic:"Food & Drink 🍔",stars:2,leftLetters:['D'],overlapLetters:['E','R'],rightLetters:['P'],leftAnswer:"RED",rightAnswer:"PEPPER",fact:"Red peppers are simply green peppers that have been left to ripen longer."},
-  {id:50,topic:"Rhyme Time 🎤",stars:2,leftLetters:['B','T'],overlapLetters:['E','S'],rightLetters:['D','R'],leftAnswer:"BEST",rightAnswer:"DRESSED",fact:"Best dressed lists have been a staple of celebrity culture since the 1940s."},
+  {id:50,topic:"Fun & Games 🎮",stars:2,leftLetters:['F','L','O'],overlapLetters:['G'],rightLetters:['E','N','R'],leftAnswer:"GOLF",rightAnswer:"GREEN",fact:"A golf green is the closely mown area surrounding the hole."},
   {id:51,topic:"Around the House 🏠",stars:2,leftLetters:['I','N','W'],overlapLetters:['E'],rightLetters:['A','G','L','S'],leftAnswer:"WINE",rightAnswer:"GLASSES",fact:"Wine glasses with longer stems help keep white wine cool by avoiding hand warmth."},
   {id:52,topic:"Around the World 🌍",stars:2,leftLetters:['I','M','P','R'],overlapLetters:['E'],rightLetters:['A','S','T'],leftAnswer:"EMPIRE",rightAnswer:"STATE",fact:"The Empire State Building was built in just 410 days."},
-  {id:53,topic:"What to Wear 👕",stars:2,leftLetters:['A','B','D'],overlapLetters:['O','R'],rightLetters:['H','S','T'],leftAnswer:"BOARD",rightAnswer:"SHORTS",fact:"Board shorts were designed in the 1970s for surfers in Hawaii."},
+  {id:53,topic:"Spring Things 🌷",stars:2,leftLetters:['E','R','U'],overlapLetters:['B'],rightLetters:['O','S','T'],leftAnswer:"RUBBER",rightAnswer:"BOOTS",fact:"Wellington boots were named after the Duke of Wellington in the early 1800s."},
   {id:54,topic:"Daily Life 🗓️",stars:2,leftLetters:['C','R'],overlapLetters:['A'],rightLetters:['H','S','W'],leftAnswer:"CAR",rightAnswer:"WASH",fact:"The first automatic car wash opened in Detroit in 1940."},
   {id:55,topic:"Food & Drink 🍔",stars:2,leftLetters:['O','P','T'],overlapLetters:['A'],rightLetters:['D','L','S'],leftAnswer:"POTATO",rightAnswer:"SALAD",fact:"Potato salad has been a picnic staple since the 19th century."},
-  {id:56,topic:"Living Things 🌿",stars:2,leftLetters:['A','C','D','I'],overlapLetters:['N'],rightLetters:['L','X','Y'],leftAnswer:"CANADIAN",rightAnswer:"LYNX",fact:"The Canadian Lynx has huge padded paws that act like snowshoes."},
+  {id:56,topic:"Around the World 🌍",stars:2,leftLetters:['O','T','W'],overlapLetters:['A'],rightLetters:['C','D','N'],leftAnswer:"OTTAWA",rightAnswer:"CANADA",fact:"Ottawa became the capital of Canada in 1857, chosen by Queen Victoria."},
   {id:57,topic:"What to Wear 👕",stars:2,leftLetters:['D','I','N','R'],overlapLetters:['E'],rightLetters:['A','C','J','K','T'],leftAnswer:"DINNER",rightAnswer:"JACKET",fact:"The dinner jacket was first worn at a gentlemen's club in 1865."},
   {id:58,topic:"Around the House 🏠",stars:2,leftLetters:['A','R','S','T'],overlapLetters:['E','O'],rightLetters:['N','V'],leftAnswer:"TOASTER",rightAnswer:"OVEN",fact:"The first pop-up toaster was invented in 1921 by Charles Strite."},
   {id:59,topic:"Spring Things 🌷",stars:2,leftLetters:['A','I','L','P'],overlapLetters:['R'],rightLetters:['E','H','O','S','W'],leftAnswer:"APRIL",rightAnswer:"SHOWERS",fact:"April showers bring May flowers — a proverb dating back to 1557."},
+  {id:60,topic:"Fun & Games 🎮",stars:2,leftLetters:['C','O','R','S'],overlapLetters:['E'],rightLetters:['N','T'],leftAnswer:"SOCCER",rightAnswer:"NET",fact:"Soccer nets were first used in 1891 at a match in Nottingham England."},
+  {id:61,topic:"Fun & Games 🎮",stars:2,leftLetters:['H'],overlapLetters:['C','E','S'],rightLetters:['I','P'],leftAnswer:"CHESS",rightAnswer:"PIECES",fact:"Chess is one of the oldest strategy games, dating back over 1500 years."},
+  {id:62,topic:"Food & Drink 🍔",stars:2,leftLetters:['B','L','U'],overlapLetters:['E'],rightLetters:['A','T'],leftAnswer:"BUBBLE",rightAnswer:"TEA",fact:"Bubble tea was invented in Taiwan in the 1980s and is now a global phenomenon."},
+  {id:63,topic:"Living Things 🌿",stars:2,leftLetters:['N','Q','U'],overlapLetters:['E'],rightLetters:['B'],leftAnswer:"QUEEN",rightAnswer:"BEE",fact:"The queen bee can lay up to 2000 eggs per day."},
+  {id:64,topic:"Food & Drink 🍔",stars:2,leftLetters:['B'],overlapLetters:['E','R'],rightLetters:['C','L','O'],leftAnswer:"BEER",rightAnswer:"COOLER",fact:"Beer coolers were popularized at outdoor events in the 1950s."},
+  {id:65,topic:"Around the World 🌍",stars:2,leftLetters:['O','T','W'],overlapLetters:['A'],rightLetters:['C','D','N'],leftAnswer:"OTTAWA",rightAnswer:"CANADA",fact:"Ottawa became the capital of Canada in 1857, chosen by Queen Victoria."},
+  {id:66,topic:"Living Things 🌿",stars:2,leftLetters:['B','I'],overlapLetters:['D','R'],rightLetters:['E','F'],leftAnswer:"BIRD",rightAnswer:"FEEDER",fact:"Bird feeders attract over 100 million birds to North American gardens each year."},
+  {id:67,topic:"Rhyme Time 🎤",stars:2,leftLetters:['B'],overlapLetters:['K','O'],rightLetters:['N'],leftAnswer:"BOOK",rightAnswer:"NOOK",fact:"A book nook is a cozy reading corner — the perfect escape."},
 ];
 
 
@@ -1086,7 +1095,7 @@ $("gi-create").addEventListener("click",()=>{closeGear();openCreateOverlay();});
 
 function openWeekOverlay(){
   const todayN=getDailyNum();
-  const startN=Math.max(1,todayN-2); // last 3 days
+  const startN=Math.max(1,todayN-3); // 3 previous days + today
   const list=$("week-list");
   const progress=loadArchiveProgress();
   list.innerHTML="";
@@ -1108,6 +1117,7 @@ function openWeekOverlay(){
     ['e','m','h'].forEach(key=>{
       const puzId=set[key];
       const puz=getPuzzleById(puzId);
+      if(!puz)return; // skip if puzzle not found
       const record=progress[`daily_${n}_${key}`];
       const solved=record?.solved;
       const timeStr=solved&&record.time?`⏱ ${parseFloat(record.time).toFixed(1)}s`:"";
@@ -1115,7 +1125,7 @@ function openWeekOverlay(){
       btn.style.cssText=`flex:1;padding:10px 6px;border-radius:12px;background:${solved?'rgba(34,197,94,.1)':getDiffBg(key)};border:2px solid ${solved?'#22c55e':getDiffColor(key)};cursor:pointer;font-family:'Nunito',sans-serif;text-align:center;`;
       btn.innerHTML=`
         <div style="font-size:14px;font-weight:900;color:${solved?'#22c55e':getDiffColor(key)};">${solved?'✅':''} ${getDiffLabel(key)}</div>
-        <div style="font-size:10px;font-weight:700;color:var(--muted);margin-top:2px;">${puz.topic.split(' ')[0]}</div>
+        <div style="font-size:10px;font-weight:700;color:var(--muted);margin-top:2px;">${(puz.topic||'').split(' ')[0]}</div>
         ${solved?`<div style="font-size:11px;font-weight:800;color:#22c55e;margin-top:2px;">${timeStr}</div>`:''}
       `;
       btn.addEventListener("click",()=>{
@@ -1123,10 +1133,26 @@ function openWeekOverlay(){
         currentDiffKey=key;
         if(isToday){
           loadDailyChallenge(key);
+        } else if(typeof puzId==='string'){
+          // Special puzzle (Mother's Day etc)
+          currentMode="week";currentFreePuzzle=puz;currentPuzzleIdx=-99;
+          currentPuzzleKey=`daily_${n}_${key}`;
+          introScreen.classList.remove("active");gameShell.classList.add("active");showDailyScreen();
+          if(topicEl)topicEl.textContent=puz.topic;
+          renderVennLetters(puz);resetPuzzleState();
+          leftGuessSlots=new Array(puz.leftAnswer.length).fill("");
+          rightGuessSlots=new Array(puz.rightAnswer.length).fill("");
+          revealedLeft=new Array(puz.leftAnswer.length).fill("");
+          revealedRight=new Array(puz.rightAnswer.length).fill("");
+          renderTiles(leftTilesEl,leftGuessSlots,puz.leftAnswer.length,revealedLeft,"left");
+          renderTiles(rightTilesEl,rightGuessSlots,puz.rightAnswer.length,revealedRight,"right");
+          setTimeout(()=>setActiveField("left"),150);renderStats();startStuckTimer();startTimer();
         } else {
-          currentMode="week";
+          currentMode="week";currentFreePuzzle=null;
           introScreen.classList.remove("active");gameShell.classList.add("active");showDailyScreen();
           loadGame("week",puzId);
+          currentPuzzleKey=`daily_${n}_${key}`;
+          if(topicEl)topicEl.textContent=puz.topic;
           const label=document.getElementById("intro-puzzle-number");
           if(label)label.textContent=getDiffLabel(key);
         }
