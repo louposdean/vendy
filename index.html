@@ -694,12 +694,13 @@
 <!-- GEAR SHEET -->
 <div class="gear-backdrop" id="gear-backdrop"></div>
 <div class="gear-sheet" id="gear-sheet">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+  <div class="gear-handle"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;padding:0 2px;">
     <div class="gear-label" style="margin:0;">Menu</div>
-    <button onclick="closeGear()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);font-family:'Nunito',sans-serif;font-weight:900;line-height:1;padding:0;">✕</button>
+    <button onclick="closeGear()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);font-family:'Nunito',sans-serif;font-weight:900;line-height:1;padding:4px 2px;">✕</button>
   </div>
-  <button class="gear-item" id="gi-how"><span class="gear-item-icon">❓</span><div><div>How to Play</div><div class="gear-item-sub">Watch a solve video</div></div></button>
-  <button class="gear-item" id="gi-week"><span class="gear-item-icon">📅</span><div><div>The Vault 🔒</div><div class="gear-item-sub">Play puzzles from the past 3 days</div></div></button>
+  <button class="gear-item" onclick="closeGear();showIntro();"><span class="gear-item-icon">🏠</span><div><div>Home</div><div class="gear-item-sub">Back to today's puzzles</div></div></button>
+  <button class="gear-item" id="gi-week"><span class="gear-item-icon">🔒</span><div><div>The Vault</div><div class="gear-item-sub">Play puzzles from the past 3 days</div></div></button>
   <button class="gear-item" id="gi-create"><span class="gear-item-icon">✏️</span><div><div>Create a Vendy</div><div class="gear-item-sub">Make one for a friend</div></div></button>
   <button class="gear-item" style="opacity:.45;pointer-events:none;"><span class="gear-item-icon">🔵</span><div><div>Three Word Vendy</div><div class="gear-item-sub">Coming soon</div></div><span style="font-size:10px;background:#eef3ff;color:#4f78ff;border-radius:999px;padding:2px 9px;font-weight:800;margin-left:auto;letter-spacing:.3px;">Soon</span></button>
 
@@ -1095,7 +1096,6 @@ function closeGear(){gearBackdrop.classList.remove("active");gearSheet.classList
 gearBtn.addEventListener("click",openGear);
 gearBackdrop.addEventListener("click",closeGear);
 $("gi-week").addEventListener("click",()=>{closeGear();openWeekOverlay();});
-$("gi-how").addEventListener("click",()=>{closeGear();window.open('https://www.youtube.com/shorts/rN6OKi_vBBw','_blank');});
 $("gi-create").addEventListener("click",()=>{closeGear();openCreateOverlay();});
 
 function openWeekOverlay(){
@@ -1827,7 +1827,9 @@ function showDailyScreen(){dailyScreen.classList.add("active");}
 function loadGame(mode,vendyNumber){
   if(puzzles[0]&&puzzles[0].id==="custom")puzzles.shift();
   currentMode=mode;currentVendyNum=vendyNumber;
-  currentPuzzleIdx=(vendyNumber-1)%puzzles.length;currentPuzzleKey=pKey(mode,vendyNumber);
+  currentPuzzleIdx=puzzles.findIndex(p=>p.id===vendyNumber);
+  if(currentPuzzleIdx===-1)currentPuzzleIdx=(vendyNumber-1)%puzzles.length;
+  currentPuzzleKey=pKey(mode,vendyNumber);
   const p=puzzles[currentPuzzleIdx];
   if(mode==="daily"&&!stats.dailyPlayedKeys.includes(currentPuzzleKey)){stats.played+=1;stats.dailyPlayedKeys.push(currentPuzzleKey);saveStats();}
   if(topicEl)topicEl.textContent=p.topic;
