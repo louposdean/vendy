@@ -1189,6 +1189,9 @@ function openWeekOverlay(){
           if(topicEl)topicEl.textContent=puz.topic;
           const label=document.getElementById("intro-puzzle-number");
           if(label)label.textContent=getDiffLabel(key);
+          // Clear timer so vault puzzles always start at 0
+          localStorage.removeItem(`vendy_timer_${currentPuzzleKey}`);
+          timerElapsed=0;startTimer();
         }
       });
       row.appendChild(btn);
