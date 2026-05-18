@@ -822,6 +822,59 @@ function checkForUpdate(){
   localStorage.setItem("vendy_version_seen", VERSION);
 }
 checkForUpdate();
+
+// First visit tutorial
+function showFirstVisitTutorial(){
+  if(localStorage.getItem('vendy_tutorial_seen')) return;
+  const overlay=document.createElement('div');
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(15,23,42,.85);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  overlay.innerHTML=`
+    <div style="background:var(--card);border-radius:24px;padding:24px 20px;width:100%;max-width:340px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3);">
+      <div style="font-size:13px;font-weight:800;color:var(--muted);letter-spacing:2px;margin-bottom:12px;">HOW TO PLAY</div>
+      <svg viewBox="0 0 200 120" width="100%" style="margin-bottom:12px;">
+        <circle cx="78" cy="60" r="44" fill="rgba(79,120,255,.72)" stroke="#4f78ff" stroke-width="2.5"/>
+        <circle cx="122" cy="60" r="44" fill="rgba(245,80,160,.72)" stroke="#f550a0" stroke-width="2.5"/>
+        <circle cx="122" cy="60" r="44" fill="rgba(212,102,187,.80)" stroke="none" clip-path="url(#tut-clip)"/>
+        <clipPath id="tut-clip"><circle cx="78" cy="60" r="44"/></clipPath>
+        <circle cx="78" cy="60" r="44" fill="none" stroke="#4f78ff" stroke-width="2.5"/>
+        <circle cx="122" cy="60" r="44" fill="none" stroke="#f550a0" stroke-width="2.5"/>
+        <!-- Blue: P L A (top to bottom) -->
+        <text x="50" y="46" font-size="14" font-weight="900" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">P</text>
+        <text x="50" y="62" font-size="14" font-weight="900" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">L</text>
+        <text x="50" y="78" font-size="14" font-weight="900" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">A</text>
+        <!-- Purple: Y -->
+        <text x="100" y="65" font-size="14" font-weight="900" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">Y</text>
+        <!-- Pink: V E N D (top to bottom) -->
+        <text x="150" y="44" font-size="14" font-weight="900" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">V</text>
+        <text x="150" y="58" font-size="14" font-weight="900" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">E</text>
+        <text x="150" y="72" font-size="14" font-weight="900" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">N</text>
+        <text x="150" y="86" font-size="14" font-weight="900" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">D</text>
+      </svg>
+      <div style="font-size:13px;font-weight:800;color:var(--muted);margin-bottom:12px;">The answer is <span style="color:#4f78ff;font-weight:900;">PLAY</span> + <span style="color:#f550a0;font-weight:900;">VENDY</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;text-align:left;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:14px;height:14px;border-radius:3px;background:rgba(79,120,255,.72);flex-shrink:0;"></div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);">Blue letters = only in Word 1</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:14px;height:14px;border-radius:3px;background:rgba(212,102,187,.80);flex-shrink:0;"></div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);">Purple letters = in both words</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:14px;height:14px;border-radius:3px;background:rgba(245,80,160,.72);flex-shrink:0;"></div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);">Pink letters = only in Word 2</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:14px;height:14px;border-radius:3px;background:rgba(100,100,100,.3);border:1px solid #888;flex-shrink:0;"></div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);">Letters can repeat!</div>
+        </div>
+      </div>
+      <button onclick="this.closest('div').parentElement.remove();localStorage.setItem('vendy_tutorial_seen','1');" style="width:100%;padding:14px;border-radius:12px;background:#4f78ff;color:white;font-size:16px;font-weight:900;border:none;cursor:pointer;font-family:'Nunito',sans-serif;">Got it — Let's Play! 🔵🩷</button>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+}
+setTimeout(showFirstVisitTutorial, 800);
 let deferredInstallPrompt=null;
 
 // Service worker for cache busting — bump VERSION to force update
