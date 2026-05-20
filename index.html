@@ -456,7 +456,10 @@
     </svg>
 
     <!-- Today's Challenges -->
-    <div style="font-size:13px;font-weight:800;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Today's Challenges</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;width:100%;max-width:320px;margin-bottom:8px;">
+      <div style="font-size:13px;font-weight:800;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;">Today's Challenges</div>
+      <div id="theme-badge" style="display:none;font-size:11px;font-weight:900;padding:3px 10px;border-radius:20px;background:rgba(245,158,11,.15);color:#b45309;border:1.5px solid rgba(245,158,11,.4);"></div>
+    </div>
     <div id="challenge-cards" style="width:100%;max-width:320px;display:flex;flex-direction:column;gap:8px;margin-bottom:12px;"></div>
 
     <!-- Archive + other buttons -->
@@ -921,7 +924,8 @@ const dailySets=[
   {e:77,m:78,h:79},  // Day 19 May 22
   {e:82,m:80,h:81},  // Day 20 May 23
   {e:84,m:83,h:85},  // Day 21 May 24
-  {e:86,m:87,h:88},  // Day 22 May 25
+  {e:89,m:90,h:91},  // Day 22 May 25 — Monday Madness
+  {e:86,m:87,h:88},  // Day 23 May 26
 ];
 
 const specialPuzzles={
@@ -1130,6 +1134,9 @@ const puzzles = [
   {id:86,topic:"Around the World 🌍",stars:2,leftLetters:['F','I','L'],overlapLetters:['E'],rightLetters:['O','R','T','W'],leftAnswer:"EIFFEL",rightAnswer:"TOWER",fact:"The Eiffel Tower was built in 1889 and was originally intended to be temporary."},
   {id:87,topic:"Daily Life 🗓️",stars:2,leftLetters:['T','X'],overlapLetters:['E'],rightLetters:['A','G','M','S'],leftAnswer:"TEXT",rightAnswer:"MESSAGE",fact:"The first text message ever sent was Merry Christmas in 1992."},
   {id:88,topic:"Rhyme Time 🎤",stars:2,leftLetters:['R'],overlapLetters:['A','E','L','Z'],rightLetters:['D'],leftAnswer:"RAZZLE",rightAnswer:"DAZZLE",fact:"Razzle dazzle means to impress with a showy performance — pure showbiz."},
+  {id:89,topic:"Daily Life 🗓️",stars:2,leftLetters:['E','P','R','Y'],overlapLetters:['L'],rightLetters:['A'],leftAnswer:"REPLY",rightAnswer:"ALL",fact:"Reply All is the most dangerous button in email — use with caution."},
+  {id:90,topic:"Daily Life 🗓️",stars:2,leftLetters:['T'],overlapLetters:['A','R'],rightLetters:['C','E'],leftAnswer:"RAT",rightAnswer:"RACE",fact:"The rat race refers to the exhausting pursuit of success in modern working life."},
+  {id:91,topic:"Rhyme Time 🎤",stars:2,leftLetters:['C','I'],overlapLetters:['A','M','N'],rightLetters:['D','O','Y'],leftAnswer:"MANIC",rightAnswer:"MONDAY",fact:"Manic Monday was a hit by The Bangles in 1986, written by Prince."},
 ];
 
 
@@ -1762,7 +1769,9 @@ function showPostSolve(){
       const remEl=document.getElementById('ps-remaining');
       if(remEl){
         if(allDone){
-          remEl.innerHTML=`<div style="text-align:center;font-size:16px;font-weight:900;color:#22c55e;margin:6px 0;">🎉 Daily Challenges Complete!</div>`;
+          const badge=document.getElementById('theme-badge');
+          const themeText=badge&&badge.textContent?`<div style="text-align:center;font-size:18px;font-weight:900;color:#f7c948;margin:4px 0;">Today's Theme: ${badge.textContent}</div>`:'';
+          remEl.innerHTML=`<div style="text-align:center;font-size:16px;font-weight:900;color:#22c55e;margin:6px 0;">🎉 Daily Challenges Complete!</div>${themeText}`;
         } else {
           remEl.innerHTML=`<div style="font-size:13px;font-weight:800;color:var(--muted);text-align:center;margin-bottom:6px;">${remaining.length} Challenge${remaining.length>1?'s':''} Remaining</div>
           <div style="display:flex;gap:8px;">${remaining.map(k=>`
@@ -1860,6 +1869,9 @@ function enterAnswer(){
           if(allDone&&!stats.dailySolvedKeys.includes(`day_${dayN}`)){
             stats.streak+=1;stats.bestStreak=Math.max(stats.bestStreak,stats.streak);
             stats.dailySolvedKeys.push(`day_${dayN}`);
+            // Reveal today's theme!
+            const badge=document.getElementById('theme-badge');
+            if(badge&&badge.textContent){badge.style.display='block';}
           }
           saveStats();
         }
@@ -2015,6 +2027,24 @@ function refreshIntroState(){
   if(introDate)introDate.textContent=fmt(dateForNum(todayN));
   const admireWrap=document.getElementById("return-btn-wrap");
   if(admireWrap)admireWrap.style.display="none";
+  // Theme badge — date based, add new dates here
+  const badge=document.getElementById("theme-badge");
+  if(badge){
+    const today=new Date();
+    const key=`${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+    const themes={
+      '2026-05-19':'🕺 Retro Day',
+      '2026-05-20':'🍕 Food Day',
+      '2026-05-21':'🐱 Cat Day',
+      '2026-05-22':'🏎️ Race Weekend',
+      '2026-05-23':'💰 Cash Day',
+      '2026-05-24':'🌟 Sunday\'s Best',
+      '2026-05-25':'😩 Monday Madness',
+    };
+    const theme=themes[key];
+    if(theme){badge.textContent=theme;badge.style.display='none';}  // hidden until all 3 solved
+    else{badge.style.display='none';}
+  }
 }
 function showIntro(){stopTimer();timerElapsed=0;updateTimerDisplay();introScreen.classList.add("active");gameShell.classList.remove("active");refreshIntroState();renderChallengeCards();updateEMHHeader();}
 function showGame(){introScreen.classList.remove("active");gameShell.classList.add("active");showDailyScreen();loadGame("daily",getDailyNum());}
