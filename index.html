@@ -603,6 +603,16 @@
             <a href="https://buymeacoffee.com/playvendy" target="_blank" style="flex:1;padding:8px;border-radius:10px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.3);font-size:11px;font-weight:700;color:#b45309;cursor:pointer;text-align:center;text-decoration:none;font-family:'Nunito',sans-serif;">☕ Support Vendy</a>
             <button onclick="showA2HS()" style="flex:1;padding:8px;border-radius:10px;background:var(--stats-bg);border:1px solid var(--divider);font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Nunito',sans-serif;">📲 Add to Home</button>
           </div>
+          <!-- Daily difficulty feedback — only shows when all 3 done -->
+          <div id="daily-feedback" style="display:none;text-align:center;margin-bottom:10px;width:100%;background:var(--stats-bg);border:1.5px solid var(--divider);border-radius:14px;padding:12px;">
+            <div style="font-size:12px;font-weight:800;color:var(--muted);letter-spacing:1px;margin-bottom:8px;">HOW WAS TODAY'S SET?</div>
+            <div style="display:flex;justify-content:center;gap:8px;">
+              <button onclick="rateDailySet('easy')" id="dfb-easy" style="flex:1;padding:8px 4px;border-radius:10px;background:transparent;border:1.5px solid var(--divider);font-size:20px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;color:var(--text);">😄<div style="font-size:10px;margin-top:2px;">Easy</div></button>
+              <button onclick="rateDailySet('medium')" id="dfb-medium" style="flex:1;padding:8px 4px;border-radius:10px;background:transparent;border:1.5px solid var(--divider);font-size:20px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;color:var(--text);">😐<div style="font-size:10px;margin-top:2px;">Medium</div></button>
+              <button onclick="rateDailySet('hard')" id="dfb-hard" style="flex:1;padding:8px 4px;border-radius:10px;background:transparent;border:1.5px solid var(--divider);font-size:20px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;color:var(--text);">😤<div style="font-size:10px;margin-top:2px;">Hard</div></button>
+            </div>
+            <div id="dfb-thanks" style="font-size:12px;font-weight:700;color:var(--muted);margin-top:6px;min-height:14px;"></div>
+          </div>
           <!-- Missed any -->
           <div onclick="closePostSolve();openWeekOverlay();" style="width:100%;padding:12px;border-radius:12px;background:transparent;border:2px solid var(--divider);cursor:pointer;text-align:center;font-size:15px;font-weight:800;color:var(--text);box-sizing:border-box;">Missed any? <span style="color:var(--pink);">Catch up ▶</span></div>
           <div class="share-preview" id="share-preview"></div>
@@ -989,6 +999,8 @@ function loadDailyChallenge(key){
   currentDiffKey=key;
   currentPuzzleKey=`daily_${getDailyNum()}_${key}`;
   introScreen.classList.remove('active');gameShell.classList.add('active');showDailyScreen();
+  // Track puzzle started
+  setTimeout(()=>trackEvent('puzzle_started', getPuzzleParams()), 100);
   if(typeof puzId==='string'){
     // Special puzzle (e.g. Mother's Day)
     const p=specialPuzzles[puzId];
@@ -1678,6 +1690,7 @@ function showQuitConfirm(){
 
 function revealAnswer(){
   if(puzzleCompleted)return;
+  trackEvent('puzzle_quit', getPuzzleParams());
   const p=(currentMode==="free"||currentMode==="daily")&&currentFreePuzzle?currentFreePuzzle:puzzles[currentPuzzleIdx];
   stopTimer();puzzleCompleted=true;lockInputs(true);kbHint.disabled=true;
   setTimeout(()=>{
@@ -1737,6 +1750,39 @@ function resetPuzzleState(){
 function buildWord(slots,revealed){return slots.map((l,i)=>revealed[i]||l||"").join("")}
 function closePostSolve(){postSolveEl.style.display="none";}
 
+// GA event tracking helper
+function trackEvent(eventName, params){
+  if(typeof gtag!=='undefined'){
+    gtag('event', eventName, params);
+  }
+}
+
+function getPuzzleParams(){
+  const p = currentFreePuzzle || (currentPuzzleIdx>=0?puzzles[currentPuzzleIdx]:null);
+  const today = new Date();
+  const dateStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+  return {
+    puzzle_date: dateStr,
+    difficulty: currentDiffKey==='e'?'Easy':currentDiffKey==='m'?'Medium':'Hard',
+    puzzle_name: p?`${p.leftAnswer}/${p.rightAnswer}`:'unknown',
+    puzzle_topic: p?p.topic:'unknown',
+    day_number: getDailyNum(),
+  };
+}
+
+function rateDailySet(difficulty){
+  ['easy','medium','hard'].forEach(d=>{
+    const btn=document.getElementById(`dfb-${d}`);
+    if(btn) btn.style.background=d===difficulty?'rgba(79,120,255,.15)':'transparent';
+    if(btn) btn.style.borderColor=d===difficulty?'#4f78ff':'var(--divider)';
+  });
+  const thanks=document.getElementById('dfb-thanks');
+  const msgs={easy:'😄 Glad it felt good!',medium:'😐 Nice balance!',hard:'😤 We\'ll ease up tomorrow!'};
+  if(thanks)thanks.textContent=msgs[difficulty]||'';
+  localStorage.setItem(`vendy_daily_rating_${getDailyNum()}`, difficulty);
+  trackEvent('daily_set_rated',{...getPuzzleParams(),daily_difficulty:difficulty,day_number:getDailyNum()});
+}
+
 function showPostSolve(){
   keyboardEl.classList.add("fading-out");
   // Keep timer visible with frozen final time
@@ -1768,11 +1814,18 @@ function showPostSolve(){
     const combackEl=document.getElementById('ps-comeback');
 
     if(allDoneNow){
-      // All 3 done — show flame streak
+      // All 3 done — show flame streak and daily feedback
       if(heroBox){heroBox.style.background='rgba(255,140,0,.1)';heroBox.style.borderColor='rgba(255,140,0,.4)';}
       if(streakEl){streakEl.style.color='#f97316';streakEl.textContent=stats.streak>0?`🔥 ${stats.streak}`:'🔥 Streak!';}
       if(streakLabel){streakLabel.style.color='#f97316';streakLabel.textContent=stats.streak>0?`day streak — don't break it!`:'Complete!';}
       if(combackEl)combackEl.textContent='Come back tomorrow to keep it going 👀';
+      // Show daily feedback
+      const fb=document.getElementById('daily-feedback');
+      if(fb){
+        fb.style.display='block';
+        ['easy','medium','hard'].forEach(d=>{const btn=document.getElementById(`dfb-${d}`);if(btn){btn.style.background='transparent';btn.style.borderColor='var(--divider)';}});
+        const ft=document.getElementById('dfb-thanks');if(ft)ft.textContent='';
+      }
     } else {
       // Still puzzles left — keep going
       const left=remaining0.length;
@@ -1780,6 +1833,7 @@ function showPostSolve(){
       if(streakEl){streakEl.style.color='#4f78ff';streakEl.textContent='💪 Keep Going!';}
       if(streakLabel){streakLabel.style.color='#4f78ff';streakLabel.textContent=`${left} puzzle${left>1?'s':''} still left today!`;}
       if(combackEl)combackEl.textContent='Finish all 3 to lock in your streak 🔥';
+      const fb=document.getElementById('daily-feedback');if(fb)fb.style.display='none';
     }
 
     // Show remaining challenges
@@ -1805,7 +1859,9 @@ function showPostSolve(){
     }
 
     // Show modal after confetti — 2 second delay
-    setTimeout(()=>{postSolveEl.style.display="flex";},2000);
+    setTimeout(()=>{
+      postSolveEl.style.display="flex";
+    },2000);
   },380);
 }
 function saveDailySolve(stars,hintsUsed,time){const p=loadArchiveProgress();p[currentPuzzleKey]={solved:true,hintsUsed,stars,time,datePlayed:new Date().toISOString()};saveArchiveProgress(p);}
@@ -1863,6 +1919,7 @@ function enterAnswer(){
   if(fl===p.leftAnswer&&fr===p.rightAnswer){
     const hintsUsed=3-hintsRemaining,stars=starsFromHints(hintsUsed);
     currentStars=stars;stopTimer();clearPuzzleTimer();const ft=timerElapsed,sl=speedLabel(ft);
+    trackEvent('puzzle_completed',{...getPuzzleParams(),hints_used:hintsUsed,time_seconds:parseFloat(ft.toFixed(1)),stars:stars});
     lastAdmiredKey=currentDiffKey;lastAdmiredPuzzle=p;
     resultEl.textContent="";resultEl.className="result";
     const goldStars="⭐".repeat(stars);
@@ -1932,6 +1989,7 @@ function useHint(){
   if(c.side==="left"){revealedLeft[c.index]=p.leftAnswer[c.index];lastHintLeftIdx=c.index;}
   else{revealedRight[c.index]=p.rightAnswer[c.index];lastHintRightIdx=c.index;}
   hintsRemaining-=1;timerElapsed+=10;if(timerStart!==null)timerStart-=10000;
+  trackEvent('hint_used',{...getPuzzleParams(),hints_remaining:hintsRemaining});
   updateTimerDisplay();updateHintBtn();renderInputs();maybeAdvance();
 }
 
