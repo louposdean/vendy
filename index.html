@@ -573,37 +573,38 @@
             </svg>
           </div>
           <!-- Well Done + stars + time -->
-          <div style="text-align:center;margin-bottom:6px;">
-            <div style="font-size:30px;font-weight:900;color:var(--text);" id="solve-speed">Well Done!</div>
-            <div style="font-size:28px;margin:6px 0;" id="ps-stars">⭐⭐⭐</div>
-            <div style="font-size:20px;font-weight:700;color:var(--pink);" id="solve-time">⏱ 8.4s</div>
+          <div style="text-align:center;margin-bottom:8px;">
+            <div style="font-size:26px;font-weight:900;color:var(--text);" id="solve-speed">Well Done!</div>
+            <div style="font-size:24px;margin:4px 0;" id="ps-stars">⭐⭐⭐</div>
+            <div style="font-size:18px;font-weight:700;color:var(--pink);" id="solve-time">⏱ 8.4s</div>
+          </div>
+          <!-- STREAK — hero element, changes based on progress -->
+          <div id="ps-hero-box" style="background:rgba(79,120,255,.1);border:2px solid rgba(79,120,255,.4);border-radius:16px;padding:14px;text-align:center;margin-bottom:10px;width:100%;">
+            <div style="font-size:36px;font-weight:900;color:#4f78ff;" id="ps-streak">💪 Keep Going!</div>
+            <div style="font-size:14px;font-weight:900;color:#4f78ff;margin-top:2px;" id="ps-streak-label">2 puzzles still left today</div>
+            <div style="font-size:12px;font-weight:700;color:var(--muted);margin-top:4px;" id="ps-comeback">Finish all 3 to complete your streak 🔥</div>
           </div>
           <!-- Remaining challenges -->
-          <div id="ps-remaining" style="margin:8px 0;"></div>
-          <!-- Streak -->
-          <div style="text-align:center;margin:8px 0 4px;">
-            <div style="font-size:22px;font-weight:900;" id="ps-streak">🔥 3-day streak</div>
-            <div style="font-size:14px;color:var(--muted);font-weight:700;margin-bottom:4px;">Don't break it tomorrow</div>
-          </div>
+          <div id="ps-remaining" style="margin:0 0 8px;width:100%;"></div>
           <!-- Next puzzle countdown -->
-          <div style="text-align:center;font-size:15px;font-weight:800;color:var(--muted);margin-bottom:10px;">Next new puzzle in: <span id="next-puzzle-timer" style="color:var(--text);">--:--:--</span></div>
+          <div style="text-align:center;font-size:13px;font-weight:800;color:var(--muted);margin-bottom:10px;">Next new puzzle in: <span id="next-puzzle-timer" style="color:var(--text);">--:--:--</span></div>
           <!-- Share -->
           <button id="ps-share" style="width:100%;padding:14px;border-radius:12px;background:#86efac;color:#14532d;font-size:16px;font-weight:700;border:none;cursor:pointer;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Nunito',sans-serif;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;flex-shrink:0;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
             Share your results
           </button>
-          <!-- Admire + Create your own -->
+          <!-- Admire + Create -->
           <div style="display:flex;gap:8px;margin-bottom:8px;">
             <button onclick="closePostSolve();admireCurrentPuzzle();" style="flex:1;padding:12px;border-radius:12px;background:rgba(212,102,187,.12);border:2px solid rgba(212,102,187,.4);font-size:14px;font-weight:800;color:#9333ea;cursor:pointer;font-family:'Nunito',sans-serif;">Admire ✨</button>
             <div onclick="closePostSolve();openCreateOverlay();" style="flex:1;padding:12px;border-radius:12px;background:transparent;border:2px solid var(--divider);font-size:14px;font-weight:800;color:var(--text);cursor:pointer;text-align:center;font-family:'Nunito',sans-serif;">Make a Vendy ✏️</div>
           </div>
-          <!-- BMC + Add to Home -->
+          <!-- BMC + Add to Home — smaller -->
           <div style="display:flex;gap:8px;margin-bottom:8px;">
-            <a href="https://buymeacoffee.com/playvendy" target="_blank" style="flex:1;padding:12px;border-radius:12px;background:rgba(245,158,11,.1);border:2px solid rgba(245,158,11,.4);font-size:13px;font-weight:800;color:#b45309;cursor:pointer;text-align:center;text-decoration:none;font-family:'Nunito',sans-serif;">☕ Support Vendy</a>
-            <button onclick="showA2HS()" style="flex:1;padding:12px;border-radius:12px;background:var(--stats-bg);border:1.5px solid var(--divider);font-size:13px;font-weight:800;color:var(--text);cursor:pointer;font-family:'Nunito',sans-serif;">📲 Add to Home</button>
+            <a href="https://buymeacoffee.com/playvendy" target="_blank" style="flex:1;padding:8px;border-radius:10px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.3);font-size:11px;font-weight:700;color:#b45309;cursor:pointer;text-align:center;text-decoration:none;font-family:'Nunito',sans-serif;">☕ Support Vendy</a>
+            <button onclick="showA2HS()" style="flex:1;padding:8px;border-radius:10px;background:var(--stats-bg);border:1px solid var(--divider);font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Nunito',sans-serif;">📲 Add to Home</button>
           </div>
-          <!-- Missed any this week -->
-          <div onclick="closePostSolve();openWeekOverlay();" style="width:100%;padding:14px;border-radius:12px;background:transparent;border:2px solid var(--divider);cursor:pointer;text-align:center;font-size:17px;font-weight:800;color:var(--text);box-sizing:border-box;">Missed any? <span style="color:var(--pink);">Catch up ▶</span></div>
+          <!-- Missed any -->
+          <div onclick="closePostSolve();openWeekOverlay();" style="width:100%;padding:12px;border-radius:12px;background:transparent;border:2px solid var(--divider);cursor:pointer;text-align:center;font-size:15px;font-weight:800;color:var(--text);box-sizing:border-box;">Missed any? <span style="color:var(--pink);">Catch up ▶</span></div>
           <div class="share-preview" id="share-preview"></div>
           <div class="solve-lock" id="solve-lock"></div>
         </div>
@@ -1120,7 +1121,7 @@ const puzzles = [
   {id:72,topic:"Food & Drink 🍔",stars:2,leftLetters:['M','N'],overlapLetters:['A','G','O'],rightLetters:['E','L','T'],leftAnswer:"MANGO",rightAnswer:"GELATO",fact:"Mango is the most consumed fruit in the world and pairs perfectly with gelato."},
   {id:73,topic:"Food & Drink 🍔",stars:2,leftLetters:['E','V'],overlapLetters:['I','L','O'],rightLetters:[],leftAnswer:"OLIVE",rightAnswer:"OIL",fact:"Olive oil has been produced in the Mediterranean for over 7000 years."},
   {id:74,topic:"Living Things 🌿",stars:2,leftLetters:['B','Y'],overlapLetters:['A','T'],rightLetters:['C'],leftAnswer:"TABBY",rightAnswer:"CAT",fact:"The tabby pattern is the most common cat coat pattern in the world."},
-  {id:75,topic:"Living Things 🌿",stars:2,leftLetters:['N'],overlapLetters:['E','I'],rightLetters:['L','S','V'],leftAnswer:"NINE",rightAnswer:"LIVES",fact:"The myth of cats having nine lives dates back to ancient Egypt."},
+  {id:75,topic:"Getting Lucky 🍀",stars:2,leftLetters:['N'],overlapLetters:['E','I'],rightLetters:['L','S','V'],leftAnswer:"NINE",rightAnswer:"LIVES",fact:"The myth of cats having nine lives dates back to ancient Egypt."},
   {id:76,topic:"Daily Life 🗓️",stars:2,leftLetters:['C','H','I','T'],overlapLetters:['Y'],rightLetters:['E','S'],leftAnswer:"ITCHY",rightAnswer:"EYES",fact:"Itchy eyes affect millions of people during spring allergy season."},
   {id:77,topic:"Rhyme Time 🎤",stars:2,leftLetters:['S','T'],overlapLetters:['E','R'],rightLetters:['A','C','L'],leftAnswer:"STEER",rightAnswer:"CLEAR",fact:"Steer clear means to avoid something — a nautical term from sailing."},
   {id:78,topic:"Fun & Games 🎮",stars:2,leftLetters:['R'],overlapLetters:['H','N','O'],rightLetters:['K'],leftAnswer:"HORN",rightAnswer:"HONK",fact:"The car horn was invented in 1908 and has been annoying people ever since."},
@@ -1683,12 +1684,12 @@ function revealAnswer(){
     const speedEl=document.getElementById("solve-speed");
     const starsEl=document.getElementById("ps-stars");
     const timeEl=document.getElementById("solve-time");
-    const streakEl=document.getElementById("ps-streak");
+    const streakEl2=document.getElementById("ps-streak");
     const remEl=document.getElementById("ps-remaining");
     if(speedEl)speedEl.textContent="That was a tough one!";
     if(starsEl)starsEl.textContent="The answer was:";
     if(timeEl)timeEl.innerHTML=`<span style="font-size:20px;font-weight:900;color:var(--text);">${p.leftAnswer} / ${p.rightAnswer}</span>`;
-    if(streakEl)streakEl.textContent="";
+    if(streakEl2)streakEl2.textContent="";
     if(remEl)remEl.innerHTML="";
     postSolveEl.style.display="flex";
   },400);
@@ -1756,9 +1757,30 @@ function showPostSolve(){
     const speedEl=document.getElementById("solve-speed");
     const timeEl=document.getElementById("solve-time");
     const streakEl=document.getElementById("ps-streak");
+    const streakLabel=document.getElementById("ps-streak-label");
     if(speedEl) speedEl.textContent="Well Done!";
     if(timeEl) timeEl.textContent=`⏱ ${timeStr}`;
-    if(streakEl) streakEl.textContent=stats.streak>0?`🔥 ${stats.streak}-day streak`:"";
+    const progress0=loadArchiveProgress();
+    const dayN0=getDailyNum();
+    const remaining0=['e','m','h'].filter(k=>!progress0[`daily_${dayN0}_${k}`]?.solved&&k!==currentDiffKey);
+    const allDoneNow=remaining0.length===0;
+    const heroBox=document.getElementById('ps-hero-box');
+    const combackEl=document.getElementById('ps-comeback');
+
+    if(allDoneNow){
+      // All 3 done — show flame streak
+      if(heroBox){heroBox.style.background='rgba(255,140,0,.1)';heroBox.style.borderColor='rgba(255,140,0,.4)';}
+      if(streakEl){streakEl.style.color='#f97316';streakEl.textContent=stats.streak>0?`🔥 ${stats.streak}`:'🔥 Streak!';}
+      if(streakLabel){streakLabel.style.color='#f97316';streakLabel.textContent=stats.streak>0?`day streak — don't break it!`:'Complete!';}
+      if(combackEl)combackEl.textContent='Come back tomorrow to keep it going 👀';
+    } else {
+      // Still puzzles left — keep going
+      const left=remaining0.length;
+      if(heroBox){heroBox.style.background='rgba(79,120,255,.1)';heroBox.style.borderColor='rgba(79,120,255,.4)';}
+      if(streakEl){streakEl.style.color='#4f78ff';streakEl.textContent='💪 Keep Going!';}
+      if(streakLabel){streakLabel.style.color='#4f78ff';streakLabel.textContent=`${left} puzzle${left>1?'s':''} still left today!`;}
+      if(combackEl)combackEl.textContent='Finish all 3 to lock in your streak 🔥';
+    }
 
     // Show remaining challenges
     if(currentMode==="daily"){
@@ -2034,7 +2056,7 @@ function refreshIntroState(){
     const key=`${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
     const themes={
       '2026-05-19':'🕺 Retro Day',
-      '2026-05-20':'🍕 Food Day',
+      '2026-05-20':'🍝 Italian Food Day',
       '2026-05-21':'🐱 Cat Day',
       '2026-05-22':'🏎️ Race Weekend',
       '2026-05-23':'💰 Cash Day',
