@@ -866,7 +866,29 @@ function showFirstVisitTutorial(){
         <text x="150" y="72" font-size="14" font-weight="900" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">N</text>
         <text x="150" y="86" font-size="14" font-weight="900" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">D</text>
       </svg>
-      <div style="font-size:13px;font-weight:800;color:var(--muted);margin-bottom:12px;">The answer is <span style="color:#4f78ff;font-weight:900;">PLAY</span> + <span style="color:#f550a0;font-weight:900;">VENDY</span></div>
+      <div style="font-size:13px;font-weight:800;color:var(--muted);margin-bottom:12px;">The answer is</div>
+      <div style="display:flex;justify-content:center;gap:16px;margin-bottom:16px;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <div style="display:flex;gap:4px;">
+            <div style="width:28px;height:34px;border-bottom:3px solid #4f78ff;display:flex;align-items:center;justify-content:center;color:#4f78ff;font-size:16px;font-weight:900;font-family:Nunito,sans-serif;">P</div>
+            <div style="width:28px;height:34px;border-bottom:3px solid #4f78ff;display:flex;align-items:center;justify-content:center;color:#4f78ff;font-size:16px;font-weight:900;font-family:Nunito,sans-serif;">L</div>
+            <div style="width:28px;height:34px;border-bottom:3px solid #4f78ff;display:flex;align-items:center;justify-content:center;color:#4f78ff;font-size:16px;font-weight:900;font-family:Nunito,sans-serif;">A</div>
+            <div style="width:28px;height:34px;border-bottom:3px solid #4f78ff;display:flex;align-items:center;justify-content:center;color:#4f78ff;font-size:16px;font-weight:900;font-family:Nunito,sans-serif;">Y</div>
+          </div>
+          <div style="font-size:10px;font-weight:800;color:#4f78ff;letter-spacing:1px;">WORD 1</div>
+        </div>
+        <div style="display:flex;align-items:center;padding-bottom:16px;color:var(--muted);font-size:18px;font-weight:900;">+</div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <div style="display:flex;gap:4px;">
+            <div style="width:28px;height:34px;border-bottom:3px solid #f550a0;display:flex;align-items:center;justify-content:center;color:#f550a0;font-size:16px;font-weight:900;font-family:Nunito,sans-serif;">V</div>
+            <div style="width:28px;height:34px;border-bottom:3px solid #f550a0;display:flex;align-items:center;justify-content:center;color:#f550a0;font-size:16px;font-weight:900;font-family:Nunito,sans-serif;">E</div>
+            <div style="width:28px;height:34px;border-bottom:3px solid #f550a0;display:flex;align-items:center;justify-content:center;color:#f550a0;font-size:16px;font-weight:900;font-family:Nunito,sans-serif;">N</div>
+            <div style="width:28px;height:34px;border-bottom:3px solid #f550a0;display:flex;align-items:center;justify-content:center;color:#f550a0;font-size:16px;font-weight:900;font-family:Nunito,sans-serif;">D</div>
+            <div style="width:28px;height:34px;border-bottom:3px solid #f550a0;display:flex;align-items:center;justify-content:center;color:#f550a0;font-size:16px;font-weight:900;font-family:Nunito,sans-serif;">Y</div>
+          </div>
+          <div style="font-size:10px;font-weight:800;color:#f550a0;letter-spacing:1px;">WORD 2</div>
+        </div>
+      </div>
       <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;text-align:left;">
         <div style="display:flex;align-items:center;gap:10px;">
           <div style="width:14px;height:14px;border-radius:3px;background:rgba(79,120,255,.72);flex-shrink:0;"></div>
@@ -885,7 +907,7 @@ function showFirstVisitTutorial(){
           <div style="font-size:14px;font-weight:700;color:var(--text);">Letters can repeat!</div>
         </div>
       </div>
-      <button onclick="this.closest('div').parentElement.remove();localStorage.setItem('vendy_tutorial_seen','1');" style="width:100%;padding:14px;border-radius:12px;background:#4f78ff;color:white;font-size:16px;font-weight:900;border:none;cursor:pointer;font-family:'Nunito',sans-serif;">Got it — Let's Play! 🔵🩷</button>
+      <button onclick="localStorage.setItem('vendy_tutorial_seen','1');this.closest('div').parentElement.remove();loadDailyChallenge('e');" style="width:100%;padding:14px;border-radius:12px;background:#4f78ff;color:white;font-size:16px;font-weight:900;border:none;cursor:pointer;font-family:'Nunito',sans-serif;">Got it — Let's Play! 🔵🩷</button>
     </div>
   `;
   document.body.appendChild(overlay);
