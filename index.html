@@ -1025,7 +1025,7 @@ function loadDailyChallenge(key){
     if(label)label.textContent=getDiffLabel(key);
     // Override puzzle key to use difficulty-based key AFTER loadGame
     currentPuzzleKey=`daily_${getDailyNum()}_${key}`;
-    if(topicEl)topicEl.textContent=puzzles[puzId-1].topic;
+    if(topicEl){const puz=getPuzzleById(puzId);if(puz)topicEl.textContent=puz.topic;}
     // Restart timer with correct key — clear any stale value first if unplayed
     const progress=loadArchiveProgress();
     const alreadySolved=progress[currentPuzzleKey]?.solved;
@@ -1781,7 +1781,12 @@ function rateDailySet(difficulty){
   const msgs={easy:'😄 Glad it felt good!',medium:'😐 Nice balance!',hard:'😤 We\'ll ease up tomorrow!'};
   if(thanks)thanks.textContent=msgs[difficulty]||'';
   localStorage.setItem(`vendy_daily_rating_${getDailyNum()}`, difficulty);
-  trackEvent('daily_set_rated',{...getPuzzleParams(),daily_difficulty:difficulty,day_number:getDailyNum()});
+  trackEvent('daily_set_rated',{
+    day_number: getDailyNum(),
+    puzzle_date: new Date().toISOString().split('T')[0],
+    daily_difficulty: difficulty,
+    puzzles_solved_today: ['e','m','h'].filter(k=>loadArchiveProgress()[`daily_${getDailyNum()}_${k}`]?.solved).length,
+  });
 }
 
 function showPostSolve(){
@@ -1920,7 +1925,7 @@ function enterAnswer(){
   if(fl===p.leftAnswer&&fr===p.rightAnswer){
     const hintsUsed=3-hintsRemaining,stars=starsFromHints(hintsUsed);
     currentStars=stars;stopTimer();clearPuzzleTimer();const ft=timerElapsed,sl=speedLabel(ft);
-    trackEvent('puzzle_completed',{...getPuzzleParams(),hints_used:hintsUsed,time_seconds:parseFloat(ft.toFixed(1)),stars:stars});
+    trackEvent('puzzle_completed',{...getPuzzleParams(),hints_used:hintsUsed,time_seconds:parseFloat(ft.toFixed(1)),stars:stars,total_solved:stats.solved});
     lastAdmiredKey=currentDiffKey;lastAdmiredPuzzle=p;
     resultEl.textContent="";resultEl.className="result";
     const goldStars="⭐".repeat(stars);
