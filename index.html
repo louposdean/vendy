@@ -959,13 +959,14 @@ const dailySets=[
   {e:82,m:80,h:81},  // Day 20 May 23
   {e:84,m:83,h:85},  // Day 21 May 24
   {e:89,m:90,h:91},  // Day 22 May 25 — Monday Madness
-  {e:110,m:111,h:112},  // Day 23 May 26 — Garden Day
-  {e:92,m:93,h:94},  // Day 24 May 27 — Sweet Treats
-  {e:95,m:96,h:97},  // Day 25 May 28 — Animal Day
-  {e:98,m:99,h:100},  // Day 26 May 29 — Collectables
-  {e:101,m:102,h:103}, // Day 27 May 30 — Pub Fun
-  {e:104,m:105,h:106}, // Day 28 May 31 — Monaco Theme
-  {e:107,m:108,h:109}, // Day 29 Jun 01 — Race Day
+  {e:113,m:114,h:115},  // Day 23 May 26 — MJ Day
+  {e:92,m:93,h:94},    // Day 24 May 27 — Sweet Treats
+  {e:101,m:102,h:103}, // Day 25 May 28 — Pub Fun
+  {e:98,m:99,h:100},   // Day 26 May 29 — Collectables
+  {e:104,m:105,h:106}, // Day 27 May 30 — Monaco Theme
+  {e:107,m:108,h:109}, // Day 28 May 31 — Race Day
+  {e:110,m:111,h:112}, // Day 29 Jun 02 — Garden Day
+  {e:95,m:96,h:97},    // Day 30 Jun 03 — Animal Day
 ];
 
 const specialPuzzles={
@@ -1201,6 +1202,10 @@ const puzzles = [
   {id:110,topic:"Living Things 🌿",stars:1,leftLetters:['H','T','W'],overlapLetters:['E','I'],rightLetters:['A','D','S'],leftAnswer:"WHITE",rightAnswer:"DAISIES",fact:"White daisies are one of the most recognisable wildflowers and symbolise innocence."},
   {id:111,topic:"Daily Life 🗓️",stars:2,leftLetters:['D','W'],overlapLetters:['E'],rightLetters:['I','K','L','R'],leftAnswer:"WEED",rightAnswer:"KILLER",fact:"The first commercial weed killer was introduced in the 1940s and changed farming forever."},
   {id:112,topic:"Living Things 🌿",stars:3,leftLetters:['L','M','U'],overlapLetters:['B','E'],rightLetters:[],leftAnswer:"BUMBLE",rightAnswer:"BEE",fact:"Bumble bees can fly in colder temperatures than most other bees thanks to their thick fur."},
+  // MJ Day - May 26
+  {id:113,topic:"Michael Jackson 🕺",stars:1,leftLetters:['A','B','E'],overlapLetters:['T'],rightLetters:['I'],leftAnswer:"BEAT",rightAnswer:"IT",fact:"Beat It features Eddie Van Halen's iconic guitar solo and won two Grammy Awards in 1984."},
+  {id:114,topic:"Michael Jackson 🕺",stars:2,leftLetters:['B','I','L'],overlapLetters:['E'],rightLetters:['A','J','N'],leftAnswer:"BILLIE",rightAnswer:"JEAN",fact:"Billie Jean was the first video by a Black artist to be played in heavy rotation on MTV."},
+  {id:115,topic:"Michael Jackson 🕺",stars:3,leftLetters:['R','T','Y'],overlapLetters:['D','I'],rightLetters:['A','N'],leftAnswer:"DIRTY",rightAnswer:"DIANA",fact:"Dirty Diana reached number one in the US in 1988 and is one of MJ's hardest rocking songs."},
 ];
 
 
@@ -2176,13 +2181,14 @@ function refreshIntroState(){
       '2026-05-23':'💰 Cash Day',
       '2026-05-24':'🌟 Sunday\'s Best',
       '2026-05-25':'😩 Monday Madness',
-      '2026-05-26':'🌸 Garden Day',
+      '2026-05-26':'🕺 MJ Day',
+      '2026-05-27':'🌸 Garden Day',
       '2026-05-26':'🍬 Sweet Treats',
       '2026-05-27':'🐾 Animal Day',
       '2026-05-28':'🧸 Collectables',
       '2026-05-29':'🍺 Pub Fun',
       '2026-05-30':'🏎️ Monaco Theme',
-      '2026-06-01':'🏎️ Race Day',
+      '2026-06-02':'🏎️ Race Day',
     };
     const theme=themes[key];
     if(theme){badge.textContent=theme;badge.style.display='none';}  // hidden until all 3 solved
