@@ -1291,11 +1291,11 @@ function openWeekOverlay(){
       const solved=record?.solved;
       const timeStr=solved&&record.time?`⏱ ${parseFloat(record.time).toFixed(1)}s`:"";
       const btn=document.createElement("button");
-      btn.style.cssText=`flex:1;padding:10px 6px;border-radius:12px;background:${solved?'rgba(34,197,94,.1)':getDiffBg(key)};border:2px solid ${solved?'#22c55e':getDiffColor(key)};cursor:pointer;font-family:'Nunito',sans-serif;text-align:center;`;
+      btn.style.cssText=`flex:1;padding:10px 6px;border-radius:12px;background:${solved?'rgba(147,51,234,.1)':getDiffBg(key)};border:2px solid ${solved?'#9333ea':getDiffColor(key)};cursor:pointer;font-family:'Nunito',sans-serif;text-align:center;`;
       btn.innerHTML=`
-        <div style="font-size:14px;font-weight:900;color:${solved?'#22c55e':getDiffColor(key)};">${solved?'✅':''} ${getDiffLabel(key)}</div>
+        <div style="font-size:14px;font-weight:900;color:${solved?'#9333ea':getDiffColor(key)};">${solved?'✨':''} ${getDiffLabel(key)}</div>
         <div style="font-size:10px;font-weight:700;color:var(--muted);margin-top:2px;">${(puz.topic||'').split(' ')[0]}</div>
-        ${solved?`<div style="font-size:11px;font-weight:800;color:#22c55e;margin-top:2px;">${timeStr}</div>`:''}
+        ${solved?`<div style="font-size:11px;font-weight:800;color:#9333ea;margin-top:2px;">${timeStr}</div>`:''}
       `;
       btn.addEventListener("click",()=>{
         closeWeekOverlay();
