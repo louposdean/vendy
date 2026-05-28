@@ -963,10 +963,15 @@ const dailySets=[
   {e:92,m:93,h:94},    // Day 24 May 27 — Sweet Treats
   {e:101,m:102,h:103}, // Day 25 May 28 — Pub Fun
   {e:98,m:99,h:100},   // Day 26 May 29 — Collectables
-  {e:104,m:105,h:106}, // Day 27 May 30 — Monaco Theme
+  {e:117,m:118,h:119}, // Day 27 May 30 — Potato Day
   {e:107,m:108,h:109}, // Day 28 May 31 — Race Day
-  {e:110,m:111,h:112}, // Day 29 Jun 02 — Garden Day
-  {e:95,m:96,h:97},    // Day 30 Jun 03 — Animal Day
+  {e:120,m:121,h:122}, // Day 29 Jun 01 — Startling Awake
+  {e:123,m:124,h:125}, // Day 30 Jun 02 — Cheap Movie Night
+  {e:95,m:96,h:97},    // Day 31 Jun 03 — Animal Day
+  {e:126,m:127,h:128}, // Day 32 Jun 04 — Numbers Day
+  {e:129,m:130,h:131}, // Day 33 Jun 05 — Steakhouse
+  {e:132,m:133,h:134}, // Day 34 Jun 06 — Pub Fun
+  {e:135,m:136,h:137}, // Day 35 Jun 07 — Need A Cleaning
 ];
 
 const specialPuzzles={
@@ -1207,6 +1212,28 @@ const puzzles = [
   {id:114,topic:"Michael Jackson 🕺",stars:2,leftLetters:['B','I','L'],overlapLetters:['E'],rightLetters:['A','J','N'],leftAnswer:"BILLIE",rightAnswer:"JEAN",fact:"Billie Jean was the first video by a Black artist to be played in heavy rotation on MTV."},
   {id:115,topic:"Michael Jackson 🕺",stars:3,leftLetters:['R','T','Y'],overlapLetters:['D','I'],rightLetters:['A','N'],leftAnswer:"DIRTY",rightAnswer:"DIANA",fact:"Dirty Diana reached number one in the US in 1988 and is one of MJ's hardest rocking songs."},
   {id:116,topic:"Daily Life 🗓️",stars:1,leftLetters:['L','Z'],overlapLetters:['A','Y'],rightLetters:['D','N','S','U'],leftAnswer:"LAZY",rightAnswer:"SUNDAY",fact:"Lazy Sunday became a cultural phrase after the Saturday Night Live sketch in 2005."},
+  // Week 5 - May 30 - Jun 7
+  {id:117,topic:"Around the World 🌍",stars:1,leftLetters:['D','I','L','N'],overlapLetters:['B','U'],rightLetters:['P'],leftAnswer:"DUBLIN",rightAnswer:"PUB",fact:"Dublin has more pubs per capita than almost any other city in the world."},
+  {id:118,topic:"Food & Drink 🍔",stars:2,leftLetters:['C','H'],overlapLetters:['E','S'],rightLetters:['F','I','R'],leftAnswer:"CHEESE",rightAnswer:"FRIES",fact:"Cheese fries are a staple of diners and pub menus across North America."},
+  {id:119,topic:"Food & Drink 🍔",stars:3,leftLetters:['A','O','T'],overlapLetters:['P'],rightLetters:['E','L','R'],leftAnswer:"POTATO",rightAnswer:"PEELER",fact:"The potato peeler was invented in 1947 and remains one of the most used kitchen tools."},
+  {id:120,topic:"Daily Life 🗓️",stars:1,leftLetters:['B'],overlapLetters:['A','D'],rightLetters:['E','M','R'],leftAnswer:"BAD",rightAnswer:"DREAM",fact:"The average person has 3 to 5 dreams per night and most are forgotten within minutes."},
+  {id:121,topic:"Living Things 🌿",stars:2,leftLetters:['D'],overlapLetters:['E','R'],rightLetters:['O','S','T'],leftAnswer:"RED",rightAnswer:"ROOSTER",fact:"A rooster crows at dawn due to its internal circadian clock not just in response to light."},
+  {id:122,topic:"Daily Life 🗓️",stars:3,leftLetters:['D','I','O'],overlapLetters:['A','R'],rightLetters:['L','M'],leftAnswer:"RADIO",rightAnswer:"ALARM",fact:"The first clock radio was patented in 1946 combining two essential morning items."},
+  {id:123,topic:"Food & Drink 🍔",stars:1,leftLetters:['C','N','O','P'],overlapLetters:['R'],rightLetters:['B','E','T','U'],leftAnswer:"POPCORN",rightAnswer:"BUTTER",fact:"Americans consume about 17 billion quarts of popcorn every year."},
+  {id:124,topic:"Fun & Games 🎮",stars:2,leftLetters:['H','R'],overlapLetters:['O'],rightLetters:['E','I','M','V'],leftAnswer:"HORROR",rightAnswer:"MOVIE",fact:"Psycho in 1960 was the first film to show a toilet flushing on screen."},
+  {id:125,topic:"Daily Life 🗓️",stars:3,leftLetters:['I','L'],overlapLetters:['A','E','S'],rightLetters:['T'],leftAnswer:"AISLE",rightAnswer:"SEAT",fact:"The aisle seat is the most popular choice on flights due to easier bathroom access."},
+  {id:126,topic:"Daily Life 🗓️",stars:1,leftLetters:['O'],overlapLetters:['D'],rightLetters:['C','K','U'],leftAnswer:"ODD",rightAnswer:"DUCK",fact:"Odd Duck is a quirky phrase used to describe someone who is charmingly different."},
+  {id:127,topic:"Rhyme Time 🎤",stars:2,leftLetters:[],overlapLetters:['E','N','V'],rightLetters:['S','T'],leftAnswer:"EVEN",rightAnswer:"STEVEN",fact:"Even Steven means perfectly equal or balanced — popularised by the Seinfeld TV show."},
+  {id:128,topic:"Fun & Games 🎮",stars:3,leftLetters:['H','T'],overlapLetters:['I','N'],rightLetters:['G'],leftAnswer:"NINTH",rightAnswer:"INNING",fact:"The ninth inning is the most dramatic in baseball with many famous walk-off moments."},
+  {id:129,topic:"Food & Drink 🍔",stars:1,leftLetters:['L','W'],overlapLetters:['E'],rightLetters:['D','N','O'],leftAnswer:"WELL",rightAnswer:"DONE",fact:"Well done steak is cooked to an internal temperature of 160 degrees Fahrenheit."},
+  {id:130,topic:"Food & Drink 🍔",stars:2,leftLetters:['B','G','L','M'],overlapLetters:['I','N','O'],rightLetters:[],leftAnswer:"BLOOMING",rightAnswer:"ONION",fact:"The Blooming Onion was created by Outback Steakhouse in 1988 and became their signature dish."},
+  {id:131,topic:"Food & Drink 🍔",stars:3,leftLetters:['C','E','R'],overlapLetters:['A','S'],rightLetters:['D','L'],leftAnswer:"CAESAR",rightAnswer:"SALAD",fact:"The Caesar salad was invented in Tijuana Mexico in 1924 by chef Caesar Cardini."},
+  {id:132,topic:"Rhyme Time 🎤",stars:1,leftLetters:['P'],overlapLetters:['B','U'],rightLetters:['G','R'],leftAnswer:"PUB",rightAnswer:"GRUB",fact:"Pub grub became a British institution in the 1960s when licensing laws allowed pubs to serve food."},
+  {id:133,topic:"Daily Life 🗓️",stars:2,leftLetters:['B','W','Y'],overlapLetters:['L','O'],rightLetters:['S','T'],leftAnswer:"WOBBLY",rightAnswer:"STOOL",fact:"A wobbly bar stool is practically a pub rite of passage — nobody ever fixes the loose ones."},
+  {id:134,topic:"Food & Drink 🍔",stars:3,leftLetters:['D','L'],overlapLetters:['C','O'],rightLetters:['A','N','R'],leftAnswer:"COLD",rightAnswer:"CORONA",fact:"Corona is best served ice cold with a wedge of lime pressed into the neck of the bottle."},
+  {id:135,topic:"Rhyme Time 🎤",stars:1,leftLetters:['M'],overlapLetters:['O','P'],rightLetters:['T'],leftAnswer:"MOP",rightAnswer:"TOP",fact:"Mop top was a famous hairstyle popularised by The Beatles in the 1960s."},
+  {id:136,topic:"Daily Life 🗓️",stars:2,leftLetters:['E','Y'],overlapLetters:['M','S'],rightLetters:['O','R'],leftAnswer:"MESSY",rightAnswer:"ROOMS",fact:"Studies show that messy rooms can actually stimulate creativity and unconventional thinking."},
+  {id:137,topic:"Daily Life 🗓️",stars:3,leftLetters:['L','O','W','Y'],overlapLetters:['E'],rightLetters:['H','T'],leftAnswer:"YELLOW",rightAnswer:"TEETH",fact:"Yellow teeth are not always a sign of poor health — natural tooth enamel has a slightly yellow tint."},
 ];
 
 
