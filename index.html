@@ -424,6 +424,30 @@
       .game-header { padding:2px 0 3px; }
       .category-box { font-size:12px; padding:3px 8px; }
     }
+    /* ── DESKTOP HOME ── */
+    #desktop-home { display:none; position:fixed; inset:0; background:linear-gradient(135deg,#0f172a 0%,#1a1040 50%,#0f172a 100%); z-index:9999; overflow-y:auto; font-family:'Nunito',sans-serif; }
+    #desktop-home.active { display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:40px 20px 60px; }
+    .dh-logo { display:flex; align-items:center; gap:16px; margin-bottom:10px; }
+    .dh-venn { width:60px; height:60px; }
+    .dh-title { font-size:42px; font-weight:900; color:#fff; letter-spacing:2px; }
+    .dh-sub { color:#94a3b8; font-size:17px; font-weight:700; margin-bottom:48px; text-align:center; }
+    .dh-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; max-width:800px; width:100%; margin-bottom:32px; }
+    .dh-card { background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.1); border-radius:20px; padding:32px 28px; cursor:pointer; transition:transform .15s,border-color .15s,background .15s; text-align:left; }
+    .dh-card:hover { transform:translateY(-4px); border-color:rgba(79,120,255,.6); background:rgba(79,120,255,.08); }
+    .dh-card.pink:hover { border-color:rgba(245,80,160,.6); background:rgba(245,80,160,.08); }
+    .dh-card.gold:hover { border-color:rgba(247,201,72,.6); background:rgba(247,201,72,.08); }
+    .dh-card.green:hover { border-color:rgba(34,197,94,.6); background:rgba(34,197,94,.08); }
+    .dh-card-icon { font-size:36px; margin-bottom:12px; }
+    .dh-card-title { font-size:20px; font-weight:900; color:#fff; margin-bottom:6px; }
+    .dh-card-desc { font-size:14px; font-weight:700; color:#94a3b8; line-height:1.5; }
+    .dh-card-badge { display:inline-block; margin-top:12px; padding:4px 12px; border-radius:20px; font-size:11px; font-weight:900; letter-spacing:1px; }
+    .dh-badge-blue { background:rgba(79,120,255,.2); color:#7fa8ff; }
+    .dh-badge-pink { background:rgba(245,80,160,.2); color:#f550a0; }
+    .dh-badge-gold { background:rgba(247,201,72,.2); color:#f7c948; }
+    .dh-badge-green { background:rgba(34,197,94,.2); color:#22c55e; }
+    .dh-footer { color:#475569; font-size:13px; font-weight:700; text-align:center; }
+    .dh-footer a { color:#7fa8ff; text-decoration:none; }
+    @media(max-width:600px){ .dh-cards { grid-template-columns:1fr; } }
   </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SB5QRPS4EV"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SB5QRPS4EV');</script>
@@ -819,6 +843,71 @@
 </div>
 <canvas id="confetti-canvas"></canvas>
 
+<!-- DESKTOP HOME -->
+<div id="desktop-home">
+  <div class="dh-logo">
+    <svg class="dh-venn" viewBox="0 0 60 40">
+      <circle cx="22" cy="20" r="18" fill="rgba(79,120,255,.7)" stroke="#4f78ff" stroke-width="2"/>
+      <circle cx="38" cy="20" r="18" fill="rgba(245,80,160,.7)" stroke="#f550a0" stroke-width="2"/>
+      <circle cx="38" cy="20" r="18" fill="rgba(212,102,187,.8)" stroke="none" clip-path="url(#dh-clip)"/>
+      <clipPath id="dh-clip"><circle cx="22" cy="20" r="18"/></clipPath>
+      <circle cx="22" cy="20" r="18" fill="none" stroke="#4f78ff" stroke-width="2"/>
+      <circle cx="38" cy="20" r="18" fill="none" stroke="#f550a0" stroke-width="2"/>
+    </svg>
+    <div class="dh-title">Vendy</div>
+  </div>
+  <div class="dh-sub">The daily Venn diagram word game 🔵🩷</div>
+  <div class="dh-cards">
+    <div class="dh-card" onclick="enterGame()">
+      <div class="dh-card-icon">🎯</div>
+      <div class="dh-card-title">Play Today's Puzzle</div>
+      <div class="dh-card-desc">3 new puzzles every day — Easy, Medium and Hard. How fast can you solve them?</div>
+      <div class="dh-card-badge dh-badge-blue">TODAY'S CHALLENGE</div>
+    </div>
+    <div class="dh-card pink" onclick="enterGame(); setTimeout(()=>document.getElementById('vault-btn')?.click(),600)">
+      <div class="dh-card-icon">🏛️</div>
+      <div class="dh-card-title">Browse the Vault</div>
+      <div class="dh-card-desc">Explore all past puzzles sorted by theme, topic and difficulty. Over 100 puzzles to try.</div>
+      <div class="dh-card-badge dh-badge-pink">FULL ARCHIVE</div>
+    </div>
+    <div class="dh-card gold" onclick="showDesktopMaker()">
+      <div class="dh-card-icon">✏️</div>
+      <div class="dh-card-title">Make a Vendy</div>
+      <div class="dh-card-desc">Type any two words and instantly create a shareable Venn diagram puzzle for your class.</div>
+      <div class="dh-card-badge dh-badge-gold">CLASSROOM TOOL</div>
+    </div>
+    <div class="dh-card green" onclick="enterGame(); setTimeout(()=>loadDailyChallenge('e'),300)">
+      <div class="dh-card-icon">📽️</div>
+      <div class="dh-card-title">Projector Mode</div>
+      <div class="dh-card-desc">Full screen puzzle for your classroom. Perfect for bell work and warm-ups.</div>
+      <div class="dh-card-badge dh-badge-green">COMING SOON</div>
+    </div>
+  </div>
+  <div class="dh-footer">playvendy.com &nbsp;·&nbsp; <a href="?mobile">Mobile version</a></div>
+</div>
+
+<!-- DESKTOP PUZZLE MAKER -->
+<div id="desktop-maker" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,.95);z-index:10000;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;">
+  <div style="background:#1e2d5a;border-radius:24px;padding:32px;width:min(100%,480px);margin:20px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <div style="color:#fff;font-size:22px;font-weight:900;">✏️ Make a Vendy</div>
+      <button onclick="document.getElementById('desktop-maker').style.display='none'" style="background:none;border:none;color:#94a3b8;font-size:22px;cursor:pointer;">✕</button>
+    </div>
+    <div style="display:flex;gap:12px;margin-bottom:16px;">
+      <input id="dm-w1" placeholder="Word 1" oninput="this.value=this.value.toUpperCase();dmGenerate()" style="flex:1;padding:14px;border-radius:12px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.15);color:#fff;font-size:18px;font-weight:900;font-family:'Nunito',sans-serif;outline:none;">
+      <input id="dm-w2" placeholder="Word 2" oninput="this.value=this.value.toUpperCase();dmGenerate()" style="flex:1;padding:14px;border-radius:12px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.15);color:#fff;font-size:18px;font-weight:900;font-family:'Nunito',sans-serif;outline:none;">
+    </div>
+    <input id="dm-topic" placeholder="Topic (e.g. Science, Geography, Rhyme Time...)" oninput="dmGenerate()" style="width:100%;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.15);color:#fff;font-size:15px;font-weight:700;font-family:'Nunito',sans-serif;outline:none;margin-bottom:16px;box-sizing:border-box;"
+    </div>
+    <div id="dm-preview" style="display:none;text-align:center;margin-bottom:16px;">
+      <svg id="dm-svg" viewBox="0 0 200 130" width="260" style="margin:0 auto;display:block;"></svg>
+      <div id="dm-score" style="color:#f7c948;font-size:13px;font-weight:800;margin-top:8px;"></div>
+      <div id="dm-warn" style="color:#ef4444;font-size:13px;font-weight:800;display:none;">⚠️ No shared letters — not a valid Vendy!</div>
+    </div>
+    <button id="dm-copy-btn" onclick="dmCopyLink()" style="display:none;width:100%;padding:14px;border-radius:12px;background:#4f78ff;color:#fff;font-size:16px;font-weight:900;border:none;cursor:pointer;font-family:'Nunito',sans-serif;">🔗 Copy Shareable Link</button>
+  </div>
+</div>
+
 <script>
 const VERSION = "1.3.0";
 
@@ -962,16 +1051,16 @@ const dailySets=[
   {e:113,m:114,h:115},  // Day 23 May 26 — MJ Day
   {e:92,m:93,h:94},    // Day 24 May 27 — Sweet Treats
   {e:98,m:99,h:100},   // Day 25 May 28 — Collectables
-  {e:104,m:105,h:106}, // Day 26 May 29 — Monaco Theme
+  {e:129,m:130,h:131}, // Day 26 May 29 — Steakhouse
   {e:117,m:118,h:119}, // Day 27 May 30 — Potato Day
-  {e:107,m:108,h:109}, // Day 28 May 31 — Race Day
+  {e:135,m:136,h:137}, // Day 28 May 31 — Need A Cleaning
   {e:120,m:121,h:122}, // Day 29 Jun 01 — Startling Awake
   {e:123,m:124,h:125}, // Day 30 Jun 02 — Cheap Movie Night
   {e:95,m:96,h:97},    // Day 31 Jun 03 — Animal Day
   {e:126,m:127,h:128}, // Day 32 Jun 04 — Numbers Day
-  {e:129,m:130,h:131}, // Day 33 Jun 05 — Steakhouse
+  {e:104,m:105,h:106}, // Day 33 Jun 05 — Monaco Theme
   {e:132,m:133,h:134}, // Day 34 Jun 06 — Pub Fun
-  {e:135,m:136,h:137}, // Day 35 Jun 07 — Need A Cleaning
+  {e:107,m:108,h:109}, // Day 35 Jun 07 — Race Day
 ];
 
 const specialPuzzles={
@@ -2569,13 +2658,65 @@ renderChallengeCards();
 updateEMHHeader();
 if(!checkURLForCustomPuzzle()){
   const params = new URLSearchParams(window.location.search);
+  const isDesktop = window.innerWidth >= 768 && !params.has('play') && !params.has('mobile');
   if(params.has('play')){
-    // Skip welcome screen — go straight to Easy
     showIntro();
     setTimeout(()=>loadDailyChallenge('e'), 100);
+  } else if(isDesktop){
+    showDesktopHome();
   } else {
     showIntro();
   }
+}
+
+/* ── DESKTOP HOME ── */
+function showDesktopHome(){
+  document.getElementById('desktop-home').classList.add('active');
+}
+function enterGame(){
+  document.getElementById('desktop-home').classList.remove('active');
+  showIntro();
+}
+function showDesktopMaker(){
+  document.getElementById('desktop-maker').style.display='flex';
+  setTimeout(()=>document.getElementById('dm-w1').focus(),100);
+}
+function dmGenerate(){
+  const w1=document.getElementById('dm-w1').value.trim();
+  const w2=document.getElementById('dm-w2').value.trim();
+  const preview=document.getElementById('dm-preview');
+  const warn=document.getElementById('dm-warn');
+  const copyBtn=document.getElementById('dm-copy-btn');
+  if(!w1||!w2||w1.length<2||w2.length<2){preview.style.display='none';copyBtn.style.display='none';return;}
+  const w1s=new Set(w1),w2s=new Set(w2);
+  const shared=[...w1s].filter(c=>w2s.has(c)).sort();
+  const left=[...w1s].filter(c=>!w2s.has(c)).sort();
+  const right=[...w2s].filter(c=>!w1s.has(c)).sort();
+  const score=shared.length+[...w1s].reduce((n,c)=>n+Math.max(0,w1.split(c).length-2),0)+[...w2s].reduce((n,c)=>n+Math.max(0,w2.split(c).length-2),0);
+  preview.style.display='block';
+  if(shared.length===0){warn.style.display='block';copyBtn.style.display='none';}
+  else{warn.style.display='none';copyBtn.style.display='block';}
+  const lPos=[[52,40],[52,58],[52,76],[52,94],[38,58],[38,76]];
+  const sPos=[[100,50],[100,68],[100,86],[100,32]];
+  const rPos=[[148,40],[148,58],[148,76],[148,94],[162,58],[162,76]];
+  let svg=`<circle cx="80" cy="65" r="52" fill="rgba(79,120,255,.7)" stroke="#4f78ff" stroke-width="2.5"/>
+    <circle cx="120" cy="65" r="52" fill="rgba(245,80,160,.7)" stroke="#f550a0" stroke-width="2.5"/>`;
+  left.slice(0,6).forEach((c,i)=>{const[x,y]=lPos[i]||[52,40+i*18];svg+=`<text x="${x}" y="${y}" font-size="18" font-weight="900" fill="white" text-anchor="middle">${c}</text>`;});
+  shared.slice(0,4).forEach((c,i)=>{const[x,y]=sPos[i]||[100,50+i*18];svg+=`<text x="${x}" y="${y}" font-size="18" font-weight="900" fill="white" text-anchor="middle">${c}</text>`;});
+  right.slice(0,6).forEach((c,i)=>{const[x,y]=rPos[i]||[148,40+i*18];svg+=`<text x="${x}" y="${y}" font-size="18" font-weight="900" fill="white" text-anchor="middle">${c}</text>`;});
+  document.getElementById('dm-svg').innerHTML=svg;
+  document.getElementById('dm-score').textContent=`Score: ${score} · ${w1} + ${w2}${document.getElementById('dm-topic').value.trim()?' · '+document.getElementById('dm-topic').value.trim():''}`;
+}
+function dmCopyLink(){
+  const w1=document.getElementById('dm-w1').value.trim();
+  const w2=document.getElementById('dm-w2').value.trim();
+  const topic=document.getElementById('dm-topic').value.trim();
+  let url=`${window.location.origin}${window.location.pathname}?custom=${encodeURIComponent(w1)}&custom2=${encodeURIComponent(w2)}`;
+  if(topic) url+=`&topic=${encodeURIComponent(topic)}`;
+  navigator.clipboard.writeText(url).then(()=>{
+    const btn=document.getElementById('dm-copy-btn');
+    btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='🔗 Copy Shareable Link',2000);
+  });
 }
 
 /* ── CONFETTI ── */
