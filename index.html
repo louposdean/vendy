@@ -425,29 +425,45 @@
       .category-box { font-size:12px; padding:3px 8px; }
     }
     /* ── DESKTOP HOME ── */
-    #desktop-home { display:none; position:fixed; inset:0; background:linear-gradient(135deg,#0f172a 0%,#1a1040 50%,#0f172a 100%); z-index:9999; overflow-y:auto; font-family:'Nunito',sans-serif; }
+    #desktop-home { display:none; position:fixed; inset:0; background:linear-gradient(150deg,#f0f4ff 0%,#faf5ff 50%,#f0f9ff 100%); z-index:9999; overflow-y:auto; font-family:'Nunito',sans-serif; }
     #desktop-home.active { display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:40px 20px 60px; }
     .dh-logo { display:flex; align-items:center; gap:16px; margin-bottom:10px; }
     .dh-venn { width:60px; height:60px; }
-    .dh-title { font-size:42px; font-weight:900; color:#fff; letter-spacing:2px; }
-    .dh-sub { color:#94a3b8; font-size:17px; font-weight:700; margin-bottom:48px; text-align:center; }
+    .dh-title { font-size:42px; font-weight:900; color:#1e2d5a; letter-spacing:2px; }
+    .dh-sub { color:#64748b; font-size:17px; font-weight:700; margin-bottom:48px; text-align:center; }
     .dh-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; max-width:800px; width:100%; margin-bottom:32px; }
-    .dh-card { background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.1); border-radius:20px; padding:32px 28px; cursor:pointer; transition:transform .15s,border-color .15s,background .15s; text-align:left; }
-    .dh-card:hover { transform:translateY(-4px); border-color:rgba(79,120,255,.6); background:rgba(79,120,255,.08); }
-    .dh-card.pink:hover { border-color:rgba(245,80,160,.6); background:rgba(245,80,160,.08); }
-    .dh-card.gold:hover { border-color:rgba(247,201,72,.6); background:rgba(247,201,72,.08); }
-    .dh-card.green:hover { border-color:rgba(34,197,94,.6); background:rgba(34,197,94,.08); }
+    .dh-card { background:#fff; border:1.5px solid #e2e8f0; border-radius:20px; padding:32px 28px; cursor:pointer; transition:transform .15s,border-color .15s,box-shadow .15s; text-align:left; box-shadow:0 2px 12px rgba(0,0,0,.06); }
+    .dh-card:hover { transform:translateY(-4px); border-color:#4f78ff; box-shadow:0 8px 28px rgba(79,120,255,.15); }
+    .dh-card.pink:hover { border-color:#f550a0; box-shadow:0 8px 28px rgba(245,80,160,.15); }
+    .dh-card.gold:hover { border-color:#f59e0b; box-shadow:0 8px 28px rgba(245,158,11,.15); }
+    .dh-card.green:hover { border-color:#22c55e; box-shadow:0 8px 28px rgba(34,197,94,.15); }
     .dh-card-icon { font-size:36px; margin-bottom:12px; }
-    .dh-card-title { font-size:20px; font-weight:900; color:#fff; margin-bottom:6px; }
-    .dh-card-desc { font-size:14px; font-weight:700; color:#94a3b8; line-height:1.5; }
+    .dh-card-title { font-size:20px; font-weight:900; color:#1e2d5a; margin-bottom:6px; }
+    .dh-card-desc { font-size:14px; font-weight:700; color:#64748b; line-height:1.5; }
     .dh-card-badge { display:inline-block; margin-top:12px; padding:4px 12px; border-radius:20px; font-size:11px; font-weight:900; letter-spacing:1px; }
-    .dh-badge-blue { background:rgba(79,120,255,.2); color:#7fa8ff; }
-    .dh-badge-pink { background:rgba(245,80,160,.2); color:#f550a0; }
-    .dh-badge-gold { background:rgba(247,201,72,.2); color:#f7c948; }
-    .dh-badge-green { background:rgba(34,197,94,.2); color:#22c55e; }
-    .dh-footer { color:#475569; font-size:13px; font-weight:700; text-align:center; }
-    .dh-footer a { color:#7fa8ff; text-decoration:none; }
+    .dh-badge-blue { background:rgba(79,120,255,.1); color:#4f78ff; }
+    .dh-badge-pink { background:rgba(245,80,160,.1); color:#f550a0; }
+    .dh-badge-gold { background:rgba(245,158,11,.1); color:#d97706; }
+    .dh-badge-green { background:rgba(34,197,94,.1); color:#16a34a; }
+    .dh-footer { color:#94a3b8; font-size:13px; font-weight:700; text-align:center; }
+    .dh-footer a { color:#4f78ff; text-decoration:none; }
     @media(max-width:600px){ .dh-cards { grid-template-columns:1fr; } }
+    /* Desktop Maker */
+    #desktop-maker { display:none; position:fixed; inset:0; background:rgba(30,45,90,.5); backdrop-filter:blur(4px); z-index:10000; align-items:center; justify-content:center; font-family:'Nunito',sans-serif; }
+    #desktop-maker.active { display:flex; }
+    .dm-panel { background:#fff; border-radius:24px; padding:32px; width:min(96vw,560px); max-height:90vh; overflow-y:auto; box-shadow:0 24px 80px rgba(0,0,0,.18); }
+    .dm-panel h2 { font-size:22px; font-weight:900; color:#1e2d5a; margin-bottom:20px; }
+    .dm-row { display:flex; gap:12px; margin-bottom:12px; }
+    .dm-input { flex:1; min-width:0; padding:13px 14px; border-radius:12px; background:#f8fafc; border:2px solid #e2e8f0; color:#1e2d5a; font-size:17px; font-weight:900; font-family:'Nunito',sans-serif; outline:none; transition:border-color .15s; box-sizing:border-box; }
+    .dm-input:focus { border-color:#4f78ff; }
+    .dm-topic { width:100%; padding:11px 14px; border-radius:12px; background:#f8fafc; border:2px solid #e2e8f0; color:#1e2d5a; font-size:14px; font-weight:700; font-family:'Nunito',sans-serif; outline:none; margin-bottom:16px; box-sizing:border-box; transition:border-color .15s; }
+    .dm-topic:focus { border-color:#4f78ff; }
+    .dm-venn-wrap { text-align:center; margin-bottom:12px; }
+    .dm-score-line { color:#64748b; font-size:13px; font-weight:800; margin-top:6px; text-align:center; }
+    .dm-warn { color:#ef4444; font-size:13px; font-weight:800; text-align:center; margin-bottom:8px; display:none; }
+    .dm-copy-btn { width:100%; padding:14px; border-radius:12px; background:#4f78ff; color:#fff; font-size:16px; font-weight:900; border:none; cursor:pointer; font-family:'Nunito',sans-serif; display:none; transition:background .15s; }
+    .dm-copy-btn:hover { background:#3a63e8; }
+    .dm-close { background:none; border:none; color:#94a3b8; font-size:24px; cursor:pointer; padding:0; line-height:1; }
   </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SB5QRPS4EV"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SB5QRPS4EV');</script>
@@ -887,24 +903,27 @@
 </div>
 
 <!-- DESKTOP PUZZLE MAKER -->
-<div id="desktop-maker" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,.95);z-index:10000;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;">
-  <div style="background:#1e2d5a;border-radius:24px;padding:32px;width:min(100%,480px);margin:20px;">
+<div id="desktop-maker">
+  <div class="dm-panel">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-      <div style="color:#fff;font-size:22px;font-weight:900;">✏️ Make a Vendy</div>
-      <button onclick="document.getElementById('desktop-maker').style.display='none'" style="background:none;border:none;color:#94a3b8;font-size:22px;cursor:pointer;">✕</button>
+      <h2 style="margin:0;font-size:22px;font-weight:900;color:#1e2d5a;">✏️ Make a Vendy</h2>
+      <button class="dm-close" onclick="document.getElementById('desktop-maker').classList.remove('active')">✕</button>
     </div>
-    <div style="display:flex;gap:12px;margin-bottom:16px;">
-      <input id="dm-w1" placeholder="Word 1" oninput="this.value=this.value.toUpperCase();dmGenerate()" style="flex:1;padding:14px;border-radius:12px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.15);color:#fff;font-size:18px;font-weight:900;font-family:'Nunito',sans-serif;outline:none;">
-      <input id="dm-w2" placeholder="Word 2" oninput="this.value=this.value.toUpperCase();dmGenerate()" style="flex:1;padding:14px;border-radius:12px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.15);color:#fff;font-size:18px;font-weight:900;font-family:'Nunito',sans-serif;outline:none;">
+    <div class="dm-row">
+      <input id="dm-w1" class="dm-input" placeholder="Word 1" oninput="this.value=this.value.toUpperCase();dmGenerate()">
+      <input id="dm-w2" class="dm-input" placeholder="Word 2" oninput="this.value=this.value.toUpperCase();dmGenerate()">
     </div>
-    <input id="dm-topic" placeholder="Topic (e.g. Science, Geography, Rhyme Time...)" oninput="dmGenerate()" style="width:100%;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.15);color:#fff;font-size:15px;font-weight:700;font-family:'Nunito',sans-serif;outline:none;margin-bottom:16px;box-sizing:border-box;"
+    <input id="dm-topic" class="dm-topic" placeholder="Topic (e.g. Science, Geography, Rhyme Time...)" oninput="dmGenerate()">
+    <div class="dm-venn-wrap">
+      <svg id="dm-svg" viewBox="0 0 200 130" width="100%" style="max-width:300px;display:block;margin:0 auto;">
+        <circle cx="80" cy="65" r="52" fill="rgba(79,120,255,.15)" stroke="#4f78ff" stroke-width="2.5"/>
+        <circle cx="120" cy="65" r="52" fill="rgba(245,80,160,.15)" stroke="#f550a0" stroke-width="2.5"/>
+      </svg>
+      <div id="dm-score" class="dm-score-line"></div>
     </div>
-    <div id="dm-preview" style="display:none;text-align:center;margin-bottom:16px;">
-      <svg id="dm-svg" viewBox="0 0 200 130" width="260" style="margin:0 auto;display:block;"></svg>
-      <div id="dm-score" style="color:#f7c948;font-size:13px;font-weight:800;margin-top:8px;"></div>
-      <div id="dm-warn" style="color:#ef4444;font-size:13px;font-weight:800;display:none;">⚠️ No shared letters — not a valid Vendy!</div>
-    </div>
-    <button id="dm-copy-btn" onclick="dmCopyLink()" style="display:none;width:100%;padding:14px;border-radius:12px;background:#4f78ff;color:#fff;font-size:16px;font-weight:900;border:none;cursor:pointer;font-family:'Nunito',sans-serif;">🔗 Copy Shareable Link</button>
+    <div id="dm-warn" class="dm-warn">⚠️ No shared letters — not a valid Vendy!</div>
+    <button id="dm-copy-btn" class="dm-copy-btn" onclick="dmCopyLink()">🔗 Copy Shareable Link</button>
+    <button id="dm-share-btn" class="dm-copy-btn" onclick="dmShare()" style="display:none;margin-top:8px;background:#f550a0;">📤 Share</button>
   </div>
 </div>
 
@@ -2678,34 +2697,62 @@ function enterGame(){
   showIntro();
 }
 function showDesktopMaker(){
-  document.getElementById('desktop-maker').style.display='flex';
+  document.getElementById('desktop-maker').classList.add('active');
   setTimeout(()=>document.getElementById('dm-w1').focus(),100);
 }
 function dmGenerate(){
   const w1=document.getElementById('dm-w1').value.trim();
   const w2=document.getElementById('dm-w2').value.trim();
-  const preview=document.getElementById('dm-preview');
+  const topic=document.getElementById('dm-topic').value.trim();
   const warn=document.getElementById('dm-warn');
   const copyBtn=document.getElementById('dm-copy-btn');
-  if(!w1||!w2||w1.length<2||w2.length<2){preview.style.display='none';copyBtn.style.display='none';return;}
+  const scoreLine=document.getElementById('dm-score');
+  const svg=document.getElementById('dm-svg');
+
+  if(!w1||!w2||w1.length<2||w2.length<2){
+    svg.innerHTML=`<circle cx="80" cy="65" r="52" fill="rgba(79,120,255,.15)" stroke="#4f78ff" stroke-width="2.5"/>
+    <circle cx="120" cy="65" r="52" fill="rgba(245,80,160,.15)" stroke="#f550a0" stroke-width="2.5"/>`;
+    scoreLine.textContent='';warn.style.display='none';copyBtn.style.display='none';document.getElementById('dm-share-btn').style.display='none';
+    return;
+  }
+
   const w1s=new Set(w1),w2s=new Set(w2);
   const shared=[...w1s].filter(c=>w2s.has(c)).sort();
   const left=[...w1s].filter(c=>!w2s.has(c)).sort();
   const right=[...w2s].filter(c=>!w1s.has(c)).sort();
   const score=shared.length+[...w1s].reduce((n,c)=>n+Math.max(0,w1.split(c).length-2),0)+[...w2s].reduce((n,c)=>n+Math.max(0,w2.split(c).length-2),0);
-  preview.style.display='block';
-  if(shared.length===0){warn.style.display='block';copyBtn.style.display='none';}
-  else{warn.style.display='none';copyBtn.style.display='block';}
-  const lPos=[[52,40],[52,58],[52,76],[52,94],[38,58],[38,76]];
+
+  if(shared.length===0){
+    warn.style.display='block';copyBtn.style.display='none';document.getElementById('dm-share-btn').style.display='none';
+  } else {
+    warn.style.display='none';copyBtn.style.display='block';
+    document.getElementById('dm-share-btn').style.display=navigator.share?'block':'none';
+  }
+
+  const lPos=[[52,44],[52,62],[52,80],[52,98],[38,62],[38,80]];
   const sPos=[[100,50],[100,68],[100,86],[100,32]];
-  const rPos=[[148,40],[148,58],[148,76],[148,94],[162,58],[162,76]];
-  let svg=`<circle cx="80" cy="65" r="52" fill="rgba(79,120,255,.7)" stroke="#4f78ff" stroke-width="2.5"/>
+  const rPos=[[148,44],[148,62],[148,80],[148,98],[162,62],[162,80]];
+  let svgHTML=`<circle cx="80" cy="65" r="52" fill="rgba(79,120,255,.7)" stroke="#4f78ff" stroke-width="2.5"/>
     <circle cx="120" cy="65" r="52" fill="rgba(245,80,160,.7)" stroke="#f550a0" stroke-width="2.5"/>`;
-  left.slice(0,6).forEach((c,i)=>{const[x,y]=lPos[i]||[52,40+i*18];svg+=`<text x="${x}" y="${y}" font-size="18" font-weight="900" fill="white" text-anchor="middle">${c}</text>`;});
-  shared.slice(0,4).forEach((c,i)=>{const[x,y]=sPos[i]||[100,50+i*18];svg+=`<text x="${x}" y="${y}" font-size="18" font-weight="900" fill="white" text-anchor="middle">${c}</text>`;});
-  right.slice(0,6).forEach((c,i)=>{const[x,y]=rPos[i]||[148,40+i*18];svg+=`<text x="${x}" y="${y}" font-size="18" font-weight="900" fill="white" text-anchor="middle">${c}</text>`;});
-  document.getElementById('dm-svg').innerHTML=svg;
-  document.getElementById('dm-score').textContent=`Score: ${score} · ${w1} + ${w2}${document.getElementById('dm-topic').value.trim()?' · '+document.getElementById('dm-topic').value.trim():''}`;
+  left.slice(0,6).forEach((c,i)=>{const[x,y]=lPos[i]||[52,44+i*18];svgHTML+=`<text x="${x}" y="${y}" font-size="18" font-weight="900" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">${c}</text>`;});
+  shared.slice(0,4).forEach((c,i)=>{const[x,y]=sPos[i]||[100,50+i*18];svgHTML+=`<text x="${x}" y="${y}" font-size="18" font-weight="900" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">${c}</text>`;});
+  right.slice(0,6).forEach((c,i)=>{const[x,y]=rPos[i]||[148,44+i*18];svgHTML+=`<text x="${x}" y="${y}" font-size="18" font-weight="900" fill="white" text-anchor="middle" font-family="Nunito,sans-serif">${c}</text>`;});
+  svg.innerHTML=svgHTML;
+  scoreLine.textContent=`Score: ${score} · ${w1} + ${w2}${topic?' · '+topic:''}`;
+}
+function dmShare(){
+  const w1=document.getElementById('dm-w1').value.trim();
+  const w2=document.getElementById('dm-w2').value.trim();
+  const topic=document.getElementById('dm-topic').value.trim();
+  let url=`${window.location.origin}${window.location.pathname}?custom=${encodeURIComponent(w1)}&custom2=${encodeURIComponent(w2)}`;
+  if(topic) url+=`&topic=${encodeURIComponent(topic)}`;
+  if(navigator.share){
+    navigator.share({
+      title:'Vendy Puzzle',
+      text:`Can you solve this Vendy puzzle? ${w1} + ${w2}${topic?' — '+topic:''}`,
+      url
+    });
+  }
 }
 function dmCopyLink(){
   const w1=document.getElementById('dm-w1').value.trim();
