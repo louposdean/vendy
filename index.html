@@ -2310,6 +2310,7 @@ function refreshIntroState(){
     const today=new Date();
     const key=`${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
     const themes={
+      '2026-05-10':'💐 Mother\'s Day',
       '2026-05-19':'🕺 Retro Day',
       '2026-05-20':'🍝 Italian Food Day',
       '2026-05-21':'🐱 Cat Day',
@@ -2318,13 +2319,18 @@ function refreshIntroState(){
       '2026-05-24':'🌟 Sunday\'s Best',
       '2026-05-25':'😩 Monday Madness',
       '2026-05-26':'🕺 MJ Day',
-      '2026-05-27':'🌸 Garden Day',
-      '2026-05-26':'🍬 Sweet Treats',
-      '2026-05-27':'🐾 Animal Day',
+      '2026-05-27':'🍬 Sweet Treats',
       '2026-05-28':'🧸 Collectables',
-      '2026-05-29':'🍺 Pub Fun',
-      '2026-05-30':'🏎️ Monaco Theme',
-      '2026-06-02':'🏎️ Race Day',
+      '2026-05-29':'🥩 Steakhouse',
+      '2026-05-30':'🥔 Potato Day',
+      '2026-05-31':'🧹 Need A Cleaning',
+      '2026-06-01':'⏰ Startling Awake',
+      '2026-06-02':'🎬 Cheap Movie Night',
+      '2026-06-03':'🐾 Animal Day',
+      '2026-06-04':'🔢 Numbers Day',
+      '2026-06-05':'🏎️ Monaco Theme',
+      '2026-06-06':'🍺 Pub Fun',
+      '2026-06-07':'🏎️ Race Day',
     };
     const theme=themes[key];
     if(theme){badge.textContent=theme;badge.style.display='none';}  // hidden until all 3 solved
