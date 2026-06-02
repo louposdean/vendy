@@ -181,6 +181,7 @@
     .tile.blue-row.cursor { box-shadow:0 0 0 3px #fff, 0 0 0 5px #1e2d5a; }
     .tile.pink-row.cursor { box-shadow:0 0 0 3px #fff, 0 0 0 5px #7c1250; }
     @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(79,120,255,.3);}70%{box-shadow:0 0 0 7px rgba(79,120,255,0);}100%{box-shadow:0 0 0 0 rgba(79,120,255,0);} }
+    @keyframes repeatGlow { 0%,100%{text-shadow:0 0 6px white,0 0 14px white,0 0 22px rgba(255,255,255,.5);} 50%{text-shadow:0 0 12px white,0 0 28px white,0 0 50px rgba(255,255,255,.9);} }
     .shake { animation:shakeRow .3s ease; }
     @keyframes shakeRow { 0%{transform:translateX(0);}20%{transform:translateX(-5px);}40%{transform:translateX(5px);}60%{transform:translateX(-4px);}80%{transform:translateX(4px);}100%{transform:translateX(0);} }
     .hidden-input { position:absolute; opacity:0; pointer-events:none; width:0; height:0; }
@@ -511,6 +512,20 @@
       <button onclick="shareVendy()" style="flex:1;padding:10px;border-radius:12px;background:#f0fdf4;border:2px solid #22c55e;font-size:13px;font-weight:800;color:#166534;cursor:pointer;font-family:'Nunito',sans-serif;">Share Vendy</button>
     </div>
 
+    <!-- Repeat glow toggle -->
+    <div onclick="toggleRepeatGlowIntro()" style="display:flex;align-items:center;justify-content:space-between;width:100%;max-width:320px;padding:10px 14px;border-radius:12px;background:var(--key-bg);cursor:pointer;margin-bottom:6px;box-sizing:border-box;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-size:18px;">✨</span>
+        <div>
+          <div style="font-size:13px;font-weight:800;color:var(--text);">✨ Highlight Repeat Letters</div>
+          <div style="font-size:11px;font-weight:600;color:var(--muted);">Show which letters appear more than once</div>
+        </div>
+      </div>
+      <div id="intro-repeat-toggle" style="width:42px;height:24px;border-radius:999px;background:#4f78ff;position:relative;flex-shrink:0;transition:background .2s;">
+        <div id="intro-repeat-thumb" style="position:absolute;top:3px;left:21px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.2);"></div>
+      </div>
+    </div>
+
     <a href="https://buymeacoffee.com/playvendy" target="_blank" style="font-size:12px;font-weight:700;color:var(--muted);text-decoration:none;opacity:.7;">☕ Support Vendy</a>
     <div id="return-btn-wrap" class="intro-return-wrap" style="display:none;">
       <button id="return-btn" class="intro-button" style="background:rgba(212,102,187,.15);color:#9333ea;border:2px solid rgba(212,102,187,.4);box-shadow:none;margin-bottom:8px;">Admire your puzzle ✨</button>
@@ -774,6 +789,11 @@
     <span class="gear-item-icon" id="sound-icon">🔊</span>
     <div><div id="sound-label">Sound</div><div class="gear-item-sub" id="sound-sub">Key clicks &amp; win sound</div></div>
     <div class="dark-toggle" id="sound-toggle"><div class="dark-thumb" id="sound-thumb"></div></div>
+  </button>
+  <button class="gear-item" id="gi-repeat">
+    <span class="gear-item-icon">✨</span>
+    <div><div>Highlight Repeat Letters</div><div class="gear-item-sub">Show which letters appear more than once</div></div>
+    <div class="dark-toggle" id="repeat-toggle"><div class="dark-thumb" id="repeat-thumb"></div></div>
   </button>
   <div class="gear-divider"></div>
   <button class="gear-item" id="gi-dark">
@@ -1073,13 +1093,15 @@ const dailySets=[
   {e:129,m:130,h:131}, // Day 26 May 29 — Steakhouse
   {e:117,m:118,h:119}, // Day 27 May 30 — Potato Day
   {e:135,m:136,h:137}, // Day 28 May 31 — Need A Cleaning
-  {e:120,m:121,h:122}, // Day 29 Jun 01 — Startling Awake
-  {e:123,m:124,h:125}, // Day 30 Jun 02 — Cheap Movie Night
-  {e:95,m:96,h:97},    // Day 31 Jun 03 — Animal Day
-  {e:126,m:127,h:128}, // Day 32 Jun 04 — Numbers Day
-  {e:104,m:105,h:106}, // Day 33 Jun 05 — Monaco Theme
-  {e:132,m:133,h:134}, // Day 34 Jun 06 — Pub Fun
-  {e:107,m:108,h:109}, // Day 35 Jun 07 — Race Day
+  {e:138,m:139,h:140}, // Day 29 Jun 01 — Wake Up Call
+  {e:141,m:142,h:143}, // Day 30 Jun 02 — Movie Night
+  {e:144,m:145,h:146}, // Day 31 Jun 03 — Almost Animals
+  {e:147,m:148,h:149}, // Day 32 Jun 04 — By The Numbers
+  {e:150,m:151,h:152}, // Day 33 Jun 05 — Branching Out
+  {e:153,m:154,h:155}, // Day 34 Jun 06 — Pub Fun
+  {e:156,m:157,h:158}, // Day 35 Jun 07 — Race Day
+  {e:159,m:160,h:161}, // Day 36 Jun 08 — World Ocean Day
+  {e:162,m:163,h:164}, // Day 37 Jun 09 — Summer Is Coming
 ];
 
 const specialPuzzles={
@@ -1530,6 +1552,33 @@ document.getElementById("gi-sound").addEventListener("click",()=>{
   localStorage.setItem("vendySound", soundEnabled?"1":"0");
   applySound();
 });
+
+// Repeat letter glow toggle
+let repeatGlowEnabled = localStorage.getItem("vendyRepeatGlow")==="1";
+function applyRepeatGlow(){
+  const toggle=document.getElementById("repeat-toggle");
+  const thumb=document.getElementById("repeat-thumb");
+  const itoggle=document.getElementById("intro-repeat-toggle");
+  const ithumb=document.getElementById("intro-repeat-thumb");
+  const on=repeatGlowEnabled;
+  if(toggle) toggle.style.background = on ? "#4f78ff" : "#d1d5db";
+  if(thumb) thumb.style.transform = on ? "translateX(18px)" : "translateX(0)";
+  if(itoggle) itoggle.style.background = on ? "#4f78ff" : "#d1d5db";
+  if(ithumb) ithumb.style.left = on ? "21px" : "3px";
+}
+function toggleRepeatGlowIntro(){
+  repeatGlowEnabled=!repeatGlowEnabled;
+  localStorage.setItem("vendyRepeatGlow", repeatGlowEnabled?"1":"0");
+  applyRepeatGlow();
+}
+applyRepeatGlow();
+document.getElementById("gi-repeat").addEventListener("click",()=>{
+  repeatGlowEnabled=!repeatGlowEnabled;
+  localStorage.setItem("vendyRepeatGlow", repeatGlowEnabled?"1":"0");
+  applyRepeatGlow();
+  const p=currentFreePuzzle||(currentPuzzleIdx>=0?puzzles[currentPuzzleIdx]:null);
+  if(p&&gameShell.classList.contains("active"))renderVennLetters(p);
+});
 $("gi-dark").addEventListener("click",()=>{darkMode=!darkMode;localStorage.setItem("vendyDark",darkMode?"1":"0");applyDark();});
 document.getElementById("gi-about").addEventListener("click",()=>{const p=document.getElementById("about-panel");p.style.display=p.style.display==="flex"?"none":"flex";});
 
@@ -1611,13 +1660,32 @@ function renderCreatePreview(puzzle){
   const note=$("create-overlap-note");
   if(!puzzle){note.textContent="";return;}
   const regions={left:puzzle.leftLetters,overlap:puzzle.overlapLetters,right:puzzle.rightLetters};
+
+  // Detect repeated letters
+  const repeatLetters=new Set();
+  [puzzle.leftAnswer,puzzle.rightAnswer].forEach(word=>{
+    if(!word)return;
+    const seen={};
+    word.split('').forEach(ch=>{seen[ch]=(seen[ch]||0)+1;if(seen[ch]>1)repeatLetters.add(ch);});
+  });
+
   ["left","overlap","right"].forEach(r=>{
     const letters=regions[r];
     const positions=r==="overlap"?getOverlapPositions(letters.length):cRegionPresets[r].slice(0,letters.length);
     positions.forEach((pos,i)=>{
+      const letter=regions[r][i];
+      const isRepeat=repeatLetters.has(letter);
       const el=document.createElement("span");
-      el.className="create-venn-letter";el.textContent=regions[r][i];
+      el.className="create-venn-letter";el.textContent=letter;
       el.style.left=`${pos.x}%`;el.style.top=`${pos.y}%`;
+      if(isRepeat){
+        el.style.fontSize="46px";
+        el.style.fontWeight="900";
+        el.style.webkitTextStroke="2px white";
+        el.style.webkitTextFillColor="black";
+        el.style.color="black";
+        el.style.animation="repeatGlow 1.8s ease-in-out infinite";
+      }
       layer.appendChild(el);
     });
   });
@@ -1846,6 +1914,14 @@ function renderVennLetters(puzzle){
   const ovSet=new Set(puzzle.overlapLetters),lSet=new Set(puzzle.leftLetters);
   const regions={left:[],overlap:[],right:[]};
   unique.forEach(l=>{if(ovSet.has(l))regions.overlap.push(l);else if(lSet.has(l))regions.left.push(l);else regions.right.push(l);});
+
+  // Detect repeated letters
+  const repeatLetters=new Set();
+  [puzzle.leftAnswer,puzzle.rightAnswer].forEach(word=>{
+    const seen={};
+    word.split('').forEach(ch=>{seen[ch]=(seen[ch]||0)+1;if(seen[ch]>1)repeatLetters.add(ch);});
+  });
+
   ["left","overlap","right"].forEach(region=>{
     const letters=shuffle([...regions[region]]);
     let positions;
@@ -1862,11 +1938,20 @@ function renderVennLetters(puzzle){
     }
     positions.forEach((pos,i)=>{
       const letter=letters[i];
+      const isRepeat=repeatLetters.has(letter);
       const el=document.createElement("button");el.type="button";el.className="venn-letter";
       el.textContent=letter;el.style.left=`${pos.x}%`;el.style.top=`${pos.y}%`;
       el.style.pointerEvents="auto";
       el.style.cursor="pointer";
       el.style.touchAction="manipulation";
+      if(isRepeat && repeatGlowEnabled){
+        el.style.fontSize="46px";
+        el.style.fontWeight="900";
+        el.style.webkitTextStroke="2px white";
+        el.style.webkitTextFillColor="black";
+        el.style.color="black";
+        el.style.animation="repeatGlow 1.8s ease-in-out infinite";
+      }
       el.addEventListener("touchstart",e=>{e.stopPropagation();e.preventDefault();keyClick();addLetter(letter);el.classList.add("used");setTimeout(()=>el.classList.remove("used"),200);},{passive:false});
       el.addEventListener("click",e=>{e.preventDefault();keyClick();addLetter(letter);el.classList.add("used");setTimeout(()=>el.classList.remove("used"),200);});
       lettersLayer.appendChild(el);
@@ -2242,6 +2327,20 @@ function loadGame(mode,vendyNumber){
   if(topicEl)topicEl.textContent=p.topic;
   if(puzzleIdEl)puzzleIdEl.textContent=`Vendy #${vendyNumber}`;if(puzzleDateEl)puzzleDateEl.textContent=fmt(dateForNum(vendyNumber));
   refreshIntroState();renderVennLetters(p);resetPuzzleState();renderInputs();
+  // One-time repeat glow explanation
+  if(repeatGlowEnabled && !localStorage.getItem('vendy_repeat_tip_seen')){
+    const hasRepeats=[...p.leftAnswer,...p.rightAnswer].some((ch,i,arr)=>arr.indexOf(ch)!==i);
+    if(hasRepeats){
+      localStorage.setItem('vendy_repeat_tip_seen','1');
+      setTimeout(()=>{
+        const tip=document.createElement('div');
+        tip.style.cssText='position:fixed;bottom:120px;left:50%;transform:translateX(-50%);background:rgba(30,45,90,.96);color:#fff;padding:14px 18px;border-radius:16px;font-family:Nunito,sans-serif;font-size:14px;font-weight:700;text-align:center;z-index:9999;width:min(320px,90%);box-shadow:0 8px 32px rgba(0,0,0,.3);backdrop-filter:blur(8px);border:1.5px solid rgba(255,255,255,.15);';
+        tip.innerHTML='✨ <strong>Glowing letters repeat</strong> in the answer<br><span style="font-size:12px;opacity:.7;margin-top:4px;display:block;">Turn off in ⚙️ Settings</span>';
+        document.body.appendChild(tip);
+        setTimeout(()=>{tip.style.transition='opacity .5s';tip.style.opacity='0';setTimeout(()=>tip.remove(),500);},4000);
+      },1200);
+    }
+  }
   if(introPuzzleNum)introPuzzleNum.textContent=`#${vendyNumber}`;
   setTimeout(()=>setActiveField("left"),150);renderStats();startStuckTimer();
   if(mode==="daily"&&stats.currentDailySolvedKey===currentPuzzleKey){
