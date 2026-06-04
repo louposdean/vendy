@@ -2405,7 +2405,10 @@ function loadCustomGame(puzzle){
 
 function checkURLForCustomPuzzle(){
   const params=new URLSearchParams(window.location.search);
-  const w1=params.get("w1"),w2=params.get("w2"),topic=params.get("t");
+  // Support both ?w1=&w2= and ?custom=&custom2= formats
+  const w1=params.get("w1")||params.get("custom");
+  const w2=params.get("w2")||params.get("custom2");
+  const topic=params.get("t")||params.get("topic");
   if(!w1||!w2)return false;
   const puzzle=buildCustomPuzzle(w1,w2);if(!puzzle)return false;
   puzzle.topic=topic||"Custom Vendy";puzzle.id="custom";
