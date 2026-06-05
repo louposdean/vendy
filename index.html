@@ -1098,17 +1098,21 @@ const dailySets=[
   {e:144,m:145,h:146}, // Day 31 Jun 03 — Almost Animals
   {e:147,m:148,h:149}, // Day 32 Jun 04 — By The Numbers
   {e:150,m:151,h:152}, // Day 33 Jun 05 — Branching Out
-  {e:153,m:154,h:155}, // Day 34 Jun 06 — Pub Fun
-  {e:156,m:157,h:158}, // Day 35 Jun 07 — Race Day
-  {e:159,m:160,h:161}, // Day 36 Jun 08 — World Ocean Day
-  {e:162,m:163,h:164}, // Day 37 Jun 09 — Summer Is Coming
-  {e:165,m:166,h:167}, // Day 38 Jun 10 — Feather Day
-  {e:168,m:169,h:170}, // Day 39 Jun 11 — World Cup
-  {e:171,m:172,h:173}, // Day 40 Jun 12 — UK Day
-  {e:174,m:175,h:176}, // Day 41 Jun 13 — Retro TV
-  {e:177,m:178,h:179}, // Day 42 Jun 14 — Bagel Day
-  {e:180,m:181,h:182}, // Day 43 Jun 15 — Recess
+  {e:153,m:154,h:155}, // Day 33 Jun 06 — Happy Hour
+  {e:186,m:187,h:188}, // Day 34 Jun 07 — Day at the Park
+  {e:156,m:157,h:189}, // Day 35 Jun 08 — Race Day
+  {e:159,m:209,h:161}, // Day 36 Jun 09 — World Ocean Day
+  {e:162,m:163,h:164}, // Day 37 Jun 10 — Mid June
+  {e:171,m:190,h:173}, // Day 38 Jun 11 — UK Day
+  {e:208,m:192,h:193}, // Day 39 Jun 12 — World Cup
+  {e:207,m:194,h:196}, // Day 40 Jun 13 — National Names
+  {e:174,m:175,h:176}, // Day 41 Jun 14 — Retro TV
+  {e:177,m:178,h:197}, // Day 42 Jun 15 — Bagel Day
+  {e:198,m:200,h:199}, // Day 43 Jun 15 — Recess
   {e:183,m:184,h:185}, // Day 44 Jun 16 — Hop To It
+  {e:204,m:205,h:206}, // Day 45 Jun 17 — Eat Your Vegetables Day
+  {e:210,m:211,h:212}, // Day 46 Jun 18 — Rock On
+  {e:201,m:202,h:203}, // Day 47 Jun 19 — Picnic Day
 ];
 
 const specialPuzzles={
@@ -1407,9 +1411,9 @@ const puzzles = [
   {id:169,topic:"Rhyme Time 🎤",stars:2,leftLetters:[],overlapLetters:['P','U'],rightLetters:['C'],leftAnswer:"PUP",rightAnswer:"CUP",fact:"The FIFA World Cup trophy was designed in 1971 and is made of 18 carat gold."},
   {id:170,topic:"Fun & Games 🎮",stars:3,leftLetters:['C','O'],overlapLetters:['E','R','S'],rightLetters:['J','Y'],leftAnswer:"SOCCER",rightAnswer:"JERSEY",fact:"Soccer jerseys were originally heavy wool but modern kits use lightweight moisture-wicking fabric."},
   {id:171,topic:"Famous Places 📍",stars:1,leftLetters:['G','I'],overlapLetters:['B'],rightLetters:['E','N'],leftAnswer:"BIG",rightAnswer:"BEN",fact:"Big Ben is actually the name of the bell inside the Elizabeth Tower — not the tower itself."},
-  {id:172,topic:"Around the World 🌍",stars:2,leftLetters:['B','L','O','U'],overlapLetters:['D','E'],rightLetters:['C','K','R'],leftAnswer:"DOUBLE",rightAnswer:"DECKER",fact:"London's iconic red double decker buses were introduced in 1956 and became a symbol of the city."},
+  {id:172,topic:"Transportation 🚌",stars:2,leftLetters:['B','L','O','U'],overlapLetters:['D','E'],rightLetters:['C','K','R'],leftAnswer:"DOUBLE",rightAnswer:"DECKER",fact:"London's iconic red double decker buses were introduced in 1956 and became a symbol of the city."},
   {id:173,topic:"Around the World 🌍",stars:3,leftLetters:['O'],overlapLetters:['D','L','N'],rightLetters:['E','G','A'],leftAnswer:"LONDON",rightAnswer:"ENGLAND",fact:"London has been the capital of England for over 1000 years and is home to over 9 million people."},
-  {id:174,topic:"Fun & Games 🎮",stars:1,leftLetters:['H','P'],overlapLetters:['A','Y'],rightLetters:['D','S'],leftAnswer:"HAPPY",rightAnswer:"DAYS",fact:"Happy Days ran from 1974 to 1984 and made The Fonz one of the most iconic TV characters ever."},
+  {id:174,topic:"TV Shows 📺",stars:1,leftLetters:['H','P'],overlapLetters:['A','Y'],rightLetters:['D','S'],leftAnswer:"HAPPY",rightAnswer:"DAYS",fact:"Happy Days ran from 1974 to 1984 and made The Fonz one of the most iconic TV characters ever."},
   {id:175,topic:"Rhyme Time 🎤",stars:2,leftLetters:['O'],overlapLetters:['B'],rightLetters:['T','U','E'],leftAnswer:"BOOB",rightAnswer:"TUBE",fact:"Boob tube is British slang for television — coined in the 1960s when TV was considered mindless."},
   {id:176,topic:"Daily Life 🗓️",stars:3,leftLetters:['E','M'],overlapLetters:['O','R','T'],rightLetters:['C','N','L'],leftAnswer:"REMOTE",rightAnswer:"CONTROL",fact:"The first TV remote control was invented in 1950 by Zenith and was called the Lazy Bones."},
   {id:177,topic:"Rhyme Time 🎤",stars:1,leftLetters:['P','L','I'],overlapLetters:['A','N'],rightLetters:['J','E'],leftAnswer:"PLAIN",rightAnswer:"JANE",fact:"Plain Jane is a phrase meaning ordinary looking — it has been used in English since the 1860s."},
@@ -1419,8 +1423,37 @@ const puzzles = [
   {id:181,topic:"Fun & Games 🎮",stars:2,leftLetters:['S','W'],overlapLetters:['G','I','N'],rightLetters:['D','A','C'],leftAnswer:"SWING",rightAnswer:"DANCING",fact:"Swing dancing originated in Harlem in the 1920s alongside jazz music and the Lindy Hop."},
   {id:182,topic:"Daily Life 🗓️",stars:3,leftLetters:['L','U','E'],overlapLetters:['A','G'],rightLetters:['T'],leftAnswer:"LUGGAGE",rightAnswer:"TAG",fact:"Luggage tags became standard practice in the 1800s when rail travel made lost bags a common problem."},
   {id:183,topic:"Calendar 📅",stars:1,leftLetters:['L','P'],overlapLetters:['A','E'],rightLetters:['R','Y'],leftAnswer:"LEAP",rightAnswer:"YEAR",fact:"Leap years occur every 4 years to keep our calendar aligned with the Earth's orbit around the sun."},
-  {id:184,topic:"Living Things 🌿",stars:2,leftLetters:['G','S'],overlapLetters:['B','U'],rightLetters:['N','Y'],leftAnswer:"BUGS",rightAnswer:"BUNNY",fact:"Bugs Bunny first appeared in 1940 and became the most recognisable cartoon character in history."},
+  {id:184,topic:"TV Shows 📺",stars:2,leftLetters:['G','S'],overlapLetters:['B','U'],rightLetters:['N','Y'],leftAnswer:"BUGS",rightAnswer:"BUNNY",fact:"Bugs Bunny first appeared in 1940 and became the most recognisable cartoon character in history."},
   {id:185,topic:"Daily Life 🗓️",stars:3,leftLetters:['D','L'],overlapLetters:['E','P','U'],rightLetters:['J','M','R'],leftAnswer:"PUDDLE",rightAnswer:"JUMPER",fact:"Puddle jumping is a beloved childhood activity that has inspired toys songs and even world championships."},
+  // Days 33-46 new puzzles
+  {id:186,topic:"Fun & Games 🎮",stars:1,leftLetters:['L','P','Y'],overlapLetters:['A'],rightLetters:['C','H','T'],leftAnswer:"PLAY",rightAnswer:"CATCH",fact:"A game of catch is one of the simplest and most beloved outdoor activities of all time."},
+  {id:187,topic:"Daily Life 🗓️",stars:2,leftLetters:['B','K'],overlapLetters:['E','I'],rightLetters:['D','R'],leftAnswer:"BIKE",rightAnswer:"RIDE",fact:"The bicycle was invented in 1817 and remains one of the most popular forms of recreation worldwide."},
+  {id:188,topic:"Food & Drink 🍔",stars:3,leftLetters:['I','P'],overlapLetters:['C','N'],rightLetters:['H','L','U'],leftAnswer:"PICNIC",rightAnswer:"LUNCH",fact:"The word picnic first appeared in English in the 1740s from the French pique-nique."},
+  {id:189,topic:"Fun & Games 🎮",stars:3,leftLetters:['E','L'],overlapLetters:['O','P'],rightLetters:['I','N','S','T'],leftAnswer:"POLE",rightAnswer:"POSITION",fact:"Pole position in Formula 1 goes to the fastest qualifier and gives a crucial head start at the race."},
+  {id:190,topic:"Music 🎵",stars:2,leftLetters:['H'],overlapLetters:['E','T'],rightLetters:['A','B','L','S'],leftAnswer:"THE",rightAnswer:"BEATLES",fact:"The Beatles are the best selling music artists of all time with over 600 million records sold worldwide."},
+  {id:191,topic:"Fun & Games 🎮",stars:1,leftLetters:['E','M'],overlapLetters:['A','T'],rightLetters:['C','I','N','P'],leftAnswer:"TEAM",rightAnswer:"CAPTAIN",fact:"The captain's armband in soccer is worn by the team leader and dates back to the early 1900s."},
+  {id:192,topic:"Daily Life 🗓️",stars:2,leftLetters:['E','N'],overlapLetters:['G','R'],rightLetters:['A','S'],leftAnswer:"GREEN",rightAnswer:"GRASS",fact:"The best soccer pitches in the world use a blend of natural grass and synthetic fibres for durability."},
+  {id:193,topic:"Fun & Games 🎮",stars:3,leftLetters:['I','N','W'],overlapLetters:['G'],rightLetters:['A','L','O'],leftAnswer:"WINNING",rightAnswer:"GOAL",fact:"The fastest goal in World Cup history was scored just 11 seconds into a match in 2002."},
+  {id:194,topic:"Food & Drink 🍔",stars:1,leftLetters:['C','H','N'],overlapLetters:['E','F','R'],rightLetters:['I','S'],leftAnswer:"FRENCH",rightAnswer:"FRIES",fact:"French fries are believed to have originated in Belgium in the late 1600s despite their name."},
+  {id:195,topic:"Living Things 🌿",stars:2,leftLetters:['A','G','M','N'],overlapLetters:['E','R'],rightLetters:['D','H','P','S'],leftAnswer:"GERMAN",rightAnswer:"SHEPHERD",fact:"The German Shepherd was first bred in Germany in 1899 and is now one of the most popular dog breeds."},
+  {id:196,topic:"Food & Drink 🍔",stars:3,leftLetters:['A','U'],overlapLetters:['I','N','R','S'],rightLetters:['D','E','G'],leftAnswer:"RUSSIAN",rightAnswer:"DRESSING",fact:"Russian dressing was actually invented in New Hampshire USA in the early 1900s."},
+  {id:197,topic:"TV Shows 📺",stars:3,leftLetters:['A','M'],overlapLetters:['E','S'],rightLetters:['R','T'],leftAnswer:"SESAME",rightAnswer:"STREET",fact:"Sesame Street has been teaching children letters numbers and values since it first aired in 1969."},
+  {id:198,topic:"Fun & Games 🎮",stars:1,leftLetters:['A','M'],overlapLetters:['N'],rightLetters:['H','T','U'],leftAnswer:"MAN",rightAnswer:"HUNT",fact:"Man Hunt is a classic playground game where one player hunts the others in a large outdoor area."},
+  {id:199,topic:"Fun & Games 🎮",stars:2,leftLetters:['P','T'],overlapLetters:['E','S'],rightLetters:['D','I','L'],leftAnswer:"STEEP",rightAnswer:"SLIDE",fact:"The tallest playground slide ever built stood over 10 storeys high at an amusement park in Japan."},
+  {id:200,topic:"Daily Life 🗓️",stars:3,leftLetters:['C','H','O','S'],overlapLetters:['L'],rightLetters:['B','E'],leftAnswer:"SCHOOL",rightAnswer:"BELL",fact:"School bells have been ringing students to class since the 1800s when factory whistles inspired the idea."},
+  {id:201,topic:"Living Things 🌿",stars:1,leftLetters:['M','R','Y'],overlapLetters:['A'],rightLetters:['N','S','T'],leftAnswer:"ARMY",rightAnswer:"ANTS",fact:"Army ants live in colonies of up to 700000 and can strip a carcass to the bone in hours."},
+  {id:202,topic:"Daily Life 🗓️",stars:2,leftLetters:['R'],overlapLetters:['A','E','P'],rightLetters:['L','T'],leftAnswer:"PAPER",rightAnswer:"PLATE",fact:"The paper plate was invented in 1904 and became essential for outdoor dining and picnics."},
+  {id:203,topic:"Food & Drink 🍔",stars:3,leftLetters:['P','T'],overlapLetters:['A','S'],rightLetters:['D','L'],leftAnswer:"PASTA",rightAnswer:"SALAD",fact:"Pasta salad became a staple of summer picnics and potlucks across North America in the 1970s."},
+  {id:204,topic:"Food & Drink 🍔",stars:1,leftLetters:['N','R'],overlapLetters:['C','O'],rightLetters:['B'],leftAnswer:"CORN",rightAnswer:"COB",fact:"Corn on the cob became a popular summer food in North America in the 1800s and is now a barbecue staple."},
+  {id:205,topic:"Food & Drink 🍔",stars:2,leftLetters:['B','Y'],overlapLetters:['A'],rightLetters:['C','O','R','T'],leftAnswer:"BABY",rightAnswer:"CARROT",fact:"Baby carrots were invented in 1986 by a farmer who wanted to sell misshapen carrots instead of wasting them."},
+  {id:206,topic:"Food & Drink 🍔",stars:3,leftLetters:['G','R'],overlapLetters:['E','N'],rightLetters:['A','B','S'],leftAnswer:"GREEN",rightAnswer:"BEANS",fact:"Green beans were one of the first vegetables cultivated in the Americas over 7000 years ago."},
+  // Additional swaps
+  {id:207,topic:"Food & Drink 🍔",stars:1,leftLetters:['E','G','H','L','S'],overlapLetters:['I','N'],rightLetters:['F','M','U'],leftAnswer:"ENGLISH",rightAnswer:"MUFFIN",fact:"The English muffin was actually invented in New York in the 1880s by a British immigrant named Samuel Bath Thomas."},
+  {id:208,topic:"Fun & Games 🎮",stars:1,leftLetters:['H','O'],overlapLetters:['E','M'],rightLetters:['A','T'],leftAnswer:"HOME",rightAnswer:"TEAM",fact:"Home team advantage is a real phenomenon — home teams win about 60% of games across major sports."},
+  {id:209,topic:"Around the World 🌍",stars:2,leftLetters:['D'],overlapLetters:['A','N'],rightLetters:['C','E','O'],leftAnswer:"INDIAN",rightAnswer:"OCEAN",fact:"The Indian Ocean is the third largest ocean and is the warmest ocean in the world."},
+  {id:210,topic:"Music 🎵",stars:1,leftLetters:['D','M'],overlapLetters:['R'],rightLetters:['L','O'],leftAnswer:"DRUM",rightAnswer:"ROLL",fact:"A drum roll is used to build tension and excitement and has been a staple of live performance for centuries."},
+  {id:211,topic:"Music 🎵",stars:2,leftLetters:['H','V','Y'],overlapLetters:['A','E'],rightLetters:['M','T','L'],leftAnswer:"HEAVY",rightAnswer:"METAL",fact:"Heavy metal emerged in the late 1960s with bands like Black Sabbath and Led Zeppelin leading the way."},
+  {id:212,topic:"Music 🎵",stars:3,leftLetters:[],overlapLetters:['A','I','R'],rightLetters:['G','T','U'],leftAnswer:"AIR",rightAnswer:"GUITAR",fact:"Air guitar became a worldwide phenomenon with the Air Guitar World Championships held annually in Finland since 1996."},
 ];
 
 
@@ -2488,11 +2521,21 @@ function refreshIntroState(){
       '2026-06-03':'🐾 Almost Animals',
       '2026-06-04':'🔢 By The Numbers',
       '2026-06-05':'🌳 Branching Out',
-      '2026-06-06':'🍺 Pub Fun',
+      '2026-06-05':'🍺 Happy Hour',
+      '2026-06-06':'🌳 Day at the Park',
       '2026-06-07':'🏎️ Race Day',
       '2026-06-08':'🌊 World Ocean Day',
-      '2026-06-09':'☀️ Summer Is Coming',
-      '2026-06-10':'🪶 Feather Day',
+      '2026-06-09':'☀️ Mid June',
+      '2026-06-10':'🇬🇧 UK Day',
+      '2026-06-11':'⚽ World Cup',
+      '2026-06-12':'🌍 National Names',
+      '2026-06-13':'📺 Retro TV',
+      '2026-06-14':'🥯 Bagel Day',
+      '2026-06-15':'🛝 Recess',
+      '2026-06-17':'🥕 Eat Your Vegetables Day',
+      '2026-06-18':'🐸 Hop To It',
+      '2026-06-18':'🎸 Rock On',
+      '2026-06-19':'🧺 Picnic Day',
       '2026-06-11':'⚽ World Cup',
       '2026-06-12':'🇬🇧 UK Day',
       '2026-06-13':'📺 Retro TV',
