@@ -2236,6 +2236,18 @@ function rateDailySet(difficulty){
   const msgs={easy:'😄 Glad it felt good!',medium:'😐 Nice balance!',hard:'😤 We\'ll ease up tomorrow!'};
   if(thanks)thanks.textContent=msgs[difficulty]||'';
   localStorage.setItem(`vendy_daily_rating_${getDailyNum()}`, difficulty);
+  // Send rating to Google Sheets
+  fetch('https://script.google.com/macros/s/AKfycbw-f3rlMSZFmIiteOw5mK2exmt7xlPmQcU5sCh_dmjE2JNhMPI6eOM2M_TM2yceaMHH/exec', {
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({
+      day: getDailyNum(),
+      theme: (() => { const d=new Date().toISOString().split('T')[0]; return dailyThemes[d]||''; })(),
+      rating: difficulty,
+      date: new Date().toISOString().split('T')[0]
+    })
+  }).catch(()=>{});
   trackEvent('daily_set_rated',{
     day_number: getDailyNum(),
     puzzle_date: new Date().toISOString().split('T')[0],
