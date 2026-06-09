@@ -1783,6 +1783,7 @@ function saveArchiveProgress(p){localStorage.setItem("vendyArchiveProgress",JSON
 /* ── DATE ── */
 function fmt(d){return d.toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"})}
 function todayStart(){const d=new Date();d.setHours(0,0,0,0);return d}
+const launchDate = new Date(2026, 4, 4);
 function launchStart(){const d=new Date(launchDate);d.setHours(0,0,0,0);return d}
 function getDailyNum(){return Math.max(0,Math.floor((todayStart()-launchStart())/86400000))+1}
 function dateForNum(n){const d=launchStart();d.setDate(d.getDate()+n-1);return d}
@@ -2478,6 +2479,94 @@ function admire(diffKey){
   lastAdmiredKey=diffKey;lastAdmiredPuzzle=puz;
   currentDiffKey=diffKey;
   admireCurrentPuzzle();
+}
+
+function getTodaySet(){const todayN=getDailyNum();return dailySets[(todayN-1)%dailySets.length];}
+function getPuzzleById(id){
+  if(typeof id==='string') return specialPuzzles[id];
+  const idx=puzzles.findIndex(p=>p.id===id);
+  return idx!==-1?puzzles[idx]:puzzles[id-1];
+}
+function loadDailyChallenge(key){
+  const set=getTodaySet();
+  const puzId=set[key];
+  currentDiffKey=key;
+  currentPuzzleKey=`daily_${getDailyNum()}_${key}`;
+  introScreen.classList.remove('active');gameShell.classList.add('active');showDailyScreen();
+  setTimeout(()=>trackEvent('puzzle_started', getPuzzleParams()), 100);
+  if(typeof puzId==='string'){
+    const p=specialPuzzles[puzId];
+    currentMode='daily';currentFreePuzzle=p;currentPuzzleIdx=-99;
+    if(topicEl)topicEl.textContent=p.topic;
+    const label=document.getElementById('intro-puzzle-number');
+    if(label)label.textContent=getDiffLabel(key);
+    renderVennLetters(p);resetPuzzleState();
+    leftGuessSlots=new Array(p.leftAnswer.length).fill('');
+    rightGuessSlots=new Array(p.rightAnswer.length).fill('');
+    revealedLeft=new Array(p.leftAnswer.length).fill('');
+    revealedRight=new Array(p.rightAnswer.length).fill('');
+    renderTiles(leftTilesEl,leftGuessSlots,p.leftAnswer.length,revealedLeft,'left');
+    renderTiles(rightTilesEl,rightGuessSlots,p.rightAnswer.length,revealedRight,'right');
+    setTimeout(()=>setActiveField('left'),150);renderStats();startStuckTimer();startTimer();
+  } else {
+    currentFreePuzzle=null;
+    loadGame('daily',puzId);
+    currentPuzzleKey=`daily_${getDailyNum()}_${key}`;
+    if(topicEl){const puz=getPuzzleById(puzId);if(puz)topicEl.textContent=puz.topic;}
+    const label=document.getElementById('intro-puzzle-number');
+    if(label)label.textContent=getDiffLabel(key);
+    const progress=loadArchiveProgress();
+    const alreadySolved=progress[currentPuzzleKey]?.solved;
+    if(!alreadySolved){
+      localStorage.removeItem(`vendy_timer_${currentPuzzleKey}`);
+      timerElapsed=0;startTimer();
+    }
+  }
+}
+
+function getDiffColor(key){return key==='e'?'#22c55e':key==='m'?'#f59e0b':'#ef4444';}
+function getDiffBg(key){return key==='e'?'rgba(34,197,94,.12)':key==='m'?'rgba(245,158,11,.12)':'rgba(239,68,68,.12)';}
+function getDiffLabel(key){return key==='e'?'Easy':key==='m'?'Medium':'Hard';}
+
+function renderChallengeCards(){
+  const set=getTodaySet();
+  const container=document.getElementById('challenge-cards');
+  if(!container)return;
+  container.innerHTML='';
+  const progress=loadArchiveProgress();
+  const dayN=getDailyNum();
+  ['e','m','h'].forEach(key=>{
+    const puzId=set[key];
+    const puz=getPuzzleById(puzId);
+    if(!puz)return;
+    const solved=progress[`daily_${dayN}_${key}`]?.solved;
+    const btn=document.createElement('button');
+    if(solved){
+      btn.style.cssText=`width:100%;padding:14px 16px;border-radius:14px;background:rgba(212,102,187,.1);border:2px solid rgba(212,102,187,.4);cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;justify-content:space-between;`;
+      btn.innerHTML=`<div style="text-align:left;"><div style="font-size:16px;font-weight:900;color:#9333ea;">✅ ${getDiffLabel(key)}</div><div style="font-size:13px;font-weight:700;color:var(--muted);margin-top:2px;">${puz.topic}</div></div><div style="font-size:15px;font-weight:900;color:#9333ea;">Admire ✨</div>`;
+      btn.addEventListener('click',()=>{admire(key);});
+    } else {
+      btn.style.cssText=`width:100%;padding:14px 16px;border-radius:14px;background:${getDiffBg(key)};border:2px solid ${getDiffColor(key)};cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;justify-content:space-between;`;
+      btn.innerHTML=`<div style="text-align:left;"><div style="font-size:16px;font-weight:900;color:${getDiffColor(key)};">${getDiffLabel(key)}</div><div style="font-size:13px;font-weight:700;color:var(--muted);margin-top:2px;">${puz.topic}</div></div><div style="font-size:22px;font-weight:900;color:${getDiffColor(key)};opacity:0.5;">${key.toUpperCase()}</div>`;
+      btn.addEventListener('click',()=>{currentDiffKey=key;loadDailyChallenge(key);});
+    }
+    container.appendChild(btn);
+  });
+}
+
+function updateEMHHeader(){
+  const progress=loadArchiveProgress();
+  const dayN=getDailyNum();
+  ['e','m','h'].forEach(key=>{
+    const el=document.getElementById(`emh-${key}`);
+    if(!el)return;
+    const solved=progress[`daily_${dayN}_${key}`]?.solved;
+    el.style.opacity=solved?'1':'0.35';
+    el.style.color=solved?getDiffColor(key):'var(--muted)';
+  });
+  const allDone=['e','m','h'].every(k=>progress[`daily_${dayN}_${k}`]?.solved);
+  const flame=document.getElementById('header-flame');
+  if(flame)flame.style.opacity=allDone?'1':'0.4';
 }
 
 function refreshIntroState(){
