@@ -1064,327 +1064,6 @@ let currentFreePuzzle=null;
 let currentDiffKey='e';
 
 // Daily puzzle sets — E/M/H per day (puzzle IDs, 1-indexed)
-
-const puzzles = [
-  {id:1,topic:"Rhyme Time 🎤",stars:2,leftLetters:['S','W'],overlapLetters:['E','T'],rightLetters:['A','R'],leftAnswer:"SWEET",rightAnswer:"TREAT",fact:"Honey never spoils — edible samples found in Egyptian tombs."},
-  {id:2,topic:"Around the House 🏠",stars:2,leftLetters:['I','K','O'],overlapLetters:['C','E'],rightLetters:['R','T','U'],leftAnswer:"COOKIE",rightAnswer:"CUTTER",fact:"Cookie cutters date back to the 1700s in Europe."},
-  {id:3,topic:"Snack Attack 🍔",stars:2,leftLetters:['N'],overlapLetters:['A','B'],rightLetters:['D','E','R'],leftAnswer:"BANANA",rightAnswer:"BREAD",fact:"Banana bread became popular during the Great Depression."},
-  {id:4,topic:"Sports 🏀",stars:2,leftLetters:['A','B','F','O'],overlapLetters:['L','T'],rightLetters:['E','H','M'],leftAnswer:"FOOTBALL",rightAnswer:"HELMET",fact:"Football helmets were not mandatory in the NFL until 1943."},
-  {id:5,topic:"Sports 🏀",stars:2,leftLetters:['A','B','S'],overlapLetters:['E','L'],rightLetters:['G','O','V'],leftAnswer:"BASEBALL",rightAnswer:"GLOVE",fact:"Early baseball players did not use gloves."},
-  {id:6,topic:"Daily Life 🗓️",stars:2,leftLetters:['G','I','U'],overlapLetters:['N','R'],rightLetters:['A','D','E','S'],leftAnswer:"RUNNING",rightAnswer:"ERRANDS",fact:"Running burns about 100 calories per mile."},
-  {id:7,topic:"Around the House 🏠",stars:2,leftLetters:['O','W'],overlapLetters:['D','I','N'],rightLetters:['B','L','S'],leftAnswer:"WINDOW",rightAnswer:"BLINDS",fact:"Window blinds date back to ancient Egypt."},
-  {id:8,topic:"Sports 🏀",stars:2,leftLetters:['I','N','T'],overlapLetters:['E','S'],rightLetters:['R','V'],leftAnswer:"TENNIS",rightAnswer:"SERVE",fact:"The fastest tennis serve ever was over 260 km/h."},
-  {id:9,topic:"What to Wear 👕",stars:2,leftLetters:['A','H','R'],overlapLetters:['E','L','T'],rightLetters:['B'],leftAnswer:"LEATHER",rightAnswer:"BELT",fact:"Belts replaced suspenders in the 1920s."},
-  {id:10,topic:"Snack Attack 🍔",stars:2,leftLetters:['B','E','S','T'],overlapLetters:['L','O','R'],rightLetters:[],leftAnswer:"LOBSTER",rightAnswer:"ROLL",fact:"Lobster was once considered poor peoples food."},
-  {id:11,topic:"Snack Attack 🍔",stars:2,leftLetters:['E','O'],overlapLetters:['P','S','T'],rightLetters:['A'],leftAnswer:"PESTO",rightAnswer:"PASTA",fact:"Pesto originated in Genoa, Italy."},
-  {id:12,topic:"Snack Attack 🍔",stars:2,leftLetters:['K','M','N','U'],overlapLetters:['I','P'],rightLetters:['E'],leftAnswer:"PUMPKIN",rightAnswer:"PIE",fact:"Pumpkin pie dates back to early American settlers."},
-  {id:13,topic:"Snack Attack 🍔",stars:2,leftLetters:['O','R','T'],overlapLetters:['A','C'],rightLetters:['E','K'],leftAnswer:"CARROT",rightAnswer:"CAKE",fact:"Carrot cake became popular when sugar was scarce."},
-  {id:14,topic:"Famous Places 📍",stars:2,leftLetters:['G','I','N','R'],overlapLetters:['A'],rightLetters:['F','L','S'],leftAnswer:"NIAGARA",rightAnswer:"FALLS",fact:"Niagara Falls generates about 20% of US-Canada border hydropower."},
-  {id:15,topic:"Famous Places 📍",stars:2,leftLetters:['D','G','R'],overlapLetters:['A','N'],rightLetters:['C','O','Y'],leftAnswer:"GRAND",rightAnswer:"CANYON",fact:"The Grand Canyon is over 277 miles long."},
-  {id:16,topic:"Famous Places 📍",stars:2,leftLetters:['F','I','L'],overlapLetters:['E'],rightLetters:['O','R','T','W'],leftAnswer:"EIFFEL",rightAnswer:"TOWER",fact:"The Eiffel Tower was meant to be temporary."},
-  {id:17,topic:"Famous Places 📍",stars:2,leftLetters:['K','L','N','O','Y'],overlapLetters:['B','R'],rightLetters:['D','E','G','I'],leftAnswer:"BROOKLYN",rightAnswer:"BRIDGE",fact:"The Brooklyn Bridge took 14 years to build."},
-  {id:18,topic:"Famous Places 📍",stars:2,leftLetters:['C','I','N','O','S'],overlapLetters:['L'],rightLetters:['A','E','V','Y'],leftAnswer:"SILICON",rightAnswer:"VALLEY",fact:"Silicon Valley got its name from silicon used in computer chips."},
-  {id:19,topic:"Big Brands 🏷️",stars:2,leftLetters:['B','U','Y'],overlapLetters:['A','S','W'],rightLetters:['C','D','H','I','N'],leftAnswer:"SUBWAY",rightAnswer:"SANDWICH",fact:"Subway has more locations worldwide than McDonalds."},
-  {id:20,topic:"Big Brands 🏷️",stars:2,leftLetters:[],overlapLetters:['A','C','O'],rightLetters:['L'],leftAnswer:"COCA",rightAnswer:"COLA",fact:"Coca-Cola was originally sold as a medicinal syrup."},
-  {id:21,topic:"Big Brands 🏷️",stars:2,leftLetters:['A','N','O','Z'],overlapLetters:['M'],rightLetters:['E','I','P','R'],leftAnswer:"AMAZON",rightAnswer:"PRIME",fact:"Amazon Prime launched in 2005 with free two-day shipping."},
-  {id:22,topic:"Big Brands 🏷️",stars:2,leftLetters:['A','D','I'],overlapLetters:['S'],rightLetters:['E','H','O'],leftAnswer:"ADIDAS",rightAnswer:"SHOES",fact:"Adidas was founded by a German cobbler named Adi Dassler."},
-  {id:23,topic:"Daily Life 🗓️",stars:2,leftLetters:['A','N','P','R','W'],overlapLetters:['G','I'],rightLetters:['F','S','T'],leftAnswer:"WRAPPING",rightAnswer:"GIFTS",fact:"Gift wrap became popular thanks to Hallmark."},
-  {id:24,topic:"Daily Life 🗓️",stars:2,leftLetters:['G','S','W'],overlapLetters:['A','H','I','N'],rightLetters:['C','E','M'],leftAnswer:"WASHING",rightAnswer:"MACHINE",fact:"The first electric washing machine was invented in 1908."},
-  {id:25,topic:"Daily Life 🗓️",stars:2,leftLetters:['P','R','S'],overlapLetters:['G','I','N'],rightLetters:['A','C','E','L'],leftAnswer:"SPRING",rightAnswer:"CLEANING",fact:"Spring cleaning dates back to ancient Persian new year traditions."},
-  {id:26,topic:"Snack Attack 🍔",stars:2,leftLetters:['O','T'],overlapLetters:['A','P'],rightLetters:['C','E','K','N'],leftAnswer:"POTATO",rightAnswer:"PANCAKE",fact:"Potato pancakes are a traditional dish in many cultures."},
-  {id:27,topic:"Snack Attack 🍔",stars:2,leftLetters:['G','H','M'],overlapLetters:['A','R'],rightLetters:['C','E','K'],leftAnswer:"GRAHAM",rightAnswer:"CRACKER",fact:"Graham crackers were originally invented as a health food."},
-  {id:28,topic:"Snack Attack 🍔",stars:2,leftLetters:['N','O','T','U'],overlapLetters:['C'],rightLetters:['A','E','M','R'],leftAnswer:"COCONUT",rightAnswer:"CREAM",fact:"Coconuts can travel across oceans and grow elsewhere."},
-  {id:29,topic:"Rhyme Time 🎤",stars:2,leftLetters:['F'],overlapLetters:['E','I','N'],rightLetters:['W'],leftAnswer:"FINE",rightAnswer:"WINE",fact:"The oldest known wine is over 8,000 years old."},
-  {id:30,topic:"Rhyme Time 🎤",stars:2,leftLetters:['W'],overlapLetters:['D','I','L'],rightLetters:['C','H'],leftAnswer:"WILD",rightAnswer:"CHILD",fact:"Rhymes stick due to brain pattern recognition."},
-  {id:31,topic:"Rhyme Time 🎤",stars:2,leftLetters:['A','N','S'],overlapLetters:['E','K'],rightLetters:['P'],leftAnswer:"SNEAK",rightAnswer:"PEEK",fact:"Rhyming boosts recall through pattern recognition."},
-  {id:32,topic:"Famous Places 📍",stars:2,leftLetters:['D','L','N','O'],overlapLetters:['E','G'],rightLetters:['A','T'],leftAnswer:"GOLDEN",rightAnswer:"GATE",fact:"The Golden Gate Bridge took 4 years to build."},
-  {id:33,topic:"Famous Places 📍",stars:2,leftLetters:['L'],overlapLetters:['A','S'],rightLetters:['E','G','V'],leftAnswer:"LAS",rightAnswer:"VEGAS",fact:"Las Vegas means the meadows in Spanish."},
-  {id:34,topic:"Famous Places 📍",stars:2,leftLetters:['C','E','L','N','T'],overlapLetters:['A','R'],rightLetters:['K','P'],leftAnswer:"CENTRAL",rightAnswer:"PARK",fact:"Central Park has 843 acres and over 36 million visitors a year."},
-  {id:35,topic:"Famous Places 📍",stars:2,leftLetters:['I','M','T'],overlapLetters:['E','S'],rightLetters:['A','Q','R','U'],leftAnswer:"TIMES",rightAnswer:"SQUARE",fact:"Times Square was originally called Longacre Square until 1904."},
-  {id:36,topic:"Big Brands 🏷️",stars:2,leftLetters:['B','E','R','U'],overlapLetters:['G'],rightLetters:['I','K','N'],leftAnswer:"BURGER",rightAnswer:"KING",fact:"Burger King is called Hungry Jacks in Australia."},
-  {id:37,topic:"Sports 🏀",stars:2,leftLetters:['G','I','M','W'],overlapLetters:['N','S'],rightLetters:['E','L','O'],leftAnswer:"SWIMMING",rightAnswer:"LESSONS",fact:"Swimming is one of the best full body workouts you can do."},
-  {id:38,topic:"Around the House 🏠",stars:2,leftLetters:['E','L','U'],overlapLetters:['B'],rightLetters:['A','H','T'],leftAnswer:"BUBBLE",rightAnswer:"BATH",fact:"Bubble baths were popularized in the 1960s."},
-  {id:39,topic:"Food & Drink 🍔",stars:2,leftLetters:['I','N','V'],overlapLetters:['A','L'],rightLetters:['E','T'],leftAnswer:"VANILLA",rightAnswer:"LATTE",fact:"Vanilla is the second most expensive spice in the world after saffron."},
-  {id:40,topic:"Daily Life 🗓️",stars:2,leftLetters:['C','O','P','R'],overlapLetters:['A','L'],rightLetters:['E','N'],leftAnswer:"CARPOOL",rightAnswer:"LANE",fact:"Carpooling can cut commute costs by up to 50%."},
-  {id:41,topic:"Around the World 🌍",stars:2,leftLetters:['A','H'],overlapLetters:['R','S'],rightLetters:['D','E','T'],leftAnswer:"SAHARA",rightAnswer:"DESERT",fact:"The Sahara Desert is about the size of the United States."},
-  {id:42,topic:"Rhyme Time 🎤",stars:2,leftLetters:['F','U'],overlapLetters:['K','N','Y'],rightLetters:['E','M','O'],leftAnswer:"FUNKY",rightAnswer:"MONKEY",fact:"Funky Monkey is a classic rhyme pairing used in music and pop culture."},
-  {id:43,topic:"What to Wear 👕",stars:2,leftLetters:['I','N','T'],overlapLetters:['E','S'],rightLetters:['H','O'],leftAnswer:"TENNIS",rightAnswer:"SHOES",fact:"Tennis shoes were originally designed for playing tennis on grass courts."},
-  {id:44,topic:"Fun & Games 🎮",stars:2,leftLetters:['N','O'],overlapLetters:['A','E','S'],rightLetters:['P'],leftAnswer:"SEASON",rightAnswer:"PASSES",fact:"Season passes were first introduced by ski resorts in the 1970s."},
-  {id:45,topic:"Fun & Games 🎮",stars:2,leftLetters:['M','X'],overlapLetters:['B'],rightLetters:['E','I','K'],leftAnswer:"BMX",rightAnswer:"BIKE",fact:"BMX racing became an Olympic sport at the 2008 Beijing Games."},
-  {id:46,topic:"Living Things 🌿",stars:2,leftLetters:['D','E','L','O'],overlapLetters:['P'],rightLetters:['U','Y'],leftAnswer:"POODLE",rightAnswer:"PUPPY",fact:"Poodles are one of the most intelligent dog breeds in the world."},
-  {id:47,topic:"Living Things 🌿",stars:2,leftLetters:['H','I'],overlapLetters:['R','S'],rightLetters:['E','T'],leftAnswer:"IRISH",rightAnswer:"SETTER",fact:"The Irish Setter is known for its distinctive mahogany red coat."},
-  {id:48,topic:"Living Things 🌿",stars:2,leftLetters:['A','L','P'],overlapLetters:['E'],rightLetters:['R','S','T'],leftAnswer:"APPLE",rightAnswer:"TREES",fact:"Apple trees can live for more than 100 years."},
-  {id:49,topic:"Food & Drink 🍔",stars:2,leftLetters:['D'],overlapLetters:['E','R'],rightLetters:['P'],leftAnswer:"RED",rightAnswer:"PEPPER",fact:"Red peppers are simply green peppers that have been left to ripen longer."},
-  {id:50,topic:"Fun & Games 🎮",stars:2,leftLetters:['F','L','O'],overlapLetters:['G'],rightLetters:['E','N','R'],leftAnswer:"GOLF",rightAnswer:"GREEN",fact:"A golf green is the closely mown area surrounding the hole."},
-  {id:51,topic:"Around the House 🏠",stars:2,leftLetters:['I','N','W'],overlapLetters:['E'],rightLetters:['A','G','L','S'],leftAnswer:"WINE",rightAnswer:"GLASSES",fact:"Wine glasses with longer stems help keep white wine cool."},
-  {id:52,topic:"Around the World 🌍",stars:2,leftLetters:['I','M','P','R'],overlapLetters:['E'],rightLetters:['A','S','T'],leftAnswer:"EMPIRE",rightAnswer:"STATE",fact:"The Empire State Building was built in just 410 days."},
-  {id:53,topic:"Spring Things 🌷",stars:2,leftLetters:['E','R','U'],overlapLetters:['B'],rightLetters:['O','S','T'],leftAnswer:"RUBBER",rightAnswer:"BOOTS",fact:"Wellington boots were named after the Duke of Wellington."},
-  {id:54,topic:"Daily Life 🗓️",stars:2,leftLetters:['C','R'],overlapLetters:['A'],rightLetters:['H','S','W'],leftAnswer:"CAR",rightAnswer:"WASH",fact:"The first automatic car wash opened in Detroit in 1940."},
-  {id:55,topic:"Food & Drink 🍔",stars:2,leftLetters:['O','P','T'],overlapLetters:['A'],rightLetters:['D','L','S'],leftAnswer:"POTATO",rightAnswer:"SALAD",fact:"Potato salad has been a picnic staple since the 19th century."},
-  {id:56,topic:"Around the World 🌍",stars:2,leftLetters:['O','T','W'],overlapLetters:['A'],rightLetters:['C','D','N'],leftAnswer:"OTTAWA",rightAnswer:"CANADA",fact:"Ottawa became the capital of Canada in 1857."},
-  {id:57,topic:"What to Wear 👕",stars:2,leftLetters:['D','I','N','R'],overlapLetters:['E'],rightLetters:['A','C','J','K','T'],leftAnswer:"DINNER",rightAnswer:"JACKET",fact:"The dinner jacket was first worn at a gentlemens club in 1865."},
-  {id:58,topic:"Around the House 🏠",stars:2,leftLetters:['A','R','S','T'],overlapLetters:['E','O'],rightLetters:['N','V'],leftAnswer:"TOASTER",rightAnswer:"OVEN",fact:"The first pop-up toaster was invented in 1921 by Charles Strite."},
-  {id:59,topic:"Spring Things 🌷",stars:2,leftLetters:['A','I','L','P'],overlapLetters:['R'],rightLetters:['E','H','O','S','W'],leftAnswer:"APRIL",rightAnswer:"SHOWERS",fact:"April showers bring May flowers — a proverb dating back to 1557."},
-  {id:60,topic:"Fun & Games 🎮",stars:2,leftLetters:['C','O','R','S'],overlapLetters:['E'],rightLetters:['N','T'],leftAnswer:"SOCCER",rightAnswer:"NET",fact:"Soccer nets were first used in 1891 at a match in Nottingham."},
-  {id:61,topic:"Fun & Games 🎮",stars:2,leftLetters:['H'],overlapLetters:['C','E','S'],rightLetters:['I','P'],leftAnswer:"CHESS",rightAnswer:"PIECES",fact:"Chess is one of the oldest strategy games, dating back over 1500 years."},
-  {id:62,topic:"Food & Drink 🍔",stars:2,leftLetters:['B','L','U'],overlapLetters:['E'],rightLetters:['A','T'],leftAnswer:"BUBBLE",rightAnswer:"TEA",fact:"Bubble tea was invented in Taiwan in the 1980s."},
-  {id:63,topic:"Living Things 🌿",stars:2,leftLetters:['N','Q','U'],overlapLetters:['E'],rightLetters:['B'],leftAnswer:"QUEEN",rightAnswer:"BEE",fact:"The queen bee can lay up to 2000 eggs per day."},
-  {id:64,topic:"Food & Drink 🍔",stars:2,leftLetters:['B'],overlapLetters:['E','R'],rightLetters:['C','L','O'],leftAnswer:"BEER",rightAnswer:"COOLER",fact:"Beer coolers were popularized at outdoor events in the 1950s."},
-  {id:65,topic:"Around the World 🌍",stars:2,leftLetters:['O','T','W'],overlapLetters:['A'],rightLetters:['C','D','N'],leftAnswer:"OTTAWA",rightAnswer:"CANADA",fact:"Ottawa became the capital of Canada in 1857, chosen by Queen Victoria."},
-  {id:66,topic:"Living Things 🌿",stars:2,leftLetters:['B','I'],overlapLetters:['D','R'],rightLetters:['E','F'],leftAnswer:"BIRD",rightAnswer:"FEEDER",fact:"Bird feeders attract over 100 million birds to North American gardens each year."},
-  {id:67,topic:"Rhyme Time 🎤",stars:2,leftLetters:['B'],overlapLetters:['K','O'],rightLetters:['N'],leftAnswer:"BOOK",rightAnswer:"NOOK",fact:"A book nook is a cozy reading corner."},
-  {id:68,topic:"Rhyme Time 🎤",stars:2,leftLetters:[],overlapLetters:['E','K','O','Y'],rightLetters:['D'],leftAnswer:"OKEY",rightAnswer:"DOKEY",fact:"Okey dokey has been slang for okay since the 1930s."},
-  {id:69,topic:"What to Wear 👕",stars:2,leftLetters:['E','L'],overlapLetters:['B'],rightLetters:['M','O','S','T'],leftAnswer:"BELL",rightAnswer:"BOTTOMS",fact:"Bell bottoms were the defining fashion of the 1970s disco era."},
-  {id:70,topic:"Daily Life 🗓️",stars:2,leftLetters:['O','S'],overlapLetters:['C','D','I'],rightLetters:['A','G','N'],leftAnswer:"DISCO",rightAnswer:"DANCING",fact:"Disco dancing peaked in popularity in the late 1970s."},
-  {id:71,topic:"Food & Drink 🍔",stars:2,leftLetters:['I','Z'],overlapLetters:['A','P'],rightLetters:['R','T','Y'],leftAnswer:"PIZZA",rightAnswer:"PARTY",fact:"Pizza party became a cultural staple in schools across North America in the 1980s."},
-  {id:72,topic:"Food & Drink 🍔",stars:2,leftLetters:['M','N'],overlapLetters:['A','G','O'],rightLetters:['E','L','T'],leftAnswer:"MANGO",rightAnswer:"GELATO",fact:"Mango is the most consumed fruit in the world."},
-  {id:73,topic:"Food & Drink 🍔",stars:2,leftLetters:['E','V'],overlapLetters:['I','L','O'],rightLetters:[],leftAnswer:"OLIVE",rightAnswer:"OIL",fact:"Olive oil has been produced in the Mediterranean for over 7000 years."},
-  {id:74,topic:"Living Things 🌿",stars:2,leftLetters:['B','Y'],overlapLetters:['A','T'],rightLetters:['C'],leftAnswer:"TABBY",rightAnswer:"CAT",fact:"The tabby pattern is the most common cat coat pattern in the world."},
-  {id:75,topic:"Getting Lucky 🍀",stars:2,leftLetters:['N'],overlapLetters:['E','I'],rightLetters:['L','S','V'],leftAnswer:"NINE",rightAnswer:"LIVES",fact:"The myth of cats having nine lives dates back to ancient Egypt."},
-  {id:76,topic:"Daily Life 🗓️",stars:2,leftLetters:['C','H','I','T'],overlapLetters:['Y'],rightLetters:['E','S'],leftAnswer:"ITCHY",rightAnswer:"EYES",fact:"Itchy eyes affect millions of people during spring allergy season."},
-  {id:77,topic:"Rhyme Time 🎤",stars:2,leftLetters:['S','T'],overlapLetters:['E','R'],rightLetters:['A','C','L'],leftAnswer:"STEER",rightAnswer:"CLEAR",fact:"Steer clear means to avoid something — a nautical term from sailing."},
-  {id:78,topic:"Fun & Games 🎮",stars:2,leftLetters:['R'],overlapLetters:['H','N','O'],rightLetters:['K'],leftAnswer:"HORN",rightAnswer:"HONK",fact:"The car horn was invented in 1908."},
-  {id:79,topic:"Fun & Games 🎮",stars:2,leftLetters:['L','Y'],overlapLetters:['A','E','R'],rightLetters:['C'],leftAnswer:"RELAY",rightAnswer:"RACE",fact:"Relay races have been part of the Olympics since the 1912 Stockholm Games."},
-  {id:80,topic:"Fun & Games 🎮",stars:2,leftLetters:['L','P'],overlapLetters:['M','N','O','Y'],rightLetters:['E'],leftAnswer:"MONOPOLY",rightAnswer:"MONEY",fact:"Monopoly was invented in 1935 and is now sold in 47 languages worldwide."},
-  {id:81,topic:"Food & Drink 🍔",stars:2,leftLetters:['E','G','R'],overlapLetters:['N'],rightLetters:['I','O'],leftAnswer:"GREEN",rightAnswer:"ONION",fact:"Green onions are one of the oldest cultivated vegetables, used for over 5000 years."},
-  {id:82,topic:"Fun & Games 🎮",stars:2,leftLetters:['G','O'],overlapLetters:['D','L'],rightLetters:['A','E','M'],leftAnswer:"GOLD",rightAnswer:"MEDAL",fact:"The Olympic gold medal is actually mostly silver — it is only gold plated."},
-  {id:83,topic:"Rhyme Time 🎤",stars:2,leftLetters:['B','T'],overlapLetters:['E','S'],rightLetters:['D','R'],leftAnswer:"BEST",rightAnswer:"DRESSED",fact:"Best dressed lists have been a staple of celebrity culture since the 1940s."},
-  {id:84,topic:"Rhyme Time 🎤",stars:2,leftLetters:['D'],overlapLetters:['E','P'],rightLetters:['L','S'],leftAnswer:"DEEP",rightAnswer:"SLEEP",fact:"Adults need 7 to 9 hours of deep sleep per night for optimal health."},
-  {id:85,topic:"Food & Drink 🍔",stars:2,leftLetters:['C','H','S'],overlapLetters:['E'],rightLetters:['L','M','O','T'],leftAnswer:"CHEESE",rightAnswer:"OMELETTE",fact:"The cheese omelette is considered one of the great tests of a chef."},
-  {id:86,topic:"Around the World 🌍",stars:2,leftLetters:['F','I','L'],overlapLetters:['E'],rightLetters:['O','R','T','W'],leftAnswer:"EIFFEL",rightAnswer:"TOWER",fact:"The Eiffel Tower was built in 1889 and was originally intended to be temporary."},
-  {id:87,topic:"Daily Life 🗓️",stars:2,leftLetters:['T','X'],overlapLetters:['E'],rightLetters:['A','G','M','S'],leftAnswer:"TEXT",rightAnswer:"MESSAGE",fact:"The first text message ever sent was Merry Christmas in 1992."},
-  {id:88,topic:"Rhyme Time 🎤",stars:2,leftLetters:['R'],overlapLetters:['A','E','L','Z'],rightLetters:['D'],leftAnswer:"RAZZLE",rightAnswer:"DAZZLE",fact:"Razzle dazzle means to impress with a showy performance."},
-  {id:89,topic:"Daily Life 🗓️",stars:2,leftLetters:['E','P','R','Y'],overlapLetters:['L'],rightLetters:['A'],leftAnswer:"REPLY",rightAnswer:"ALL",fact:"Reply All is the most dangerous button in email."},
-  {id:90,topic:"Daily Life 🗓️",stars:2,leftLetters:['T'],overlapLetters:['A','R'],rightLetters:['C','E'],leftAnswer:"RAT",rightAnswer:"RACE",fact:"The rat race refers to the exhausting pursuit of success in modern working life."},
-  {id:91,topic:"Daily Life 🗓️",stars:3,leftLetters:['N','R'],overlapLetters:['C','E','O'],rightLetters:['F','I'],leftAnswer:"CORNER",rightAnswer:"OFFICE",fact:"The corner office is a symbol of corporate success."},
-  {id:92,topic:"Rhyme Time 🎤",stars:1,leftLetters:['J'],overlapLetters:['E','L','Y'],rightLetters:['B'],leftAnswer:"JELLY",rightAnswer:"BELLY",fact:"Jelly Belly jelly beans were the first jelly beans eaten in space in 1983."},
-  {id:93,topic:"Food & Drink 🍔",stars:2,leftLetters:['D'],overlapLetters:['R'],rightLetters:['E','P'],leftAnswer:"DR",rightAnswer:"PEPPER",fact:"Dr Pepper was invented in 1885 making it the oldest major soft drink in the US."},
-  {id:94,topic:"Food & Drink 🍔",stars:2,leftLetters:['O','T'],overlapLetters:['R'],rightLetters:['B','E'],leftAnswer:"ROOT",rightAnswer:"BEER",fact:"Root beer was originally brewed from the root bark of the sassafras tree."},
-  {id:95,topic:"Rhyme Time 🎤",stars:1,leftLetters:['F'],overlapLetters:['A','T'],rightLetters:['C'],leftAnswer:"FAT",rightAnswer:"CAT",fact:"The phrase fat cat dates back to the 1920s referring to wealthy political donors."},
-  {id:96,topic:"Living Things 🌿",stars:2,leftLetters:['H','S'],overlapLetters:['U'],rightLetters:['P','Y'],leftAnswer:"HUSH",rightAnswer:"PUPPY",fact:"Hush puppies are deep fried cornmeal balls originally used to quiet barking dogs."},
-  {id:97,topic:"Living Things 🌿",stars:2,leftLetters:['O','S'],overlapLetters:['E','G'],rightLetters:[],leftAnswer:"GOOSE",rightAnswer:"EGG",fact:"A goose egg meaning zero in sports comes from the egg shape resembling 0."},
-  {id:98,topic:"Food & Drink 🍔",stars:1,leftLetters:['F'],overlapLetters:['E','I','N'],rightLetters:['W'],leftAnswer:"FINE",rightAnswer:"WINE",fact:"Fine wine improves with age due to chemical reactions between acids tannins and sugars."},
-  {id:99,topic:"Fun & Games 🎮",stars:2,leftLetters:['C','I','M'],overlapLetters:['O'],rightLetters:['B','K','S'],leftAnswer:"COMIC",rightAnswer:"BOOKS",fact:"The first comic book sold for 10 cents in 1933."},
-  {id:100,topic:"Fun & Games 🎮",stars:3,leftLetters:['N'],overlapLetters:['A','B','E','I'],rightLetters:['S'],leftAnswer:"BEANIE",rightAnswer:"BABIES",fact:"Beanie Babies created a collecting frenzy in the 1990s."},
-  {id:101,topic:"Rhyme Time 🎤",stars:1,leftLetters:['P'],overlapLetters:['A','E','L'],rightLetters:[],leftAnswer:"PALE",rightAnswer:"ALE",fact:"Pale ale gets its name from the pale malt used in brewing."},
-  {id:102,topic:"Food & Drink 🍔",stars:2,leftLetters:['W'],overlapLetters:['A','R'],rightLetters:['B'],leftAnswer:"RAW",rightAnswer:"BAR",fact:"Raw bars serving fresh oysters became popular in coastal cities."},
-  {id:103,topic:"Food & Drink 🍔",stars:2,leftLetters:['O','R'],overlapLetters:['A','C','N'],rightLetters:[],leftAnswer:"CORONA",rightAnswer:"CAN",fact:"Corona beer was first brewed in Mexico in 1925."},
-  {id:104,topic:"Rhyme Time 🎤",stars:1,leftLetters:['L','Y'],overlapLetters:['C','K','U'],rightLetters:['D'],leftAnswer:"LUCKY",rightAnswer:"DUCK",fact:"Lucky Duck is a classic rhyming phrase used in games and childrens stories."},
-  {id:105,topic:"Food & Drink 🍔",stars:2,leftLetters:['B','I','R'],overlapLetters:['E'],rightLetters:['C','H','S'],leftAnswer:"BRIE",rightAnswer:"CHEESE",fact:"Brie is one of Frances most famous cheeses."},
-  {id:106,topic:"Fun & Games 🎮",stars:3,leftLetters:['O','R','T','U'],overlapLetters:['E','L'],rightLetters:['H','W'],leftAnswer:"ROULETTE",rightAnswer:"WHEEL",fact:"The roulette wheel was invented in France in the 18th century."},
-  {id:107,topic:"Rhyme Time 🎤",stars:1,leftLetters:['L','U'],overlapLetters:['D','O'],rightLetters:['C','R','W'],leftAnswer:"LOUD",rightAnswer:"CROWD",fact:"A loud crowd at a stadium can reach 130 decibels."},
-  {id:108,topic:"Fun & Games 🎮",stars:2,leftLetters:['I'],overlapLetters:['P','T'],rightLetters:['O','S'],leftAnswer:"PIT",rightAnswer:"STOP",fact:"A Formula 1 pit stop takes about 2 seconds and requires over 20 crew members."},
-  {id:109,topic:"Fun & Games 🎮",stars:3,leftLetters:['D'],overlapLetters:['E','R'],rightLetters:['A','F','I'],leftAnswer:"RED",rightAnswer:"FERRARI",fact:"Ferraris iconic red colour called Rosso Corsa was Italys international racing colour."},
-  {id:110,topic:"Living Things 🌿",stars:1,leftLetters:['H','T','W'],overlapLetters:['E','I'],rightLetters:['A','D','S'],leftAnswer:"WHITE",rightAnswer:"DAISIES",fact:"White daisies are one of the most recognisable wildflowers."},
-  {id:111,topic:"Daily Life 🗓️",stars:2,leftLetters:['D','W'],overlapLetters:['E'],rightLetters:['I','K','L','R'],leftAnswer:"WEED",rightAnswer:"KILLER",fact:"The first commercial weed killer was introduced in the 1940s."},
-  {id:112,topic:"Living Things 🌿",stars:3,leftLetters:['L','M','U'],overlapLetters:['B','E'],rightLetters:[],leftAnswer:"BUMBLE",rightAnswer:"BEE",fact:"Bumble bees can fly in colder temperatures than most other bees."},
-  {id:113,topic:"Michael Jackson 🕺",stars:1,leftLetters:['A','B','E'],overlapLetters:['T'],rightLetters:['I'],leftAnswer:"BEAT",rightAnswer:"IT",fact:"Beat It features Eddie Van Halens iconic guitar solo and won two Grammy Awards in 1984."},
-  {id:114,topic:"Michael Jackson 🕺",stars:2,leftLetters:['B','I','L'],overlapLetters:['E'],rightLetters:['A','J','N'],leftAnswer:"BILLIE",rightAnswer:"JEAN",fact:"Billie Jean was the first video by a Black artist to be played in heavy rotation on MTV."},
-  {id:115,topic:"Michael Jackson 🕺",stars:3,leftLetters:['R','T','Y'],overlapLetters:['D','I'],rightLetters:['A','N'],leftAnswer:"DIRTY",rightAnswer:"DIANA",fact:"Dirty Diana reached number one in the US in 1988."},
-  {id:116,topic:"Daily Life 🗓️",stars:1,leftLetters:['L','Z'],overlapLetters:['A','Y'],rightLetters:['D','N','S','U'],leftAnswer:"LAZY",rightAnswer:"SUNDAY",fact:"Lazy Sunday became a cultural phrase after the Saturday Night Live sketch in 2005."},
-  {id:117,topic:"Around the World 🌍",stars:1,leftLetters:['D','I','L','N'],overlapLetters:['B','U'],rightLetters:['P'],leftAnswer:"DUBLIN",rightAnswer:"PUB",fact:"Dublin has more pubs per capita than almost any other city in the world."},
-  {id:118,topic:"Food & Drink 🍔",stars:2,leftLetters:['C','H'],overlapLetters:['E','S'],rightLetters:['F','I','R'],leftAnswer:"CHEESE",rightAnswer:"FRIES",fact:"Cheese fries are a staple of diners across North America."},
-  {id:119,topic:"Food & Drink 🍔",stars:3,leftLetters:['A','O','T'],overlapLetters:['P'],rightLetters:['E','L','R'],leftAnswer:"POTATO",rightAnswer:"PEELER",fact:"The potato peeler was invented in 1947."},
-  {id:120,topic:"Daily Life 🗓️",stars:1,leftLetters:['B'],overlapLetters:['A','D'],rightLetters:['E','M','R'],leftAnswer:"BAD",rightAnswer:"DREAM",fact:"The average person has 3 to 5 dreams per night."},
-  {id:121,topic:"Living Things 🌿",stars:2,leftLetters:['D'],overlapLetters:['E','R'],rightLetters:['O','S','T'],leftAnswer:"RED",rightAnswer:"ROOSTER",fact:"A rooster crows at dawn due to its internal circadian clock."},
-  {id:122,topic:"Daily Life 🗓️",stars:3,leftLetters:['D','I','O'],overlapLetters:['A','R'],rightLetters:['L','M'],leftAnswer:"RADIO",rightAnswer:"ALARM",fact:"The first clock radio was patented in 1946."},
-  {id:123,topic:"Food & Drink 🍔",stars:1,leftLetters:['C','N','O','P'],overlapLetters:['R'],rightLetters:['B','E','T','U'],leftAnswer:"POPCORN",rightAnswer:"BUTTER",fact:"Americans consume about 17 billion quarts of popcorn every year."},
-  {id:124,topic:"Fun & Games 🎮",stars:2,leftLetters:['H','R'],overlapLetters:['O'],rightLetters:['E','I','M','V'],leftAnswer:"HORROR",rightAnswer:"MOVIE",fact:"Psycho in 1960 was the first film to show a toilet flushing on screen."},
-  {id:125,topic:"Daily Life 🗓️",stars:3,leftLetters:['I','L'],overlapLetters:['A','E','S'],rightLetters:['T'],leftAnswer:"AISLE",rightAnswer:"SEAT",fact:"The aisle seat is the most popular choice on flights."},
-  {id:126,topic:"Daily Life 🗓️",stars:1,leftLetters:['O'],overlapLetters:['D'],rightLetters:['C','K','U'],leftAnswer:"ODD",rightAnswer:"DUCK",fact:"Odd Duck is a quirky phrase used to describe someone who is charmingly different."},
-  {id:127,topic:"Rhyme Time 🎤",stars:2,leftLetters:[],overlapLetters:['E','N','V'],rightLetters:['S','T'],leftAnswer:"EVEN",rightAnswer:"STEVEN",fact:"Even Steven means perfectly equal or balanced."},
-  {id:128,topic:"Fun & Games 🎮",stars:3,leftLetters:['H','T'],overlapLetters:['I','N'],rightLetters:['G'],leftAnswer:"NINTH",rightAnswer:"INNING",fact:"The ninth inning is the most dramatic in baseball."},
-  {id:129,topic:"Food & Drink 🍔",stars:1,leftLetters:['L','W'],overlapLetters:['E'],rightLetters:['D','N','O'],leftAnswer:"WELL",rightAnswer:"DONE",fact:"Well done steak is cooked to an internal temperature of 160 degrees Fahrenheit."},
-  {id:130,topic:"Food & Drink 🍔",stars:2,leftLetters:['B','G','L','M'],overlapLetters:['I','N','O'],rightLetters:[],leftAnswer:"BLOOMING",rightAnswer:"ONION",fact:"The Blooming Onion was created by Outback Steakhouse in 1988."},
-  {id:131,topic:"Food & Drink 🍔",stars:3,leftLetters:['C','E','R'],overlapLetters:['A','S'],rightLetters:['D','L'],leftAnswer:"CAESAR",rightAnswer:"SALAD",fact:"The Caesar salad was invented in Tijuana Mexico in 1924."},
-  {id:132,topic:"Rhyme Time 🎤",stars:1,leftLetters:['P'],overlapLetters:['B','U'],rightLetters:['G','R'],leftAnswer:"PUB",rightAnswer:"GRUB",fact:"Pub grub became a British institution in the 1960s."},
-  {id:133,topic:"Daily Life 🗓️",stars:2,leftLetters:['B','W','Y'],overlapLetters:['L','O'],rightLetters:['S','T'],leftAnswer:"WOBBLY",rightAnswer:"STOOL",fact:"A wobbly bar stool is practically a pub rite of passage."},
-  {id:134,topic:"Food & Drink 🍔",stars:3,leftLetters:['D','L'],overlapLetters:['C','O'],rightLetters:['A','N','R'],leftAnswer:"COLD",rightAnswer:"CORONA",fact:"Corona is best served ice cold with a wedge of lime."},
-  {id:135,topic:"Rhyme Time 🎤",stars:1,leftLetters:['M'],overlapLetters:['O','P'],rightLetters:['T'],leftAnswer:"MOP",rightAnswer:"TOP",fact:"Mop top was a famous hairstyle popularised by The Beatles in the 1960s."},
-  {id:136,topic:"Daily Life 🗓️",stars:2,leftLetters:['E','Y'],overlapLetters:['M','S'],rightLetters:['O','R'],leftAnswer:"MESSY",rightAnswer:"ROOMS",fact:"Studies show that messy rooms can actually stimulate creativity."},
-  {id:137,topic:"Daily Life 🗓️",stars:3,leftLetters:['L','O','W','Y'],overlapLetters:['E'],rightLetters:['H','T'],leftAnswer:"YELLOW",rightAnswer:"TEETH",fact:"Yellow teeth are not always a sign of poor health."},
-  {id:138,topic:"Daily Life 🗓️",stars:1,leftLetters:['B'],overlapLetters:['A','D'],rightLetters:['E','M','R'],leftAnswer:"BAD",rightAnswer:"DREAM",fact:"The average person has 3 to 5 dreams per night."},
-  {id:139,topic:"Living Things 🌿",stars:2,leftLetters:['E','S','T'],overlapLetters:['O','R'],rightLetters:['C','W'],leftAnswer:"ROOSTER",rightAnswer:"CROW",fact:"Both roosters and crows are famous for their loud calls at the start of the day."},
-  {id:140,topic:"Around the House 🏠",stars:3,leftLetters:['D','I','O'],overlapLetters:['A','R'],rightLetters:['L','M'],leftAnswer:"RADIO",rightAnswer:"ALARM",fact:"The first clock radio was patented in 1946."},
-  {id:141,topic:"Daily Life 🗓️",stars:1,leftLetters:['F','N','T'],overlapLetters:['O','R'],rightLetters:['W'],leftAnswer:"FRONT",rightAnswer:"ROW",fact:"Front row seats at concerts are the most coveted spots."},
-  {id:142,topic:"Food & Drink 🍔",stars:2,leftLetters:['C','N','O','P'],overlapLetters:['R'],rightLetters:['B','E','T','U'],leftAnswer:"POPCORN",rightAnswer:"BUTTER",fact:"Americans consume about 17 billion quarts of popcorn every year."},
-  {id:143,topic:"Fun & Games 🎮",stars:3,leftLetters:['H','R'],overlapLetters:['O'],rightLetters:['E','I','M','V'],leftAnswer:"HORROR",rightAnswer:"MOVIE",fact:"Psycho in 1960 was the first film to show a toilet flushing on screen."},
-  {id:144,topic:"Rhyme Time 🎤",stars:1,leftLetters:['F'],overlapLetters:['A','T'],rightLetters:['C'],leftAnswer:"FAT",rightAnswer:"CAT",fact:"Fat cat is a phrase dating to the 1920s."},
-  {id:145,topic:"Food & Drink 🍔",stars:2,leftLetters:['H','S'],overlapLetters:['U'],rightLetters:['P','Y'],leftAnswer:"HUSH",rightAnswer:"PUPPY",fact:"Hush puppies are deep fried cornmeal fritters served alongside seafood."},
-  {id:146,topic:"Fun & Games 🎮",stars:3,leftLetters:['E','L','S'],overlapLetters:['A','B'],rightLetters:['T'],leftAnswer:"BASEBALL",rightAnswer:"BAT",fact:"Baseball bats were originally made from any available wood."},
-  {id:147,topic:"Figures of Speech 🗣️",stars:1,leftLetters:['O'],overlapLetters:['D'],rightLetters:['C','K','U'],leftAnswer:"ODD",rightAnswer:"DUCK",fact:"Odd duck describes someone quirky or different."},
-  {id:148,topic:"Rhyme Time 🎤",stars:2,leftLetters:[],overlapLetters:['E','N','V'],rightLetters:['S','T'],leftAnswer:"EVEN",rightAnswer:"STEVEN",fact:"Even Steven means perfectly balanced or equal."},
-  {id:149,topic:"Fun & Games 🎮",stars:3,leftLetters:['H','T'],overlapLetters:['I','N'],rightLetters:['G'],leftAnswer:"NINTH",rightAnswer:"INNING",fact:"The ninth inning is the most dramatic in baseball."},
-  {id:150,topic:"Nature 🌿",stars:1,leftLetters:['I','P'],overlapLetters:['E','N'],rightLetters:['C','O'],leftAnswer:"PINE",rightAnswer:"CONE",fact:"Pine cones are the seed-bearing structures of pine trees."},
-  {id:151,topic:"Food & Drink 🍔",stars:2,leftLetters:['A','L'],overlapLetters:['E','P'],rightLetters:['I'],leftAnswer:"APPLE",rightAnswer:"PIE",fact:"Apple pie became an American symbol in the 1900s."},
-  {id:152,topic:"Around the House 🏠",stars:3,leftLetters:['D','W'],overlapLetters:['O'],rightLetters:['F','L','R'],leftAnswer:"WOOD",rightAnswer:"FLOOR",fact:"Hardwood floors can last over 100 years if properly maintained."},
-  {id:153,topic:"Rhyme Time 🎤",stars:1,leftLetters:['P'],overlapLetters:['B','U'],rightLetters:['G','R'],leftAnswer:"PUB",rightAnswer:"GRUB",fact:"Pub grub became a British institution in the 1960s."},
-  {id:154,topic:"Pub Life 🍺",stars:2,leftLetters:['B','W','Y'],overlapLetters:['L','O'],rightLetters:['S','T'],leftAnswer:"WOBBLY",rightAnswer:"STOOL",fact:"A wobbly bar stool is practically a pub rite of passage."},
-  {id:155,topic:"Pub Life 🍺",stars:3,leftLetters:['R'],overlapLetters:['B','E'],rightLetters:['L','O','T'],leftAnswer:"BEER",rightAnswer:"BOTTLE",fact:"The first mass produced glass beer bottle appeared in the 1850s."},
-  {id:156,topic:"Fun & Games 🎮",stars:1,leftLetters:['I'],overlapLetters:['P','T'],rightLetters:['O','S'],leftAnswer:"PIT",rightAnswer:"STOP",fact:"A Formula 1 pit stop takes about 2 seconds."},
-  {id:157,topic:"Fun & Games 🎮",stars:2,leftLetters:['E'],overlapLetters:['A','C','R'],rightLetters:['K','T'],leftAnswer:"RACE",rightAnswer:"TRACK",fact:"The Monaco Grand Prix is the most famous race track in Formula 1 history."},
-  {id:158,topic:"Around the House 🏠",stars:3,leftLetters:['E','G','N'],overlapLetters:['I'],rightLetters:['L','O'],leftAnswer:"ENGINE",rightAnswer:"OIL",fact:"Motor oil needs to be changed every 5000 to 10000 kilometres."},
-  {id:159,topic:"Nature 🌿",stars:1,leftLetters:['B','U'],overlapLetters:['E','L'],rightLetters:['A','H','W'],leftAnswer:"BLUE",rightAnswer:"WHALE",fact:"The blue whale is the largest animal ever known to have existed on Earth."},
-  {id:160,topic:"Nature 🌿",stars:2,leftLetters:['A','C','L','O'],overlapLetters:['R'],rightLetters:['E','F'],leftAnswer:"CORAL",rightAnswer:"REEF",fact:"Coral reefs support over 25% of all marine species."},
-  {id:161,topic:"Nature 🌿",stars:3,leftLetters:['A'],overlapLetters:['E','S'],rightLetters:['H','L'],leftAnswer:"SEA",rightAnswer:"SHELL",fact:"Sea shells are the protective exoskeletons of molluscs."},
-  {id:162,topic:"Nature 🌿",stars:1,leftLetters:['H','N','O','Y'],overlapLetters:['E'],rightLetters:['B'],leftAnswer:"HONEY",rightAnswer:"BEE",fact:"A single honey bee will make only about one twelfth of a teaspoon of honey."},
-  {id:163,topic:"Daily Life 🗓️",stars:2,leftLetters:['E','L','P'],overlapLetters:['N','O'],rightLetters:['C','T','U'],leftAnswer:"POLLEN",rightAnswer:"COUNT",fact:"Pollen counts are highest in the morning on warm windy days."},
-  {id:164,topic:"Daily Life 🗓️",stars:3,leftLetters:['M','S','U'],overlapLetters:['E','R'],rightLetters:['B','Z'],leftAnswer:"SUMMER",rightAnswer:"BREEZE",fact:"Summer Breeze by Seals and Crofts was a hit in 1972."},
-  {id:165,topic:"Around the House 🏠",stars:1,leftLetters:['D','N'],overlapLetters:['O','W'],rightLetters:['I','L','P'],leftAnswer:"DOWN",rightAnswer:"PILLOW",fact:"Down feathers have been used to fill pillows for centuries."},
-  {id:166,topic:"Around the House 🏠",stars:2,leftLetters:['B','I'],overlapLetters:['D','R'],rightLetters:['E','F'],leftAnswer:"BIRD",rightAnswer:"FEEDER",fact:"Bird feeders attract over 100 million birds to North American gardens each year."},
-  {id:167,topic:"Rhyme Time 🎤",stars:3,leftLetters:['H'],overlapLetters:['C','I','K'],rightLetters:['F','L'],leftAnswer:"CHICK",rightAnswer:"FLICK",fact:"Chick flick became a pop culture term in the 1980s."},
-  {id:168,topic:"Fun & Games 🎮",stars:1,leftLetters:['O','R','Y'],overlapLetters:['A','L'],rightLetters:['B'],leftAnswer:"ROYAL",rightAnswer:"BALL",fact:"Royal balls have been held at Buckingham Palace since the 19th century."},
-  {id:169,topic:"Rhyme Time 🎤",stars:2,leftLetters:[],overlapLetters:['P','U'],rightLetters:['C'],leftAnswer:"PUP",rightAnswer:"CUP",fact:"The FIFA World Cup trophy was designed in 1971."},
-  {id:170,topic:"Fun & Games 🎮",stars:3,leftLetters:['C','O'],overlapLetters:['E','R','S'],rightLetters:['J','Y'],leftAnswer:"SOCCER",rightAnswer:"JERSEY",fact:"Soccer jerseys now use lightweight moisture-wicking fabric."},
-  {id:171,topic:"Famous Places 📍",stars:1,leftLetters:['G','I'],overlapLetters:['B'],rightLetters:['E','N'],leftAnswer:"BIG",rightAnswer:"BEN",fact:"Big Ben is actually the name of the bell inside the Elizabeth Tower."},
-  {id:172,topic:"Transportation 🚌",stars:2,leftLetters:['B','L','O','U'],overlapLetters:['D','E'],rightLetters:['C','K','R'],leftAnswer:"DOUBLE",rightAnswer:"DECKER",fact:"Londons iconic red double decker buses were introduced in 1956."},
-  {id:173,topic:"Around the World 🌍",stars:3,leftLetters:['O'],overlapLetters:['D','L','N'],rightLetters:['E','G','A'],leftAnswer:"LONDON",rightAnswer:"ENGLAND",fact:"London has been the capital of England for over 1000 years."},
-  {id:174,topic:"TV Shows 📺",stars:1,leftLetters:['H','P'],overlapLetters:['A','Y'],rightLetters:['D','S'],leftAnswer:"HAPPY",rightAnswer:"DAYS",fact:"Happy Days ran from 1974 to 1984 and made The Fonz iconic."},
-  {id:175,topic:"Rhyme Time 🎤",stars:2,leftLetters:['O'],overlapLetters:['B'],rightLetters:['T','U','E'],leftAnswer:"BOOB",rightAnswer:"TUBE",fact:"Boob tube is British slang for television coined in the 1960s."},
-  {id:176,topic:"Daily Life 🗓️",stars:3,leftLetters:['E','M'],overlapLetters:['O','R','T'],rightLetters:['C','N','L'],leftAnswer:"REMOTE",rightAnswer:"CONTROL",fact:"The first TV remote control was invented in 1950 by Zenith."},
-  {id:177,topic:"Rhyme Time 🎤",stars:1,leftLetters:['P','L','I'],overlapLetters:['A','N'],rightLetters:['J','E'],leftAnswer:"PLAIN",rightAnswer:"JANE",fact:"Plain Jane is a phrase meaning ordinary looking used since the 1860s."},
-  {id:178,topic:"Daily Life 🗓️",stars:2,leftLetters:['F'],overlapLetters:['A','C','E'],rightLetters:['M','R'],leftAnswer:"FACE",rightAnswer:"CREAM",fact:"Face cream dates back to ancient Egypt."},
-  {id:179,topic:"Food & Drink 🍔",stars:3,leftLetters:['I','W'],overlapLetters:['S'],rightLetters:['C','E','H'],leftAnswer:"SWISS",rightAnswer:"CHEESE",fact:"Swiss cheese gets its characteristic holes from carbon dioxide bubbles."},
-  {id:180,topic:"Fun & Games 🎮",stars:1,leftLetters:['I','M','O','N'],overlapLetters:['S'],rightLetters:['A','Y'],leftAnswer:"SIMON",rightAnswer:"SAYS",fact:"Simon Says has been played by children for centuries."},
-  {id:181,topic:"Fun & Games 🎮",stars:2,leftLetters:['S','W'],overlapLetters:['G','I','N'],rightLetters:['D','A','C'],leftAnswer:"SWING",rightAnswer:"DANCING",fact:"Swing dancing originated in Harlem in the 1920s."},
-  {id:182,topic:"Daily Life 🗓️",stars:3,leftLetters:['L','U','E'],overlapLetters:['A','G'],rightLetters:['T'],leftAnswer:"LUGGAGE",rightAnswer:"TAG",fact:"Luggage tags became standard practice in the 1800s."},
-  {id:183,topic:"Calendar 📅",stars:1,leftLetters:['L','P'],overlapLetters:['A','E'],rightLetters:['R','Y'],leftAnswer:"LEAP",rightAnswer:"YEAR",fact:"Leap years occur every 4 years to keep our calendar aligned."},
-  {id:184,topic:"TV Shows 📺",stars:2,leftLetters:['G','S'],overlapLetters:['B','U'],rightLetters:['N','Y'],leftAnswer:"BUGS",rightAnswer:"BUNNY",fact:"Bugs Bunny first appeared in 1940."},
-  {id:185,topic:"Daily Life 🗓️",stars:3,leftLetters:['D','L'],overlapLetters:['E','P','U'],rightLetters:['J','M','R'],leftAnswer:"PUDDLE",rightAnswer:"JUMPER",fact:"Puddle jumping is a beloved childhood activity."},
-  {id:186,topic:"Fun & Games 🎮",stars:1,leftLetters:['L','P','Y'],overlapLetters:['A'],rightLetters:['C','H','T'],leftAnswer:"PLAY",rightAnswer:"CATCH",fact:"A game of catch is one of the simplest and most beloved outdoor activities."},
-  {id:187,topic:"Daily Life 🗓️",stars:2,leftLetters:['B','K'],overlapLetters:['E','I'],rightLetters:['D','R'],leftAnswer:"BIKE",rightAnswer:"RIDE",fact:"The bicycle was invented in 1817."},
-  {id:188,topic:"Food & Drink 🍔",stars:3,leftLetters:['I','P'],overlapLetters:['C','N'],rightLetters:['H','L','U'],leftAnswer:"PICNIC",rightAnswer:"LUNCH",fact:"The word picnic first appeared in English in the 1740s."},
-  {id:189,topic:"Fun & Games 🎮",stars:3,leftLetters:['E','L'],overlapLetters:['O','P'],rightLetters:['I','N','S','T'],leftAnswer:"POLE",rightAnswer:"POSITION",fact:"Pole position in Formula 1 goes to the fastest qualifier."},
-  {id:190,topic:"Music 🎵",stars:2,leftLetters:['H'],overlapLetters:['E','T'],rightLetters:['A','B','L','S'],leftAnswer:"THE",rightAnswer:"BEATLES",fact:"The Beatles are the best selling music artists of all time."},
-  {id:191,topic:"Fun & Games 🎮",stars:1,leftLetters:['E','M'],overlapLetters:['A','T'],rightLetters:['C','I','N','P'],leftAnswer:"TEAM",rightAnswer:"CAPTAIN",fact:"The captains armband in soccer dates back to the early 1900s."},
-  {id:192,topic:"Daily Life 🗓️",stars:2,leftLetters:['E','N'],overlapLetters:['G','R'],rightLetters:['A','S'],leftAnswer:"GREEN",rightAnswer:"GRASS",fact:"The best soccer pitches use a blend of natural and synthetic fibres."},
-  {id:193,topic:"Fun & Games 🎮",stars:3,leftLetters:['I','N','W'],overlapLetters:['G'],rightLetters:['A','L','O'],leftAnswer:"WINNING",rightAnswer:"GOAL",fact:"The fastest goal in World Cup history was scored just 11 seconds in."},
-  {id:194,topic:"Food & Drink 🍔",stars:1,leftLetters:['C','H','N'],overlapLetters:['E','F','R'],rightLetters:['I','S'],leftAnswer:"FRENCH",rightAnswer:"FRIES",fact:"French fries are believed to have originated in Belgium."},
-  {id:195,topic:"Living Things 🌿",stars:2,leftLetters:['A','G','M','N'],overlapLetters:['E','R'],rightLetters:['D','H','P','S'],leftAnswer:"GERMAN",rightAnswer:"SHEPHERD",fact:"The German Shepherd was first bred in Germany in 1899."},
-  {id:196,topic:"Food & Drink 🍔",stars:3,leftLetters:['A','U'],overlapLetters:['I','N','R','S'],rightLetters:['D','E','G'],leftAnswer:"RUSSIAN",rightAnswer:"DRESSING",fact:"Russian dressing was actually invented in New Hampshire USA."},
-  {id:197,topic:"TV Shows 📺",stars:3,leftLetters:['A','M'],overlapLetters:['E','S'],rightLetters:['R','T'],leftAnswer:"SESAME",rightAnswer:"STREET",fact:"Sesame Street has been teaching children since 1969."},
-  {id:198,topic:"Fun & Games 🎮",stars:1,leftLetters:['A','M'],overlapLetters:['N'],rightLetters:['H','T','U'],leftAnswer:"MAN",rightAnswer:"HUNT",fact:"Man Hunt is a classic playground game."},
-  {id:199,topic:"Fun & Games 🎮",stars:2,leftLetters:['P','T'],overlapLetters:['E','S'],rightLetters:['D','I','L'],leftAnswer:"STEEP",rightAnswer:"SLIDE",fact:"The tallest playground slide ever built stood over 10 storeys high."},
-  {id:200,topic:"Daily Life 🗓️",stars:3,leftLetters:['C','H','O','S'],overlapLetters:['L'],rightLetters:['B','E'],leftAnswer:"SCHOOL",rightAnswer:"BELL",fact:"School bells have been ringing students to class since the 1800s."},
-  {id:201,topic:"Living Things 🌿",stars:1,leftLetters:['M','R','Y'],overlapLetters:['A'],rightLetters:['N','S','T'],leftAnswer:"ARMY",rightAnswer:"ANTS",fact:"Army ants live in colonies of up to 700000."},
-  {id:202,topic:"Daily Life 🗓️",stars:2,leftLetters:['R'],overlapLetters:['A','E','P'],rightLetters:['L','T'],leftAnswer:"PAPER",rightAnswer:"PLATE",fact:"The paper plate was invented in 1904."},
-  {id:203,topic:"Food & Drink 🍔",stars:3,leftLetters:['P','T'],overlapLetters:['A','S'],rightLetters:['D','L'],leftAnswer:"PASTA",rightAnswer:"SALAD",fact:"Pasta salad became a staple of summer picnics in the 1970s."},
-  {id:204,topic:"Food & Drink 🍔",stars:1,leftLetters:['D','R'],overlapLetters:['E'],rightLetters:['B','S','T'],leftAnswer:"RED",rightAnswer:"BEETS",fact:"Beets get their deep red colour from betalain pigment."},
-  {id:205,topic:"Food & Drink 🍔",stars:2,leftLetters:['B','Y'],overlapLetters:['A'],rightLetters:['C','O','R','T'],leftAnswer:"BABY",rightAnswer:"CARROT",fact:"Baby carrots were invented in 1986."},
-  {id:206,topic:"Food & Drink 🍔",stars:3,leftLetters:['G','R'],overlapLetters:['E','N'],rightLetters:['A','B','S'],leftAnswer:"GREEN",rightAnswer:"BEANS",fact:"Green beans were one of the first vegetables cultivated in the Americas."},
-  {id:207,topic:"Food & Drink 🍔",stars:1,leftLetters:['E','G','H','L','S'],overlapLetters:['I','N'],rightLetters:['F','M','U'],leftAnswer:"ENGLISH",rightAnswer:"MUFFIN",fact:"The English muffin was invented in New York in the 1880s."},
-  {id:208,topic:"Fun & Games 🎮",stars:1,leftLetters:['H','O'],overlapLetters:['E','M'],rightLetters:['A','T'],leftAnswer:"HOME",rightAnswer:"TEAM",fact:"Home team advantage is real — home teams win about 60% of games."},
-  {id:209,topic:"Around the World 🌍",stars:2,leftLetters:['D','I'],overlapLetters:['A','N'],rightLetters:['C','E','O'],leftAnswer:"INDIAN",rightAnswer:"OCEAN",fact:"The Indian Ocean is the third largest ocean and the warmest."},
-  {id:210,topic:"Music 🎵",stars:1,leftLetters:['D','M','U'],overlapLetters:['R'],rightLetters:['L','O'],leftAnswer:"DRUM",rightAnswer:"ROLL",fact:"A drum roll is used to build tension and has been a staple of live performance."},
-  {id:211,topic:"Music 🎵",stars:2,leftLetters:['H','V','Y'],overlapLetters:['A','E'],rightLetters:['M','T','L'],leftAnswer:"HEAVY",rightAnswer:"METAL",fact:"Heavy metal emerged in the late 1960s with Black Sabbath."},
-  {id:212,topic:"Music 🎵",stars:3,leftLetters:[],overlapLetters:['A','I','R'],rightLetters:['G','T','U'],leftAnswer:"AIR",rightAnswer:"GUITAR",fact:"Air guitar became a worldwide phenomenon with annual championships in Finland."},
-  {id:213,topic:"Around the World 🌍",stars:1,leftLetters:['D','I'],overlapLetters:['A','N'],rightLetters:['C','E','O'],leftAnswer:"INDIAN",rightAnswer:"OCEAN",fact:"The Indian Ocean is the warmest ocean covering about 20% of Earths surface."},
-  {id:219,topic:"Nature 🌿",stars:1,leftLetters:['L','S'],overlapLetters:['A','T'],rightLetters:['E','R','W'],leftAnswer:"SALT",rightAnswer:"WATER",fact:"About 97% of all water on Earth is salt water."},
-  {id:220,topic:"Nature 🌿",stars:2,leftLetters:['N','S'],overlapLetters:['A','D'],rightLetters:['L','O','R'],leftAnswer:"SAND",rightAnswer:"DOLLAR",fact:"Sand dollars are actually living sea creatures related to sea urchins."},
-  {id:221,topic:"80s Vibe 🕹️",stars:1,leftLetters:['I','K','R'],overlapLetters:['B','U'],rightLetters:['C','E'],leftAnswer:"RUBIK",rightAnswer:"CUBE",fact:"The Rubiks Cube was invented in 1974 by Hungarian professor Erno Rubik."},
-  {id:222,topic:"80s Vibe 🕹️",stars:2,leftLetters:['E','L','O'],overlapLetters:['R'],rightLetters:['I','K','N'],leftAnswer:"ROLLER",rightAnswer:"RINK",fact:"Roller rinks peaked in popularity in the 1980s."},
-  {id:223,topic:"80s Vibe 🕹️",stars:3,leftLetters:['B','E','G'],overlapLetters:['A','C'],rightLetters:['H','P','T'],leftAnswer:"CABBAGE",rightAnswer:"PATCH",fact:"Cabbage Patch Kids sparked one of the first toy buying frenzies in 1983."},
-  {id:224,topic:"Fun & Games 🎮",stars:2,leftLetters:['E'],overlapLetters:['A','C','R'],rightLetters:[],leftAnswer:"RACE",rightAnswer:"CAR",fact:"Formula 1 race cars can accelerate from 0 to 100km per hour in under 2 seconds."},
-  {id:225,topic:"Nature 🌿",stars:3,leftLetters:['N','V'],overlapLetters:['E','S'],rightLetters:['A'],leftAnswer:"SEVEN",rightAnswer:"SEAS",fact:"The Seven Seas is an ancient phrase referring to all the worlds oceans."},
-  {id:226,topic:"⚽ World Cup",stars:2,leftLetters:['E'],overlapLetters:['D','R'],rightLetters:['A','C'],leftAnswer:"RED",rightAnswer:"CARD",fact:"The first red card in World Cup history was shown in 1966."},
-  {id:227,topic:"Food & Drink 🍔",stars:1,leftLetters:['A','B','D','E'],overlapLetters:['R'],rightLetters:['L','O'],leftAnswer:"BREAD",rightAnswer:"ROLL",fact:"Bread rolls have been a staple of family dinners for centuries."},
-  {id:228,topic:"Food & Drink 🍔",stars:2,leftLetters:['D','E','H','M','S'],overlapLetters:['A'],rightLetters:['O','P','T'],leftAnswer:"MASHED",rightAnswer:"POTATO",fact:"Mashed potato became a family dinner staple in the 1800s."},
-  {id:229,topic:"Food & Drink 🍔",stars:3,leftLetters:['C','M','R','T'],overlapLetters:['F','O'],rightLetters:['D'],leftAnswer:"COMFORT",rightAnswer:"FOOD",fact:"Comfort food is a universal concept — people reach for familiar childhood foods."},
-  {id:230,topic:"Fun & Games 🎮",stars:1,leftLetters:['F','O','U'],overlapLetters:['R'],rightLetters:['E','H','L','W'],leftAnswer:"FOUR",rightAnswer:"WHEELER",fact:"The four-wheeler was first developed in the 1960s."},
-  {id:231,topic:"Transportation 🚌",stars:2,leftLetters:['B','E','G'],overlapLetters:['A'],rightLetters:['C','R','T'],leftAnswer:"BAGGAGE",rightAnswer:"CART",fact:"Baggage carts at airports were introduced in the 1970s."},
-  {id:232,topic:"Daily Life 🗓️",stars:3,leftLetters:['B','Y'],overlapLetters:['A'],rightLetters:['C','E','G','I','R'],leftAnswer:"BABY",rightAnswer:"CARRIAGE",fact:"The baby carriage was invented in 1733 by William Kent."},
-  {id:233,topic:"Characters 🎭",stars:1,leftLetters:['B','T'],overlapLetters:['A'],rightLetters:['M','N'],leftAnswer:"BAT",rightAnswer:"MAN",fact:"Batman first appeared in Detective Comics in 1939."},
-  {id:234,topic:"Fun & Games 🎮",stars:2,leftLetters:['C','H','K','Y'],overlapLetters:['E','O'],rightLetters:['A','G','I','L'],leftAnswer:"HOCKEY",rightAnswer:"GOALIE",fact:"The goalie mask in hockey was first worn by Jacques Plante in 1959."},
-  {id:235,topic:"People 👤",stars:3,leftLetters:['B'],overlapLetters:['E'],rightLetters:['K','P','R'],leftAnswer:"BEE",rightAnswer:"KEEPER",fact:"Beekeeping dates back over 9000 years."},
-  {id:236,topic:"Pet Life 🐾",stars:1,leftLetters:['D','G'],overlapLetters:['O'],rightLetters:['A','C','L','R'],leftAnswer:"DOG",rightAnswer:"COLLAR",fact:"Dog collars have been used for thousands of years."},
-  {id:237,topic:"Music 🎵",stars:2,leftLetters:['C','D','O','R'],overlapLetters:['E'],rightLetters:['L','S','V'],leftAnswer:"RECORD",rightAnswer:"SLEEVE",fact:"Record sleeves became an art form in the 1960s."},
-  {id:238,topic:"Daily Life 🗓️",stars:3,leftLetters:['D','E','L'],overlapLetters:['T'],rightLetters:['B','N','O','U'],leftAnswer:"DELETE",rightAnswer:"BUTTON",fact:"The delete button was introduced on early computer keyboards in the 1970s."},
-  {id:239,topic:"Fun & Games 🎮",stars:1,leftLetters:['A'],overlapLetters:['G'],rightLetters:['F','I','T'],leftAnswer:"GAG",rightAnswer:"GIFT",fact:"Gag gifts became popular in the 20th century."},
-  {id:240,topic:"Fun & Games 🎮",stars:2,leftLetters:['E','J'],overlapLetters:['K','O'],rightLetters:['B'],leftAnswer:"JOKE",rightAnswer:"BOOK",fact:"The worlds oldest recorded joke dates back to 1900 BC in ancient Sumeria."},
-  {id:241,topic:"Rhyme Time 🎤",stars:3,leftLetters:['F'],overlapLetters:['N','U','Y'],rightLetters:['B'],leftAnswer:"FUNNY",rightAnswer:"BUNNY",fact:"The Easter Bunny tradition originated in Germany in the 1600s."},
-  {id:242,topic:"Living Things 🌿",stars:1,leftLetters:['M'],overlapLetters:['A'],rightLetters:['B','E','R'],leftAnswer:"MAMA",rightAnswer:"BEAR",fact:"Mama bears are among the most protective parents in the animal kingdom."},
-  {id:243,topic:"Music 🎵",stars:2,leftLetters:['P'],overlapLetters:['O'],rightLetters:['C','E','N','R','T'],leftAnswer:"POP",rightAnswer:"CONCERT",fact:"The worlds largest pop concert drew 3.5 million people in Rio de Janeiro in 1994."},
-  {id:244,topic:"Music 🎵",stars:3,leftLetters:['D','W'],overlapLetters:['E','I','S','T'],rightLetters:['R'],leftAnswer:"TWISTED",rightAnswer:"SISTER",fact:"Twisted Sister formed in 1972 and We're Not Gonna Take It became a rock anthem."},
-  {id:245,topic:"Rhyme Time 🎤",stars:1,leftLetters:['H','W'],overlapLetters:['A','M'],rightLetters:['B'],leftAnswer:"WHAM",rightAnswer:"BAM",fact:"Wham formed in 1981 and became one of the most successful pop duos of the 80s."},
-  {id:246,topic:"People 👤",stars:2,leftLetters:['A','H','T'],overlapLetters:['E','F','R'],rightLetters:['G','I','U'],leftAnswer:"FATHER",rightAnswer:"FIGURE",fact:"The term father figure describes someone who provides guidance in the role of a father."},
-  {id:247,topic:"Music 🎵",stars:3,leftLetters:['A','C','L'],overlapLetters:['E','R','S'],rightLetters:['H','I','P','W'],leftAnswer:"CARELESS",rightAnswer:"WHISPER",fact:"Careless Whisper was written by George Michael at age 17 on a bus."},
-  {id:248,topic:"People 👤",stars:1,leftLetters:['A','D','I','R'],overlapLetters:['O'],rightLetters:['H','S','T'],leftAnswer:"RADIO",rightAnswer:"HOST",fact:"Radio hosts have been entertaining audiences since the first commercial broadcast in 1920."},
-  {id:249,topic:"People 👤",stars:2,leftLetters:['D','G','I','N','W'],overlapLetters:['E'],rightLetters:['C','M'],leftAnswer:"WEDDING",rightAnswer:"EMCEE",fact:"The wedding emcee tradition dates back centuries."},
-  {id:250,topic:"Music 🎵",stars:3,leftLetters:['A','K','O'],overlapLetters:['E','R'],rightLetters:['G','I','N','S'],leftAnswer:"KARAOKE",rightAnswer:"SINGER",fact:"Karaoke was invented in Japan in 1971 and means empty orchestra."},
-  {id:251,topic:"Living Things 🌿",stars:1,leftLetters:['A','D','H','S'],overlapLetters:['E'],rightLetters:['R','T'],leftAnswer:"SHADE",rightAnswer:"TREE",fact:"Shade trees can reduce surrounding air temperatures by up to 10 degrees."},
-  {id:252,topic:"Around the House 🏠",stars:2,leftLetters:['A','D','E','F'],overlapLetters:['M','R'],rightLetters:['I','O'],leftAnswer:"FRAMED",rightAnswer:"MIRROR",fact:"Framed mirrors became fashionable in the 17th century."},
-  {id:253,topic:"Daily Life 🗓️",stars:3,leftLetters:['E','T'],overlapLetters:['D','I','N'],rightLetters:['O','S','W'],leftAnswer:"TINTED",rightAnswer:"WINDOWS",fact:"Tinted windows were first developed for cars in the 1960s."},
-  {id:254,topic:"Nature 🌿",stars:1,leftLetters:['D','P'],overlapLetters:['E'],rightLetters:['A','K','L'],leftAnswer:"DEEP",rightAnswer:"LAKE",fact:"The worlds deepest lake is Lake Baikal in Russia at over 1600 metres deep."},
-  {id:255,topic:"Nature 🌿",stars:2,leftLetters:['A','S'],overlapLetters:['E'],rightLetters:['L','V'],leftAnswer:"SEA",rightAnswer:"LEVEL",fact:"Global sea levels have risen about 20cm since 1900."},
-  {id:256,topic:"Nature 🌿",stars:3,leftLetters:['D','G','N','W'],overlapLetters:['I'],rightLetters:['E','R','V'],leftAnswer:"WINDING",rightAnswer:"RIVER",fact:"The Amazon River winds over 6400km through South America."},
-  {id:257,topic:"Around the World 🌍",stars:1,leftLetters:['E','M','O','X'],overlapLetters:['C','I'],rightLetters:['T','Y'],leftAnswer:"MEXICO",rightAnswer:"CITY",fact:"Mexico City is one of the largest cities in the world with over 21 million people."},
-  {id:258,topic:"Around the World 🌍",stars:2,leftLetters:['D','L','N','O'],overlapLetters:['E','G'],rightLetters:['A','T'],leftAnswer:"GOLDEN",rightAnswer:"GATE",fact:"The Golden Gate Bridge took four years to build and opened in 1937."},
-  {id:259,topic:"Around the World 🌍",stars:3,leftLetters:['I','M'],overlapLetters:['A'],rightLetters:['B','C','E','H'],leftAnswer:"MIAMI",rightAnswer:"BEACH",fact:"Miami Beach was developed as a resort destination in the 1910s."},
-  {id:260,topic:"Human Body 🧠",stars:1,leftLetters:['A','H','R'],overlapLetters:['I'],rightLetters:['E','L','N'],leftAnswer:"HAIR",rightAnswer:"LINE",fact:"Male pattern baldness affects about 50% of men by age 50."},
-  {id:261,topic:"Living Things 🌿",stars:2,leftLetters:['E','H','W'],overlapLetters:['I','T'],rightLetters:['A','B','R'],leftAnswer:"WHITE",rightAnswer:"RABBIT",fact:"The White Rabbit in Alice in Wonderland is one of literatures most iconic characters."},
-  {id:262,topic:"Daily Life 🗓️",stars:3,leftLetters:['D','T'],overlapLetters:['E','L'],rightLetters:['F','I'],leftAnswer:"DELETED",rightAnswer:"FILE",fact:"The first computer file deletion was on UNIX systems in the 1970s."},
-  {id:263,topic:"Rhyme Time 🎤",stars:1,leftLetters:['J'],overlapLetters:['E','T'],rightLetters:['S'],leftAnswer:"JET",rightAnswer:"SET",fact:"The jet set was a term coined in the 1950s to describe wealthy world travellers."},
-  {id:264,topic:"Living Things 🌿",stars:2,leftLetters:['A','L','M','R'],overlapLetters:['D'],rightLetters:['C','K','U'],leftAnswer:"MALLARD",rightAnswer:"DUCK",fact:"The mallard is the most common duck in the world."},
-  {id:265,topic:"Daily Life 🗓️",stars:3,leftLetters:['R'],overlapLetters:['A','E','P'],rightLetters:['L','N'],leftAnswer:"PAPER",rightAnswer:"PLANE",fact:"The world record for the longest paper plane flight is 69.14 metres."},
-  {id:266,topic:"Daily Life 🗓️",stars:1,leftLetters:['A','F','I','O','T','U'],overlapLetters:['N'],rightLetters:['E','P'],leftAnswer:"FOUNTAIN",rightAnswer:"PEN",fact:"The fountain pen was invented in the 10th century."},
-  {id:267,topic:"Nature 🌿",stars:2,leftLetters:['A','E','N'],overlapLetters:['C','O'],rightLetters:['P','S','T','U'],leftAnswer:"OCEAN",rightAnswer:"OCTOPUS",fact:"Octopuses have three hearts two brains and blue blood."},
-  {id:268,topic:"Places 📍",stars:3,leftLetters:['T'],overlapLetters:['A','O'],rightLetters:['L','P','R'],leftAnswer:"TATTOO",rightAnswer:"PARLOR",fact:"The word tattoo comes from the Polynesian word tatau."},
-  {id:269,topic:"Daily Life 🗓️",stars:1,leftLetters:['A','C','D','E','N'],overlapLetters:['L'],rightLetters:['G','H','I','T'],leftAnswer:"CANDLE",rightAnswer:"LIGHT",fact:"Candles have been used for light for over 5000 years."},
-  {id:270,topic:"What to Wear 👕",stars:2,leftLetters:['G','I'],overlapLetters:['H'],rightLetters:['E','L','S'],leftAnswer:"HIGH",rightAnswer:"HEELS",fact:"High heels were originally worn by men in 10th century Persian cavalry."},
-  {id:271,topic:"Food & Drink 🍔",stars:3,leftLetters:['I','N','R'],overlapLetters:['D','E'],rightLetters:['A','T'],leftAnswer:"DINNER",rightAnswer:"DATE",fact:"The concept of the dinner date became a social norm in the early 20th century."},
-  {id:272,topic:"Living Things 🌿",stars:1,leftLetters:['B','K'],overlapLetters:['O'],rightLetters:['M','R','W'],leftAnswer:"BOOK",rightAnswer:"WORM",fact:"Bookworms are actually real insects that burrow through old books."},
-  {id:273,topic:"People 👤",stars:2,leftLetters:['A','Y'],overlapLetters:['B'],rightLetters:['E','M','O','R'],leftAnswer:"BABY",rightAnswer:"BOOMER",fact:"Baby boomers are people born between 1946 and 1964."},
-  {id:274,topic:"Rhyme Time 🎤",stars:3,leftLetters:['N','S'],overlapLetters:['A','I','L'],rightLetters:['M'],leftAnswer:"SNAIL",rightAnswer:"MAIL",fact:"Snail mail became a slang term for postal services in the 1980s."},
-  {id:275,topic:"Nature 🌿",stars:1,leftLetters:['I','N','P'],overlapLetters:['E'],rightLetters:['R','T'],leftAnswer:"PINE",rightAnswer:"TREE",fact:"Pine trees are among the longest living organisms on Earth."},
-  {id:276,topic:"Music 🎵",stars:2,leftLetters:['C','D','O'],overlapLetters:['E','R'],rightLetters:['A','L','P','Y'],leftAnswer:"RECORD",rightAnswer:"PLAYER",fact:"The record player was invented by Thomas Edison in 1877."},
-  {id:277,topic:"Fun & Games 🎮",stars:3,leftLetters:['V'],overlapLetters:['D','O'],rightLetters:['L'],leftAnswer:"VOODOO",rightAnswer:"DOLL",fact:"Voodoo dolls are a pop culture invention with little to do with actual Vodou practice."},
-  {id:278,topic:"Daily Life 🗓️",stars:1,leftLetters:['I','P'],overlapLetters:['L'],rightLetters:['G','O','S'],leftAnswer:"LIP",rightAnswer:"GLOSS",fact:"Lip gloss was invented in 1930 by Max Factor."},
-  {id:279,topic:"Food & Drink 🍔",stars:2,leftLetters:['C','F','H','N'],overlapLetters:['E','R'],rightLetters:['P','S'],leftAnswer:"FRENCH",rightAnswer:"PRESS",fact:"The French press coffee maker was actually patented by an Italian in 1929."},
-  {id:280,topic:"Daily Life 🗓️",stars:3,leftLetters:['O','V'],overlapLetters:['E','L'],rightLetters:['R','T'],leftAnswer:"LOVE",rightAnswer:"LETTER",fact:"Love letters date back thousands of years with examples found in Egyptian papyrus."},
-  {id:281,topic:"Food & Drink 🍔",stars:1,leftLetters:['R'],overlapLetters:['A','B'],rightLetters:['T'],leftAnswer:"BAR",rightAnswer:"TAB",fact:"Running a tab at a bar originated in British pubs in the 19th century."},
-  {id:282,topic:"Food & Drink 🍔",stars:2,leftLetters:['B','I','R'],overlapLetters:['E','T'],rightLetters:['S','W'],leftAnswer:"BITTER",rightAnswer:"SWEET",fact:"Bittersweet chocolate must contain at least 35% cocoa solids."},
-  {id:283,topic:"Rhyme Time 🎤",stars:3,leftLetters:['R','T'],overlapLetters:['E','F','L','U'],rightLetters:['H','S'],leftAnswer:"TRUFFLE",rightAnswer:"SHUFFLE",fact:"The Truffle Shuffle is a famous dance move from the 1985 film The Goonies."},
-  {id:284,topic:"Nature 🌿",stars:1,leftLetters:['C','E','H'],overlapLetters:['A','B'],rightLetters:['L'],leftAnswer:"BEACH",rightAnswer:"BALL",fact:"Beach volleyball became an Olympic sport in 1996."},
-  {id:285,topic:"Nature 🌿",stars:3,leftLetters:['A','R','U'],overlapLetters:['E','S','T'],rightLetters:['C','H'],leftAnswer:"TREASURE",rightAnswer:"CHEST",fact:"The most famous treasure chest story is from Treasure Island published in 1883."},
-  {id:286,topic:"Around the House 🏠",stars:2,leftLetters:['C','H','K','N'],overlapLetters:['E','I'],rightLetters:['R','W'],leftAnswer:"CHICKEN",rightAnswer:"WIRE",fact:"Chicken wire was invented in the 1840s."},
-  {id:287,topic:"People 👤",stars:3,leftLetters:['L','S'],overlapLetters:['A'],rightLetters:['C','D','E','N','R'],leftAnswer:"SALSA",rightAnswer:"DANCER",fact:"Salsa music and dance originated in New York City in the 1960s."},
-  {id:288,topic:"Fun & Games 🎮",stars:1,leftLetters:['A','E','R','T'],overlapLetters:['K'],rightLetters:['C','I'],leftAnswer:"KARATE",rightAnswer:"KICK",fact:"Karate originated in the Ryukyu Kingdom now modern Okinawa Japan."},
-  {id:289,topic:"Fun & Games 🎮",stars:2,leftLetters:['H','I'],overlapLetters:['C','P','T'],rightLetters:['E','F','R'],leftAnswer:"PITCH",rightAnswer:"PERFECT",fact:"Pitch Perfect became a surprise hit grossing over 115 million dollars worldwide."},
-  {id:290,topic:"Rhyme Time 🎤",stars:1,leftLetters:['I','T'],overlapLetters:['E'],rightLetters:['D','Y'],leftAnswer:"TIE",rightAnswer:"DYE",fact:"Tie-dye became a symbol of the 1960s counterculture movement."},
-  {id:291,topic:"Daily Life 🗓️",stars:2,leftLetters:['C','P'],overlapLetters:['A','E','T'],rightLetters:['D','F'],leftAnswer:"ACCEPT",rightAnswer:"DEFEAT",fact:"Accepting defeat gracefully is considered a mark of good sportsmanship."},
-  {id:292,topic:"💬 Common Sayings",stars:3,leftLetters:['T','W'],overlapLetters:['E','S'],rightLetters:['C','U'],leftAnswer:"SWEET",rightAnswer:"SUCCESS",fact:"Sweet Success has been used in English since the 1800s."},
-  {id:293,topic:"💬 Common Sayings",stars:1,leftLetters:['G','I'],overlapLetters:['H'],rightLetters:['E','O','P','S'],leftAnswer:"HIGH",rightAnswer:"HOPES",fact:"High Hopes was originally written by Sammy Cahn and Jimmy Van Heusen in 1959."},
-  {id:294,topic:"People 👤",stars:2,leftLetters:['E','M'],overlapLetters:['D','I','L'],rightLetters:['C','H'],leftAnswer:"MIDDLE",rightAnswer:"CHILD",fact:"Middle child syndrome was first studied in the 1960s."},
-  {id:295,topic:"Food & Drink 🍔",stars:3,leftLetters:['B','O','W'],overlapLetters:['A','L'],rightLetters:['G','S'],leftAnswer:"LOWBALL",rightAnswer:"GLASS",fact:"A lowball glass holds between 6 and 10 ounces."},
-  {id:296,topic:"Fun & Games 🎮",stars:1,leftLetters:['B','L'],overlapLetters:['A'],rightLetters:['G','T'],leftAnswer:"BALL",rightAnswer:"TAG",fact:"Tag is one of the oldest childrens games in the world."},
-  {id:297,topic:"Fun & Games 🎮",stars:2,leftLetters:['E','R','T'],overlapLetters:['I'],rightLetters:['G','N','S','W'],leftAnswer:"TIRE",rightAnswer:"SWING",fact:"Tire swings became popular in the 1950s."},
-  {id:298,topic:"Fun & Games 🎮",stars:3,leftLetters:[],overlapLetters:['E','R','T'],rightLetters:['O'],leftAnswer:"TEETER",rightAnswer:"TOTTER",fact:"The teeter totter has been a playground staple since the 17th century."},
-  {id:299,topic:"Fun & Games 🎮",stars:2,leftLetters:['A','N','K'],overlapLetters:['B'],rightLetters:['R','O','E'],leftAnswer:"BANK",rightAnswer:"ROBBER",fact:"Bank robberies peaked in the United States in 1991."},
-  {id:300,topic:"People 👤",stars:3,leftLetters:['J','N'],overlapLetters:['A','I'],rightLetters:['O','R','W'],leftAnswer:"NINJA",rightAnswer:"WARRIOR",fact:"Ninjas or shinobi were covert agents in feudal Japan."},
-  {id:301,topic:"80s Vibe 🕹️",stars:2,leftLetters:['C'],overlapLetters:['A','E','R'],rightLetters:['B'],leftAnswer:"CARE",rightAnswer:"BEAR",fact:"Care Bears were introduced in 1982 as greeting card characters."},
-  {id:302,topic:"Rhyme Time 🎤",stars:1,leftLetters:['P'],overlapLetters:['A','S'],rightLetters:['G'],leftAnswer:"PASS",rightAnswer:"GAS",fact:"Pass gas is a polite euphemism that has been used in English since the 1800s."},
-  {id:303,topic:"Food & Drink 🍔",stars:2,leftLetters:['E','G','V'],overlapLetters:['I'],rightLetters:['C','H','L'],leftAnswer:"VEGGIE",rightAnswer:"CHILLI",fact:"Veggie chilli became popular in the 1970s as a meatless alternative to traditional chilli."},
-  {id:304,topic:"Food & Drink 🍔",stars:1,leftLetters:['J','L','Y'],overlapLetters:['E'],rightLetters:['A','B','N','S'],leftAnswer:"JELLY",rightAnswer:"BEANS",fact:"Jelly beans were invented in the 1860s and became a staple of Easter baskets across America."},
-  {id:305,topic:"Food & Drink 🍔",stars:2,leftLetters:['O','R','T'],overlapLetters:['A','C'],rightLetters:['E','K'],leftAnswer:"CARROT",rightAnswer:"CAKE",fact:"Carrot cake became popular during World War 2 when sugar was rationed and carrots added natural sweetness."},
-  {id:306,topic:"Daily Life 🗓️",stars:3,leftLetters:['E'],overlapLetters:['P','R'],rightLetters:['A','S','Y'],leftAnswer:"PEPPER",rightAnswer:"SPRAY",fact:"Pepper spray was first developed as a commercial product in the 1960s inspired by the natural heat of chili peppers."},
-  {id:307,topic:"Body Part 🫀",stars:1,leftLetters:['A','E'],overlapLetters:['R'],rightLetters:['D','M','U'],leftAnswer:"EAR",rightAnswer:"DRUM",fact:"The ear drum is a thin membrane that vibrates when sound waves hit it transmitting sound to the inner ear."},
-  {id:308,topic:"Daily Life 🗓️",stars:2,leftLetters:['A','P','R'],overlapLetters:['E','S'],rightLetters:['K','Y'],leftAnswer:"SPARE",rightAnswer:"KEYS",fact:"Leaving spare keys with a trusted neighbour became common practice in suburban America in the 1950s."},
-  {id:309,topic:"Living Things 🌿",stars:3,leftLetters:['E'],overlapLetters:['A','S'],rightLetters:['B'],leftAnswer:"SEA",rightAnswer:"BASS",fact:"Sea bass is one of the most prized fish in fine dining and can live for over 30 years in the wild."},
-  {id:310,topic:"💬 Common Sayings",stars:2,leftLetters:['I','M'],overlapLetters:['A','D','T'],rightLetters:['E','F'],leftAnswer:"ADMIT",rightAnswer:"DEFEAT",fact:"Admit defeat is a common expression meaning to acknowledge you have lost or failed at something."},
-  {id:311,topic:"💬 Common Sayings",stars:1,leftLetters:[],overlapLetters:['L','O','W'],rightLetters:['B'],leftAnswer:"LOW",rightAnswer:"BLOW",fact:"Low blow comes from boxing where hitting below the belt is an illegal and unsporting move."},
-  {id:312,topic:"Daily Life 🗓️",stars:2,leftLetters:['L','O','T'],overlapLetters:['S'],rightLetters:['E','K','Y'],leftAnswer:"LOST",rightAnswer:"KEYS",fact:"The average person spends about 10 minutes a day looking for lost items with keys topping the list."},
-  {id:313,topic:"People 👤",stars:2,leftLetters:['T'],overlapLetters:['L','O','S'],rightLetters:['U'],leftAnswer:"LOST",rightAnswer:"SOUL",fact:"A lost soul is an expression for someone who feels directionless or spiritually adrift — used in English since the 1600s."},
-  {id:317,topic:"People 👤",stars:1,leftLetters:['A'],overlapLetters:['D'],rightLetters:['B','O'],leftAnswer:"DAD",rightAnswer:"BOD",fact:"Dad bod became a cultural phenomenon in 2015 when a viral article celebrated the relaxed physique of modern fathers."},
-  {id:318,topic:"Food & Drink 🍔",stars:2,leftLetters:['P'],overlapLetters:['O'],rightLetters:['B','E','L','T'],leftAnswer:"POP",rightAnswer:"BOTTLE",fact:"Pop bottles have been a staple of family celebrations since carbonated drinks were first bottled in the 1800s."},
-  {id:319,topic:"Movies 🎬",stars:3,leftLetters:[],overlapLetters:['A','D','Y'],rightLetters:['C','E','R'],leftAnswer:"DADDY",rightAnswer:"DAYCARE",fact:"Daddy Day Care starring Eddie Murphy was released in 2003 and became a family comedy classic."},
-  {id:320,topic:"Human Body 🧠",stars:1,leftLetters:['B','L'],overlapLetters:['A','D'],rightLetters:['E','H'],leftAnswer:"BALD",rightAnswer:"HEAD",fact:"Bald eagles get their name from the Old English word balde meaning white referring to their distinctive white head feathers."},
-  {id:321,topic:"💬 Common Sayings",stars:2,leftLetters:['A','G','L'],overlapLetters:['E'],rightLetters:['D','Y'],leftAnswer:"EAGLE",rightAnswer:"EYED",fact:"Eagle eyed means having very sharp eyesight or keen attention to detail — eagles can spot prey from over a mile away."},
-  {id:322,topic:"People 👤",stars:3,leftLetters:['G'],overlapLetters:['A','E','R'],rightLetters:['B','V'],leftAnswer:"EAGER",rightAnswer:"BEAVER",fact:"Eager beaver describes an enthusiastic hard-working person — the beaver is Canadas national animal and a symbol of industry."},
-  {id:314,topic:"Nature 🌿",stars:1,leftLetters:['M','P'],overlapLetters:['A','E','L'],rightLetters:['F'],leftAnswer:"MAPLE",rightAnswer:"LEAF",fact:"The maple leaf has been a symbol of Canada since the 1700s and appears on the Canadian flag adopted in 1965."},
-  {id:315,topic:"TV Shows 📺",stars:2,leftLetters:['L','O','Y'],overlapLetters:['E','N'],rightLetters:['S','T','U'],leftAnswer:"LOONEY",rightAnswer:"TUNES",fact:"Looney Tunes debuted in 1930 and introduced Bugs Bunny Daffy Duck and Porky Pig to generations of fans."},
-  {id:316,topic:"People 👤",stars:3,leftLetters:['G'],overlapLetters:['A','E','R'],rightLetters:['B','V'],leftAnswer:"EAGER",rightAnswer:"BEAVER",fact:"Eager beaver describes an enthusiastic hard-working person — the beaver is also Canadas national animal."},
-];
-
 const dailySets=[
   {e:12,m:1,h:3},    // Day 1
   {e:13,m:2,h:4},    // Day 2
@@ -1454,21 +1133,489 @@ const dailySets=[
   {e:332,m:333,h:334}, // Day 66 Jul 08 — National Video Game Day
   {e:174,m:175,h:176}, // Day 67 Jul 09 — Retro TV
   {e:379,m:380,h:381}, // Day 68 Jul 10 — Three Course Dinner
-    {e:171,m:190,h:172}, // Day 69 Jul 11 — UK Day
+  {e:171,m:190,h:172}, // Day 69 Jul 11 — UK Day
   {e:335,m:336,h:337}, // Day 70 Jul 12 — Wimbledon
   {e:323,m:325,h:324}, // Day 71 Jul 13 — Stay Cool
   {e:375,m:105,h:376}, // Day 72 Jul 14 — Bastille Day
   {e:329,m:330,h:331}, // Day 73 Jul 15 — Like Home
+  {e:338,m:339,h:340}, // Day 74 Jul 16 — Battery
+  {e:326,m:327,h:328}, // Day 75 Jul 17 — Tiny Stuff
+  {e:374,m:377,h:378}, // Day 76 Jul 18 — Scoring Plays
+  {e:226,m:341,h:193}, // Day 77 Jul 19 — World Cup Final
+  {e:36,m:342,h:343}, // Day 78 Jul 20 — World Chess Day
+  {e:344,m:345,h:346}, // Day 79 Jul 21 — Summer Fun
+  {e:347,m:348,h:349}, // Day 80 Jul 22 — Greek Vacay
+  {e:350,m:351,h:352}, // Day 81 Jul 23 — Tom Dick and Harry
+  {e:353,m:354,h:355}, // Day 82 Jul 24 — Things You Ride
+  {e:356,m:357,h:358}, // Day 83 Jul 25 — Smooth Operators
+  {e:359,m:360,h:361}, // Day 84 Jul 26 — General Hospital
+  {e:362,m:363,h:364}, // Day 85 Jul 27 — Gas Station
+  {e:365,m:366,h:367}, // Day 86 Jul 28 — Red Things
+  {e:382,m:383,h:384}, // Day 87 Jul 29 — Chicken in the Pool
+  {e:372,m:371,h:373}, // Day 88 Jul 30 — Friendship Day
+];
+
+const specialPuzzles={
+  'md_e':{id:'md_e',topic:"Mother's Day 🌸",stars:2,leftLetters:['S','W'],overlapLetters:['E','T'],rightLetters:['A','H','R'],leftAnswer:"SWEET",rightAnswer:"HEART",fact:"Sweet heart is a classic Mother's Day term of endearment."},
+  'md_m':{id:'md_m',topic:"Mother's Day 🌸",stars:2,leftLetters:['F','L'],overlapLetters:['E','O','R','W'],rightLetters:['P'],leftAnswer:"FLOWER",rightAnswer:"POWER",fact:"Flowers are the most popular Mother's Day gift worldwide."},
+  'md_h':{id:'md_h',topic:"Mother's Day 🌸",stars:2,leftLetters:['G','S'],overlapLetters:['E'],rightLetters:['B','C','D','I','N','T'],leftAnswer:"EGGS",rightAnswer:"BENEDICT",fact:"Eggs Benedict is a classic brunch dish, perfect for Mother's Day breakfast in bed."},
+};
+function getDiffColor(key){return key==='e'?'#22c55e':key==='m'?'#f59e0b':'#ef4444';}
+function getDiffBg(key){return key==='e'?'rgba(34,197,94,.12)':key==='m'?'rgba(245,158,11,.12)':'rgba(239,68,68,.12)';}
+function getDiffLabel(key){return key==='e'?'Easy':key==='m'?'Medium':'Hard';}
+function getPuzzleById(id){
+  if(typeof id==='string') return specialPuzzles[id];
+  const idx=puzzles.findIndex(p=>p.id===id);
+  return idx!==-1?puzzles[idx]:puzzles[id-1];
+}
+function getTodaySet(){const todayN=getDailyNum();return dailySets[(todayN-1)%dailySets.length];}
+
+function renderChallengeCards(){
+  const set=getTodaySet();
+  const container=document.getElementById('challenge-cards');
+  if(!container)return;
+  container.innerHTML='';
+  const progress=loadArchiveProgress();
+  const dayN=getDailyNum();
+  ['e','m','h'].forEach(key=>{
+    const puzId=set[key];
+    const puz=getPuzzleById(puzId);
+    if(!puz)return;
+    const solved=progress[`daily_${dayN}_${key}`]?.solved;
+    const btn=document.createElement('button');
+    if(solved){
+      // Solved — show Admire button
+      btn.style.cssText=`width:100%;padding:14px 16px;border-radius:14px;background:rgba(212,102,187,.1);border:2px solid rgba(212,102,187,.4);cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;justify-content:space-between;`;
+      btn.innerHTML=`
+        <div style="text-align:left;">
+          <div style="font-size:16px;font-weight:900;color:#9333ea;">✅ ${getDiffLabel(key)}</div>
+          <div style="font-size:13px;font-weight:700;color:var(--muted);margin-top:2px;">${puz.topic}</div>
+        </div>
+        <div style="font-size:15px;font-weight:900;color:#9333ea;">Admire ✨</div>
+      `;
+      btn.addEventListener('click',()=>{admire(key);});
+    } else {
+      // Unsolved — show play card
+      btn.style.cssText=`width:100%;padding:14px 16px;border-radius:14px;background:${getDiffBg(key)};border:2px solid ${getDiffColor(key)};cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;justify-content:space-between;`;
+      btn.innerHTML=`
+        <div style="text-align:left;">
+          <div style="font-size:16px;font-weight:900;color:${getDiffColor(key)};">${getDiffLabel(key)}</div>
+          <div style="font-size:13px;font-weight:700;color:var(--muted);margin-top:2px;">${puz.topic}</div>
+        </div>
+        <div style="font-size:22px;font-weight:900;color:${getDiffColor(key)};opacity:0.5;">${key.toUpperCase()}</div>
+      `;
+      btn.addEventListener('click',()=>{currentDiffKey=key;loadDailyChallenge(key);});
+    }
+    container.appendChild(btn);
+  });
+}
+
+function loadDailyChallenge(key){
+  const set=getTodaySet();
+  const puzId=set[key];
+  currentDiffKey=key;
+  currentPuzzleKey=`daily_${getDailyNum()}_${key}`;
+  introScreen.classList.remove('active');gameShell.classList.add('active');showDailyScreen();
+  // Track puzzle started
+  setTimeout(()=>trackEvent('puzzle_started', getPuzzleParams()), 100);
+  if(typeof puzId==='string'){
+    // Special puzzle (e.g. Mother's Day)
+    const p=specialPuzzles[puzId];
+    currentMode="daily";currentFreePuzzle=p;currentPuzzleIdx=-99;
+    if(topicEl)topicEl.textContent=p.topic;
+    if(puzzleIdEl)puzzleIdEl.textContent=getDiffLabel(key);
+    const label=document.getElementById('intro-puzzle-number');
+    if(label)label.textContent=getDiffLabel(key);
+    renderVennLetters(p);resetPuzzleState();
+    leftGuessSlots=new Array(p.leftAnswer.length).fill("");
+    rightGuessSlots=new Array(p.rightAnswer.length).fill("");
+    revealedLeft=new Array(p.leftAnswer.length).fill("");
+    revealedRight=new Array(p.rightAnswer.length).fill("");
+    renderTiles(leftTilesEl,leftGuessSlots,p.leftAnswer.length,revealedLeft,"left");
+    renderTiles(rightTilesEl,rightGuessSlots,p.rightAnswer.length,revealedRight,"right");
+    setTimeout(()=>setActiveField("left"),150);renderStats();startStuckTimer();startTimer();
+  } else {
+    currentFreePuzzle=null;
+    loadGame('daily',puzId);
+    const label=document.getElementById('intro-puzzle-number');
+    if(label)label.textContent=getDiffLabel(key);
+    // Override puzzle key to use difficulty-based key AFTER loadGame
+    currentPuzzleKey=`daily_${getDailyNum()}_${key}`;
+    if(topicEl){const puz=getPuzzleById(puzId);if(puz)topicEl.textContent=puz.topic;}
+    // Restart timer with correct key — clear any stale value first if unplayed
+    const progress=loadArchiveProgress();
+    const alreadySolved=progress[currentPuzzleKey]?.solved;
+    if(!alreadySolved){
+      localStorage.removeItem(`vendy_timer_${currentPuzzleKey}`);
+      timerElapsed=0;
+      startTimer();
+    }
+  }
+}
+
+function updateEMHHeader(){
+  const progress=loadArchiveProgress();
+  const dayN=getDailyNum();
+  ['e','m','h'].forEach(key=>{
+    const el=document.getElementById(`emh-${key}`);
+    if(!el)return;
+    const solved=progress[`daily_${dayN}_${key}`]?.solved;
+    el.style.opacity=solved?'1':'0.35';
+    el.style.color=solved?getDiffColor(key):'var(--muted)';
+  });
+  const allDone=['e','m','h'].every(k=>progress[`daily_${dayN}_${k}`]?.solved);
+  const flame=document.getElementById('header-flame');
+  if(flame)flame.style.opacity=allDone?'1':'0.4';
+}
+window.addEventListener("beforeinstallprompt",(e)=>{e.preventDefault();deferredInstallPrompt=e;});
+const launchDate = new Date(2026, 4, 4);
+
+const trialPuzzle = {id:"trial",topic:"Snack Attack 🍔",stars:3,leftLetters:['A','N','P'],overlapLetters:['E','T','U'],rightLetters:['B','R'],leftAnswer:"PEANUT",rightAnswer:"BUTTER",fact:"Peanut butter can be turned into diamonds under extreme pressure."};
+
+
+const puzzles = [
+  {id:1,topic:"Rhyme Time 🎤",stars:2,leftLetters:['S','W'],overlapLetters:['E','T'],rightLetters:['A','R'],leftAnswer:"SWEET",rightAnswer:"TREAT",fact:"Honey never spoils — edible samples found in Egyptian tombs."},
+  {id:2,topic:"Around the House 🏠",stars:2,leftLetters:['I','K','O'],overlapLetters:['C','E'],rightLetters:['R','T','U'],leftAnswer:"COOKIE",rightAnswer:"CUTTER",fact:"Cookie cutters date back to the 1700s in Europe."},
+  {id:3,topic:"Snack Attack 🍔",stars:2,leftLetters:['N'],overlapLetters:['A','B'],rightLetters:['D','E','R'],leftAnswer:"BANANA",rightAnswer:"BREAD",fact:"Banana bread became popular during the Great Depression."},
+  {id:4,topic:"Sports 🏀",stars:2,leftLetters:['A','B','F','O'],overlapLetters:['L','T'],rightLetters:['E','H','M'],leftAnswer:"FOOTBALL",rightAnswer:"HELMET",fact:"Football helmets were not mandatory in the NFL until 1943."},
+  {id:5,topic:"Sports 🏀",stars:2,leftLetters:['A','B','S'],overlapLetters:['E','L'],rightLetters:['G','O','V'],leftAnswer:"BASEBALL",rightAnswer:"GLOVE",fact:"Early baseball players did not use gloves."},
+  {id:6,topic:"Daily Life 🗓️",stars:2,leftLetters:['G','I','U'],overlapLetters:['N','R'],rightLetters:['A','D','E','S'],leftAnswer:"RUNNING",rightAnswer:"ERRANDS",fact:"Running burns about 100 calories per mile."},
+  {id:7,topic:"Around the House 🏠",stars:2,leftLetters:['O','W'],overlapLetters:['D','I','N'],rightLetters:['B','L','S'],leftAnswer:"WINDOW",rightAnswer:"BLINDS",fact:"Window blinds date back to ancient Egypt."},
+  {id:8,topic:"Sports 🏀",stars:2,leftLetters:['I','N','T'],overlapLetters:['E','S'],rightLetters:['R','V'],leftAnswer:"TENNIS",rightAnswer:"SERVE",fact:"The fastest tennis serve ever was over 260 km/h."},
+  {id:9,topic:"What to Wear 👕",stars:2,leftLetters:['A','H','R'],overlapLetters:['E','L','T'],rightLetters:['B'],leftAnswer:"LEATHER",rightAnswer:"BELT",fact:"Belts replaced suspenders in the 1920s."},
+  {id:10,topic:"Snack Attack 🍔",stars:2,leftLetters:['B','E','S','T'],overlapLetters:['L','O','R'],rightLetters:[],leftAnswer:"LOBSTER",rightAnswer:"ROLL",fact:"Lobster was once considered poor peoples food."},
+  {id:11,topic:"Snack Attack 🍔",stars:2,leftLetters:['E','O'],overlapLetters:['P','S','T'],rightLetters:['A'],leftAnswer:"PESTO",rightAnswer:"PASTA",fact:"Pesto originated in Genoa, Italy."},
+  {id:12,topic:"Snack Attack 🍔",stars:2,leftLetters:['K','M','N','U'],overlapLetters:['I','P'],rightLetters:['E'],leftAnswer:"PUMPKIN",rightAnswer:"PIE",fact:"Pumpkin pie dates back to early American settlers."},
+  {id:13,topic:"Snack Attack 🍔",stars:2,leftLetters:['O','R','T'],overlapLetters:['A','C'],rightLetters:['E','K'],leftAnswer:"CARROT",rightAnswer:"CAKE",fact:"Carrot cake became popular when sugar was scarce."},
+  {id:14,topic:"Famous Places 📍",stars:2,leftLetters:['G','I','N','R'],overlapLetters:['A'],rightLetters:['F','L','S'],leftAnswer:"NIAGARA",rightAnswer:"FALLS",fact:"Niagara Falls generates about 20% of US-Canada border hydropower."},
+  {id:15,topic:"Famous Places 📍",stars:2,leftLetters:['D','G','R'],overlapLetters:['A','N'],rightLetters:['C','O','Y'],leftAnswer:"GRAND",rightAnswer:"CANYON",fact:"The Grand Canyon is over 277 miles long."},
+  {id:16,topic:"Famous Places 📍",stars:2,leftLetters:['F','I','L'],overlapLetters:['E'],rightLetters:['O','R','T','W'],leftAnswer:"EIFFEL",rightAnswer:"TOWER",fact:"The Eiffel Tower was meant to be temporary."},
+  {id:17,topic:"Famous Places 📍",stars:2,leftLetters:['K','L','N','O','Y'],overlapLetters:['B','R'],rightLetters:['D','E','G','I'],leftAnswer:"BROOKLYN",rightAnswer:"BRIDGE",fact:"The Brooklyn Bridge took 14 years to build."},
+  {id:18,topic:"Famous Places 📍",stars:2,leftLetters:['C','I','N','O','S'],overlapLetters:['L'],rightLetters:['A','E','V','Y'],leftAnswer:"SILICON",rightAnswer:"VALLEY",fact:"Silicon Valley got its name from silicon used in computer chips."},
+  {id:19,topic:"Big Brands 🏷️",stars:2,leftLetters:['B','U','Y'],overlapLetters:['A','S','W'],rightLetters:['C','D','H','I','N'],leftAnswer:"SUBWAY",rightAnswer:"SANDWICH",fact:"Subway has more locations worldwide than McDonalds."},
+  {id:20,topic:"Big Brands 🏷️",stars:2,leftLetters:[],overlapLetters:['A','C','O'],rightLetters:['L'],leftAnswer:"COCA",rightAnswer:"COLA",fact:"Coca-Cola was originally sold as a medicinal syrup."},
+  {id:21,topic:"Big Brands 🏷️",stars:2,leftLetters:['A','N','O','Z'],overlapLetters:['M'],rightLetters:['E','I','P','R'],leftAnswer:"AMAZON",rightAnswer:"PRIME",fact:"Amazon Prime launched in 2005 with free two-day shipping."},
+  {id:22,topic:"Big Brands 🏷️",stars:2,leftLetters:['A','D','I'],overlapLetters:['S'],rightLetters:['E','H','O'],leftAnswer:"ADIDAS",rightAnswer:"SHOES",fact:"Adidas was founded by a German cobbler named Adi Dassler."},
+  {id:23,topic:"Daily Life 🗓️",stars:2,leftLetters:['A','N','P','R','W'],overlapLetters:['G','I'],rightLetters:['F','S','T'],leftAnswer:"WRAPPING",rightAnswer:"GIFTS",fact:"Gift wrap became popular thanks to Hallmark."},
+  {id:24,topic:"Daily Life 🗓️",stars:2,leftLetters:['G','S','W'],overlapLetters:['A','H','I','N'],rightLetters:['C','E','M'],leftAnswer:"WASHING",rightAnswer:"MACHINE",fact:"The first electric washing machine was invented in 1908."},
+  {id:25,topic:"Daily Life 🗓️",stars:2,leftLetters:['P','R','S'],overlapLetters:['G','I','N'],rightLetters:['A','C','E','L'],leftAnswer:"SPRING",rightAnswer:"CLEANING",fact:"Spring cleaning dates back to ancient Persian new year traditions."},
+  {id:26,topic:"Snack Attack 🍔",stars:2,leftLetters:['O','T'],overlapLetters:['A','P'],rightLetters:['C','E','K','N'],leftAnswer:"POTATO",rightAnswer:"PANCAKE",fact:"Potato pancakes are a traditional dish in many cultures."},
+  {id:27,topic:"Snack Attack 🍔",stars:2,leftLetters:['G','H','M'],overlapLetters:['A','R'],rightLetters:['C','E','K'],leftAnswer:"GRAHAM",rightAnswer:"CRACKER",fact:"Graham crackers were originally invented as a health food."},
+  {id:28,topic:"Snack Attack 🍔",stars:2,leftLetters:['N','O','T','U'],overlapLetters:['C'],rightLetters:['A','E','M','R'],leftAnswer:"COCONUT",rightAnswer:"CREAM",fact:"Coconuts can travel across oceans and grow elsewhere."},
+  {id:29,topic:"Rhyme Time 🎤",stars:2,leftLetters:['F'],overlapLetters:['E','I','N'],rightLetters:['W'],leftAnswer:"FINE",rightAnswer:"WINE",fact:"The oldest known wine is over 8,000 years old."},
+  {id:30,topic:"Rhyme Time 🎤",stars:2,leftLetters:['W'],overlapLetters:['D','I','L'],rightLetters:['C','H'],leftAnswer:"WILD",rightAnswer:"CHILD",fact:"Rhymes stick due to brain pattern recognition."},
+  {id:31,topic:"Rhyme Time 🎤",stars:2,leftLetters:['A','N','S'],overlapLetters:['E','K'],rightLetters:['P'],leftAnswer:"SNEAK",rightAnswer:"PEEK",fact:"Rhyming boosts recall through pattern recognition."},
+  {id:32,topic:"Famous Places 📍",stars:2,leftLetters:['D','L','N','O'],overlapLetters:['E','G'],rightLetters:['A','T'],leftAnswer:"GOLDEN",rightAnswer:"GATE",fact:"The Golden Gate Bridge took 4 years to build."},
+  {id:33,topic:"Famous Places 📍",stars:2,leftLetters:['L'],overlapLetters:['A','S'],rightLetters:['E','G','V'],leftAnswer:"LAS",rightAnswer:"VEGAS",fact:"Las Vegas means the meadows in Spanish."},
+  {id:34,topic:"Famous Places 📍",stars:2,leftLetters:['C','E','L','N','T'],overlapLetters:['A','R'],rightLetters:['K','P'],leftAnswer:"CENTRAL",rightAnswer:"PARK",fact:"Central Park has 843 acres and over 36 million visitors a year."},
+  {id:35,topic:"Famous Places 📍",stars:2,leftLetters:['I','M','T'],overlapLetters:['E','S'],rightLetters:['A','Q','R','U'],leftAnswer:"TIMES",rightAnswer:"SQUARE",fact:"Times Square was originally called Longacre Square until 1904."},
+  {id:36,topic:"Big Brands 🏷️",stars:2,leftLetters:['B','E','R','U'],overlapLetters:['G'],rightLetters:['I','K','N'],leftAnswer:"BURGER",rightAnswer:"KING",fact:"Burger King is called Hungry Jacks in Australia."},
+  {id:37,topic:"Sports 🏀",stars:2,leftLetters:['G','I','M','W'],overlapLetters:['N','S'],rightLetters:['E','L','O'],leftAnswer:"SWIMMING",rightAnswer:"LESSONS",fact:"Swimming is one of the best full body workouts you can do."},
+  {id:38,topic:"Around the House 🏠",stars:2,leftLetters:['E','L','U'],overlapLetters:['B'],rightLetters:['A','H','T'],leftAnswer:"BUBBLE",rightAnswer:"BATH",fact:"Bubble baths were popularized in the 1960s with the invention of bubble bath liquid."},
+  // Week 2 - May 11-17
+  {id:39,topic:"Food & Drink 🍔",stars:2,leftLetters:['I','N','V'],overlapLetters:['A','L'],rightLetters:['E','T'],leftAnswer:"VANILLA",rightAnswer:"LATTE",fact:"Vanilla is the second most expensive spice in the world after saffron."},
+  {id:40,topic:"Daily Life 🗓️",stars:2,leftLetters:['C','O','P','R'],overlapLetters:['A','L'],rightLetters:['E','N'],leftAnswer:"CARPOOL",rightAnswer:"LANE",fact:"Carpooling can cut commute costs by up to 50%."},
+  {id:41,topic:"Around the World 🌍",stars:2,leftLetters:['A','H'],overlapLetters:['R','S'],rightLetters:['D','E','T'],leftAnswer:"SAHARA",rightAnswer:"DESERT",fact:"The Sahara Desert is about the size of the United States."},
+  {id:42,topic:"Rhyme Time 🎤",stars:2,leftLetters:['F','U'],overlapLetters:['K','N','Y'],rightLetters:['E','M','O'],leftAnswer:"FUNKY",rightAnswer:"MONKEY",fact:"Funky Monkey is a classic rhyme pairing that's been used in music and pop culture."},
+  {id:43,topic:"What to Wear 👕",stars:2,leftLetters:['I','N','T'],overlapLetters:['E','S'],rightLetters:['H','O'],leftAnswer:"TENNIS",rightAnswer:"SHOES",fact:"Tennis shoes were originally designed for playing tennis on grass courts."},
+  {id:44,topic:"Fun & Games 🎮",stars:2,leftLetters:['N','O'],overlapLetters:['A','E','S'],rightLetters:['P'],leftAnswer:"SEASON",rightAnswer:"PASSES",fact:"Season passes were first introduced by ski resorts in the 1970s."},
+  {id:45,topic:"Fun & Games 🎮",stars:2,leftLetters:['M','X'],overlapLetters:['B'],rightLetters:['E','I','K'],leftAnswer:"BMX",rightAnswer:"BIKE",fact:"BMX racing became an Olympic sport at the 2008 Beijing Games."},
+  {id:47,topic:"Living Things 🌿",stars:2,leftLetters:['H','I'],overlapLetters:['R','S'],rightLetters:['E','T'],leftAnswer:"IRISH",rightAnswer:"SETTER",fact:"The Irish Setter is known for its distinctive mahogany red coat."},
+  {id:46,topic:"Living Things 🌿",stars:2,leftLetters:['D','E','L','O'],overlapLetters:['P'],rightLetters:['U','Y'],leftAnswer:"POODLE",rightAnswer:"PUPPY",fact:"Poodles are one of the most intelligent dog breeds in the world."},
+  {id:48,topic:"Living Things 🌿",stars:2,leftLetters:['A','L','P'],overlapLetters:['E'],rightLetters:['R','S','T'],leftAnswer:"APPLE",rightAnswer:"TREES",fact:"Apple trees can live for more than 100 years."},
+  {id:49,topic:"Food & Drink 🍔",stars:2,leftLetters:['D'],overlapLetters:['E','R'],rightLetters:['P'],leftAnswer:"RED",rightAnswer:"PEPPER",fact:"Red peppers are simply green peppers that have been left to ripen longer."},
+  {id:50,topic:"Fun & Games 🎮",stars:2,leftLetters:['F','L','O'],overlapLetters:['G'],rightLetters:['E','N','R'],leftAnswer:"GOLF",rightAnswer:"GREEN",fact:"A golf green is the closely mown area surrounding the hole."},
+  {id:51,topic:"Around the House 🏠",stars:2,leftLetters:['I','N','W'],overlapLetters:['E'],rightLetters:['A','G','L','S'],leftAnswer:"WINE",rightAnswer:"GLASSES",fact:"Wine glasses with longer stems help keep white wine cool by avoiding hand warmth."},
+  {id:52,topic:"Around the World 🌍",stars:2,leftLetters:['I','M','P','R'],overlapLetters:['E'],rightLetters:['A','S','T'],leftAnswer:"EMPIRE",rightAnswer:"STATE",fact:"The Empire State Building was built in just 410 days."},
+  {id:53,topic:"Spring Things 🌷",stars:2,leftLetters:['E','R','U'],overlapLetters:['B'],rightLetters:['O','S','T'],leftAnswer:"RUBBER",rightAnswer:"BOOTS",fact:"Wellington boots were named after the Duke of Wellington in the early 1800s."},
+  {id:54,topic:"Daily Life 🗓️",stars:2,leftLetters:['C','R'],overlapLetters:['A'],rightLetters:['H','S','W'],leftAnswer:"CAR",rightAnswer:"WASH",fact:"The first automatic car wash opened in Detroit in 1940."},
+  {id:55,topic:"Food & Drink 🍔",stars:2,leftLetters:['O','P','T'],overlapLetters:['A'],rightLetters:['D','L','S'],leftAnswer:"POTATO",rightAnswer:"SALAD",fact:"Potato salad has been a picnic staple since the 19th century."},
+  {id:56,topic:"Around the World 🌍",stars:2,leftLetters:['O','T','W'],overlapLetters:['A'],rightLetters:['C','D','N'],leftAnswer:"OTTAWA",rightAnswer:"CANADA",fact:"Ottawa became the capital of Canada in 1857, chosen by Queen Victoria."},
+  {id:57,topic:"What to Wear 👕",stars:2,leftLetters:['D','I','N','R'],overlapLetters:['E'],rightLetters:['A','C','J','K','T'],leftAnswer:"DINNER",rightAnswer:"JACKET",fact:"The dinner jacket was first worn at a gentlemen's club in 1865."},
+  {id:58,topic:"Around the House 🏠",stars:2,leftLetters:['A','R','S','T'],overlapLetters:['E','O'],rightLetters:['N','V'],leftAnswer:"TOASTER",rightAnswer:"OVEN",fact:"The first pop-up toaster was invented in 1921 by Charles Strite."},
+  {id:59,topic:"Spring Things 🌷",stars:2,leftLetters:['A','I','L','P'],overlapLetters:['R'],rightLetters:['E','H','O','S','W'],leftAnswer:"APRIL",rightAnswer:"SHOWERS",fact:"April showers bring May flowers — a proverb dating back to 1557."},
+  {id:60,topic:"Fun & Games 🎮",stars:2,leftLetters:['C','O','R','S'],overlapLetters:['E'],rightLetters:['N','T'],leftAnswer:"SOCCER",rightAnswer:"NET",fact:"Soccer nets were first used in 1891 at a match in Nottingham England."},
+  {id:61,topic:"Fun & Games 🎮",stars:2,leftLetters:['H'],overlapLetters:['C','E','S'],rightLetters:['I','P'],leftAnswer:"CHESS",rightAnswer:"PIECES",fact:"Chess is one of the oldest strategy games, dating back over 1500 years."},
+  {id:62,topic:"Food & Drink 🍔",stars:2,leftLetters:['B','L','U'],overlapLetters:['E'],rightLetters:['A','T'],leftAnswer:"BUBBLE",rightAnswer:"TEA",fact:"Bubble tea was invented in Taiwan in the 1980s and is now a global phenomenon."},
+  {id:63,topic:"Living Things 🌿",stars:2,leftLetters:['N','Q','U'],overlapLetters:['E'],rightLetters:['B'],leftAnswer:"QUEEN",rightAnswer:"BEE",fact:"The queen bee can lay up to 2000 eggs per day."},
+  {id:64,topic:"Food & Drink 🍔",stars:2,leftLetters:['B'],overlapLetters:['E','R'],rightLetters:['C','L','O'],leftAnswer:"BEER",rightAnswer:"COOLER",fact:"Beer coolers were popularized at outdoor events in the 1950s."},
+  {id:65,topic:"Around the World 🌍",stars:2,leftLetters:['O','T','W'],overlapLetters:['A'],rightLetters:['C','D','N'],leftAnswer:"OTTAWA",rightAnswer:"CANADA",fact:"Ottawa became the capital of Canada in 1857, chosen by Queen Victoria."},
+  {id:66,topic:"Living Things 🌿",stars:2,leftLetters:['B','I'],overlapLetters:['D','R'],rightLetters:['E','F'],leftAnswer:"BIRD",rightAnswer:"FEEDER",fact:"Bird feeders attract over 100 million birds to North American gardens each year."},
+  {id:67,topic:"Rhyme Time 🎤",stars:2,leftLetters:['B'],overlapLetters:['K','O'],rightLetters:['N'],leftAnswer:"BOOK",rightAnswer:"NOOK",fact:"A book nook is a cozy reading corner — the perfect escape."},
+  // Week 3 - May 19-24
+  {id:68,topic:"Rhyme Time 🎤",stars:2,leftLetters:[],overlapLetters:['E','K','O','Y'],rightLetters:['D'],leftAnswer:"OKEY",rightAnswer:"DOKEY",fact:"Okey dokey has been slang for okay since the 1930s."},
+  {id:69,topic:"What to Wear 👕",stars:2,leftLetters:['E','L'],overlapLetters:['B'],rightLetters:['M','O','S','T'],leftAnswer:"BELL",rightAnswer:"BOTTOMS",fact:"Bell bottoms were the defining fashion of the 1970s disco era."},
+  {id:70,topic:"Daily Life 🗓️",stars:2,leftLetters:['O','S'],overlapLetters:['C','D','I'],rightLetters:['A','G','N'],leftAnswer:"DISCO",rightAnswer:"DANCING",fact:"Disco dancing peaked in popularity in the late 1970s with Saturday Night Fever."},
+  {id:71,topic:"Food & Drink 🍔",stars:2,leftLetters:['I','Z'],overlapLetters:['A','P'],rightLetters:['R','T','Y'],leftAnswer:"PIZZA",rightAnswer:"PARTY",fact:"Pizza party became a cultural staple in schools across North America in the 1980s."},
+  {id:72,topic:"Food & Drink 🍔",stars:2,leftLetters:['M','N'],overlapLetters:['A','G','O'],rightLetters:['E','L','T'],leftAnswer:"MANGO",rightAnswer:"GELATO",fact:"Mango is the most consumed fruit in the world and pairs perfectly with gelato."},
+  {id:73,topic:"Food & Drink 🍔",stars:2,leftLetters:['E','V'],overlapLetters:['I','L','O'],rightLetters:[],leftAnswer:"OLIVE",rightAnswer:"OIL",fact:"Olive oil has been produced in the Mediterranean for over 7000 years."},
+  {id:74,topic:"Living Things 🌿",stars:2,leftLetters:['B','Y'],overlapLetters:['A','T'],rightLetters:['C'],leftAnswer:"TABBY",rightAnswer:"CAT",fact:"The tabby pattern is the most common cat coat pattern in the world."},
+  {id:75,topic:"Getting Lucky 🍀",stars:2,leftLetters:['N'],overlapLetters:['E','I'],rightLetters:['L','S','V'],leftAnswer:"NINE",rightAnswer:"LIVES",fact:"The myth of cats having nine lives dates back to ancient Egypt."},
+  {id:76,topic:"Daily Life 🗓️",stars:2,leftLetters:['C','H','I','T'],overlapLetters:['Y'],rightLetters:['E','S'],leftAnswer:"ITCHY",rightAnswer:"EYES",fact:"Itchy eyes affect millions of people during spring allergy season."},
+  {id:77,topic:"Rhyme Time 🎤",stars:2,leftLetters:['S','T'],overlapLetters:['E','R'],rightLetters:['A','C','L'],leftAnswer:"STEER",rightAnswer:"CLEAR",fact:"Steer clear means to avoid something — a nautical term from sailing."},
+  {id:78,topic:"Fun & Games 🎮",stars:2,leftLetters:['R'],overlapLetters:['H','N','O'],rightLetters:['K'],leftAnswer:"HORN",rightAnswer:"HONK",fact:"The car horn was invented in 1908 and has been annoying people ever since."},
+  {id:79,topic:"Fun & Games 🎮",stars:2,leftLetters:['L','Y'],overlapLetters:['A','E','R'],rightLetters:['C'],leftAnswer:"RELAY",rightAnswer:"RACE",fact:"Relay races have been part of the Olympics since the 1912 Stockholm Games."},
+  {id:80,topic:"Fun & Games 🎮",stars:2,leftLetters:['L','P'],overlapLetters:['M','N','O','Y'],rightLetters:['E'],leftAnswer:"MONOPOLY",rightAnswer:"MONEY",fact:"Monopoly was invented in 1935 and is now sold in 47 languages worldwide."},
+  {id:81,topic:"Food & Drink 🍔",stars:2,leftLetters:['E','G','R'],overlapLetters:['N'],rightLetters:['I','O'],leftAnswer:"GREEN",rightAnswer:"ONION",fact:"Green onions are one of the oldest cultivated vegetables, used for over 5000 years."},
+  {id:82,topic:"Fun & Games 🎮",stars:2,leftLetters:['G','O'],overlapLetters:['D','L'],rightLetters:['A','E','M'],leftAnswer:"GOLD",rightAnswer:"MEDAL",fact:"The Olympic gold medal is actually mostly silver — it is only gold plated."},
+  {id:83,topic:"Rhyme Time 🎤",stars:2,leftLetters:['B','T'],overlapLetters:['E','S'],rightLetters:['D','R'],leftAnswer:"BEST",rightAnswer:"DRESSED",fact:"Best dressed lists have been a staple of celebrity culture since the 1940s."},
+  {id:84,topic:"Rhyme Time 🎤",stars:2,leftLetters:['D'],overlapLetters:['E','P'],rightLetters:['L','S'],leftAnswer:"DEEP",rightAnswer:"SLEEP",fact:"Adults need 7 to 9 hours of deep sleep per night for optimal health."},
+  {id:85,topic:"Food & Drink 🍔",stars:2,leftLetters:['C','H','S'],overlapLetters:['E'],rightLetters:['L','M','O','T'],leftAnswer:"CHEESE",rightAnswer:"OMELETTE",fact:"The cheese omelette is considered one of the great tests of a chef skill."},
+  {id:86,topic:"Around the World 🌍",stars:2,leftLetters:['F','I','L'],overlapLetters:['E'],rightLetters:['O','R','T','W'],leftAnswer:"EIFFEL",rightAnswer:"TOWER",fact:"The Eiffel Tower was built in 1889 and was originally intended to be temporary."},
+  {id:87,topic:"Daily Life 🗓️",stars:2,leftLetters:['T','X'],overlapLetters:['E'],rightLetters:['A','G','M','S'],leftAnswer:"TEXT",rightAnswer:"MESSAGE",fact:"The first text message ever sent was Merry Christmas in 1992."},
+  {id:88,topic:"Rhyme Time 🎤",stars:2,leftLetters:['R'],overlapLetters:['A','E','L','Z'],rightLetters:['D'],leftAnswer:"RAZZLE",rightAnswer:"DAZZLE",fact:"Razzle dazzle means to impress with a showy performance — pure showbiz."},
+  {id:89,topic:"Daily Life 🗓️",stars:2,leftLetters:['E','P','R','Y'],overlapLetters:['L'],rightLetters:['A'],leftAnswer:"REPLY",rightAnswer:"ALL",fact:"Reply All is the most dangerous button in email — use with caution."},
+  {id:90,topic:"Daily Life 🗓️",stars:2,leftLetters:['T'],overlapLetters:['A','R'],rightLetters:['C','E'],leftAnswer:"RAT",rightAnswer:"RACE",fact:"The rat race refers to the exhausting pursuit of success in modern working life."},
+  {id:91,topic:"Daily Life 🗓️",stars:3,leftLetters:['N','R'],overlapLetters:['C','E','O'],rightLetters:['F','I'],leftAnswer:"CORNER",rightAnswer:"OFFICE",fact:"The corner office is a symbol of corporate success — it has windows on two sides."},
+  // Week 4 - May 27 - June 1
+  {id:92,topic:"Rhyme Time 🎤",stars:1,leftLetters:['J'],overlapLetters:['E','L','Y'],rightLetters:['B'],leftAnswer:"JELLY",rightAnswer:"BELLY",fact:"Jelly Belly jelly beans were the first jelly beans eaten in space in 1983."},
+  {id:93,topic:"Food & Drink 🍔",stars:2,leftLetters:['D'],overlapLetters:['R'],rightLetters:['E','P'],leftAnswer:"DR",rightAnswer:"PEPPER",fact:"Dr Pepper was invented in 1885 making it the oldest major soft drink in the US."},
+  {id:94,topic:"Food & Drink 🍔",stars:2,leftLetters:['O','T'],overlapLetters:['R'],rightLetters:['B','E'],leftAnswer:"ROOT",rightAnswer:"BEER",fact:"Root beer was originally brewed from the root bark of the sassafras tree."},
+  {id:95,topic:"Rhyme Time 🎤",stars:1,leftLetters:['F'],overlapLetters:['A','T'],rightLetters:['C'],leftAnswer:"FAT",rightAnswer:"CAT",fact:"The phrase fat cat dates back to the 1920s referring to wealthy political donors."},
+  {id:96,topic:"Living Things 🌿",stars:2,leftLetters:['H','S'],overlapLetters:['U'],rightLetters:['P','Y'],leftAnswer:"HUSH",rightAnswer:"PUPPY",fact:"Hush puppies are deep fried cornmeal balls originally used to quiet barking dogs."},
+  {id:97,topic:"Living Things 🌿",stars:2,leftLetters:['O','S'],overlapLetters:['E','G'],rightLetters:[],leftAnswer:"GOOSE",rightAnswer:"EGG",fact:"A goose egg meaning zero in sports comes from the egg shape resembling the number 0."},
+  {id:98,topic:"Food & Drink 🍔",stars:1,leftLetters:['F'],overlapLetters:['E','I','N'],rightLetters:['W'],leftAnswer:"FINE",rightAnswer:"WINE",fact:"Fine wine improves with age due to chemical reactions between acids tannins and sugars."},
+  {id:99,topic:"Fun & Games 🎮",stars:2,leftLetters:['C','I','M'],overlapLetters:['O'],rightLetters:['B','K','S'],leftAnswer:"COMIC",rightAnswer:"BOOKS",fact:"The first comic book sold for 10 cents in 1933 and some original copies now sell for millions."},
+  {id:100,topic:"Fun & Games 🎮",stars:3,leftLetters:['N'],overlapLetters:['A','B','E','I'],rightLetters:['S'],leftAnswer:"BEANIE",rightAnswer:"BABIES",fact:"Beanie Babies created a collecting frenzy in the 1990s with some selling for thousands."},
+  {id:101,topic:"Rhyme Time 🎤",stars:1,leftLetters:['P'],overlapLetters:['A','E','L'],rightLetters:[],leftAnswer:"PALE",rightAnswer:"ALE",fact:"Pale ale gets its name from the pale malt used in brewing which gives it a lighter colour."},
+  {id:102,topic:"Food & Drink 🍔",stars:2,leftLetters:['W'],overlapLetters:['A','R'],rightLetters:['B'],leftAnswer:"RAW",rightAnswer:"BAR",fact:"Raw bars serving fresh oysters clams and shellfish became popular in coastal cities."},
+  {id:103,topic:"Food & Drink 🍔",stars:2,leftLetters:['O','R'],overlapLetters:['A','C','N'],rightLetters:[],leftAnswer:"CORONA",rightAnswer:"CAN",fact:"Corona beer was first brewed in Mexico in 1925 and is now one of the best selling beers."},
+  {id:104,topic:"Rhyme Time 🎤",stars:1,leftLetters:['L','Y'],overlapLetters:['C','K','U'],rightLetters:['D'],leftAnswer:"LUCKY",rightAnswer:"DUCK",fact:"Lucky Duck is a classic rhyming phrase used in games and children's stories worldwide."},
+  {id:105,topic:"Food & Drink 🍔",stars:2,leftLetters:['B','I','R'],overlapLetters:['E'],rightLetters:['C','H','S'],leftAnswer:"BRIE",rightAnswer:"CHEESE",fact:"Brie is one of France's most famous cheeses and has been made in the Brie region for centuries."},
+  {id:106,topic:"Fun & Games 🎮",stars:3,leftLetters:['O','R','T','U'],overlapLetters:['E','L'],rightLetters:['H','W'],leftAnswer:"ROULETTE",rightAnswer:"WHEEL",fact:"The roulette wheel was invented in France in the 18th century and the word means little wheel."},
+  {id:107,topic:"Rhyme Time 🎤",stars:1,leftLetters:['L','U'],overlapLetters:['D','O'],rightLetters:['C','R','W'],leftAnswer:"LOUD",rightAnswer:"CROWD",fact:"A loud crowd at a stadium can reach 130 decibels which is louder than a jet engine."},
+  {id:108,topic:"Fun & Games 🎮",stars:2,leftLetters:['I'],overlapLetters:['P','T'],rightLetters:['O','S'],leftAnswer:"PIT",rightAnswer:"STOP",fact:"A Formula 1 pit stop takes about 2 seconds and requires over 20 crew members."},
+  {id:109,topic:"Fun & Games 🎮",stars:3,leftLetters:['D'],overlapLetters:['E','R'],rightLetters:['A','F','I'],leftAnswer:"RED",rightAnswer:"FERRARI",fact:"Ferrari's iconic red colour called Rosso Corsa was Italy's international racing colour."},
+  {id:110,topic:"Living Things 🌿",stars:1,leftLetters:['H','T','W'],overlapLetters:['E','I'],rightLetters:['A','D','S'],leftAnswer:"WHITE",rightAnswer:"DAISIES",fact:"White daisies are one of the most recognisable wildflowers and symbolise innocence."},
+  {id:111,topic:"Daily Life 🗓️",stars:2,leftLetters:['D','W'],overlapLetters:['E'],rightLetters:['I','K','L','R'],leftAnswer:"WEED",rightAnswer:"KILLER",fact:"The first commercial weed killer was introduced in the 1940s and changed farming forever."},
+  {id:112,topic:"Living Things 🌿",stars:3,leftLetters:['L','M','U'],overlapLetters:['B','E'],rightLetters:[],leftAnswer:"BUMBLE",rightAnswer:"BEE",fact:"Bumble bees can fly in colder temperatures than most other bees thanks to their thick fur."},
+  // MJ Day - May 26
+  {id:113,topic:"Michael Jackson 🕺",stars:1,leftLetters:['A','B','E'],overlapLetters:['T'],rightLetters:['I'],leftAnswer:"BEAT",rightAnswer:"IT",fact:"Beat It features Eddie Van Halen's iconic guitar solo and won two Grammy Awards in 1984."},
+  {id:114,topic:"Michael Jackson 🕺",stars:2,leftLetters:['B','I','L'],overlapLetters:['E'],rightLetters:['A','J','N'],leftAnswer:"BILLIE",rightAnswer:"JEAN",fact:"Billie Jean was the first video by a Black artist to be played in heavy rotation on MTV."},
+  {id:115,topic:"Michael Jackson 🕺",stars:3,leftLetters:['R','T','Y'],overlapLetters:['D','I'],rightLetters:['A','N'],leftAnswer:"DIRTY",rightAnswer:"DIANA",fact:"Dirty Diana reached number one in the US in 1988 and is one of MJ's hardest rocking songs."},
+  {id:116,topic:"Daily Life 🗓️",stars:1,leftLetters:['L','Z'],overlapLetters:['A','Y'],rightLetters:['D','N','S','U'],leftAnswer:"LAZY",rightAnswer:"SUNDAY",fact:"Lazy Sunday became a cultural phrase after the Saturday Night Live sketch in 2005."},
+  // Week 5 - May 30 - Jun 7
+  {id:117,topic:"Around the World 🌍",stars:1,leftLetters:['D','I','L','N'],overlapLetters:['B','U'],rightLetters:['P'],leftAnswer:"DUBLIN",rightAnswer:"PUB",fact:"Dublin has more pubs per capita than almost any other city in the world."},
+  {id:118,topic:"Food & Drink 🍔",stars:2,leftLetters:['C','H'],overlapLetters:['E','S'],rightLetters:['F','I','R'],leftAnswer:"CHEESE",rightAnswer:"FRIES",fact:"Cheese fries are a staple of diners and pub menus across North America."},
+  {id:119,topic:"Food & Drink 🍔",stars:3,leftLetters:['A','O','T'],overlapLetters:['P'],rightLetters:['E','L','R'],leftAnswer:"POTATO",rightAnswer:"PEELER",fact:"The potato peeler was invented in 1947 and remains one of the most used kitchen tools."},
+  {id:120,topic:"Daily Life 🗓️",stars:1,leftLetters:['B'],overlapLetters:['A','D'],rightLetters:['E','M','R'],leftAnswer:"BAD",rightAnswer:"DREAM",fact:"The average person has 3 to 5 dreams per night and most are forgotten within minutes."},
+  {id:121,topic:"Living Things 🌿",stars:2,leftLetters:['D'],overlapLetters:['E','R'],rightLetters:['O','S','T'],leftAnswer:"RED",rightAnswer:"ROOSTER",fact:"A rooster crows at dawn due to its internal circadian clock not just in response to light."},
+  {id:122,topic:"Daily Life 🗓️",stars:3,leftLetters:['D','I','O'],overlapLetters:['A','R'],rightLetters:['L','M'],leftAnswer:"RADIO",rightAnswer:"ALARM",fact:"The first clock radio was patented in 1946 combining two essential morning items."},
+  {id:123,topic:"Food & Drink 🍔",stars:1,leftLetters:['C','N','O','P'],overlapLetters:['R'],rightLetters:['B','E','T','U'],leftAnswer:"POPCORN",rightAnswer:"BUTTER",fact:"Americans consume about 17 billion quarts of popcorn every year."},
+  {id:124,topic:"Fun & Games 🎮",stars:2,leftLetters:['H','R'],overlapLetters:['O'],rightLetters:['E','I','M','V'],leftAnswer:"HORROR",rightAnswer:"MOVIE",fact:"Psycho in 1960 was the first film to show a toilet flushing on screen."},
+  {id:125,topic:"Daily Life 🗓️",stars:3,leftLetters:['I','L'],overlapLetters:['A','E','S'],rightLetters:['T'],leftAnswer:"AISLE",rightAnswer:"SEAT",fact:"The aisle seat is the most popular choice on flights due to easier bathroom access."},
+  {id:126,topic:"Daily Life 🗓️",stars:1,leftLetters:['O'],overlapLetters:['D'],rightLetters:['C','K','U'],leftAnswer:"ODD",rightAnswer:"DUCK",fact:"Odd Duck is a quirky phrase used to describe someone who is charmingly different."},
+  {id:127,topic:"Rhyme Time 🎤",stars:2,leftLetters:[],overlapLetters:['E','N','V'],rightLetters:['S','T'],leftAnswer:"EVEN",rightAnswer:"STEVEN",fact:"Even Steven means perfectly equal or balanced — popularised by the Seinfeld TV show."},
+  {id:128,topic:"Fun & Games 🎮",stars:3,leftLetters:['H','T'],overlapLetters:['I','N'],rightLetters:['G'],leftAnswer:"NINTH",rightAnswer:"INNING",fact:"The ninth inning is the most dramatic in baseball with many famous walk-off moments."},
+  {id:129,topic:"Food & Drink 🍔",stars:1,leftLetters:['L','W'],overlapLetters:['E'],rightLetters:['D','N','O'],leftAnswer:"WELL",rightAnswer:"DONE",fact:"Well done steak is cooked to an internal temperature of 160 degrees Fahrenheit."},
+  {id:130,topic:"Food & Drink 🍔",stars:2,leftLetters:['B','G','L','M'],overlapLetters:['I','N','O'],rightLetters:[],leftAnswer:"BLOOMING",rightAnswer:"ONION",fact:"The Blooming Onion was created by Outback Steakhouse in 1988 and became their signature dish."},
+  {id:131,topic:"Food & Drink 🍔",stars:3,leftLetters:['C','E','R'],overlapLetters:['A','S'],rightLetters:['D','L'],leftAnswer:"CAESAR",rightAnswer:"SALAD",fact:"The Caesar salad was invented in Tijuana Mexico in 1924 by chef Caesar Cardini."},
+  {id:132,topic:"Rhyme Time 🎤",stars:1,leftLetters:['P'],overlapLetters:['B','U'],rightLetters:['G','R'],leftAnswer:"PUB",rightAnswer:"GRUB",fact:"Pub grub became a British institution in the 1960s when licensing laws allowed pubs to serve food."},
+  {id:133,topic:"Daily Life 🗓️",stars:2,leftLetters:['B','W','Y'],overlapLetters:['L','O'],rightLetters:['S','T'],leftAnswer:"WOBBLY",rightAnswer:"STOOL",fact:"A wobbly bar stool is practically a pub rite of passage — nobody ever fixes the loose ones."},
+  {id:134,topic:"Food & Drink 🍔",stars:3,leftLetters:['D','L'],overlapLetters:['C','O'],rightLetters:['A','N','R'],leftAnswer:"COLD",rightAnswer:"CORONA",fact:"Corona is best served ice cold with a wedge of lime pressed into the neck of the bottle."},
+  {id:135,topic:"Rhyme Time 🎤",stars:1,leftLetters:['M'],overlapLetters:['O','P'],rightLetters:['T'],leftAnswer:"MOP",rightAnswer:"TOP",fact:"Mop top was a famous hairstyle popularised by The Beatles in the 1960s."},
+  {id:136,topic:"Daily Life 🗓️",stars:2,leftLetters:['E','Y'],overlapLetters:['M','S'],rightLetters:['O','R'],leftAnswer:"MESSY",rightAnswer:"ROOMS",fact:"Studies show that messy rooms can actually stimulate creativity and unconventional thinking."},
+  {id:137,topic:"Daily Life 🗓️",stars:3,leftLetters:['L','O','W','Y'],overlapLetters:['E'],rightLetters:['H','T'],leftAnswer:"YELLOW",rightAnswer:"TEETH",fact:"Yellow teeth are not always a sign of poor health — natural tooth enamel has a slightly yellow tint."},
+  // Days 29-37
+  {id:138,topic:"Daily Life 🗓️",stars:1,leftLetters:['B'],overlapLetters:['A','D'],rightLetters:['E','M','R'],leftAnswer:"BAD",rightAnswer:"DREAM",fact:"The average person has 3 to 5 dreams per night and most are forgotten within minutes."},
+  {id:139,topic:"Living Things 🌿",stars:2,leftLetters:['E','S','T'],overlapLetters:['O','R'],rightLetters:['C','W'],leftAnswer:"ROOSTER",rightAnswer:"CROW",fact:"Both roosters and crows are famous for their loud distinctive calls at the start of the day."},
+  {id:140,topic:"Around the House 🏠",stars:3,leftLetters:['D','I','O'],overlapLetters:['A','R'],rightLetters:['L','M'],leftAnswer:"RADIO",rightAnswer:"ALARM",fact:"The first clock radio was patented in 1946 combining two essential morning items."},
+  {id:141,topic:"Daily Life 🗓️",stars:1,leftLetters:['F','N','T'],overlapLetters:['O','R'],rightLetters:['W'],leftAnswer:"FRONT",rightAnswer:"ROW",fact:"Front row seats at concerts and events are the most coveted spots for any true fan."},
+  {id:142,topic:"Food & Drink 🍔",stars:2,leftLetters:['C','N','O','P'],overlapLetters:['R'],rightLetters:['B','E','T','U'],leftAnswer:"POPCORN",rightAnswer:"BUTTER",fact:"Americans consume about 17 billion quarts of popcorn every year most of it at the movies."},
+  {id:143,topic:"Fun & Games 🎮",stars:3,leftLetters:['H','R'],overlapLetters:['O'],rightLetters:['E','I','M','V'],leftAnswer:"HORROR",rightAnswer:"MOVIE",fact:"Psycho in 1960 was the first film to show a toilet flushing on screen causing public outrage."},
+  {id:144,topic:"Rhyme Time 🎤",stars:1,leftLetters:['F'],overlapLetters:['A','T'],rightLetters:['C'],leftAnswer:"FAT",rightAnswer:"CAT",fact:"Fat cat is a phrase dating to the 1920s referring to a wealthy and powerful individual."},
+  {id:145,topic:"Food & Drink 🍔",stars:2,leftLetters:['H','S'],overlapLetters:['U'],rightLetters:['P','Y'],leftAnswer:"HUSH",rightAnswer:"PUPPY",fact:"Hush puppies are deep fried cornmeal fritters traditionally served alongside seafood in the American South."},
+  {id:146,topic:"Fun & Games 🎮",stars:3,leftLetters:['E','L','S'],overlapLetters:['A','B'],rightLetters:['T'],leftAnswer:"BASEBALL",rightAnswer:"BAT",fact:"Baseball bats were originally made from any available wood but ash and maple are now the most popular."},
+  {id:147,topic:"Figures of Speech 🗣️",stars:1,leftLetters:['O'],overlapLetters:['D'],rightLetters:['C','K','U'],leftAnswer:"ODD",rightAnswer:"DUCK",fact:"Odd duck describes someone quirky or different — like a duck that walks out of step with the flock."},
+  {id:148,topic:"Rhyme Time 🎤",stars:2,leftLetters:[],overlapLetters:['E','N','V'],rightLetters:['S','T'],leftAnswer:"EVEN",rightAnswer:"STEVEN",fact:"Even Steven means perfectly balanced or equal — popularised by the Seinfeld TV show in the 1990s."},
+  {id:149,topic:"Fun & Games 🎮",stars:3,leftLetters:['H','T'],overlapLetters:['I','N'],rightLetters:['G'],leftAnswer:"NINTH",rightAnswer:"INNING",fact:"The ninth inning is the most dramatic in baseball with many famous walk-off home runs."},
+  {id:150,topic:"Nature 🌿",stars:1,leftLetters:['I','P'],overlapLetters:['E','N'],rightLetters:['C','O'],leftAnswer:"PINE",rightAnswer:"CONE",fact:"Pine cones are the seed-bearing structures of pine trees and can take up to three years to mature."},
+  {id:151,topic:"Food & Drink 🍔",stars:2,leftLetters:['A','L'],overlapLetters:['E','P'],rightLetters:['I'],leftAnswer:"APPLE",rightAnswer:"PIE",fact:"Apple pie became an American symbol in the 1900s — the phrase as American as apple pie dates to 1924."},
+  {id:152,topic:"Around the House 🏠",stars:3,leftLetters:['D','W'],overlapLetters:['O'],rightLetters:['F','L','R'],leftAnswer:"WOOD",rightAnswer:"FLOOR",fact:"Hardwood floors can last over 100 years if properly maintained — some colonial homes still have originals."},
+  {id:153,topic:"Rhyme Time 🎤",stars:1,leftLetters:['P'],overlapLetters:['B','U'],rightLetters:['G','R'],leftAnswer:"PUB",rightAnswer:"GRUB",fact:"Pub grub became a British institution in the 1960s when licensing laws allowed pubs to serve food."},
+  {id:154,topic:"Pub Life 🍺",stars:2,leftLetters:['B','W','Y'],overlapLetters:['L','O'],rightLetters:['S','T'],leftAnswer:"WOBBLY",rightAnswer:"STOOL",fact:"A wobbly bar stool is practically a pub rite of passage — nobody ever fixes the loose ones."},
+  {id:155,topic:"Pub Life 🍺",stars:3,leftLetters:['R'],overlapLetters:['B','E'],rightLetters:['L','O','T'],leftAnswer:"BEER",rightAnswer:"BOTTLE",fact:"The first mass produced glass beer bottle appeared in the 1850s revolutionising how beer was sold."},
+  {id:156,topic:"Fun & Games 🎮",stars:1,leftLetters:['I'],overlapLetters:['P','T'],rightLetters:['O','S'],leftAnswer:"PIT",rightAnswer:"STOP",fact:"A Formula 1 pit stop takes about 2 seconds and requires over 20 crew members working in perfect sync."},
+  {id:157,topic:"Fun & Games 🎮",stars:2,leftLetters:['E'],overlapLetters:['A','C','R'],rightLetters:['K','T'],leftAnswer:"RACE",rightAnswer:"TRACK",fact:"The Monaco Grand Prix street circuit is the most famous race track in Formula 1 history."},
+  {id:158,topic:"Around the House 🏠",stars:3,leftLetters:['E','G','N'],overlapLetters:['I'],rightLetters:['L','O'],leftAnswer:"ENGINE",rightAnswer:"OIL",fact:"Motor oil needs to be changed every 5000 to 10000 kilometres to keep an engine running smoothly."},
+  {id:159,topic:"Nature 🌿",stars:1,leftLetters:['B','U'],overlapLetters:['E','L'],rightLetters:['A','H','W'],leftAnswer:"BLUE",rightAnswer:"WHALE",fact:"The blue whale is the largest animal ever known to have existed on Earth reaching up to 30 metres long."},
+  {id:160,topic:"Nature 🌿",stars:2,leftLetters:['A','C','L','O'],overlapLetters:['R'],rightLetters:['E','F'],leftAnswer:"CORAL",rightAnswer:"REEF",fact:"Coral reefs cover less than 1% of the ocean floor but support over 25% of all marine species."},
+  {id:161,topic:"Nature 🌿",stars:3,leftLetters:['A'],overlapLetters:['E','S'],rightLetters:['H','L'],leftAnswer:"SEA",rightAnswer:"SHELL",fact:"Sea shells are the protective exoskeletons of molluscs and can take decades to form their distinctive shapes."},
+  {id:162,topic:"Nature 🌿",stars:1,leftLetters:['H','N','O','Y'],overlapLetters:['E'],rightLetters:['B'],leftAnswer:"HONEY",rightAnswer:"BEE",fact:"A single honey bee will make only about one twelfth of a teaspoon of honey in its entire lifetime."},
+  {id:163,topic:"Daily Life 🗓️",stars:2,leftLetters:['E','L','P'],overlapLetters:['N','O'],rightLetters:['C','T','U'],leftAnswer:"POLLEN",rightAnswer:"COUNT",fact:"Pollen counts are highest in the morning on warm windy days and lowest on cool rainy days."},
+  {id:164,topic:"Daily Life 🗓️",stars:3,leftLetters:['M','S','U'],overlapLetters:['E','R'],rightLetters:['B','Z'],leftAnswer:"SUMMER",rightAnswer:"BREEZE",fact:"Summer Breeze by Seals and Crofts was a hit in 1972 and has been covered dozens of times since."},
+  // Days 38-44
+  {id:165,topic:"Around the House 🏠",stars:1,leftLetters:['D','N'],overlapLetters:['O','W'],rightLetters:['I','L','P'],leftAnswer:"DOWN",rightAnswer:"PILLOW",fact:"Down feathers have been used to fill pillows and duvets for centuries due to their warmth and softness."},
+  {id:166,topic:"Around the House 🏠",stars:2,leftLetters:['B','I'],overlapLetters:['D','R'],rightLetters:['E','F'],leftAnswer:"BIRD",rightAnswer:"FEEDER",fact:"Bird feeders attract over 100 million birds to North American gardens each year."},
+  {id:167,topic:"Rhyme Time 🎤",stars:3,leftLetters:['H'],overlapLetters:['C','I','K'],rightLetters:['F','L'],leftAnswer:"CHICK",rightAnswer:"FLICK",fact:"Chick flick became a pop culture term in the 1980s for films aimed at female audiences."},
+  {id:168,topic:"Fun & Games 🎮",stars:1,leftLetters:['O','R','Y'],overlapLetters:['A','L'],rightLetters:['B'],leftAnswer:"ROYAL",rightAnswer:"BALL",fact:"Royal balls have been held at Buckingham Palace since the 19th century as formal state occasions."},
+  {id:169,topic:"Rhyme Time 🎤",stars:2,leftLetters:[],overlapLetters:['P','U'],rightLetters:['C'],leftAnswer:"PUP",rightAnswer:"CUP",fact:"The FIFA World Cup trophy was designed in 1971 and is made of 18 carat gold."},
+  {id:170,topic:"Fun & Games 🎮",stars:3,leftLetters:['C','O'],overlapLetters:['E','R','S'],rightLetters:['J','Y'],leftAnswer:"SOCCER",rightAnswer:"JERSEY",fact:"Soccer jerseys were originally heavy wool but modern kits use lightweight moisture-wicking fabric."},
+  {id:171,topic:"Famous Places 📍",stars:1,leftLetters:['G','I'],overlapLetters:['B'],rightLetters:['E','N'],leftAnswer:"BIG",rightAnswer:"BEN",fact:"Big Ben is actually the name of the bell inside the Elizabeth Tower — not the tower itself."},
+  {id:172,topic:"Transportation 🚌",stars:2,leftLetters:['B','L','O','U'],overlapLetters:['D','E'],rightLetters:['C','K','R'],leftAnswer:"DOUBLE",rightAnswer:"DECKER",fact:"London's iconic red double decker buses were introduced in 1956 and became a symbol of the city."},
+  {id:173,topic:"Around the World 🌍",stars:3,leftLetters:['O'],overlapLetters:['D','L','N'],rightLetters:['E','G','A'],leftAnswer:"LONDON",rightAnswer:"ENGLAND",fact:"London has been the capital of England for over 1000 years and is home to over 9 million people."},
+  {id:174,topic:"TV Shows 📺",stars:1,leftLetters:['H','P'],overlapLetters:['A','Y'],rightLetters:['D','S'],leftAnswer:"HAPPY",rightAnswer:"DAYS",fact:"Happy Days ran from 1974 to 1984 and made The Fonz one of the most iconic TV characters ever."},
+  {id:175,topic:"Rhyme Time 🎤",stars:2,leftLetters:['O'],overlapLetters:['B'],rightLetters:['T','U','E'],leftAnswer:"BOOB",rightAnswer:"TUBE",fact:"Boob tube is British slang for television — coined in the 1960s when TV was considered mindless."},
+  {id:176,topic:"Daily Life 🗓️",stars:3,leftLetters:['E','M'],overlapLetters:['O','R','T'],rightLetters:['C','N','L'],leftAnswer:"REMOTE",rightAnswer:"CONTROL",fact:"The first TV remote control was invented in 1950 by Zenith and was called the Lazy Bones."},
+  {id:177,topic:"Rhyme Time 🎤",stars:1,leftLetters:['P','L','I'],overlapLetters:['A','N'],rightLetters:['J','E'],leftAnswer:"PLAIN",rightAnswer:"JANE",fact:"Plain Jane is a phrase meaning ordinary looking — it has been used in English since the 1860s."},
+  {id:178,topic:"Daily Life 🗓️",stars:2,leftLetters:['F'],overlapLetters:['A','C','E'],rightLetters:['M','R'],leftAnswer:"FACE",rightAnswer:"CREAM",fact:"Face cream dates back to ancient Egypt where people used animal fat and plant oils on their skin."},
+  {id:179,topic:"Food & Drink 🍔",stars:3,leftLetters:['I','W'],overlapLetters:['S'],rightLetters:['C','E','H'],leftAnswer:"SWISS",rightAnswer:"CHEESE",fact:"Swiss cheese gets its characteristic holes from carbon dioxide bubbles produced during fermentation."},
+  {id:180,topic:"Fun & Games 🎮",stars:1,leftLetters:['I','M','O','N'],overlapLetters:['S'],rightLetters:['A','Y'],leftAnswer:"SIMON",rightAnswer:"SAYS",fact:"Simon Says has been played by children for centuries — the earliest versions date back to the 1600s."},
+  {id:181,topic:"Fun & Games 🎮",stars:2,leftLetters:['S','W'],overlapLetters:['G','I','N'],rightLetters:['D','A','C'],leftAnswer:"SWING",rightAnswer:"DANCING",fact:"Swing dancing originated in Harlem in the 1920s alongside jazz music and the Lindy Hop."},
+  {id:182,topic:"Daily Life 🗓️",stars:3,leftLetters:['L','U','E'],overlapLetters:['A','G'],rightLetters:['T'],leftAnswer:"LUGGAGE",rightAnswer:"TAG",fact:"Luggage tags became standard practice in the 1800s when rail travel made lost bags a common problem."},
+  {id:183,topic:"Calendar 📅",stars:1,leftLetters:['L','P'],overlapLetters:['A','E'],rightLetters:['R','Y'],leftAnswer:"LEAP",rightAnswer:"YEAR",fact:"Leap years occur every 4 years to keep our calendar aligned with the Earth's orbit around the sun."},
+  {id:184,topic:"TV Shows 📺",stars:2,leftLetters:['G','S'],overlapLetters:['B','U'],rightLetters:['N','Y'],leftAnswer:"BUGS",rightAnswer:"BUNNY",fact:"Bugs Bunny first appeared in 1940 and became the most recognisable cartoon character in history."},
+  {id:185,topic:"Daily Life 🗓️",stars:3,leftLetters:['D','L'],overlapLetters:['E','P','U'],rightLetters:['J','M','R'],leftAnswer:"PUDDLE",rightAnswer:"JUMPER",fact:"Puddle jumping is a beloved childhood activity that has inspired toys songs and even world championships."},
+  // Days 33-46 new puzzles
+  {id:186,topic:"Fun & Games 🎮",stars:1,leftLetters:['L','P','Y'],overlapLetters:['A'],rightLetters:['C','H','T'],leftAnswer:"PLAY",rightAnswer:"CATCH",fact:"A game of catch is one of the simplest and most beloved outdoor activities of all time."},
+  {id:187,topic:"Daily Life 🗓️",stars:2,leftLetters:['B','K'],overlapLetters:['E','I'],rightLetters:['D','R'],leftAnswer:"BIKE",rightAnswer:"RIDE",fact:"The bicycle was invented in 1817 and remains one of the most popular forms of recreation worldwide."},
+  {id:188,topic:"Food & Drink 🍔",stars:3,leftLetters:['I','P'],overlapLetters:['C','N'],rightLetters:['H','L','U'],leftAnswer:"PICNIC",rightAnswer:"LUNCH",fact:"The word picnic first appeared in English in the 1740s from the French pique-nique."},
+  {id:189,topic:"Fun & Games 🎮",stars:3,leftLetters:['E','L'],overlapLetters:['O','P'],rightLetters:['I','N','S','T'],leftAnswer:"POLE",rightAnswer:"POSITION",fact:"Pole position in Formula 1 goes to the fastest qualifier and gives a crucial head start at the race."},
+  {id:190,topic:"Music 🎵",stars:2,leftLetters:['H'],overlapLetters:['E','T'],rightLetters:['A','B','L','S'],leftAnswer:"THE",rightAnswer:"BEATLES",fact:"The Beatles are the best selling music artists of all time with over 600 million records sold worldwide."},
+  {id:191,topic:"Fun & Games 🎮",stars:1,leftLetters:['E','M'],overlapLetters:['A','T'],rightLetters:['C','I','N','P'],leftAnswer:"TEAM",rightAnswer:"CAPTAIN",fact:"The captain's armband in soccer is worn by the team leader and dates back to the early 1900s."},
+  {id:192,topic:"Daily Life 🗓️",stars:2,leftLetters:['E','N'],overlapLetters:['G','R'],rightLetters:['A','S'],leftAnswer:"GREEN",rightAnswer:"GRASS",fact:"The best soccer pitches in the world use a blend of natural grass and synthetic fibres for durability."},
+  {id:193,topic:"Fun & Games 🎮",stars:3,leftLetters:['I','N','W'],overlapLetters:['G'],rightLetters:['A','L','O'],leftAnswer:"WINNING",rightAnswer:"GOAL",fact:"The fastest goal in World Cup history was scored just 11 seconds into a match in 2002."},
+  {id:194,topic:"Food & Drink 🍔",stars:1,leftLetters:['C','H','N'],overlapLetters:['E','F','R'],rightLetters:['I','S'],leftAnswer:"FRENCH",rightAnswer:"FRIES",fact:"French fries are believed to have originated in Belgium in the late 1600s despite their name."},
+  {id:195,topic:"Living Things 🌿",stars:2,leftLetters:['A','G','M','N'],overlapLetters:['E','R'],rightLetters:['D','H','P','S'],leftAnswer:"GERMAN",rightAnswer:"SHEPHERD",fact:"The German Shepherd was first bred in Germany in 1899 and is now one of the most popular dog breeds."},
+  {id:196,topic:"Food & Drink 🍔",stars:3,leftLetters:['A','U'],overlapLetters:['I','N','R','S'],rightLetters:['D','E','G'],leftAnswer:"RUSSIAN",rightAnswer:"DRESSING",fact:"Russian dressing was actually invented in New Hampshire USA in the early 1900s."},
+  {id:197,topic:"TV Shows 📺",stars:3,leftLetters:['A','M'],overlapLetters:['E','S'],rightLetters:['R','T'],leftAnswer:"SESAME",rightAnswer:"STREET",fact:"Sesame Street has been teaching children letters numbers and values since it first aired in 1969."},
+  {id:198,topic:"Fun & Games 🎮",stars:1,leftLetters:['A','M'],overlapLetters:['N'],rightLetters:['H','T','U'],leftAnswer:"MAN",rightAnswer:"HUNT",fact:"Man Hunt is a classic playground game where one player hunts the others in a large outdoor area."},
+  {id:199,topic:"Fun & Games 🎮",stars:2,leftLetters:['P','T'],overlapLetters:['E','S'],rightLetters:['D','I','L'],leftAnswer:"STEEP",rightAnswer:"SLIDE",fact:"The tallest playground slide ever built stood over 10 storeys high at an amusement park in Japan."},
+  {id:200,topic:"Daily Life 🗓️",stars:3,leftLetters:['C','H','O','S'],overlapLetters:['L'],rightLetters:['B','E'],leftAnswer:"SCHOOL",rightAnswer:"BELL",fact:"School bells have been ringing students to class since the 1800s when factory whistles inspired the idea."},
+  {id:201,topic:"Living Things 🌿",stars:1,leftLetters:['M','R','Y'],overlapLetters:['A'],rightLetters:['N','S','T'],leftAnswer:"ARMY",rightAnswer:"ANTS",fact:"Army ants live in colonies of up to 700000 and can strip a carcass to the bone in hours."},
+  {id:202,topic:"Daily Life 🗓️",stars:2,leftLetters:['R'],overlapLetters:['A','E','P'],rightLetters:['L','T'],leftAnswer:"PAPER",rightAnswer:"PLATE",fact:"The paper plate was invented in 1904 and became essential for outdoor dining and picnics."},
+  {id:203,topic:"Food & Drink 🍔",stars:3,leftLetters:['P','T'],overlapLetters:['A','S'],rightLetters:['D','L'],leftAnswer:"PASTA",rightAnswer:"SALAD",fact:"Pasta salad became a staple of summer picnics and potlucks across North America in the 1970s."},
+  {id:204,topic:"Food & Drink 🍔",stars:1,leftLetters:['D'],overlapLetters:['E'],rightLetters:['B','S','T'],leftAnswer:"RED",rightAnswer:"BEETS",fact:"Beets get their deep red colour from a pigment called betalain which also acts as a powerful antioxidant."},
+  {id:205,topic:"Food & Drink 🍔",stars:2,leftLetters:['B','Y'],overlapLetters:['A'],rightLetters:['C','O','R','T'],leftAnswer:"BABY",rightAnswer:"CARROT",fact:"Baby carrots were invented in 1986 by a farmer who wanted to sell misshapen carrots instead of wasting them."},
+  {id:206,topic:"Food & Drink 🍔",stars:3,leftLetters:['G','R'],overlapLetters:['E','N'],rightLetters:['A','B','S'],leftAnswer:"GREEN",rightAnswer:"BEANS",fact:"Green beans were one of the first vegetables cultivated in the Americas over 7000 years ago."},
+  // Additional swaps
+  {id:207,topic:"Food & Drink 🍔",stars:1,leftLetters:['E','G','H','L','S'],overlapLetters:['I','N'],rightLetters:['F','M','U'],leftAnswer:"ENGLISH",rightAnswer:"MUFFIN",fact:"The English muffin was actually invented in New York in the 1880s by a British immigrant named Samuel Bath Thomas."},
+  {id:208,topic:"Fun & Games 🎮",stars:1,leftLetters:['H','O'],overlapLetters:['E','M'],rightLetters:['A','T'],leftAnswer:"HOME",rightAnswer:"TEAM",fact:"Home team advantage is a real phenomenon — home teams win about 60% of games across major sports."},
+  {id:209,topic:"Around the World 🌍",stars:2,leftLetters:['D'],overlapLetters:['A','N'],rightLetters:['C','E','O'],leftAnswer:"INDIAN",rightAnswer:"OCEAN",fact:"The Indian Ocean is the third largest ocean and is the warmest ocean in the world."},
+  {id:213,topic:"Around the World 🌍",stars:1,leftLetters:['D','I'],overlapLetters:['A','N'],rightLetters:['C','E','O'],leftAnswer:"INDIAN",rightAnswer:"OCEAN",fact:"The Indian Ocean is the warmest ocean in the world and third largest covering about 20% of Earth's surface."},
+  {id:214,topic:"Around the World 🌍",stars:2,leftLetters:['T','C'],overlapLetters:['A','L','N'],rightLetters:['S','M','O'],leftAnswer:"ATLANTIC",rightAnswer:"SALMON",fact:"Atlantic salmon can travel thousands of miles from the ocean back to the exact river where they were born."},
+  {id:215,topic:"Around the World 🌍",stars:3,leftLetters:['P','A','F','C'],overlapLetters:['I'],rightLetters:['R','M'],leftAnswer:"PACIFIC",rightAnswer:"RIM",fact:"The Pacific Rim refers to the countries and economies bordering the Pacific Ocean including Japan China and the USA."},
+  {id:216,topic:"Food & Drink 🍔",stars:1,leftLetters:['P','E'],overlapLetters:['E'],rightLetters:['S','A','M'],leftAnswer:"OPEN",rightAnswer:"SESAME",fact:"Open sesame comes from Ali Baba and the Forty Thieves and has become a universal phrase for unlocking something magical."},
+  {id:217,topic:"Food & Drink 🍔",stars:2,leftLetters:['Y','E','L','W'],overlapLetters:['O'],rightLetters:['N','I'],leftAnswer:"YELLOW",rightAnswer:"ONION",fact:"Yellow onions are the most commonly used onion in cooking worldwide and become sweet when caramelised."},
+  {id:218,topic:"Food & Drink 🍔",stars:3,leftLetters:['P','Y'],overlapLetters:['O'],rightLetters:['C','K'],leftAnswer:"POPPY",rightAnswer:"COCK",fact:"Poppycock is an old fashioned word for nonsense derived from the Dutch word for soft dung."},
+  {id:219,topic:"Nature 🌿",stars:1,leftLetters:['L','S'],overlapLetters:['A','T'],rightLetters:['E','R','W'],leftAnswer:"SALT",rightAnswer:"WATER",fact:"About 97% of all water on Earth is salt water found in the oceans making fresh water an extremely precious resource."},
+  {id:221,topic:"80s Vibe 🕹️",stars:1,leftLetters:['I','K','R'],overlapLetters:['B','U'],rightLetters:['C','E'],leftAnswer:"RUBIK",rightAnswer:"CUBE",fact:"The Rubik's Cube was invented in 1974 by Hungarian professor Erno Rubik and became the best selling toy of all time."},
+  {id:222,topic:"80s Vibe 🕹️",stars:2,leftLetters:['E','L','O'],overlapLetters:['R'],rightLetters:['I','K','N'],leftAnswer:"ROLLER",rightAnswer:"RINK",fact:"Roller rinks peaked in popularity in the 1980s with over 4000 rinks operating across North America."},
+  {id:223,topic:"80s Vibe 🕹️",stars:3,leftLetters:['B','E','G'],overlapLetters:['A','C'],rightLetters:['H','P','T'],leftAnswer:"CABBAGE",rightAnswer:"PATCH",fact:"Cabbage Patch Kids sparked one of the first toy buying frenzies in 1983 with parents fighting over shelves in stores."},
+  {id:224,topic:"Fun & Games 🎮",stars:2,leftLetters:['E'],overlapLetters:['A','C','R'],rightLetters:[],leftAnswer:"RACE",rightAnswer:"CAR",fact:"Formula 1 race cars can accelerate from 0 to 100km per hour in under 2 seconds."},
+  {id:225,topic:"Nature 🌿",stars:3,leftLetters:['N','V'],overlapLetters:['E','S'],rightLetters:['A'],leftAnswer:"SEVEN",rightAnswer:"SEAS",fact:"The Seven Seas is an ancient phrase referring to all the world's oceans and has been used in literature for thousands of years."},
+  {id:226,topic:"⚽ World Cup",stars:2,leftLetters:['E'],overlapLetters:['D','R'],rightLetters:['A','C'],leftAnswer:"RED",rightAnswer:"CARD",fact:"The first red card in World Cup history was shown in 1966 and the record for fastest red card is just 56 seconds."},
+  {id:227,topic:"Food & Drink 🍔",stars:1,leftLetters:['A','B','D','E'],overlapLetters:['R'],rightLetters:['L','O'],leftAnswer:"BREAD",rightAnswer:"ROLL",fact:"Bread rolls have been a staple of family dinners for centuries and are found in almost every cuisine around the world."},
+  {id:228,topic:"Food & Drink 🍔",stars:2,leftLetters:['D','E','H','M','S'],overlapLetters:['A'],rightLetters:['O','P','T'],leftAnswer:"MASHED",rightAnswer:"POTATO",fact:"Mashed potato became a family dinner staple in the 1800s after the potato spread across Europe from the Americas."},
+  {id:229,topic:"Food & Drink 🍔",stars:3,leftLetters:['C','M','R','T'],overlapLetters:['F','O'],rightLetters:['D'],leftAnswer:"COMFORT",rightAnswer:"FOOD",fact:"Comfort food is a universal concept — studies show people reach for familiar childhood foods when stressed or nostalgic."},
+  // Days 48-65
+  {id:230,topic:"Fun & Games 🎮",stars:1,leftLetters:['F','O','U'],overlapLetters:['R'],rightLetters:['E','H','L','W'],leftAnswer:"FOUR",rightAnswer:"WHEELER",fact:"The four-wheeler or ATV was first developed in the 1960s and became hugely popular for off-road recreation."},
+  {id:231,topic:"Transportation 🚌",stars:2,leftLetters:['B','E','G'],overlapLetters:['A'],rightLetters:['C','R','T'],leftAnswer:"BAGGAGE",rightAnswer:"CART",fact:"Baggage carts at airports were introduced in the 1970s to help travellers manage the growing size of luggage."},
+  {id:232,topic:"Daily Life 🗓️",stars:3,leftLetters:['B','Y'],overlapLetters:['A'],rightLetters:['C','E','G','I','R'],leftAnswer:"BABY",rightAnswer:"CARRIAGE",fact:"The baby carriage was invented in 1733 by William Kent who designed one for the Duke of Devonshire's children."},
+  {id:233,topic:"Characters 🎭",stars:1,leftLetters:['B','T'],overlapLetters:['A'],rightLetters:['M','N'],leftAnswer:"BAT",rightAnswer:"MAN",fact:"Batman first appeared in Detective Comics in 1939 and has become one of the most recognisable characters in the world."},
+  {id:234,topic:"Fun & Games 🎮",stars:2,leftLetters:['C','H','K','Y'],overlapLetters:['E','O'],rightLetters:['A','G','I','L'],leftAnswer:"HOCKEY",rightAnswer:"GOALIE",fact:"The goalie mask in hockey was first worn by Jacques Plante in 1959 after being hit in the face by a puck."},
+  {id:235,topic:"People 👤",stars:3,leftLetters:['B'],overlapLetters:['E'],rightLetters:['K','P','R'],leftAnswer:"BEE",rightAnswer:"KEEPER",fact:"Beekeeping dates back over 9000 years and ancient Egyptians were among the first to keep bees for honey."},
+  {id:236,topic:"Pet Life 🐾",stars:1,leftLetters:['D','G'],overlapLetters:['O'],rightLetters:['A','C','L','R'],leftAnswer:"DOG",rightAnswer:"COLLAR",fact:"Dog collars have been used for thousands of years — ancient Egyptian paintings show dogs wearing decorative collars."},
+  {id:237,topic:"Music 🎵",stars:2,leftLetters:['C','D','O','R'],overlapLetters:['E'],rightLetters:['L','S','V'],leftAnswer:"RECORD",rightAnswer:"SLEEVE",fact:"Record sleeves became an art form in the 1960s with artists like Andy Warhol designing iconic album covers."},
+  {id:238,topic:"Daily Life 🗓️",stars:3,leftLetters:['D','L'],overlapLetters:['E','T'],rightLetters:['B','N','O','U'],leftAnswer:"DELETE",rightAnswer:"BUTTON",fact:"The delete button was introduced on early computer keyboards in the 1970s as computers moved from punch cards to screens."},
+  {id:239,topic:"Fun & Games 🎮",stars:1,leftLetters:['G'],overlapLetters:['A'],rightLetters:['I','F','T'],leftAnswer:"GAG",rightAnswer:"GIFT",fact:"Gag gifts became popular in the 20th century and novelty shops selling joke items boomed in the 1950s and 60s."},
+  {id:240,topic:"Fun & Games 🎮",stars:2,leftLetters:['J'],overlapLetters:['K','O'],rightLetters:['B'],leftAnswer:"JOKE",rightAnswer:"BOOK",fact:"The world's oldest recorded joke dates back to 1900 BC in ancient Sumeria and involves a woman who had never been on top."},
+  {id:241,topic:"Rhyme Time 🎤",stars:3,leftLetters:['F'],overlapLetters:['N','U','Y'],rightLetters:['B'],leftAnswer:"FUNNY",rightAnswer:"BUNNY",fact:"The Easter Bunny tradition originated in Germany in the 1600s and was brought to America by German immigrants."},
+  {id:242,topic:"Living Things 🌿",stars:1,leftLetters:['M'],overlapLetters:['A'],rightLetters:['B','E','R'],leftAnswer:"MAMA",rightAnswer:"BEAR",fact:"Mama bears are among the most protective parents in the animal kingdom and will fiercely defend their cubs."},
+  {id:243,topic:"Music 🎵",stars:2,leftLetters:['P'],overlapLetters:['O'],rightLetters:['C','N','R','T'],leftAnswer:"POP",rightAnswer:"CONCERT",fact:"The world's largest pop concert ever was Rod Stewart's New Year's Eve show in Rio de Janeiro in 1994 drawing 3.5 million people."},
+  {id:244,topic:"Music 🎵",stars:3,leftLetters:['D','W'],overlapLetters:['E','I','S','T'],rightLetters:['R'],leftAnswer:"TWISTED",rightAnswer:"SISTER",fact:"Twisted Sister formed in 1972 and their anthem We're Not Gonna Take It became one of rock's most defiant anthems."},
+  {id:245,topic:"Rhyme Time 🎤",stars:1,leftLetters:['H','W'],overlapLetters:['A','M'],rightLetters:['B'],leftAnswer:"WHAM",rightAnswer:"BAM",fact:"Wham formed in 1981 and George Michael and Andrew Ridgeley became one of the most successful pop duos of the 80s."},
+  {id:246,topic:"People 👤",stars:2,leftLetters:['A','H','T'],overlapLetters:['E','F','R'],rightLetters:['G','I','U'],leftAnswer:"FATHER",rightAnswer:"FIGURE",fact:"The term father figure describes someone who provides guidance and support in the role of a father regardless of biology."},
+  {id:247,topic:"Music 🎵",stars:3,leftLetters:['A','C','L'],overlapLetters:['E','R','S'],rightLetters:['H','I','P','W'],leftAnswer:"CARELESS",rightAnswer:"WHISPER",fact:"Careless Whisper was written by George Michael at age 17 on a bus and became one of the best selling singles of the 1980s."},
+  {id:248,topic:"People 👤",stars:1,leftLetters:['A','D','I','R'],overlapLetters:['O'],rightLetters:['H','S','T'],leftAnswer:"RADIO",rightAnswer:"HOST",fact:"Radio hosts have been entertaining audiences since the first commercial radio broadcast in 1920."},
+  {id:249,topic:"People 👤",stars:2,leftLetters:['D','G','I','N','W'],overlapLetters:['E'],rightLetters:['C','M'],leftAnswer:"WEDDING",rightAnswer:"EMCEE",fact:"The wedding emcee tradition dates back centuries when a master of ceremonies would coordinate royal banquets and celebrations."},
+  {id:250,topic:"Music 🎵",stars:3,leftLetters:['A','K','O'],overlapLetters:['E','R'],rightLetters:['G','I','N','S'],leftAnswer:"KARAOKE",rightAnswer:"SINGER",fact:"Karaoke was invented in Japan in 1971 by Daisuke Inoue and the word means empty orchestra in Japanese."},
+  {id:251,topic:"Living Things 🌿",stars:1,leftLetters:['H','S'],overlapLetters:['A','E'],rightLetters:['T','R'],leftAnswer:"SHADE",rightAnswer:"TREE",fact:"Shade trees can reduce surrounding air temperatures by up to 10 degrees Celsius making them vital in urban environments."},
+  {id:252,topic:"Around the House 🏠",stars:2,leftLetters:['F','D'],overlapLetters:['R','E'],rightLetters:['M','I'],leftAnswer:"FRAMED",rightAnswer:"MIRROR",fact:"Framed mirrors became fashionable in the 17th century when Venetian glassmakers perfected the art of mirror making."},
+  {id:253,topic:"Daily Life 🗓️",stars:3,leftLetters:['D','I','N'],overlapLetters:['T'],rightLetters:['E','W'],leftAnswer:"TINTED",rightAnswer:"WINDOWS",fact:"Tinted windows were first developed for cars in the 1960s to reduce glare and heat from sunlight."},
+  {id:254,topic:"Nature 🌿",stars:1,leftLetters:['D','P'],overlapLetters:['E'],rightLetters:['A','K','L'],leftAnswer:"DEEP",rightAnswer:"LAKE",fact:"The world's deepest lake is Lake Baikal in Russia at over 1600 metres deep and contains 20% of the world's fresh water."},
+  {id:255,topic:"Nature 🌿",stars:2,leftLetters:['A','S'],overlapLetters:['E'],rightLetters:['L','V'],leftAnswer:"SEA",rightAnswer:"LEVEL",fact:"Global sea levels have risen about 20cm since 1900 and are rising faster each decade due to climate change."},
+  {id:256,topic:"Nature 🌿",stars:3,leftLetters:['D','G','N','W'],overlapLetters:['I'],rightLetters:['E','R','V'],leftAnswer:"WINDING",rightAnswer:"RIVER",fact:"The Amazon River winds over 6400km through South America and carries more water than any other river on Earth."},
+  {id:257,topic:"Around the World 🌍",stars:1,leftLetters:['E','M','O','X'],overlapLetters:['C','I'],rightLetters:['T','Y'],leftAnswer:"MEXICO",rightAnswer:"CITY",fact:"Mexico City is one of the largest cities in the world with over 21 million people in its metropolitan area."},
+  {id:258,topic:"Around the World 🌍",stars:2,leftLetters:['D','L','N','O'],overlapLetters:['E','G'],rightLetters:['A','T'],leftAnswer:"GOLDEN",rightAnswer:"GATE",fact:"The Golden Gate Bridge took four years to build and when it opened in 1937 it was the longest suspension bridge in the world."},
+  {id:259,topic:"Around the World 🌍",stars:3,leftLetters:['I','M'],overlapLetters:['A'],rightLetters:['B','C','E','H'],leftAnswer:"MIAMI",rightAnswer:"BEACH",fact:"Miami Beach was developed as a resort destination in the 1910s and is now one of the most visited beaches in the world."},
+  {id:260,topic:"Daily Life 🗓️",stars:1,leftLetters:['A','H','R'],overlapLetters:['I'],rightLetters:['E','L','N'],leftAnswer:"HAIR",rightAnswer:"LINE",fact:"Male pattern baldness affects about 50% of men by age 50 and is primarily determined by genetics."},
+  {id:261,topic:"Living Things 🌿",stars:2,leftLetters:['E','H','W'],overlapLetters:['I','T'],rightLetters:['A','B','R'],leftAnswer:"WHITE",rightAnswer:"RABBIT",fact:"The White Rabbit in Alice in Wonderland is one of literature's most iconic characters and has inspired countless adaptations."},
+  {id:262,topic:"Daily Life 🗓️",stars:3,leftLetters:['D','T'],overlapLetters:['E','L'],rightLetters:['F','I'],leftAnswer:"DELETED",rightAnswer:"FILE",fact:"The first computer file deletion was on UNIX systems in the 1970s and the data was never truly gone — just the pointer was removed."},
+  {id:263,topic:"Rhyme Time 🎤",stars:1,leftLetters:['J'],overlapLetters:['E','T'],rightLetters:['S'],leftAnswer:"JET",rightAnswer:"SET",fact:"The jet set was a term coined in the 1950s to describe wealthy people who travelled the world by the then glamorous jet airplane."},
+  {id:264,topic:"Living Things 🌿",stars:2,leftLetters:['M','L'],overlapLetters:['A','D'],rightLetters:['R','U','C','K'],leftAnswer:"MALLARD",rightAnswer:"DUCK",fact:"The mallard is the most common duck in the world and is the ancestor of almost all domestic duck breeds."},
+  {id:265,topic:"Daily Life 🗓️",stars:3,leftLetters:['P','L'],overlapLetters:['A','E'],rightLetters:['N'],leftAnswer:"PAPER",rightAnswer:"PLANE",fact:"The world record for the longest paper plane flight is 69.14 metres set by Joe Ayoob in 2012."},
+  {id:266,topic:"Daily Life 🗓️",stars:1,leftLetters:['F','O','U','N','T','I'],overlapLetters:['N'],rightLetters:['P','E'],leftAnswer:"FOUNTAIN",rightAnswer:"PEN",fact:"The fountain pen was invented in the 10th century for the Caliph of Egypt who wanted a pen that would not stain his clothes."},
+  {id:267,topic:"Nature 🌿",stars:2,leftLetters:['A','E','N'],overlapLetters:['C','O'],rightLetters:['P','S','T','U'],leftAnswer:"OCEAN",rightAnswer:"OCTOPUS",fact:"Octopuses have three hearts two brains and blue blood and are considered the most intelligent invertebrates on Earth."},
+  {id:268,topic:"Places 📍",stars:3,leftLetters:['T'],overlapLetters:['A','O'],rightLetters:['L','P','R'],leftAnswer:"TATTOO",rightAnswer:"PARLOR",fact:"The word tattoo comes from the Polynesian word tatau and was brought to Europe by Captain Cook after his 1769 voyage."},
+  {id:269,topic:"Daily Life 🗓️",stars:1,leftLetters:['C','D','N'],overlapLetters:['L'],rightLetters:['G','H','I','T'],leftAnswer:"CANDLE",rightAnswer:"LIGHT",fact:"Candles have been used for light for over 5000 years and beeswax candles were a luxury only the wealthy could afford."},
+  {id:270,topic:"What to Wear 👕",stars:2,leftLetters:['G','H'],overlapLetters:['I'],rightLetters:['E','L','S'],leftAnswer:"HIGH",rightAnswer:"HEELS",fact:"High heels were originally worn by men in the 10th century Persian cavalry to keep their feet in stirrups while riding."},
+  {id:271,topic:"Food & Drink 🍔",stars:3,leftLetters:['I','N','R'],overlapLetters:['D','E'],rightLetters:['A','T'],leftAnswer:"DINNER",rightAnswer:"DATE",fact:"The concept of the dinner date became a social norm in the early 20th century as restaurants became more accessible to the public."},
+  {id:272,topic:"Living Things 🌿",stars:1,leftLetters:['B','K'],overlapLetters:['O'],rightLetters:['R','W'],leftAnswer:"BOOK",rightAnswer:"WORM",fact:"Bookworms are actually real insects — tiny larvae that burrow through the pages and binding of old books."},
+  {id:273,topic:"People 👤",stars:2,leftLetters:['A','Y'],overlapLetters:['B'],rightLetters:['E','M','O','R'],leftAnswer:"BABY",rightAnswer:"BOOMER",fact:"Baby boomers are people born between 1946 and 1964 during the post-war population boom and number over 70 million in the USA."},
+  {id:274,topic:"Rhyme Time 🎤",stars:3,leftLetters:['N','V'],overlapLetters:['A','I','L'],rightLetters:['M'],leftAnswer:"SNAIL",rightAnswer:"MAIL",fact:"Snail mail became a slang term for postal services in the 1980s when email started to replace physical letters."},
+  {id:275,topic:"Nature 🌿",stars:1,leftLetters:['P'],overlapLetters:['E','I','N'],rightLetters:['T','R'],leftAnswer:"PINE",rightAnswer:"TREE",fact:"Pine trees are among the longest living organisms on Earth with some bristlecone pines over 5000 years old."},
+  {id:276,topic:"Music 🎵",stars:2,leftLetters:['E','C','D','O'],overlapLetters:['R'],rightLetters:['P','L','A','Y'],leftAnswer:"RECORD",rightAnswer:"PLAYER",fact:"The record player was invented by Thomas Edison in 1877 and revolutionised how people listened to music at home."},
+  {id:277,topic:"Fun & Games 🎮",stars:3,leftLetters:['B','E','G'],overlapLetters:['A','C'],rightLetters:['H','P','T'],leftAnswer:"VOODOO",rightAnswer:"DOLL",fact:"Voodoo dolls are a pop culture invention and have little to do with actual Vodou religious practice from West Africa."},
+  {id:278,topic:"Daily Life 🗓️",stars:1,leftLetters:['I','P'],overlapLetters:['L'],rightLetters:['G','O','S'],leftAnswer:"LIP",rightAnswer:"GLOSS",fact:"Lip gloss was invented in 1930 by Max Factor and was first worn by actresses in Hollywood films."},
+  {id:279,topic:"Food & Drink 🍔",stars:2,leftLetters:['C','H','N'],overlapLetters:['E','R'],rightLetters:['P','S'],leftAnswer:"FRENCH",rightAnswer:"PRESS",fact:"The French press coffee maker was actually patented by an Italian designer in 1929 despite its name."},
+  {id:280,topic:"Daily Life 🗓️",stars:3,leftLetters:['O','V'],overlapLetters:['E','L'],rightLetters:['R','T'],leftAnswer:"LOVE",rightAnswer:"LETTER",fact:"Love letters date back thousands of years with some of the earliest examples found in ancient Egyptian papyrus scrolls."},
+  {id:281,topic:"Food & Drink 🍔",stars:1,leftLetters:['A','B'],overlapLetters:['R'],rightLetters:['T'],leftAnswer:"BAR",rightAnswer:"TAB",fact:"Running a tab at a bar originated in British pubs in the 19th century where landlords would chalk up drinks on a board."},
+  {id:282,topic:"Food & Drink 🍔",stars:2,leftLetters:['B','I','W'],overlapLetters:['E','T'],rightLetters:['S'],leftAnswer:"BITTER",rightAnswer:"SWEET",fact:"Bittersweet chocolate must contain at least 35% cocoa solids and is prized by pastry chefs for its complex flavour."},
+  {id:283,topic:"Rhyme Time 🎤",stars:3,leftLetters:['R'],overlapLetters:['E','F','L','U'],rightLetters:['S','H'],leftAnswer:"TRUFFLE",rightAnswer:"SHUFFLE",fact:"The Truffle Shuffle is a famous dance move from the 1985 film The Goonies performed by the character Chunk."},
+  // New puzzles for Days 36-49
+  {id:284,topic:"Nature 🌿",stars:1,leftLetters:['B','C','E','H'],overlapLetters:['A','L'],rightLetters:['L','O','T','E'],leftAnswer:"BEACH",rightAnswer:"BALL",fact:"Beach volleyball became an Olympic sport in 1996 and is played on 16 by 16 metre sand courts."},
+  {id:285,topic:"Nature 🌿",stars:3,leftLetters:['H','R'],overlapLetters:['C','E','S','T'],rightLetters:['U'],leftAnswer:"TREASURE",rightAnswer:"CHEST",fact:"The most famous treasure chest story is from Treasure Island published in 1883 by Robert Louis Stevenson."},
+  {id:286,topic:"Food & Drink 🍔",stars:2,leftLetters:['C','H','K','N'],overlapLetters:['E','I'],rightLetters:['R','W'],leftAnswer:"CHICKEN",rightAnswer:"WIRE",fact:"Chicken wire was invented in the 1840s and is used worldwide to protect poultry from predators."},
+  {id:287,topic:"Food & Drink 🍔",stars:3,leftLetters:['L','S'],overlapLetters:['A'],rightLetters:['C','D','E','N','R'],leftAnswer:"SALSA",rightAnswer:"DANCER",fact:"Salsa music and dance originated in New York City in the 1960s among Puerto Rican and Cuban communities."},
+  {id:288,topic:"Fun & Games 🎮",stars:1,leftLetters:['A','E','R','T'],overlapLetters:['K'],rightLetters:['C','I'],leftAnswer:"KARATE",rightAnswer:"KICK",fact:"Karate originated in the Ryukyu Kingdom now modern Okinawa Japan and was systematised in the early 20th century."},
+  {id:289,topic:"Fun & Games 🎮",stars:2,leftLetters:['H','I'],overlapLetters:['C','P','T'],rightLetters:['E','F','R'],leftAnswer:"PITCH",rightAnswer:"PERFECT",fact:"Pitch Perfect the 2012 film about college a cappella groups became a surprise hit grossing over 115 million dollars worldwide."},
+  {id:290,topic:"Rhyme Time 🎤",stars:1,leftLetters:['I','T'],overlapLetters:['E'],rightLetters:['D','Y'],leftAnswer:"TIE",rightAnswer:"DYE",fact:"Tie-dye became a symbol of the 1960s counterculture movement in America and has seen multiple fashion revivals since."},
+  {id:291,topic:"Daily Life 🗓️",stars:2,leftLetters:['I','M'],overlapLetters:['A','D','T'],rightLetters:['E','F'],leftAnswer:"ACCEPT",rightAnswer:"DEFEAT",fact:"Accepting defeat gracefully is considered a mark of good sportsmanship across all competitive sports and games."},
+  {id:292,topic:"Daily Life 🗓️",stars:3,leftLetters:[],overlapLetters:['E','S'],rightLetters:['C','U'],leftAnswer:"SWEET",rightAnswer:"SUCCESS",fact:"Sweet Success is a phrase meaning achieving something wonderful and has been used in English since the 1800s."},
+  {id:293,topic:"Daily Life 🗓️",stars:1,leftLetters:['G','I'],overlapLetters:['H'],rightLetters:['E','O','P','S'],leftAnswer:"HIGH",rightAnswer:"HOPES",fact:"High Hopes is one of the most covered songs in history originally written by Sammy Cahn and Jimmy Van Heusen in 1959."},
+  {id:294,topic:"Daily Life 🗓️",stars:2,leftLetters:['E','M'],overlapLetters:['D','I','L'],rightLetters:['C','H'],leftAnswer:"MIDDLE",rightAnswer:"CHILD",fact:"Middle child syndrome was first studied in the 1960s and describes the often overlooked middle sibling in a family."},
+  {id:295,topic:"Daily Life 🗓️",stars:3,leftLetters:['B','O','W'],overlapLetters:['A','L'],rightLetters:['G','S'],leftAnswer:"LOWBALL",rightAnswer:"GLASS",fact:"A lowball glass also called a rocks glass holds between 6 and 10 ounces and is used for spirits served over ice."},
+  {id:296,topic:"Fun & Games 🎮",stars:1,leftLetters:['B','L'],overlapLetters:['A'],rightLetters:['G','T'],leftAnswer:"BALL",rightAnswer:"TAG",fact:"Tag is one of the oldest children's games in the world with versions found in cultures across every continent."},
+  {id:297,topic:"Fun & Games 🎮",stars:2,leftLetters:['E','R','T'],overlapLetters:['I'],rightLetters:['G','N','S','W'],leftAnswer:"TIRE",rightAnswer:"SWING",fact:"Tire swings became popular in the 1950s as a way to repurpose old car tyres into backyard playground equipment."},
+  {id:298,topic:"Fun & Games 🎮",stars:3,leftLetters:[],overlapLetters:['E','R','T'],rightLetters:['O'],leftAnswer:"TEETER",rightAnswer:"TOTTER",fact:"The teeter totter or seesaw has been a playground staple since the 17th century and teaches children about balance and cooperation."},
+  {id:299,topic:"Fun & Games 🎮",stars:2,leftLetters:['A','N','K'],overlapLetters:['B'],rightLetters:['R','O','E'],leftAnswer:"BANK",rightAnswer:"ROBBER",fact:"Bank robberies peaked in the United States in 1991 with over 9000 incidents and have declined significantly since then."},
+  {id:300,topic:"People 👤",stars:3,leftLetters:['A','J'],overlapLetters:['I','N','R'],rightLetters:['W','O'],leftAnswer:"NINJA",rightAnswer:"WARRIOR",fact:"Ninjas or shinobi were covert agents in feudal Japan known for espionage sabotage and unconventional warfare."},
+  {id:220,topic:"Nature 🌿",stars:2,leftLetters:['N','S'],overlapLetters:['A','D'],rightLetters:['L','O','R'],leftAnswer:"SAND",rightAnswer:"DOLLAR",fact:"Sand dollars are actually living sea creatures related to sea urchins and are covered in tiny spines when alive."},
+  {id:210,topic:"Music 🎵",stars:1,leftLetters:['D','M'],overlapLetters:['R'],rightLetters:['L','O'],leftAnswer:"DRUM",rightAnswer:"ROLL",fact:"A drum roll is used to build tension and excitement and has been a staple of live performance for centuries."},
+  {id:211,topic:"Music 🎵",stars:2,leftLetters:['H','V','Y'],overlapLetters:['A','E'],rightLetters:['M','T','L'],leftAnswer:"HEAVY",rightAnswer:"METAL",fact:"Heavy metal emerged in the late 1960s with bands like Black Sabbath and Led Zeppelin leading the way."},
+  {id:212,topic:"Music 🎵",stars:3,leftLetters:[],overlapLetters:['A','I','R'],rightLetters:['G','T','U'],leftAnswer:"AIR",rightAnswer:"GUITAR",fact:"Air guitar became a worldwide phenomenon with the Air Guitar World Championships held annually in Finland since 1996."},
+  {id:301,topic:"80s Vibe 🕹️",stars:2,leftLetters:['C'],overlapLetters:['A','E','R'],rightLetters:['B'],leftAnswer:"CARE",rightAnswer:"BEAR",fact:"Care Bears were introduced in 1982 as greeting card characters and became one of the most popular toy lines of the 1980s."},
+  {id:302,topic:"Rhyme Time 🎤",stars:2,leftLetters:['P'],overlapLetters:['A','S'],rightLetters:['G'],leftAnswer:"PASS",rightAnswer:"GAS",fact:"Pass gas is a polite euphemism that has been used in English since the 1800s."},
+  {id:303,topic:"Food & Drink 🍔",stars:3,leftLetters:['E','G','V'],overlapLetters:['I'],rightLetters:['C','H','L'],leftAnswer:"VEGGIE",rightAnswer:"CHILLI",fact:"Veggie chilli became popular in the 1970s as a meatless alternative to traditional chilli."},
+  {id:304,topic:"Food & Drink 🍔",stars:1,leftLetters:['J','L','Y'],overlapLetters:['E'],rightLetters:['A','B','N','S'],leftAnswer:"JELLY",rightAnswer:"BEANS",fact:"Jelly beans were invented in the 1860s and became a staple of Easter baskets across America."},
+  {id:305,topic:"Food & Drink 🍔",stars:2,leftLetters:['O','R','T'],overlapLetters:['A','C'],rightLetters:['E','K'],leftAnswer:"CARROT",rightAnswer:"CAKE",fact:"Carrot cake became popular during World War 2 when sugar was rationed and carrots added natural sweetness."},
+  {id:306,topic:"Daily Life 🗓️",stars:3,leftLetters:['E'],overlapLetters:['P','R'],rightLetters:['A','S','Y'],leftAnswer:"PEPPER",rightAnswer:"SPRAY",fact:"Pepper spray was first developed as a commercial product in the 1960s inspired by the natural heat of chili peppers."},
+  {id:307,topic:"Body Part 🫀",stars:1,leftLetters:['A','E'],overlapLetters:['R'],rightLetters:['D','M','U'],leftAnswer:"EAR",rightAnswer:"DRUM",fact:"The ear drum is a thin membrane that vibrates when sound waves hit it transmitting sound to the inner ear."},
+  {id:308,topic:"Daily Life 🗓️",stars:1,leftLetters:['A','P','R'],overlapLetters:['E','S'],rightLetters:['K','Y'],leftAnswer:"SPARE",rightAnswer:"KEYS",fact:"Leaving spare keys with a trusted neighbour became common practice in suburban America in the 1950s."},
+  {id:309,topic:"Living Things 🌿",stars:2,leftLetters:['E'],overlapLetters:['A','S'],rightLetters:['B'],leftAnswer:"SEA",rightAnswer:"BASS",fact:"Sea bass is one of the most prized fish in fine dining and can live for over 30 years in the wild."},
+  {id:310,topic:"💬 Common Sayings",stars:2,leftLetters:['I','M'],overlapLetters:['A','D','T'],rightLetters:['E','F'],leftAnswer:"ADMIT",rightAnswer:"DEFEAT",fact:"Admit defeat is a common expression meaning to acknowledge you have lost or failed at something."},
+  {id:311,topic:"💬 Common Sayings",stars:2,leftLetters:[],overlapLetters:['L','O','W'],rightLetters:['B'],leftAnswer:"LOW",rightAnswer:"BLOW",fact:"Low blow comes from boxing where hitting below the belt is an illegal and unsporting move."},
+  {id:312,topic:"Daily Life 🗓️",stars:1,leftLetters:['L','O','T'],overlapLetters:['S'],rightLetters:['E','K','Y'],leftAnswer:"LOST",rightAnswer:"KEYS",fact:"The average person spends about 10 minutes a day looking for lost items with keys topping the list."},
+  {id:313,topic:"People 👤",stars:2,leftLetters:['T'],overlapLetters:['L','O','S'],rightLetters:['U'],leftAnswer:"LOST",rightAnswer:"SOUL",fact:"A lost soul is an expression for someone who feels directionless or spiritually adrift — used in English since the 1600s."},
+  {id:314,topic:"Nature 🌿",stars:2,leftLetters:['M','P'],overlapLetters:['A','E','L'],rightLetters:['F'],leftAnswer:"MAPLE",rightAnswer:"LEAF",fact:"The maple leaf has been a symbol of Canada since the 1700s and appears on the Canadian flag adopted in 1965."},
+  {id:315,topic:"TV Shows 📺",stars:2,leftLetters:['L','O','Y'],overlapLetters:['E','N'],rightLetters:['S','T','U'],leftAnswer:"LOONEY",rightAnswer:"TUNES",fact:"Looney Tunes debuted in 1930 and introduced Bugs Bunny Daffy Duck and Porky Pig to generations of fans."},
+  {id:316,topic:"People 👤",stars:3,leftLetters:['G'],overlapLetters:['A','E','R'],rightLetters:['B','V'],leftAnswer:"EAGER",rightAnswer:"BEAVER",fact:"Eager beaver describes an enthusiastic hard-working person — the beaver is also Canadas national animal."},
+  {id:317,topic:"People 👤",stars:1,leftLetters:['A'],overlapLetters:['D'],rightLetters:['B','O'],leftAnswer:"DAD",rightAnswer:"BOD",fact:"Dad bod became a cultural phenomenon in 2015 when a viral article celebrated the relaxed physique of modern fathers."},
+  {id:318,topic:"Food & Drink 🍔",stars:2,leftLetters:['P'],overlapLetters:['O'],rightLetters:['B','E','L','T'],leftAnswer:"POP",rightAnswer:"BOTTLE",fact:"Pop bottles have been a staple of family celebrations since carbonated drinks were first bottled in the 1800s."},
+  {id:319,topic:"Movies 🎬",stars:3,leftLetters:[],overlapLetters:['A','D','Y'],rightLetters:['C','E','R'],leftAnswer:"DADDY",rightAnswer:"DAYCARE",fact:"Daddy Day Care starring Eddie Murphy was released in 2003 and became a family comedy classic."},
+  {id:320,topic:"Human Body 🧠",stars:1,leftLetters:['B','L'],overlapLetters:['A','D'],rightLetters:['E','H'],leftAnswer:"BALD",rightAnswer:"HEAD",fact:"Bald eagles get their name from the Old English word balde meaning white referring to their distinctive white head feathers."},
+  {id:321,topic:"💬 Common Sayings",stars:2,leftLetters:['A','G','L'],overlapLetters:['E'],rightLetters:['D','Y'],leftAnswer:"EAGLE",rightAnswer:"EYED",fact:"Eagle eyed means having very sharp eyesight or keen attention to detail — eagles can spot prey from over a mile away."},
+  {id:322,topic:"People 👤",stars:3,leftLetters:['G'],overlapLetters:['A','E','R'],rightLetters:['B','V'],leftAnswer:"EAGER",rightAnswer:"BEAVER",fact:"Eager beaver describes an enthusiastic hard-working person — the beaver is Canadas national animal and a symbol of industry."},
   {id:323,topic:"Daily Life 🗓️",stars:1,leftLetters:['F','N'],overlapLetters:['A'],rightLetters:['I','L','M'],leftAnswer:"FAN",rightAnswer:"MAIL",fact:"Fan mail dates back to the early days of Hollywood when studios received thousands of letters for their stars each week."},
   {id:324,topic:"Daily Life 🗓️",stars:2,leftLetters:['E','R','Z'],overlapLetters:['B'],rightLetters:['Y'],leftAnswer:"BREEZE",rightAnswer:"BY",fact:"Breezing by means to pass through quickly and effortlessly — a common phrase since the 1920s."},
-  {id:325,topic:"Food & Drink 🍔",stars:3,leftLetters:['D','I'],overlapLetters:['C','E'],rightLetters:['F','O'],leftAnswer:"ICED",rightAnswer:"COFFEE",fact:"Iced coffee dates back to 1840s Algeria where cold coffee drinks were first served at cafes."},
-  {id:326,topic:"💬 Common Sayings",stars:1,leftLetters:['M','S'],overlapLetters:['A','L'],rightLetters:['K','T'],leftAnswer:"SMALL",rightAnswer:"TALK",fact:"Small talk as a phrase for light conversation has been used in English since the 1700s."},
+  {id:325,topic:"Food & Drink 🍔",stars:2,leftLetters:['D','I'],overlapLetters:['C','E'],rightLetters:['F','O'],leftAnswer:"ICED",rightAnswer:"COFFEE",fact:"Iced coffee dates back to 1840s Algeria where cold coffee drinks were first served at cafes."},
+  {id:326,topic:"💬 Common Sayings",stars:2,leftLetters:['M','S'],overlapLetters:['A','L'],rightLetters:['K','T'],leftAnswer:"SMALL",rightAnswer:"TALK",fact:"Small talk as a phrase for light conversation has been used in English since the 1700s."},
   {id:327,topic:"Rhyme Time 🎤",stars:2,leftLetters:[],overlapLetters:['I','S','T','Y'],rightLetters:['B'],leftAnswer:"ITSY",rightAnswer:"BITSY",fact:"Itsy Bitsy Spider is one of the most sung childrens songs in the world with origins dating to the 1910s."},
   {id:328,topic:"Daily Life 🗓️",stars:3,leftLetters:['L','T'],overlapLetters:['E','I'],rightLetters:['D','P','R'],leftAnswer:"LITTLE",rightAnswer:"DIPPER",fact:"The Little Dipper constellation contains Polaris the North Star which has guided navigators for thousands of years."},
   {id:329,topic:"Daily Life 🗓️",stars:1,leftLetters:['N','T'],overlapLetters:['E'],rightLetters:['G','P'],leftAnswer:"TENT",rightAnswer:"PEG",fact:"Tent pegs have been used since ancient times to anchor shelters and were crucial tools for nomadic peoples."},
   {id:330,topic:"Rhyme Time 🎤",stars:2,leftLetters:['H'],overlapLetters:['E','O','S','U'],rightLetters:['M'],leftAnswer:"HOUSE",rightAnswer:"MOUSE",fact:"If You Give a Mouse a Cookie is one of the bestselling childrens books of all time."},
   {id:331,topic:"Food & Drink 🍔",stars:3,leftLetters:['A','G','O','T'],overlapLetters:['C','E'],rightLetters:['H','S'],leftAnswer:"COTTAGE",rightAnswer:"CHEESE",fact:"Cottage cheese gets its name from the small cottages where it was traditionally made from leftover milk."},
-
   {id:332,topic:"Fun & Games 🎮",stars:1,leftLetters:['C','P'],overlapLetters:['A'],rightLetters:['M','N'],leftAnswer:"PAC",rightAnswer:"MAN",fact:"Pac-Man was released in 1980 and became one of the most iconic video games of all time."},
   {id:333,topic:"Fun & Games 🎮",stars:1,leftLetters:['I','M','O'],overlapLetters:['A','R'],rightLetters:['K','T'],leftAnswer:"MARIO",rightAnswer:"KART",fact:"Mario Kart was first released in 1992 and remains one of the best-selling video game franchises ever."},
   {id:334,topic:"Fun & Games 🎮",stars:2,leftLetters:['D','E','Y'],overlapLetters:['K','N','O'],rightLetters:['G'],leftAnswer:"DONKEY",rightAnswer:"KONG",fact:"Donkey Kong debuted in 1981 and was the first game to feature the character who would become Mario."},
@@ -1512,29 +1659,12 @@ const dailySets=[
   {id:372,topic:"People 👤",stars:1,leftLetters:['F','I','R','S'],overlapLetters:['T'],rightLetters:['A','E','M'],leftAnswer:"FIRST",rightAnswer:"MATE",fact:"The first mate is the second in command on a ship responsible for cargo and crew safety."},
   {id:373,topic:"People 👤",stars:2,leftLetters:['M','O','S'],overlapLetters:['B'],rightLetters:['D','U','Y'],leftAnswer:"BOSOM",rightAnswer:"BUDDY",fact:"Bosom buddy meaning a very close friend comes from the biblical phrase bosom friend used since the 1800s."},
   {id:374,topic:"Fun & Games 🎮",stars:1,leftLetters:['A','B','E','L','M'],overlapLetters:['R'],rightLetters:['N','U'],leftAnswer:"MARBLE",rightAnswer:"RUN",fact:"Marble runs have been a favourite engineering toy since the 1960s teaching kids about physics and gravity."},
-
   {id:375,topic:"Around the World 🌍",stars:1,leftLetters:['M','N','O'],overlapLetters:['A'],rightLetters:['I','L','S'],leftAnswer:"MONA",rightAnswer:"LISA",fact:"The Mona Lisa painted by Leonardo da Vinci is the most visited artwork in the world at the Louvre in Paris."},
   {id:376,topic:"Food & Drink 🍔",stars:2,leftLetters:['T','W'],overlapLetters:['E','S'],rightLetters:['C','P','R'],leftAnswer:"SWEET",rightAnswer:"CREPES",fact:"Crepes originated in Brittany France in the 13th century and sweet crepes are now enjoyed worldwide."},
   {id:377,topic:"Daily Life 🗓️",stars:2,leftLetters:['H','L'],overlapLetters:['A'],rightLetters:['P','S'],leftAnswer:"HALL",rightAnswer:"PASS",fact:"Hall passes have been used in schools since the 1900s to allow students to move between classrooms."},
   {id:378,topic:"Daily Life 🗓️",stars:3,leftLetters:['P'],overlapLetters:['H','O','T'],rightLetters:['S'],leftAnswer:"PHOTO",rightAnswer:"SHOOT",fact:"Photo shoots became a staple of fashion and advertising in the early 20th century."},
-
-  {e:338,m:339,h:340}, // Day 74 Jul 16 — Battery
-  {e:326,m:327,h:328}, // Day 75 Jul 17 — Tiny Stuff
-  {e:374,m:377,h:378}, // Day 76 Jul 18 — Scoring Plays
-  {e:226,m:341,h:193}, // Day 77 Jul 19 — World Cup Final
-  {e:36,m:342,h:343}, // Day 78 Jul 20 — World Chess Day
-  {e:344,m:345,h:346}, // Day 79 Jul 21 — Summer Fun
-  {e:347,m:348,h:349}, // Day 80 Jul 22 — Greek Vacay
-  {e:350,m:351,h:352}, // Day 81 Jul 23 — Tom Dick and Harry
-  {e:353,m:354,h:355}, // Day 82 Jul 24 — Things You Ride
-  {e:356,m:357,h:358}, // Day 83 Jul 25 — Smooth Operators
-  {e:359,m:360,h:361}, // Day 84 Jul 26 — General Hospital
-  {e:362,m:363,h:364}, // Day 85 Jul 27 — Gas Station
-  {e:365,m:366,h:367}, // Day 86 Jul 28 — Red Things
-  {e:382,m:383,h:384}, // Day 87 Jul 29 — Chicken in the Pool
-  {e:372,m:371,h:373}, // Day 88 Jul 30 — Friendship Day
   {id:379,topic:"Daily Life 🗓️",stars:1,leftLetters:['I','P'],overlapLetters:['E'],rightLetters:['D','Y'],leftAnswer:"PIE",rightAnswer:"EYED",fact:"Pie-eyed meaning wide-eyed with wonder or intoxication has been used in English slang since the 1800s."},
-  {id:380,topic:"Daily Life 🗓️",stars:2,leftLetters:['P'],overlapLetters:['L','O'],rightLetters:['D','E','N'],leftAnswer:"POOL",rightAnswer:"NOODLE",fact:"Pool noodles were invented in the 1980s in Canada and were originally used as pipe insulation."},
+  {id:380,topic:"Daily Life 🗓️",stars:2,leftLetters:['P'],overlapLetters:['L','O'],rightLetters:['D','E','N'],leftAnswer:"POOL",rightAnswer:"NOODLE",fact:"Pool noodles were invented in Canada in the 1980s and were originally used as pipe insulation."},
   {id:381,topic:"Daily Life 🗓️",stars:2,leftLetters:['L','O','R','U'],overlapLetters:['A','P'],rightLetters:['S'],leftAnswer:"POPULAR",rightAnswer:"APPS",fact:"Mobile apps became mainstream after the launch of the Apple App Store in 2008."},
   {id:382,topic:"Daily Life 🗓️",stars:1,leftLetters:['A','E','R','T'],overlapLetters:['W'],rightLetters:['G','I','N','S'],leftAnswer:"WATER",rightAnswer:"WINGS",fact:"Water wings were invented in the 1960s and became one of the most popular swimming aids for children."},
   {id:383,topic:"Fun & Games 🎮",stars:1,leftLetters:['A','C','M','R'],overlapLetters:['O'],rightLetters:['L','P'],leftAnswer:"MARCO",rightAnswer:"POLO",fact:"Marco Polo is a classic pool game where the seeker calls Marco and others respond Polo."},
@@ -1891,7 +2021,6 @@ function saveArchiveProgress(p){localStorage.setItem("vendyArchiveProgress",JSON
 /* ── DATE ── */
 function fmt(d){return d.toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"})}
 function todayStart(){const d=new Date();d.setHours(0,0,0,0);return d}
-const launchDate = new Date(2026, 4, 4);
 function launchStart(){const d=new Date(launchDate);d.setHours(0,0,0,0);return d}
 function getDailyNum(){return Math.max(0,Math.floor((todayStart()-launchStart())/86400000))+1}
 function dateForNum(n){const d=launchStart();d.setDate(d.getDate()+n-1);return d}
@@ -2589,94 +2718,6 @@ function admire(diffKey){
   admireCurrentPuzzle();
 }
 
-function getTodaySet(){const todayN=getDailyNum();return dailySets[(todayN-1)%dailySets.length];}
-function getPuzzleById(id){
-  if(typeof id==='string') return specialPuzzles[id];
-  const idx=puzzles.findIndex(p=>p.id===id);
-  return idx!==-1?puzzles[idx]:puzzles[id-1];
-}
-function loadDailyChallenge(key){
-  const set=getTodaySet();
-  const puzId=set[key];
-  currentDiffKey=key;
-  currentPuzzleKey=`daily_${getDailyNum()}_${key}`;
-  introScreen.classList.remove('active');gameShell.classList.add('active');showDailyScreen();
-  setTimeout(()=>trackEvent('puzzle_started', getPuzzleParams()), 100);
-  if(typeof puzId==='string'){
-    const p=specialPuzzles[puzId];
-    currentMode='daily';currentFreePuzzle=p;currentPuzzleIdx=-99;
-    if(topicEl)topicEl.textContent=p.topic;
-    const label=document.getElementById('intro-puzzle-number');
-    if(label)label.textContent=getDiffLabel(key);
-    renderVennLetters(p);resetPuzzleState();
-    leftGuessSlots=new Array(p.leftAnswer.length).fill('');
-    rightGuessSlots=new Array(p.rightAnswer.length).fill('');
-    revealedLeft=new Array(p.leftAnswer.length).fill('');
-    revealedRight=new Array(p.rightAnswer.length).fill('');
-    renderTiles(leftTilesEl,leftGuessSlots,p.leftAnswer.length,revealedLeft,'left');
-    renderTiles(rightTilesEl,rightGuessSlots,p.rightAnswer.length,revealedRight,'right');
-    setTimeout(()=>setActiveField('left'),150);renderStats();startStuckTimer();startTimer();
-  } else {
-    currentFreePuzzle=null;
-    loadGame('daily',puzId);
-    currentPuzzleKey=`daily_${getDailyNum()}_${key}`;
-    if(topicEl){const puz=getPuzzleById(puzId);if(puz)topicEl.textContent=puz.topic;}
-    const label=document.getElementById('intro-puzzle-number');
-    if(label)label.textContent=getDiffLabel(key);
-    const progress=loadArchiveProgress();
-    const alreadySolved=progress[currentPuzzleKey]?.solved;
-    if(!alreadySolved){
-      localStorage.removeItem(`vendy_timer_${currentPuzzleKey}`);
-      timerElapsed=0;startTimer();
-    }
-  }
-}
-
-function getDiffColor(key){return key==='e'?'#22c55e':key==='m'?'#f59e0b':'#ef4444';}
-function getDiffBg(key){return key==='e'?'rgba(34,197,94,.12)':key==='m'?'rgba(245,158,11,.12)':'rgba(239,68,68,.12)';}
-function getDiffLabel(key){return key==='e'?'Easy':key==='m'?'Medium':'Hard';}
-
-function renderChallengeCards(){
-  const set=getTodaySet();
-  const container=document.getElementById('challenge-cards');
-  if(!container)return;
-  container.innerHTML='';
-  const progress=loadArchiveProgress();
-  const dayN=getDailyNum();
-  ['e','m','h'].forEach(key=>{
-    const puzId=set[key];
-    const puz=getPuzzleById(puzId);
-    if(!puz)return;
-    const solved=progress[`daily_${dayN}_${key}`]?.solved;
-    const btn=document.createElement('button');
-    if(solved){
-      btn.style.cssText=`width:100%;padding:14px 16px;border-radius:14px;background:rgba(212,102,187,.1);border:2px solid rgba(212,102,187,.4);cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;justify-content:space-between;`;
-      btn.innerHTML=`<div style="text-align:left;"><div style="font-size:16px;font-weight:900;color:#9333ea;">✅ ${getDiffLabel(key)}</div><div style="font-size:13px;font-weight:700;color:var(--muted);margin-top:2px;">${puz.topic}</div></div><div style="font-size:15px;font-weight:900;color:#9333ea;">Admire ✨</div>`;
-      btn.addEventListener('click',()=>{admire(key);});
-    } else {
-      btn.style.cssText=`width:100%;padding:14px 16px;border-radius:14px;background:${getDiffBg(key)};border:2px solid ${getDiffColor(key)};cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;justify-content:space-between;`;
-      btn.innerHTML=`<div style="text-align:left;"><div style="font-size:16px;font-weight:900;color:${getDiffColor(key)};">${getDiffLabel(key)}</div><div style="font-size:13px;font-weight:700;color:var(--muted);margin-top:2px;">${puz.topic}</div></div><div style="font-size:22px;font-weight:900;color:${getDiffColor(key)};opacity:0.5;">${key.toUpperCase()}</div>`;
-      btn.addEventListener('click',()=>{currentDiffKey=key;loadDailyChallenge(key);});
-    }
-    container.appendChild(btn);
-  });
-}
-
-function updateEMHHeader(){
-  const progress=loadArchiveProgress();
-  const dayN=getDailyNum();
-  ['e','m','h'].forEach(key=>{
-    const el=document.getElementById(`emh-${key}`);
-    if(!el)return;
-    const solved=progress[`daily_${dayN}_${key}`]?.solved;
-    el.style.opacity=solved?'1':'0.35';
-    el.style.color=solved?getDiffColor(key):'var(--muted)';
-  });
-  const allDone=['e','m','h'].every(k=>progress[`daily_${dayN}_${k}`]?.solved);
-  const flame=document.getElementById('header-flame');
-  if(flame)flame.style.opacity=allDone?'1':'0.4';
-}
-
 function refreshIntroState(){
   const todayN=getDailyNum();
   if(introPuzzleNum)introPuzzleNum.textContent=`#${todayN}`;
@@ -2707,23 +2748,24 @@ function refreshIntroState(){
       '2026-06-02':'🎬 Movie Night',
       '2026-06-03':'🐾 Almost Animals',
       '2026-06-04':'🔢 By The Numbers',
+      '2026-06-05':'🌳 Branching Out',
       '2026-06-05':'🍺 Happy Hour',
       '2026-06-06':'🌳 Day at the Park',
       '2026-06-07':'🏎️ Race Day',
       '2026-06-08':'🌊 World Ocean Day',
-      '2026-06-09':'🌮 Taco Tuesday',
-      '2026-06-10':'🐸 Hop To It',
+      '2026-06-09':'🕹️ Awesome 80s',
+      '2026-06-10':'🇬🇧 UK Day',
       '2026-06-11':'⚽ World Cup',
-      '2026-06-12':'🌍 National Foods',
-      '2026-06-13':'🏆 Win Lose or Draw',
-      '2026-06-14':'📊 Levels',
+      '2026-06-12':'🌍 National Names',
+      '2026-06-13':'📺 Retro TV',
+      '2026-06-14':'🍽️ Sunday Dinner',
       '2026-06-15':'🛝 Recess',
-      '2026-06-16':'👻 Now You See It',
       '2026-06-17':'🥕 Eat Your Vegetables Day',
-      '2026-06-18':'🪁 Up Up and Away',
+      '2026-06-18':'🐸 Hop To It',
+      '2026-06-18':'🎸 Rock On',
       '2026-06-19':'🧺 International Picnic Day',
-      '2026-06-20':'🦅 North American Animals',
-      '2026-06-21':'👨 Fathers Day',
+      '2026-06-20':'🛞 Wheely Things',
+      '2026-06-21':'🎭 Behind the Mask',
       '2026-06-22':'👔 Shirt Parts',
       '2026-06-23':'😂 Ha Ha Ha',
       '2026-06-24':'👨‍👩‍👧 Its All Relative',
@@ -2732,30 +2774,20 @@ function refreshIntroState(){
       '2026-06-27':'🕶️ Sunglasses Day',
       '2026-06-28':'💧 Go with the Flow',
       '2026-06-29':'🌎 World Cup Cities',
-      '2026-06-30':'🕹️ Awesome 80s',
-      '2026-07-08':'🕹️ National Video Game Day',
-      '2026-07-09':'📺 Retro TV',
-      '2026-07-10':'🍽️ Three Course Dinner',
-      '2026-07-11':'🇬🇧 UK Day',
-      '2026-07-12':'🎾 Wimbledon',
-      '2026-07-13':'❄️ Stay Cool',
-      '2026-07-14':'🇫🇷 Bastille Day',
-      '2026-07-15':'🏠 Like Home',
-      '2026-07-16':'🔋 Battery',
-      '2026-07-17':'🔬 Tiny Stuff',
-      '2026-07-18':'🏃 Scoring Plays',
-      '2026-07-19':'⚽ World Cup Final',
-      '2026-07-20':'♟️ World Chess Day',
-      '2026-07-21':'☀️ Summer Fun',
-      '2026-07-22':'🇬🇷 Greek Vacay',
-      '2026-07-23':'🎯 Tom Dick and Harry',
-      '2026-07-24':'🚴 Things You Ride',
-      '2026-07-25':'📡 Smooth Operators',
-      '2026-07-26':'🏥 General Hospital',
-      '2026-07-27':'⛽ Gas Station',
-      '2026-07-28':'🔴 Red Things',
-      '2026-07-29':'🐔 Chicken in the Pool',
-      '2026-07-30':'👫 Friendship Day',
+      '2026-06-30':'👻 Now You See It',
+      '2026-07-01':'🪁 Up Up and Away',
+      '2026-07-02':'🦑 Inky Things',
+      '2026-07-03':'🥂 Fancy Night Out',
+      '2026-07-04':'🐛 Things That Crawl',
+      '2026-07-05':'📍 Things with Needles',
+      '2026-07-06':'💋 International Kissing Day',
+      '2026-07-07':'🍫 World Chocolate Day',
+      '2026-06-11':'⚽ World Cup',
+      '2026-06-12':'🇬🇧 UK Day',
+      '2026-06-13':'📺 Retro TV',
+      '2026-06-14':'🍽️ Sunday Dinner',
+      '2026-06-15':'🛝 Recess',
+      '2026-06-16':'🐸 Hop To It',
     };
     const theme=themes[key];
     if(theme){badge.textContent=theme;badge.style.display='none';}  // hidden until all 3 solved
