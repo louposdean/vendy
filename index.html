@@ -649,6 +649,8 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;flex-shrink:0;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
             Share your results
           </button>
+          <!-- World Cup -->
+          <button onclick="closePostSolve();openWCOverlay();" style="width:100%;padding:12px;border-radius:12px;background:rgba(34,197,94,.1);border:2px solid rgba(34,197,94,.4);font-size:15px;font-weight:900;color:#16a34a;cursor:pointer;font-family:'Nunito',sans-serif;margin-bottom:8px;">⚽ Play World Cup Puzzles</button>
           <!-- Admire + Create -->
           <div style="display:flex;gap:8px;margin-bottom:8px;">
             <button onclick="closePostSolve();admireCurrentPuzzle();" style="flex:1;padding:12px;border-radius:12px;background:rgba(212,102,187,.12);border:2px solid rgba(212,102,187,.4);font-size:14px;font-weight:800;color:#9333ea;cursor:pointer;font-family:'Nunito',sans-serif;">Admire ✨</button>
@@ -772,6 +774,7 @@
   </div>
   <button class="gear-item" onclick="closeGear();showIntro();"><span class="gear-item-icon">🏠</span><div><div>Home</div><div class="gear-item-sub">Back to today's puzzles</div></div></button>
   <button class="gear-item" id="gi-week"><span class="gear-item-icon">🔒</span><div><div>The Vault</div><div class="gear-item-sub">Play puzzles from the past 3 days</div></div></button>
+  <button class="gear-item" onclick="closeGear();openWCOverlay();"><span class="gear-item-icon">⚽</span><div><div>World Cup 2026</div><div class="gear-item-sub">Special puzzles — stars, legends & more</div></div></button>
   <button class="gear-item" id="gi-create"><span class="gear-item-icon">✏️</span><div><div>Create a Vendy</div><div class="gear-item-sub">Make one for a friend</div></div></button>
   <button class="gear-item" style="opacity:.45;pointer-events:none;"><span class="gear-item-icon">🔵</span><div><div>Three Word Vendy</div><div class="gear-item-sub">Coming soon</div></div><span style="font-size:10px;background:#eef3ff;color:#4f78ff;border-radius:999px;padding:2px 9px;font-weight:800;margin-left:auto;letter-spacing:.3px;">Soon</span></button>
 
@@ -2666,6 +2669,12 @@ function renderChallengeCards(){
     }
     container.appendChild(btn);
   });
+  // World Cup button
+  const wcBtn=document.createElement('button');
+  wcBtn.style.cssText='width:100%;padding:12px 16px;border-radius:14px;background:rgba(34,197,94,.1);border:2px solid rgba(34,197,94,.4);cursor:pointer;font-family:Nunito,sans-serif;display:flex;align-items:center;justify-content:space-between;margin-top:4px;';
+  wcBtn.innerHTML='<div style="font-size:15px;font-weight:900;color:#16a34a;">⚽ World Cup 2026</div><div style="font-size:13px;font-weight:700;color:#16a34a;">Play Now ▶</div>';
+  wcBtn.addEventListener('click',()=>openWCOverlay());
+  container.appendChild(wcBtn);
 }
 
 function updateEMHHeader(){
