@@ -2089,7 +2089,7 @@ async function doCreateShare(){
     $("create-msg").style.color="var(--error)";return;
   }
   const p=new URLSearchParams();p.set("w1",w1);p.set("w2",w2);if(topic)p.set("t",topic);
-  const url=`https://playvendy.com/VendyApp.html?${p.toString()}`;
+  const url=`https://playvendy.com/?${p.toString()}`;
   const shareText=`Can you solve my Vendy?${topic?" Category: "+topic:""}\n${url}`;
   // Go straight to native share sheet
   if(navigator.share){
